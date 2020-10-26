@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import './App.css';
-import TechStocks from './components/TechStocks';
+import Work from './components/Tech/Work';
+import Amd from './components/Tech/Amd';
 
 class App extends Component {
   state = {
@@ -46,7 +47,8 @@ class App extends Component {
           
 
         </div>
-        <TechStocks />
+        <Work />
+        <Amd />
     </>
     );
 
