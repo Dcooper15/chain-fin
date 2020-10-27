@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import MainSearch from './components/MainSearch';
 import MainTech from "./components/Tech/MainTech";
@@ -10,19 +9,7 @@ import MainTravel from "./components/Travel/MainTravel";
 
 
 class App extends Component {
-  state = {
-    stockData: [],
-  };
-
-  searchStocks = async text => {
-
-    const res = await axios.get(
-      `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${text}&contractType=CALL&strikeCount=1&optionType=CALL&expMonth=NOV&toDate=2020-11-08&range=OTM`
-    );
-    
-    this.setState({ stockData: [res.data] });
-    console.log(res);
-  }
+ 
 
   render() {
 
