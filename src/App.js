@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import Search from './components/Search';
+import MainSearch from './components/MainSearch';
 import MainTech from "./components/Tech/MainTech";
 import MainFinance from "./components/Finance/MainFinance";
 import MainEntertainment from "./components/Entertainment/MainEntertainment";
@@ -25,7 +25,6 @@ class App extends Component {
   }
 
   render() {
-    const { stockData } = this.state;
 
     return (
       <>
@@ -33,34 +32,7 @@ class App extends Component {
         <Route exact path="/">
         <div>
           <h1>Hello CC Scanner</h1>
-          <Search searchStocks={this.searchStocks} />
-          {!!stockData.length ? (
-            stockData.map((option) => (
-              <i key={option.id}>
-                {option.symbol}, Stock Price:{" "}
-                {option.underlyingPrice.toFixed(2)} Cost for 100 shares: $
-                {option.underlyingPrice.toFixed(2) * 100} ___{" "}
-                {Object.keys(option.callExpDateMap).map((entry) => {
-                  return Object.keys(
-                    option.callExpDateMap[entry]
-                  ).map((innerArrayID) =>
-                    option.callExpDateMap[entry][innerArrayID][0].ask.toFixed(2)
-                  );
-                })}{" "}
-                Premium collected: $
-                {Object.keys(option.callExpDateMap).map((entry) => {
-                  return Object.keys(option.callExpDateMap[entry]).map(
-                    (innerArrayID) =>
-                      option.callExpDateMap[entry][innerArrayID][0].ask.toFixed(
-                        2
-                      ) * 100
-                  );
-                })}
-              </i>
-            ))
-          ) : (
-            <p>loading data...</p>
-          )}
+         <MainSearch />
         </div>
         <h2>Sectors</h2>
         <h3><Link to="/finance">View Finance Stocks</Link></h3>
@@ -70,22 +42,22 @@ class App extends Component {
         </Route>
         
         
-        <div className="MainTech">
+        <div className="Routes">
           <Route path="/tech">
             <MainTech />
           </Route>
-        </div>
-        <div className="MainFinance">
+        
+        
           <Route path="/finance">
             <MainFinance />
           </Route>
-        </div>
-        <div className='MainTravel'>
+        
+       
           <Route path="/travel">
             <MainTravel />
           </Route>
-        </div>
-        <div className="MainEntertainment">
+        
+        
           <Route path="/entertainment">
             <MainEntertainment />
           </Route>
