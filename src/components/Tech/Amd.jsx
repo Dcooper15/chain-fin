@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from "axios";
+import { Card } from "bloomer";
 
 class Amd extends Component {
     state = {
@@ -23,7 +24,7 @@ class Amd extends Component {
         return (
             <div>
                 {/* AMD Data */}
-            
+            <Card>
               {!!amdData.length ? ( amdData.map(option => (
             
             
@@ -33,7 +34,7 @@ class Amd extends Component {
                 return Object.keys(option.callExpDateMap[entry]).map((innerArrayID) => option.callExpDateMap[entry][innerArrayID][0].ask.toFixed(2) * 100);
             })}</i>
             ))) : (<p>loading data...</p>)}
-
+            </Card>
             </div>
         )
     }

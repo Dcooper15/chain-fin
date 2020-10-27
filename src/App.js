@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import axios from "axios";
-import "./App.css";
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Search from './components/Search';
 import MainTech from "./components/Tech/MainTech";
 import MainFinance from "./components/Finance/MainFinance";
 import MainEntertainment from "./components/Entertainment/MainEntertainment";
 import MainTravel from "./components/Travel/MainTravel";
+
 
 
 class App extends Component {
@@ -28,6 +29,8 @@ class App extends Component {
 
     return (
       <>
+      <Router>
+        <Route exact path="/">
         <div>
           <h1>Hello CC Scanner</h1>
           <Search searchStocks={this.searchStocks} />
@@ -59,18 +62,35 @@ class App extends Component {
             <p>loading data...</p>
           )}
         </div>
+        <h2>Sectors</h2>
+        <h3><Link to="/finance">View Finance Stocks</Link></h3>
+        <h3><Link to="/entertainment">View Entertainment Stocks</Link></h3>
+        <h3><Link to="/tech">View Tech Stocks</Link></h3>
+        <h3><Link to="/travel">View Travel Stocks</Link></h3>
+        </Route>
+        
+        
         <div className="MainTech">
-          <MainTech />
+          <Route path="/tech">
+            <MainTech />
+          </Route>
         </div>
         <div className="MainFinance">
-          <MainFinance />
+          <Route path="/finance">
+            <MainFinance />
+          </Route>
         </div>
         <div className='MainTravel'>
-          <MainTravel />
+          <Route path="/travel">
+            <MainTravel />
+          </Route>
         </div>
         <div className="MainEntertainment">
-          <MainEntertainment />
+          <Route path="/entertainment">
+            <MainEntertainment />
+          </Route>
         </div>
+        </Router>
       </>
     );
   }
