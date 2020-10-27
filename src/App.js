@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./App.css";
+import Search from './components/Search';
 import MainTech from "./components/Tech/MainTech";
 import MainFinance from "./components/Finance/MainFinance";
 import MainEntertainment from "./components/Entertainment/MainEntertainment";
@@ -12,11 +13,13 @@ class App extends Component {
     stockData: [],
   };
 
-  async componentDidMount() {
+  searchStocks = async text => {
+
     const res = await axios.get(
-      `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=AAPL&contractType=CALL&strikeCount=1&optionType=CALL&expMonth=OCT`
+      `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${text}&contractType=CALL&strikeCount=1&optionType=CALL&expMonth=NOV&toDate=2020-11-08&range=OTM`
     );
-    this.setState({ stockData: [...this.state.stockData, res.data] });
+    
+    this.setState({ stockData: [res.data] });
     console.log(res);
   }
 
@@ -27,13 +30,13 @@ class App extends Component {
       <>
         <div>
           <h1>Hello CC Scanner</h1>
-          <h2>{stockData.symbol}</h2>
+          <Search searchStocks={this.searchStocks} />
           {!!stockData.length ? (
             stockData.map((option) => (
               <i key={option.id}>
                 {option.symbol}, Stock Price:{" "}
                 {option.underlyingPrice.toFixed(2)} Cost for 100 shares: $
-                {option.underlyingPrice * 100} ___{" "}
+                {option.underlyingPrice.toFixed(2) * 100} ___{" "}
                 {Object.keys(option.callExpDateMap).map((entry) => {
                   return Object.keys(
                     option.callExpDateMap[entry]
@@ -63,10 +66,10 @@ class App extends Component {
           <MainFinance />
         </div>
         <div className='MainTravel'>
-            <MainTravel />
+          <MainTravel />
         </div>
         <div className="MainEntertainment">
-            <MainEntertainment />
+          <MainEntertainment />
         </div>
       </>
     );
