@@ -5,6 +5,8 @@ import MainTech from "./components/Tech/MainTech";
 import MainFinance from "./components/Finance/MainFinance";
 import MainEntertainment from "./components/Entertainment/MainEntertainment";
 import MainTravel from "./components/Travel/MainTravel";
+import AppInfo from "./components/AppInfo";
+import Navbar from "./components/Navbar/Navbar";
 import './App.css';
 
 
@@ -16,12 +18,17 @@ class App extends Component {
 
     return (
       <>
+       
       <Router>
         <Route exact path="/">
-        <h1>Hello CC Scanner</h1>
+        <Navbar />
+        <br></br>
         <div>
-          
+          <br></br><br></br><br></br><br></br>
          <MainSearch />
+        </div>
+        <div className="AppInfo">
+          <AppInfo />
         </div>
           <h2>Sectors</h2>
           <h3><Link to="/finance">View Finance Stocks</Link></h3>
@@ -53,6 +60,7 @@ class App extends Component {
           </Route>
         </div>
         </Router>
+       
       </>
     );
   }

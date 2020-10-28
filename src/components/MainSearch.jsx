@@ -53,7 +53,7 @@ class MainSearch extends Component {
               </i></Card>
             ))
           ) : (
-            <p>loading data...</p>
+            <p>Search for stocks to view their call option data.</p>
           )}
 
 

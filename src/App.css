@@ -1,17 +1,17 @@
 
 
 
-.body {
-  background-color: antiquewhite;
+body {
+  background-color: #DEE4E7;
 }
 
-.techContainer {
-  position: relative;
-}
 
-.techLink {
-  position: absolute;
-  
- 
-}
 
+.AppInfo {
+  border-color:  #4ad9e4;
+  border-style: double;
+  text-align: center;
+  font-family: Noto Sans, sans-serif;
+  margin-left: 3%;
+  margin-right: 3%;
+}
