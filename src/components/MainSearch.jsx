@@ -15,7 +15,7 @@ class MainSearch extends Component {
         `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${text}&contractType=CALL&strikeCount=1&optionType=CALL&expMonth=NOV&toDate=2020-11-08&range=OTM`
       );
       
-      this.setState({ stockData: [res.data] });
+      this.setState({ stockData: [...this.state.stockData, res.data] });
       console.log(res);
     }
 
