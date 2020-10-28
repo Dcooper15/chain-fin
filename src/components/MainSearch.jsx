@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import axios from "axios";
 import Search from "./Search";
+import { Card } from "@material-ui/core";
+import './MainSearch.css';
 
 class MainSearch extends Component {
     state = {
@@ -28,18 +30,18 @@ class MainSearch extends Component {
             <Search searchStocks={this.searchStocks} />
           {!!stockData.length ? (
             stockData.map((option) => (
-              <i key={option.id}>
-                {option.symbol}, Stock Price:{" "}
-                {option.underlyingPrice.toFixed(2)} Cost for 100 shares: $
-                {option.underlyingPrice.toFixed(2) * 100} ___{" "}
+              <Card className="stockInfo" variant="outlined"><i key={option.id}>
+                {option.symbol}</i><br></br><i>Stock Price:{" "}
+                ${option.underlyingPrice.toFixed(2)}</i><br></br><i> Cost for 100 shares: $
+                {option.underlyingPrice.toFixed(2) * 100}</i><br></br><i>Ask Price: $
                 {Object.keys(option.callExpDateMap).map((entry) => {
                   return Object.keys(
                     option.callExpDateMap[entry]
                   ).map((innerArrayID) =>
                     option.callExpDateMap[entry][innerArrayID][0].ask.toFixed(2)
                   );
-                })}{" "}
-                Premium collected: $
+                })}{" "}</i>
+                <br></br><i>Premium collected: $
                 {Object.keys(option.callExpDateMap).map((entry) => {
                   return Object.keys(option.callExpDateMap[entry]).map(
                     (innerArrayID) =>
@@ -48,7 +50,7 @@ class MainSearch extends Component {
                       ) * 100
                   );
                 })}
-              </i>
+              </i></Card>
             ))
           ) : (
             <p>loading data...</p>

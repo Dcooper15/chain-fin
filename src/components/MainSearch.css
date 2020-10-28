@@ -1,0 +1,26 @@
+.stockInfo{
+    position: center;
+    justify-items: center;
+    color: blanchedalmond;
+    margin-left: 6%;
+    margin-right: 6%;
+    margin-top: 3%;
+    padding-left: 2%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    font-family: Noto Sans, sans-serif;
+
+}
+
+
+.searchForm {
+    text-align: center;
+}
+
+.searchField {
+    margin-right: 3%;
+}
+
+.searchButton {
+    margin-left: 2%;
+}
