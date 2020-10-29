@@ -4,6 +4,8 @@ import Navbar from "../Navbar/Navbar"
 import Wfc from './Wfc';
 import Axp from './Axp';
 import Citi from './Citi';
+import Bac from './Bac';
+import Jpm from './Jpm';
 
 class MainFinance extends Component {
     render() {
@@ -11,9 +13,11 @@ class MainFinance extends Component {
             <div>
                 <Navbar />
                 <h2 className="sectorHeader">Finance Stocks</h2>
-                <Wfc />
                 <Axp />
+                <Bac />
                 <Citi />
+                <Jpm />
+                <Wfc />
                 <h5 className="sectorHeader"><Link to="/" style={{color: '#fff'}}>Return to Homepage</Link></h5>
             </div>
         )

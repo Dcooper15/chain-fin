@@ -2,34 +2,32 @@ import React, { Component } from 'react'
 import axios from "axios";
 import { Card } from "@material-ui/core";
 
-class Wfc extends Component {
+class Bac extends Component {
     state = {
-        wfcData: [],
+        bacData: [],
         
       }
 
       async componentDidMount() {
       
-        const res = await axios.get(`https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=WFC&contractType=CALL&strikeCount=1&optionType=CALL&expMonth=NOV&toDate=${process.env.REACT_APP_DATE}&range=OTM`);
-        this.setState({ wfcData: [...this.state.wfcData, res.data] });
-       
+        const res = await axios.get(`https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=BAC&contractType=CALL&strikeCount=1&optionType=CALL&expMonth=NOV&toDate=${process.env.REACT_APP_DATE}&range=OTM`);
+        this.setState({ bacData: [...this.state.bacData, res.data] });
+        
       }
       
   
     render() {
        
-        const { wfcData } = this.state;
+        const { bacData } = this.state;
 
 
         return(
           <> 
             <div>
-            {/* Wells Fargo Data */}
+            {/* Bank of America Data */}
         
-            {!!wfcData.length ? ( wfcData.map(option => (
-            
-            
-            <Card className="stockInfo" variant="outlined" style={{backgroundColor: "#6d76f7", color: '#fff'}}><i><strong>Wells Fargo</strong></i><hr></hr><i key={option.index}>
+            {!!bacData.length ? ( bacData.map(option => (
+            <Card className="stockInfo" variant="outlined" style={{backgroundColor: "#6d76f7", color: '#fff'}}><i><strong>Bank of America</strong></i><hr></hr><i key={option.index}>
             {option.symbol}</i><br></br><i>Stock Price:{" "}
             ${option.underlyingPrice.toFixed(2)}</i><br></br><i> Cost for 100 shares: $
             {option.underlyingPrice.toFixed(2) * 100}</i><br></br><i>Ask Price: $
@@ -63,4 +61,4 @@ class Wfc extends Component {
 }
 
 
-export default Wfc;
+export default Bac;

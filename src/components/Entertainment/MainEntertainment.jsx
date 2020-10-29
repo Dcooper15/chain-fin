@@ -4,16 +4,18 @@ import Navbar from "../Navbar/Navbar"
 import Dis from './Dis';
 import Amc from './Amc';
 import Mgm from './Mgm';
+import Wynn from './Wynn';
 
 class MainEntertainment extends Component {
     render() {
         return (
             <div>
                 <Navbar />
-                <h2 className="sectorHeader">Tech Stocks</h2>
+                <h2 className="sectorHeader">Entertainment Stocks</h2>
                 <Dis />
                 <Amc />
                 <Mgm />
+                <Wynn />
                 <h5 className="sectorHeader"><Link to="/" style={{color: '#4ad9e4'}}>Return to Homepage</Link></h5>
             </div>
         )

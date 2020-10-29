@@ -56,7 +56,7 @@ class MainSearch extends Component {
               </i></Card>
             ))
           ) : (
-            <p>Search for stocks to view their call option data.</p>
+            <p className="searchInfo">Search for stocks to view their call option data. Add multiple to compare data.</p>
           )}
 
 
