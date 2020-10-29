@@ -28,7 +28,7 @@ class Dis extends Component {
         
             {!!disData.length ? ( disData.map(option => (
             
-            <Card className="stockInfo" variant="outlined"><i key={option.id}>
+            <Card className="stockInfo" variant="outlined" style={{backgroundColor: "#6d76f7", color: '#fff'}}><i key={option.id}><i><strong>Disney</strong></i><hr></hr>
             {option.symbol}</i><br></br><i>Stock Price:{" "}
             ${option.underlyingPrice.toFixed(2)}</i><br></br><i> Cost for 100 shares: $
             {option.underlyingPrice.toFixed(2) * 100}</i><br></br><i>Ask Price: $

@@ -10,11 +10,13 @@ class MainTech extends Component {
     render() {
         return (
             <div>
+
                 <Navbar />
+                <h2 className="sectorHeader">Tech Stocks</h2>
                 <Amd />
                 <Work /> 
                 <Twtr />
-                <Link to="/">Return to Homepage</Link>
+                <h5 className="sectorHeader"><Link to="/" style={{color: '#4ad9e4'}}>Return to Homepage</Link></h5>
             </div>
         )
     }

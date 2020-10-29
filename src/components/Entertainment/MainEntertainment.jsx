@@ -10,10 +10,11 @@ class MainEntertainment extends Component {
         return (
             <div>
                 <Navbar />
+                <h2 className="sectorHeader">Tech Stocks</h2>
                 <Dis />
                 <Amc />
                 <Mgm />
-                <Link to="/">Return to Homepage</Link>
+                <h5 className="sectorHeader"><Link to="/" style={{color: '#4ad9e4'}}>Return to Homepage</Link></h5>
             </div>
         )
     }

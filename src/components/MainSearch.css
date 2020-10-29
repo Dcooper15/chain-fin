@@ -10,6 +10,7 @@
     padding-top: 1%;
     padding-bottom: 1%;
     font-family: Noto Sans, sans-serif;
+   
 
 }
 
@@ -20,6 +21,8 @@
 
 .searchField {
     margin-right: 3%;
+    background-color: #fff;
+    color: #4ad9e4;
 }
 
 .searchButton {

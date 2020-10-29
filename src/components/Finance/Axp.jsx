@@ -27,7 +27,7 @@ class Axp extends Component {
             {/* American Express Data */}
         
             {!!axpData.length ? ( axpData.map(option => (
-            <Card className="stockInfo" variant="outlined"><i key={option.id}>
+            <Card className="stockInfo" variant="outlined" style={{backgroundColor: "#6d76f7", color: '#fff'}}><i><strong>American Express</strong></i><hr></hr><i key={option.id}>
             {option.symbol}</i><br></br><i>Stock Price:{" "}
             ${option.underlyingPrice.toFixed(2)}</i><br></br><i> Cost for 100 shares: $
             {option.underlyingPrice.toFixed(2) * 100}</i><br></br><i>Ask Price: $

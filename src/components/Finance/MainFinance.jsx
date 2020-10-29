@@ -10,10 +10,11 @@ class MainFinance extends Component {
         return (
             <div>
                 <Navbar />
+                <h2 className="sectorHeader">Finance Stocks</h2>
                 <Wfc />
                 <Axp />
                 <Citi />
-                <Link to="/">Return to Homepage</Link>
+                <h5 className="sectorHeader"><Link to="/" style={{color: '#fff'}}>Return to Homepage</Link></h5>
             </div>
         )
     }

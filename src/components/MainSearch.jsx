@@ -4,10 +4,13 @@ import Search from "./Search";
 import { Card } from "@material-ui/core";
 import './MainSearch.css';
 
+
+
 class MainSearch extends Component {
     state = {
       stockData: [],
     };
+    
   
     searchStocks = async text => {
   
@@ -21,7 +24,7 @@ class MainSearch extends Component {
 
     render() {
         const { stockData } = this.state;
-
+       
 
 
         return (
@@ -30,7 +33,7 @@ class MainSearch extends Component {
             <Search searchStocks={this.searchStocks} />
           {!!stockData.length ? (
             stockData.map((option) => (
-              <Card className="stockInfo" variant="outlined"><i key={option.id}>
+              <Card className="stockInfo" variant="outlined" style={{backgroundColor: "#6d76f7", color: '#fff'}}><i key={option.id}>
                 {option.symbol}</i><br></br><i>Stock Price:{" "}
                 ${option.underlyingPrice.toFixed(2)}</i><br></br><i> Cost for 100 shares: $
                 {option.underlyingPrice.toFixed(2) * 100}</i><br></br><i>Ask Price: $
