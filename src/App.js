@@ -30,12 +30,13 @@ class App extends Component {
         <div className="AppInfo">
           <AppInfo />
         </div>
-          <h2>Sectors</h2>
-          <h3><Link to="/finance">View Finance Stocks</Link></h3>
-          <h3><Link to="/entertainment">View Entertainment Stocks</Link></h3>
-          <h3><Link to="/tech">View Tech Stocks</Link></h3>
-          <h3><Link to="/travel">View Travel Stocks</Link></h3>
-          
+        <div className="sectorMenu">
+          <h2 className="sectorMain">Sectors</h2>
+          <div className="financeSect"><h3><Link to="/finance" style={{color: '#4B0082'}} style={{ textDecoration: 'none' }}>View Finance Stocks</Link></h3></div>
+          <div className="entertainmentSect"><h3><Link to="/entertainment" style={{color: '#6568f4'}} style={{ textDecoration: 'none' }}>View Entertainment Stocks</Link></h3></div>
+          <div className="techSect"><h3><Link to="/tech" style={{color: '#6568f4'}} style={{ textDecoration: 'none' }}>View Tech Stocks</Link></h3></div>
+          <div className="travelSect"><h3><Link to="/travel" style={{color: '#6568f4'}} style={{ textDecoration: 'none' }}>View Travel Stocks</Link></h3></div>
+        </div>
         </Route>
         
         

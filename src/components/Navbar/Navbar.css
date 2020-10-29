@@ -17,6 +17,7 @@
 .fa-react {
     margin-left: 0.5rem;
     font-size: 1.6rem;
+    color: #3acbf7;
 }
 
 .nav-menu {
@@ -43,7 +44,7 @@
 }
 
 .fa-bars {
-    color: #fff;
+    color: #3acbf7;
 }
 
 .nav-links-mobile {
@@ -115,7 +116,7 @@
     }
 
     .fa-times {
-        color: #fff;
+        color: #3acbf7;
         font-size: 2rem;
     }
 
