@@ -13,7 +13,7 @@ class Search extends Component {
     onSubmit = (e) => {
         e.preventDefault();
         if (this.state.text === '') {
-            this.props.setAlert('Please enter a valid search')
+            alert('Please specifiy a Ticker Symbol')
         } else {
         this.props.searchStocks(this.state.text);
         this.setState({ text: '' });
