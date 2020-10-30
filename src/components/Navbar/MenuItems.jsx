@@ -1,26 +1,27 @@
-
-
+import { Link } from 'react-router-dom';
+import React from 'react';
 
 
 export const MenuItems = [
+    
     {
         title: 'Finance',
-        url:  "coveredcalls.dev/finance",
+        url:  '/finance',
         cName: 'nav-links'
     },
     {
         title: 'Entertainment',
-        url: 'coveredcalls.dev/entertainment',
+        url: <Link to='/entertainment'></Link>,
         cName: 'nav-links'
     },
     {
         title: 'Tech',
-        url: 'coveredcalls.dev/tech',
+        url: '/tech',
         cName: 'nav-links'
     },
     {
         title: 'Travel',
-        url: 'coveredcalls.dev/travel',
+        url: 'https://coveredcalls.dev/travel',
         cName: 'nav-links'
     },
     {
@@ -28,4 +29,5 @@ export const MenuItems = [
         url: 'https://github.com/Dcooper15/covered-call-scanner',
         cName: 'nav-links-mobile'
     }
+    
 ]
