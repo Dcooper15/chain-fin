@@ -18,7 +18,7 @@ class MainEntertainment extends Component {
                 <Amc />
                 <Mgm />
                 <Wynn />
-                <h5 className="sectorHeader"><Link to="/" style={{color: '#4ad9e4'}}>Return to Homepage</Link></h5>
+                <h5 className="sectorHeader"><Link to="/" style={{color: '#fff'}}>Return to Homepage</Link></h5>
             </div>
         )
     }
