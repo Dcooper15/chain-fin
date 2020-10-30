@@ -1,10 +1,12 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 
 
 export const MenuItems = [
     {
         title: 'Finance',
-        url: '/finance',
+        url:  "/finance",
         cName: 'nav-links'
     },
     {
