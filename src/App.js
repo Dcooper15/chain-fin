@@ -7,13 +7,19 @@ import MainEntertainment from "./components/Entertainment/MainEntertainment";
 import MainTravel from "./components/Travel/MainTravel";
 import AppInfo from "./components/AppInfo";
 import Navbar from "./components/Navbar/Navbar";
+import Footer from "./components/Footer";
+// import Alert from "./components/Alert";
 import './App.css';
 
 
 
 class App extends Component {
  
+  // setAlert = () => { 
+  //   this.setState({ alert: {  }})
 
+  //   setTimeout(() => this.setState({ alert: null}), 3500)
+  // }
   render() {
 
     return (
@@ -26,16 +32,21 @@ class App extends Component {
         <div>
           <br></br><br></br><br></br><br></br>
          <MainSearch />
+         {/* <Alert /> */}
         </div>
         <div className="AppInfo">
           <AppInfo />
         </div>
         <div className="sectorMenu">
           <h2 className="sectorMain">Sectors</h2>
-          <div className="financeSect"><h3><Link to="/finance" style={{ textDecoration: 'none' }}>View Finance Stocks</Link></h3></div>
-          <div className="entertainmentSect"><h3><Link to="/entertainment"  style={{ textDecoration: 'none' }}>View Entertainment Stocks</Link></h3></div>
-          <div className="techSect"><h3><Link to="/tech" style={{ textDecoration: 'none' }}>View Tech Stocks</Link></h3></div>
-          <div className="travelSect"><h3><Link to="/travel" style={{ textDecoration: 'none' }}>View Travel Stocks</Link></h3></div>
+          <div className="financeSect"><h3><Link to="/finance" style={{ textDecoration: 'none' }}>Finance Stocks</Link></h3></div>
+          <div className="entertainmentSect"><h3><Link to="/entertainment"  style={{ textDecoration: 'none' }}>Entertainment Stocks</Link></h3></div>
+          <div className="techSect"><h3><Link to="/tech" style={{ textDecoration: 'none' }}>Tech Stocks</Link></h3></div>
+          <div className="travelSect"><h3><Link to="/travel" style={{ textDecoration: 'none' }}>Travel Stocks</Link></h3></div>
+        </div>
+        <br></br><br></br>
+        
+        <div className="Footer"><Footer />
         </div>
         </Route>
         

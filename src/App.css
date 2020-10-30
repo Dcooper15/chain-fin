@@ -56,6 +56,7 @@ body {
   padding-top: 1%;
   padding-bottom: 2%;
   margin-top: 2%;
+  margin-bottom: 10%;
 }
 
 .techSect {
@@ -72,4 +73,28 @@ body {
 
 .sectorMain {
   text-decoration: underline;
+}
+
+.alert {
+  padding: 0.7rem;
+  margin: 1rem 0;
+  opacity: 0.9;
+  background: var(--light-color);
+  color: #333;
+}
+
+.Footer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;
+  font-size: 70%;
+  margin: 0, 3%;
+  margin-top: 50px;
+  margin-bottom: 3%;
+  
+  
+  border-top: double #3acbf7;
+  text-align: center;
+  
 }
