@@ -4,6 +4,7 @@ import Navbar from "../Navbar/Navbar";
 import Amd from './Amd';
 import Pins from './Pins';
 import Work from './Work';
+import Sne from './Sne';
 import Twtr from './Twtr';
 import Zm from './Zm';
 
@@ -17,10 +18,11 @@ class MainTech extends Component {
                 <h2 className="sectorHeader">Tech Stocks</h2>
                 <Amd />
                 <Pins />
-                <Work /> 
+                <Work />
+                <Sne /> 
                 <Twtr />
                 <Zm />
-                <h5 className="sectorHeader"><Link to="/" style={{color: '#4ad9e4'}}>Return to Homepage</Link></h5>
+                <h5 className="sectorHeader"><Link to="/" style={{color: '#fff'}}>Return to Homepage</Link></h5>
             </div>
         )
     }

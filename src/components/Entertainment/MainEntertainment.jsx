@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from "../Navbar/Navbar"
+import Att from './Att';
 import Dis from './Dis';
 import Amc from './Amc';
 import Mgm from './Mgm';
@@ -12,6 +13,7 @@ class MainEntertainment extends Component {
             <div>
                 <Navbar />
                 <h2 className="sectorHeader">Entertainment Stocks</h2>
+                <Att />
                 <Dis />
                 <Amc />
                 <Mgm />
