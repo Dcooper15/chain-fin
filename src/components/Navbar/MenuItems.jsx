@@ -5,22 +5,22 @@
 export const MenuItems = [
     {
         title: 'Finance',
-        url:  "/finance",
+        url:  "coveredcalls.dev/finance",
         cName: 'nav-links'
     },
     {
         title: 'Entertainment',
-        url: '/entertainment',
+        url: 'coveredcalls.dev/entertainment',
         cName: 'nav-links'
     },
     {
         title: 'Tech',
-        url: '/tech',
+        url: 'coveredcalls.dev/tech',
         cName: 'nav-links'
     },
     {
         title: 'Travel',
-        url: '/travel',
+        url: 'coveredcalls.dev/travel',
         cName: 'nav-links'
     },
     {
