@@ -15,7 +15,7 @@ class Search extends Component {
         if (this.state.text === '') {
             alert('Please specifiy a Ticker Symbol')
         } else {
-        this.props.searchStocks(this.state.text);
+        this.props.searchStocks(this.state.text.toUpperCase());
         this.setState({ text: '' });
         }
     }
