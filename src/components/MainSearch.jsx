@@ -33,7 +33,7 @@ class MainSearch extends Component {
             <Search searchStocks={this.searchStocks} />
           {!!stockData.length ? (
             stockData.map((option) => (
-              <Card className="stockInfo" variant="outlined" style={{backgroundColor: "#7161ef", color: '#fff'}}><i key={option.id}>
+              <Card className="stockInfo" variant="outlined" style={{backgroundColor: "#7161ef", color: '#fff', borderRadius: '17px'}}><i key={option.id}>
                 {option.symbol}</i><br></br><i>Stock Price:{" "}
                 ${option.underlyingPrice.toFixed(2)}</i><br></br><i> Cost for 100 shares: $
                 {option.underlyingPrice.toFixed(2) * 100}</i><br></br><i>Ask Price: $

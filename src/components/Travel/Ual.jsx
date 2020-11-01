@@ -28,7 +28,7 @@ class Ual extends Component {
         
             {!!ualData.length ? ( ualData.map(option => (
             
-            <Card className="stockInfo" variant="outlined" style={{backgroundColor: "#6d76f7", color: '#fff'}}><i><strong>United Airlines</strong></i><hr></hr><i key={option.index}>
+            <Card className="stockInfo" variant="outlined" style={{backgroundColor: "#6d76f7", color: '#fff', borderRadius: '15px'}}><i><strong>United Airlines</strong></i><hr></hr><i key={option.index}>
             {option.symbol}</i><br></br><i>Stock Price:{" "}
             ${option.underlyingPrice.toFixed(2)}</i><br></br><i> Cost for 100 shares: $
             {option.underlyingPrice.toFixed(2) * 100}</i><br></br><i>Ask Price: $

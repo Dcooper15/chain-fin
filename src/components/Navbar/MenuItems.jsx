@@ -24,7 +24,8 @@ export const MenuItems = [
         url: 'travel',
         cName: 'nav-links'
     },
-    {   title: <a style={{textDecoration: 'none', color: '#fff'}} href='https://github.com/Dcooper15/covered-call-scanner'>Repo</a>,
+    {   title: <a style={{textDecoration: 'none', color: '#fff'}} href='https://github.com/Dcooper15/covered-call-scanner'>Repo<i class="fab fa-github" style={{padding: '0.4rem'}}></i>
+    </a>,
 
         cName: 'nav-links-mobile'
 

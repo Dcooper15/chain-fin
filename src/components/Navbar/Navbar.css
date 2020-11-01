@@ -1,5 +1,5 @@
 .NavbarItems{
-    background: linear-gradient(90deg, rgb(110, 94, 254) 0%, rgb(43, 33, 244) 100%);
+    background: linear-gradient(90deg, rgb(110, 94, 254) 0%, rgb(79, 71, 223) 100%);
     height: 80px;
     display: flex;
     justify-content: center;
@@ -45,7 +45,7 @@
 }
 
 .fa-bars {
-    color: #3acbf7;
+    color: #fff;
 }
 
 .nav-links-mobile {
@@ -118,7 +118,7 @@
     }
 
     .fa-times {
-        color: #3acbf7;
+        color: #fff;
         font-size: 2rem;
     }
 

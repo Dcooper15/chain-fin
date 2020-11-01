@@ -35,7 +35,7 @@ class Navbar extends Component {
                    
                </ul>
                <form method="get" action="https://github.com/Dcooper15/covered-call-scanner">
-               <Button type="submit">Repo</Button>
+               <Button type="submit"><i class="fab fa-github" style={{padding: '0.1rem'}}></i></Button>
                </form>
            </nav>
         )
