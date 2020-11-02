@@ -47,7 +47,7 @@ body {
 }
 
 .travelSect {
-  background: linear-gradient(90deg, rgb(94, 225, 254) 0%, rgb(71, 208, 223) 100%);
+  background: linear-gradient(90deg, rgb(94, 225, 254) 0%, rgb(56, 200, 232) 100%);
   margin-left: 3%;
   margin-right: 3%;
   border-radius: 15px;
@@ -60,7 +60,7 @@ body {
 }
 
 .techSect {
-  background: linear-gradient(90deg, rgb(94, 225, 254) 0%, rgb(71, 208, 223) 100%);
+  background: linear-gradient(90deg, rgb(94, 225, 254) 0%, rgb(56, 200, 232) 100%);
   margin-left: 3%;
   margin-right: 3%;
   border-radius: 15px;
