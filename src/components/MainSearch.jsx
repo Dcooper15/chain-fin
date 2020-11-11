@@ -15,7 +15,7 @@ class MainSearch extends Component {
     searchStocks = async text => {
   
       const res = await axios.get(
-        `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${text}&contractType=CALL&strikeCount=1&optionType=CALL&expMonth=NOV&toDate=2020-11-08&range=OTM`
+        `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${text}&contractType=CALL&strikeCount=1&optionType=CALL&expMonth=NOV&toDate=${process.env.REACT_APP_DATE}&range=OTM`
       );
       
       this.setState({ stockData: [...this.state.stockData, res.data] });
