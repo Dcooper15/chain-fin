@@ -8,18 +8,11 @@ import MainTravel from "./components/Travel/MainTravel";
 import AppInfo from "./components/AppInfo";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer";
-// import Alert from "./components/Alert";
 import './App.css';
 
 
 
 class App extends Component {
- 
-  // setAlert = () => { 
-  //   this.setState({ alert: {  }})
-
-  //   setTimeout(() => this.setState({ alert: null}), 3500)
-  // }
   render() {
 
     return (
