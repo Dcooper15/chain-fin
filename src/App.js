@@ -8,7 +8,6 @@ import MainTravel from "./components/Travel/MainTravel";
 import AppInfo from "./components/AppInfo";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer";
-// import Alert from "./components/Alert";
 import './App.css';
 
 
