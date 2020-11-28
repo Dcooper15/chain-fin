@@ -14,12 +14,6 @@ import './App.css';
 
 
 class App extends Component {
- 
-  // setAlert = () => { 
-  //   this.setState({ alert: {  }})
-
-  //   setTimeout(() => this.setState({ alert: null}), 3500)
-  // }
   render() {
 
     return (
