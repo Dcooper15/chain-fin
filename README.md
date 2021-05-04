@@ -6,3 +6,6 @@
 
 
 <p>API: TD Ameritrade Option Chain</p>
+
+
+<p>-styling optimized for mobile-</p>
