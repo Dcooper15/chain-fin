@@ -19,12 +19,12 @@ class MainSearch extends Component {
       );
       
       this.setState({ stockData: [...this.state.stockData, res.data] });
-      console.log(res);
+      console.log("search res is...", res);
     }
 
     render() {
         const { stockData } = this.state;
-       
+       console.log("stock data issss...,", stockData)
 
 
         return (
@@ -32,31 +32,31 @@ class MainSearch extends Component {
 
             <Search searchStocks={this.searchStocks} />
           {!!stockData.length ? (
+            
             stockData.map((option) => (
               <Card className="stockInfo" variant="outlined" style={{backgroundColor: "#7161ef", color: '#fff', borderRadius: '17px'}}><i key={option.id}>
                 {option.symbol}</i><br></br><i>Stock Price:{" "}
                 ${option.underlyingPrice.toFixed(2)}</i><br></br><i> Cost for 100 shares: $
-                {option.underlyingPrice.toFixed(2) * 100}</i><br></br><i>Ask Price: $
+                {option.underlyingPrice.toFixed(2) * 100}</i><br></br><i>Bid Price: $
                 {Object.keys(option.callExpDateMap).map((entry) => {
                   return Object.keys(
                     option.callExpDateMap[entry]
                   ).map((innerArrayID) =>
-                    option.callExpDateMap[entry][innerArrayID][0].ask.toFixed(2)
+                    option.callExpDateMap[entry][innerArrayID][0].bid.toFixed(2)
                   );
                 })}{" "}</i>
                 <br></br><i>Premium collected: $
                 {Object.keys(option.callExpDateMap).map((entry) => {
                   return Object.keys(option.callExpDateMap[entry]).map(
                     (innerArrayID) =>
-                      option.callExpDateMap[entry][innerArrayID][0].ask.toFixed(
+                      option.callExpDateMap[entry][innerArrayID][0].bid.toFixed(
                         2
                       ) * 100
                   );
                 })}
               </i></Card>
             ))
-          ) : (
-            <p className="searchInfo">Search for stocks to view their call option data. Add multiple to compare data.</p>
+          ) : ( <p className="searchInfo">Search for stocks to view their call option data. Add multiple to compare data.</p>
           )}
 
 

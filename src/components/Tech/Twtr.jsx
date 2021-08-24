@@ -35,12 +35,12 @@ function Twtr() {
             <i> Cost for 100 shares: $
             {option.underlyingPrice.toFixed(0) * 100}</i>
           <br></br>
-            <i>Ask Price: $
+            <i>Bid Price: $
             {Object.keys(option.callExpDateMap).map((entry) => {
             return Object.keys(
             option.callExpDateMap[entry]
             ).map((innerArrayID) =>
-            option.callExpDateMap[entry][innerArrayID][0].ask.toFixed(2)
+            option.callExpDateMap[entry][innerArrayID][0].bid.toFixed(2)
             );
             })}{" "}</i>
           <br></br>
@@ -48,7 +48,7 @@ function Twtr() {
             {Object.keys(option.callExpDateMap).map((entry) => {
             return Object.keys(option.callExpDateMap[entry]).map(
             (innerArrayID) =>
-            option.callExpDateMap[entry][innerArrayID][0].ask.toFixed(
+            option.callExpDateMap[entry][innerArrayID][0].bid.toFixed(
             2) * 100
             );
             })}
