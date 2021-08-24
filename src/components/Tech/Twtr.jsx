@@ -10,7 +10,7 @@ function Twtr() {
       useEffect(() => {
         axios.get(url).then((response) => {
           setTwtrData([response.data]);
-          console.log("response.data is...", response.data);
+          
         });
       },[]
       )

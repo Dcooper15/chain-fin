@@ -10,7 +10,7 @@ function Zm() {
       useEffect(() => {
         axios.get(url).then((response) => {
           setZmData([response.data]);
-          console.log("response.data is...", response.data);
+          
         });
       },[]
       )

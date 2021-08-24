@@ -10,7 +10,7 @@ function Sne() {
       useEffect(() => {
         axios.get(url).then((response) => {
           setSneData([response.data]);
-          console.log("response.data is...", response.data);
+          
         });
       },[]
       )

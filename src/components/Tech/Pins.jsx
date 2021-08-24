@@ -10,7 +10,7 @@ function Pins() {
       useEffect(() => {
         axios.get(url).then((response) => {
           setPinsData([response.data]);
-          console.log("response.data is...", response.data);
+         
         });
       },[]
       )

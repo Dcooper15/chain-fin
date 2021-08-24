@@ -10,7 +10,7 @@ function Amd() {
       useEffect(() => {
         axios.get(url).then((response) => {
           setAmdData([response.data]);
-          console.log("response.data is...", response.data);
+          
         });
       },[]
       )

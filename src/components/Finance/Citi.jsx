@@ -10,7 +10,7 @@ function Citi() {
       useEffect(() => {
         axios.get(url).then((response) => {
           setCitiData([response.data]);
-          console.log("response.data is...", response.data);
+          
         });
       },[]
       )

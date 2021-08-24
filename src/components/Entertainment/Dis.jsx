@@ -10,7 +10,7 @@ function Dis() {
       useEffect(() => {
         axios.get(url).then((response) => {
           setDisData([response.data]);
-          console.log("response.data is...", response.data);
+          
         });
       },[]
       )

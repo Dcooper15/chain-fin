@@ -10,7 +10,7 @@ function Mgm() {
       useEffect(() => {
         axios.get(url).then((response) => {
           setMgmData([response.data]);
-          console.log("response.data is...", response.data);
+          
         });
       },[]
       )

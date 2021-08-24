@@ -10,7 +10,7 @@ function Axp() {
       useEffect(() => {
         axios.get(url).then((response) => {
           setAxpData([response.data]);
-          console.log("response.data is...", response.data);
+          
         });
       },[]
       )

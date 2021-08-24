@@ -10,7 +10,7 @@ function Amc() {
       useEffect(() => {
         axios.get(url).then((response) => {
           setAmcData([response.data]);
-          console.log("response.data is...", response.data);
+          
         });
       },[]
       )

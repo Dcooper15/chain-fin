@@ -10,7 +10,7 @@ function Bac() {
       useEffect(() => {
         axios.get(url).then((response) => {
           setBacData([response.data]);
-          console.log("response.data is...", response.data);
+          
         });
       },[]
       )

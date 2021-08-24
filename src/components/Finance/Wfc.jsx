@@ -10,7 +10,7 @@ function Wfc() {
       useEffect(() => {
         axios.get(url).then((response) => {
           setWfcData([response.data]);
-          console.log("response.data is...", response.data);
+          
         });
       },[]
       )

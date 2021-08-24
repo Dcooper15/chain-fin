@@ -10,7 +10,7 @@ function Att() {
       useEffect(() => {
         axios.get(url).then((response) => {
           setAttData([response.data]);
-          console.log("response.data is...", response.data);
+         
         });
       },[]
       )

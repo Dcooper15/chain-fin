@@ -10,7 +10,7 @@ function Jpm() {
       useEffect(() => {
         axios.get(url).then((response) => {
           setJmpData([response.data]);
-          console.log("response.data is...", response.data);
+         
         });
       },[]
       )

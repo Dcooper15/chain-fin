@@ -10,7 +10,7 @@ function Wynn() {
       useEffect(() => {
         axios.get(url).then((response) => {
           setWynnData([response.data]);
-          console.log("response.data is...", response.data);
+          
         });
       },[]
       )
