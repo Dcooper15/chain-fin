@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import Navbar from "../Navbar/Navbar";
 import Amd from './Amd';
 import Pins from './Pins';
-import Work from './Work';
 import Sne from './Sne';
 import Twtr from './Twtr';
 import Zm from './Zm';
@@ -18,7 +17,6 @@ class MainTech extends Component {
                 <h2 className="sectorHeader">Tech Stocks</h2>
                 <Amd />
                 <Pins />
-                <Work />
                 <Sne /> 
                 <Twtr />
                 <Zm />
