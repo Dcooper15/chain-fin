@@ -5,7 +5,6 @@ import MainTech from "./components/Tech/MainTech";
 import MainFinance from "./components/Finance/MainFinance";
 import MainEntertainment from "./components/Entertainment/MainEntertainment";
 import MainTravel from "./components/Travel/MainTravel";
-import AppInfo from "./components/AppInfo";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer";
 import './App.css';
