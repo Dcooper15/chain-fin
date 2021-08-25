@@ -1,11 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import Navbar from "../Navbar/Navbar";
-import Amd from './Amd';
-import Pins from './Pins';
-import Sne from './Sne';
-import Twtr from './Twtr';
-import Zm from './Zm';
+import TechStocks from './TechStocks'
 
 
 class MainTech extends Component {
@@ -15,11 +11,7 @@ class MainTech extends Component {
 
                 <Navbar />
                 <h2 className="sectorHeader">Tech Stocks</h2>
-                <Amd />
-                <Pins />
-                <Sne /> 
-                <Twtr />
-                <Zm />
+                <TechStocks />
                 <h5 className="sectorHeader"><Link to="/" style={{color: '#fff'}}>Return to Homepage</Link></h5>
             </div>
         )
