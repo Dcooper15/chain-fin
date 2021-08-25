@@ -7,8 +7,8 @@ class Footer extends Component {
             <>
              <footer>
              <div className="supLinks">
-             <a  style={{color: '#4ad9e4', textDecoration: 'none'}} href="https://www.investopedia.com/terms/c/coveredcall.asp" target="_blank" rel="noreferrer">Covered Call Definition</a> |
-             <a  style={{color: '#4ad9e4', textDecoration: 'none'}} href="https://www.investopedia.com/articles/optioninvestor/08/covered-call.asp" target="_blank" rel="noreferrer"> The Basics of Covered Calls </a> 
+             <a  style={{color: '#B8F1F4', textDecoration: 'none'}} href="https://www.investopedia.com/terms/c/coveredcall.asp" target="_blank" rel="noreferrer">Covered Call Definition</a> |
+             <a  style={{color: '#B8F1F4', textDecoration: 'none'}} href="https://www.investopedia.com/articles/optioninvestor/08/covered-call.asp" target="_blank" rel="noreferrer"> The Basics of Covered Calls </a> 
              </div>
              </footer>
             </>

@@ -59,7 +59,7 @@ function FinanceStocks() {
             ${option.underlyingPrice.toFixed(2)}</i>
           <br></br>
             <i key={3}> Cost for 100 shares: $
-            {option.underlyingPrice.toFixed(0) * 100}</i>
+            {option.underlyingPrice.toFixed(2) * 100}</i>
           <br></br>
             <i key={4}>Bid Price: $
             {Object.keys(option.callExpDateMap).map((entry) => {
@@ -76,6 +76,38 @@ function FinanceStocks() {
             (innerArrayID) =>
             option.callExpDateMap[entry][innerArrayID][0].bid.toFixed(
             2) * 100
+            );
+            })}
+            </i>
+            <br></br>
+            <i key={6}>Open Interest:{' '}
+            {Object.keys(option.callExpDateMap).map((entry) => {
+            return Object.keys(option.callExpDateMap[entry]).map(
+            (innerArrayID) =>
+            option.callExpDateMap[entry][innerArrayID][0].openInterest
+          
+            );
+            })}
+            </i>
+            <br></br>
+            <i key={7}>
+            Volatility:{' '}
+            {Object.keys(option.callExpDateMap).map((entry) => {
+            return Object.keys(option.callExpDateMap[entry]).map(
+            (innerArrayID) =>
+            option.callExpDateMap[entry][innerArrayID][0].volatility.toFixed(2)
+          
+            );
+            })}
+            </i>
+            <br></br>
+            <i key={8}>
+            Days to Expiration:{' '}
+            {Object.keys(option.callExpDateMap).map((entry) => {
+            return Object.keys(option.callExpDateMap[entry]).map(
+            (innerArrayID) =>
+            option.callExpDateMap[entry][innerArrayID][0].daysToExpiration
+          
             );
             })}
             </i>

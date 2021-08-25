@@ -27,16 +27,21 @@ class App extends Component {
          <MainSearch />
          {/* <Alert /> */}
         </div>
-        <div className="AppInfo">
-          <AppInfo />
-        </div>
+        
         <div className="sectorMenu">
-          <h2 className="sectorMain">Sectors</h2>
-          <div className="financeSect"><h3><Link to="/finance" style={{ textDecoration: 'none' }}>Finance Stocks</Link></h3></div>
-          <div className="entertainmentSect"><h3><Link to="/entertainment"  style={{ textDecoration: 'none' }}>Entertainment Stocks</Link></h3></div>
-          <div className="techSect"><h3><Link to="/tech" style={{ textDecoration: 'none' }}>Tech Stocks</Link></h3></div>
-          <div className="travelSect"><h3><Link to="/travel" style={{ textDecoration: 'none' }}>Travel Stocks</Link></h3></div>
+          <div class="row">
+            <div class="column" className="financeSect"><h3 className="linkHeader"><Link to="/finance" style={{ textDecoration: 'none' ,color: '#1F51FF'}}>Finance</Link></h3></div>
+            <div class="column" className="entertainmentSect"><h3 className="linkHeader"><Link to="/entertainment"  style={{ textDecoration: 'none', color: '#1F51FF'}}>Entertainment</Link></h3></div>
+          </div>
+          
+          <div class="row">
+            <div class="column"className="techSect"><h3 className="linkHeader"><Link to="/tech" style={{ textDecoration: 'none', color: '#1F51FF' }}>Tech</Link></h3></div>
+            <div class="column" className="travelSect"><h3 className="linkHeader"><Link to="/travel" style={{ textDecoration: 'none', color: '#1F51FF' }}>Travel</Link></h3></div>
+          </div>
         </div>
+        {/* <div className="AppInfo">
+          <AppInfo />
+        </div> */}
         <br></br><br></br>
         
         <div className="Footer">

@@ -54,6 +54,38 @@ class MainSearch extends Component {
                       ) * 100
                   );
                 })}
+                 <br></br>
+            <i key={6}>Open Interest:{' '}
+            {Object.keys(option.callExpDateMap).map((entry) => {
+            return Object.keys(option.callExpDateMap[entry]).map(
+            (innerArrayID) =>
+            option.callExpDateMap[entry][innerArrayID][0].openInterest
+          
+            );
+            })}
+            </i>
+            <br></br>
+            <i key={7}>
+            Volatility:{' '}
+            {Object.keys(option.callExpDateMap).map((entry) => {
+            return Object.keys(option.callExpDateMap[entry]).map(
+            (innerArrayID) =>
+            option.callExpDateMap[entry][innerArrayID][0].volatility.toFixed(2)
+          
+            );
+            })}
+            </i>
+            <br></br>
+            <i key={8}>
+            Days to Expiration:{' '}
+            {Object.keys(option.callExpDateMap).map((entry) => {
+            return Object.keys(option.callExpDateMap[entry]).map(
+            (innerArrayID) =>
+            option.callExpDateMap[entry][innerArrayID][0].daysToExpiration
+          
+            );
+            })}
+            </i>
               </i></Card>
             ))
           ) : ( <p className="searchInfo">Search for stocks to view their call option data. Add multiple to compare data.</p>
