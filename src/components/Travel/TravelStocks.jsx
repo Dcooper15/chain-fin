@@ -4,7 +4,7 @@ import { Card } from "@material-ui/core";
 
 const travelArray = ['CCL', 'DAL', 'LUV', 'NCLH', 'UAL'];
 
-function Ccl() {
+function TravelStocks() {
     const [ccl, setCclData] = useState([]);
     const [dal, setDalData] = useState([]);
     const [luv, setLuvData] = useState([]);
@@ -91,4 +91,4 @@ function Ccl() {
 };
 
 
-export default Ccl;
+export default TravelStocks;
