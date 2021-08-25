@@ -2,36 +2,36 @@ import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import { Card } from "@material-ui/core";
 
-const finArray = ['AXP', 'BAC', 'C', 'JPM', 'WFC'];
+const techArray = ['AMD', 'PINS', 'SONY', 'TWTR', 'ZM'];
 
-function FinanceStocks() {
-    const [axp, setAxpData] = useState([]);
-    const [bac, setBacData] = useState([]);
-    const [c, setCData] = useState([]);
-    const [jpm, setJpmData] = useState([]);
-    const [wfc, setWfcData] = useState([]);
+function TechStocks() {
+    const [amd, setAmdData] = useState([]);
+    const [pins, setPinsData] = useState([]);
+    const [sony, setSonyData] = useState([]);
+    const [twtr, setTwtrData] = useState([]);
+    const [zm, setZmData] = useState([]);
  
-    const dataArray = [axp, bac, c, jpm, wfc];
+    const dataArray = [amd, pins, sony, twtr, zm];
     
     
       useEffect(() => {
         
-       finArray.map(symbol => 
+       techArray.map(symbol => 
         axios.get(`https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&contractType=CALL&strikeCount=1&optionType=CALL&expMonth=${process.env.REACT_APP_MONTH}&toDate=${process.env.REACT_APP_DATE}&range=OTM` 
         ).then((response) => {
-          if(symbol === 'AXP'){
-            setAxpData([response.data]);
-          } else if (symbol === 'BAC') {
-            setBacData([response.data])
+          if(symbol === 'AMD'){
+            setAmdData([response.data]);
+          } else if (symbol === 'PINS') {
+            setPinsData([response.data])
           }
-          else if (symbol === 'C') {
-            setCData([response.data])
+          else if (symbol === 'SONY') {
+            setSonyData([response.data])
           }
-          else if (symbol === 'JPM') {
-            setJpmData([response.data])
+          else if (symbol === 'TWTR') {
+            setTwtrData([response.data])
           }
-          else if (symbol === 'WFC') {
-            setWfcData([response.data])
+          else if (symbol === 'ZM') {
+            setZmData([response.data])
           }
           
          
@@ -91,4 +91,4 @@ function FinanceStocks() {
 };
 
 
-export default FinanceStocks;
+export default TechStocks;
