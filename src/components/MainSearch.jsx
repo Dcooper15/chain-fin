@@ -24,7 +24,7 @@ class MainSearch extends Component {
 
     render() {
         const { stockData } = this.state;
-       console.log("stock data issss...,", stockData)
+       
 
 
         return (
