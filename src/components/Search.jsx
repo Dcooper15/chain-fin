@@ -26,8 +26,8 @@ class Search extends Component {
             <div>
                 <form className="searchForm" onSubmit={this.onSubmit} >
                     <label> Search Stock by Ticker Symbol </label><br></br><br></br>
-                    <TextField className="searchField" type="text" name="text" placeholder="AAPL" value={this.state.text} onChange={this.onChange} variant="outlined" size="small"/><p></p>
-                    <Button className="searchButton" type="submit" variant="contained" color="primary" value="Search">Search</Button>
+                    <TextField className="searchField" type="text" name="text" placeholder="AAPL" value={this.state.text} onChange={this.onChange} variant="outlined" size="small" color="#fff"/><p></p>
+                    <Button className="searchButton" type="submit" variant="contained" value="Search" color="primary" >Search</Button>
                 </form>
                 
               
