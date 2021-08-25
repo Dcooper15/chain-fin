@@ -2,23 +2,16 @@ import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import { Card } from "@material-ui/core";
 
-const entArray = ['AMC', 'T', 'DIS', 'MGM', 'WYNN'];
+const entArray = ['AXP', 'BAC', 'C', 'JPM', 'WFC'];
 
-
-
-
-
-//const url = `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=AMC&contractType=CALL&strikeCount=1&optionType=CALL&expMonth=${process.env.REACT_APP_MONTH}&toDate=${process.env.REACT_APP_DATE}&range=OTM` 
-
-
-function Amc() {
-    const [amc, setAmcData] = useState([]);
-    const [t, setTData] = useState([]);
-    const [dis, setDisData] = useState([]);
-    const [mgm, setMgmData] = useState([]);
-    const [wynn, setWynnData] = useState([]);
+function FinanceStocks() {
+    const [axp, setAxpData] = useState([]);
+    const [bac, setBacData] = useState([]);
+    const [c, setCData] = useState([]);
+    const [jpm, setJpmData] = useState([]);
+    const [wfc, setWfcData] = useState([]);
  
-    const dataArray = [amc, t, dis, mgm, wynn];
+    const dataArray = [axp, bac, c, jpm, wfc];
     
     
       useEffect(() => {
@@ -26,19 +19,19 @@ function Amc() {
        entArray.map(symbol => 
         axios.get(`https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&contractType=CALL&strikeCount=1&optionType=CALL&expMonth=${process.env.REACT_APP_MONTH}&toDate=${process.env.REACT_APP_DATE}&range=OTM` 
         ).then((response) => {
-          if(symbol == 'AMC'){
-            setAmcData([response.data]);
-          } else if (symbol === 'T') {
-            setTData([response.data])
+          if(symbol === 'AXP'){
+            setAxpData([response.data]);
+          } else if (symbol === 'BAC') {
+            setBacData([response.data])
           }
-          else if (symbol === 'DIS') {
-            setDisData([response.data])
+          else if (symbol === 'C') {
+            setCData([response.data])
           }
-          else if (symbol === 'MGM') {
-            setMgmData([response.data])
+          else if (symbol === 'JPM') {
+            setJpmData([response.data])
           }
-          else if (symbol === 'WYNN') {
-            setWynnData([response.data])
+          else if (symbol === 'WFC') {
+            setWfcData([response.data])
           }
           
          
@@ -54,7 +47,7 @@ function Amc() {
             
             
             
-    {!!amc.length ? ( dataArray.map(stock => stock.map(option => (
+    {!!dataArray.length ? ( dataArray.map(stock => stock.map(option => (
       <Card className="stockInfo" variant="outlined"
         style={{backgroundColor: "#6d76f7", color: '#fff', borderRadius: '15px'}}>
           {/* <i><strong>{name}</strong></i> */}
@@ -98,4 +91,4 @@ function Amc() {
 };
 
 
-export default Amc;
+export default FinanceStocks;
