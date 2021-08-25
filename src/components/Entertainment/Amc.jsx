@@ -3,12 +3,12 @@ import axios from "axios";
 import { Card } from "@material-ui/core";
 
 const entArray = ['AMC', 'T', 'DIS', 'MGM', 'WYNN'];
-const symbols = [];
-entArray.forEach(symbol => symbols.push(symbol));
 
-console.log("Symbols are..", symbols)
 
-const url = `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=AMC&contractType=CALL&strikeCount=1&optionType=CALL&expMonth=${process.env.REACT_APP_MONTH}&toDate=${process.env.REACT_APP_DATE}&range=OTM` 
+
+
+
+//const url = `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=AMC&contractType=CALL&strikeCount=1&optionType=CALL&expMonth=${process.env.REACT_APP_MONTH}&toDate=${process.env.REACT_APP_DATE}&range=OTM` 
 
 
 function Amc() {
@@ -17,25 +17,27 @@ function Amc() {
     const [dis, setDisData] = useState([]);
     const [mgm, setMgmData] = useState([]);
     const [wynn, setWynnData] = useState([]);
-       
-    console.log("AMC issss..", amc);
+ 
+    const dataArray = [amc, t, dis, mgm, wynn];
+    
+    
       useEffect(() => {
         
-       entArray.forEach(symbol => 
+       entArray.map(symbol => 
         axios.get(`https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&contractType=CALL&strikeCount=1&optionType=CALL&expMonth=${process.env.REACT_APP_MONTH}&toDate=${process.env.REACT_APP_DATE}&range=OTM` 
         ).then((response) => {
           if(symbol == 'AMC'){
             setAmcData([response.data]);
-          } else if (symbol == 'T') {
+          } else if (symbol === 'T') {
             setTData([response.data])
           }
-          else if (symbol == 'DIS') {
+          else if (symbol === 'DIS') {
             setDisData([response.data])
           }
-          else if (symbol == 'MGM') {
+          else if (symbol === 'MGM') {
             setMgmData([response.data])
           }
-          else if (symbol == 'WYNN') {
+          else if (symbol === 'WYNN') {
             setWynnData([response.data])
           }
           
@@ -52,21 +54,21 @@ function Amc() {
             
             
             
-    {!!amc.length ? ( amc.map(option => (
+    {!!amc.length ? ( dataArray.map(stock => stock.map(option => (
       <Card className="stockInfo" variant="outlined"
         style={{backgroundColor: "#6d76f7", color: '#fff', borderRadius: '15px'}}>
-          <i><strong>AMC Theatres</strong></i>
-            <hr></hr>
-            <i key={option.index}>
-            {option.symbol}</i>
+          {/* <i><strong>{name}</strong></i> */}
+            {/* <hr></hr> */}
+            <i key={1}>
+           <strong>{option.symbol}</strong></i>
           <br></br>
-            <i>Stock Price:{" "}
+            <i key={2}>Stock Price:{" "}
             ${option.underlyingPrice.toFixed(2)}</i>
           <br></br>
-            <i> Cost for 100 shares: $
+            <i key={3}> Cost for 100 shares: $
             {option.underlyingPrice.toFixed(0) * 100}</i>
           <br></br>
-            <i>Bid Price: $
+            <i key={4}>Bid Price: $
             {Object.keys(option.callExpDateMap).map((entry) => {
             return Object.keys(
             option.callExpDateMap[entry]
@@ -75,7 +77,7 @@ function Amc() {
             );
             })}{" "}</i>
           <br></br>
-            <i>Premium collected: $
+            <i key={5}>Premium collected: $
             {Object.keys(option.callExpDateMap).map((entry) => {
             return Object.keys(option.callExpDateMap[entry]).map(
             (innerArrayID) =>
@@ -85,7 +87,7 @@ function Amc() {
             })}
             </i>
       </Card>
-            ))
+            )))
           ) : (
             <p>loading data...</p>
           )} 
