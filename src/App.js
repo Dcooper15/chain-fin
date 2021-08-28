@@ -5,9 +5,12 @@ import MainTech from "./components/Tech/MainTech";
 import MainFinance from "./components/Finance/MainFinance";
 import MainEntertainment from "./components/Entertainment/MainEntertainment";
 import MainTravel from "./components/Travel/MainTravel";
+import MainTopMovers from './components/TopMovers/MainTopMovers';
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer";
 import DJI from './components/TopMovers/DJI';
+import COMPX from './components/TopMovers/COMPX';
+import SPX from './components/TopMovers/SPX';
 import './App.css';
 
 
@@ -39,10 +42,10 @@ class App extends Component {
             <div class="column"className="techSect"><h3 className="linkHeader"><Link to="/tech" style={{ textDecoration: 'none', color: '#1F51FF' }}>Tech</Link></h3></div>
             <div class="column" className="travelSect"><h3 className="linkHeader"><Link to="/travel" style={{ textDecoration: 'none', color: '#1F51FF' }}>Travel</Link></h3></div>
           </div>
+          <div class="row">
+            <div class="column" className="travelSect"><h3 className="linkHeader"><Link to="/topmovers" style={{ textDecoration: 'none', color: '#1F51FF' }}>Top Movers</Link></h3></div>
+          </div>
         </div>
-        {/* <div className="AppInfo">
-          <AppInfo />
-        </div> */}
         <br></br><br></br>
         
         <div className="Footer">
@@ -66,13 +69,26 @@ class App extends Component {
             <MainTravel />
           </Route>
         
-        
-          <Route path="/entertainment">
+           <Route path="/entertainment">
             <MainEntertainment />
           </Route>
+
+           <Route path="/topmovers">
+             <MainTopMovers />
+           </Route>
+           
+           <Route path="/topmovers/compx">
+            <COMPX />
+           </Route>
+           <Route path="/topmovers/dji">
+             <DJI />
+           </Route>
+           <Route path="/topmovers/spx">
+            <SPX />
+           </Route>    
         </div>
         </Router>
-          <DJI />
+       
       </>
     );
   }

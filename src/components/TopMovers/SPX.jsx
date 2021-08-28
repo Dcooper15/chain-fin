@@ -13,13 +13,13 @@ import DaysToExpiration from '../DataPoints/DaysToExpiration';
 // const url = `https://api.tdameritrade.com/v1/marketdata/$SPX.X/movers?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&direction=up&change=percent`
 
 //using Mock data now because api returns empty array on weekends
-const djiMovers = [
+const spxMovers = [
     {
         "change": 1,
         "description": "string",
         "direction": "'up' or 'down'",
         "last": 0,
-        "symbol": "AXP",
+        "symbol": "ALL",
         "totalVolume": 0
       },
       {
@@ -27,7 +27,7 @@ const djiMovers = [
         "description": "string",
         "direction": "'up' or 'down'",
         "last": 3,
-        "symbol": "CVX",
+        "symbol": "AAL",
         "totalVolume": 0
       },
       {
@@ -35,7 +35,7 @@ const djiMovers = [
         "description": "string",
         "direction": "'up' or 'down'",
         "last": 3,
-        "symbol": "WMT",
+        "symbol": "BBY",
         "totalVolume": 0
       },
       {
@@ -43,15 +43,15 @@ const djiMovers = [
         "description": "string",
         "direction": "'up' or 'down'",
         "last": 0,
-        "symbol": "PFE",
+        "symbol": "BLK",
         "totalVolume": 0
       },
       {
         "change": 5,
-        "description": "ACB",
+        "description": "TMUS",
         "direction": "'up' or 'down'",
         "last": 0,
-        "symbol": "NKE",
+        "symbol": "BA",
         "totalVolume": 0
       },
       {
@@ -59,7 +59,7 @@ const djiMovers = [
         "description": "string",
         "direction": "'up' or 'down'",
         "last": 0,
-        "symbol": "MRK",
+        "symbol": "DLTR",
         "totalVolume": 0
       },
       {
@@ -67,7 +67,7 @@ const djiMovers = [
         "description": "string",
         "direction": "'up' or 'down'",
         "last": 0,
-        "symbol": "IBM",
+        "symbol": "EA",
         "totalVolume": 0
       },
       {
@@ -75,7 +75,7 @@ const djiMovers = [
         "description": "string",
         "direction": "'up' or 'down'",
         "last": 0,
-        "symbol": "JNJ",
+        "symbol": "HAS",
         "totalVolume": 0
       },
       {
@@ -83,7 +83,7 @@ const djiMovers = [
         "description": "string",
         "direction": "'up' or 'down'",
         "last": 0,
-        "symbol": "XOM",
+        "symbol": "MRO",
         "totalVolume": 0
       },
       {
@@ -91,26 +91,26 @@ const djiMovers = [
         "description": "string",
         "direction": "'up' or 'down'",
         "last": 0,
-        "symbol": "GE",
+        "symbol": "SBUX",
         "totalVolume": 0
       }
       
 ];
-const djiMoversArray = djiMovers.map(djiSymbol => djiSymbol.symbol );
+const spxMoversArray = spxMovers.map(spxSymbol => spxSymbol.symbol );
 
 
-function DJI() {
-    const [djiData, setDjiData] = useState([]);
-   
+function SPX() {
+    const [spxData, setSpxData] = useState([]);
+
  
     useEffect(() => {
-        const djiDataArray = [];
+        const spxDataArray = [];
 
-        djiMoversArray.map(symbol => 
+        spxMoversArray.map(symbol => 
             axios.get(`https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&contractType=CALL&strikeCount=1&optionType=CALL&expMonth=${process.env.REACT_APP_MONTH}&toDate=${process.env.REACT_APP_DATE}&range=OTM` 
             ).then((response) => {
-                djiDataArray.push(response.data)
-                setDjiData([djiDataArray])
+                spxDataArray.push(response.data)
+                setSpxData([spxDataArray])
     }))
         
 },[]
@@ -119,8 +119,8 @@ function DJI() {
   
   return(
   <>
-        <h2>DJI</h2>    
-    {!!djiData.length ? ( djiData.map(stock => stock.map(option => (
+      <h2>SPX</h2>      
+    {!!spxData.length ? ( spxData.map(stock => stock.map(option => (
       <Card className="stockInfo" variant="outlined"
         style={{backgroundColor: "#6d76f7", color: '#fff', borderRadius: '15px'}}>
         
@@ -149,4 +149,4 @@ function DJI() {
 };
 
 
-export default DJI;
+export default SPX;
