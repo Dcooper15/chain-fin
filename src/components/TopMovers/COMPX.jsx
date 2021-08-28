@@ -13,13 +13,13 @@ import DaysToExpiration from '../DataPoints/DaysToExpiration';
 // const url = `https://api.tdameritrade.com/v1/marketdata/$SPX.X/movers?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&direction=up&change=percent`
 
 //using Mock data now because api returns empty array on weekends
-const djiMovers = [
+const compxMovers = [
     {
         "change": 1,
         "description": "string",
         "direction": "'up' or 'down'",
         "last": 0,
-        "symbol": "AXP",
+        "symbol": "NVDA",
         "totalVolume": 0
       },
       {
@@ -27,7 +27,7 @@ const djiMovers = [
         "description": "string",
         "direction": "'up' or 'down'",
         "last": 3,
-        "symbol": "CVX",
+        "symbol": "INTC",
         "totalVolume": 0
       },
       {
@@ -35,7 +35,7 @@ const djiMovers = [
         "description": "string",
         "direction": "'up' or 'down'",
         "last": 3,
-        "symbol": "WMT",
+        "symbol": "ADBE",
         "totalVolume": 0
       },
       {
@@ -43,15 +43,15 @@ const djiMovers = [
         "description": "string",
         "direction": "'up' or 'down'",
         "last": 0,
-        "symbol": "PFE",
+        "symbol": "PEP",
         "totalVolume": 0
       },
       {
         "change": 5,
-        "description": "ACB",
+        "description": "TMUS",
         "direction": "'up' or 'down'",
         "last": 0,
-        "symbol": "NKE",
+        "symbol": "TSLA",
         "totalVolume": 0
       },
       {
@@ -59,7 +59,7 @@ const djiMovers = [
         "description": "string",
         "direction": "'up' or 'down'",
         "last": 0,
-        "symbol": "MRK",
+        "symbol": "PYPL",
         "totalVolume": 0
       },
       {
@@ -67,7 +67,7 @@ const djiMovers = [
         "description": "string",
         "direction": "'up' or 'down'",
         "last": 0,
-        "symbol": "IBM",
+        "symbol": "FB",
         "totalVolume": 0
       },
       {
@@ -75,7 +75,7 @@ const djiMovers = [
         "description": "string",
         "direction": "'up' or 'down'",
         "last": 0,
-        "symbol": "JNJ",
+        "symbol": "AMZN",
         "totalVolume": 0
       },
       {
@@ -83,7 +83,7 @@ const djiMovers = [
         "description": "string",
         "direction": "'up' or 'down'",
         "last": 0,
-        "symbol": "XOM",
+        "symbol": "MSFT",
         "totalVolume": 0
       },
       {
@@ -91,26 +91,26 @@ const djiMovers = [
         "description": "string",
         "direction": "'up' or 'down'",
         "last": 0,
-        "symbol": "GE",
+        "symbol": "NFLX",
         "totalVolume": 0
       }
       
 ];
-const djiMoversArray = djiMovers.map(djiSymbol => djiSymbol.symbol );
+const compxMoversArray = compxMovers.map(compxSymbol => compxSymbol.symbol );
 
 
-function DJI() {
-    const [djiData, setDjiData] = useState([]);
-   
- 
+function COMPX() {
+    const [compxData, setCompxData] = useState([]);
+    
+
     useEffect(() => {
-        const djiDataArray = [];
+        const compxDataArray = [];
 
-        djiMoversArray.map(symbol => 
+        compxMoversArray.map(symbol => 
             axios.get(`https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&contractType=CALL&strikeCount=1&optionType=CALL&expMonth=${process.env.REACT_APP_MONTH}&toDate=${process.env.REACT_APP_DATE}&range=OTM` 
             ).then((response) => {
-                djiDataArray.push(response.data)
-                setDjiData([djiDataArray])
+                compxDataArray.push(response.data)
+                setCompxData([compxDataArray])
     }))
         
 },[]
@@ -120,7 +120,7 @@ function DJI() {
   return(
   <>
             
-    {!!djiData.length ? ( djiData.map(stock => stock.map(option => (
+    {!!compxData.length ? ( compxData.map(stock => stock.map(option => (
       <Card className="stockInfo" variant="outlined"
         style={{backgroundColor: "#6d76f7", color: '#fff', borderRadius: '15px'}}>
          <Symbol option={option} />
@@ -148,4 +148,4 @@ function DJI() {
 };
 
 
-export default DJI;
+export default COMPX;

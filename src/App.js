@@ -8,6 +8,8 @@ import MainTravel from "./components/Travel/MainTravel";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer";
 import DJI from './components/TopMovers/DJI';
+import COMPX from './components/TopMovers/COMPX';
+import SPX from './components/TopMovers/SPX';
 import './App.css';
 
 
@@ -73,6 +75,8 @@ class App extends Component {
         </div>
         </Router>
           <DJI />
+          <COMPX />
+          <SPX />
       </>
     );
   }
