@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import axios from "axios";
-import { Card } from "@material-ui/core";
+import axios from 'axios';
+import { Card } from '@material-ui/core';
+import Symbol from '../DataPoints/Symbol';
+import StockPrice from '../DataPoints/StockPrice';
+import HundredShares from '../DataPoints/HundredShares';
+import BidPrice from '../DataPoints/BidPrice';
+import PremiumCollected from '../DataPoints/PremiumCollected';
+import OpenInterest from '../DataPoints/OpenInterest';
+import Volatility from '../DataPoints/Volatility';
+import DaysToExpiration from '../DataPoints/DaysToExpiration';
 
 const finArray = ['AXP', 'BAC', 'C', 'JPM', 'WFC'];
 
@@ -13,10 +21,8 @@ function FinanceStocks() {
  
     const dataArray = [axp, bac, c, jpm, wfc];
     
-    
-      useEffect(() => {
-        
-       finArray.map(symbol => 
+    useEffect(() => {
+      finArray.map(symbol => 
         axios.get(`https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&contractType=CALL&strikeCount=1&optionType=CALL&expMonth=${process.env.REACT_APP_MONTH}&toDate=${process.env.REACT_APP_DATE}&range=OTM` 
         ).then((response) => {
           if(symbol === 'AXP'){
@@ -33,93 +39,40 @@ function FinanceStocks() {
           else if (symbol === 'WFC') {
             setWfcData([response.data])
           }
-          
-         
-        }))
+       }))
         
       },[]
-        
-      )
+    )
       
   
   return(
   <>
             
-            
-            
     {!!dataArray.length ? ( dataArray.map(stock => stock.map(option => (
       <Card className="stockInfo" variant="outlined"
         style={{backgroundColor: "#6d76f7", color: '#fff', borderRadius: '15px'}}>
-          {/* <i><strong>{name}</strong></i> */}
-            {/* <hr></hr> */}
-            <i key={1}>
-           <strong>{option.symbol}</strong></i>
-          <br></br>
-            <i key={2}>Stock Price:{" "}
-            ${option.underlyingPrice.toFixed(2)}</i>
-          <br></br>
-            <i key={3}> Cost for 100 shares: $
-            {option.underlyingPrice.toFixed(2) * 100}</i>
-          <br></br>
-            <i key={4}>Bid Price: $
-            {Object.keys(option.callExpDateMap).map((entry) => {
-            return Object.keys(
-            option.callExpDateMap[entry]
-            ).map((innerArrayID) =>
-            option.callExpDateMap[entry][innerArrayID][0].bid.toFixed(2)
-            );
-            })}{" "}</i>
-          <br></br>
-            <i key={5}>Premium collected: $
-            {Object.keys(option.callExpDateMap).map((entry) => {
-            return Object.keys(option.callExpDateMap[entry]).map(
-            (innerArrayID) =>
-            option.callExpDateMap[entry][innerArrayID][0].bid.toFixed(
-            2) * 100
-            );
-            })}
-            </i>
-            <br></br>
-            <i key={6}>Open Interest:{' '}
-            {Object.keys(option.callExpDateMap).map((entry) => {
-            return Object.keys(option.callExpDateMap[entry]).map(
-            (innerArrayID) =>
-            option.callExpDateMap[entry][innerArrayID][0].openInterest
-          
-            );
-            })}
-            </i>
-            <br></br>
-            <i key={7}>
-            Volatility:{' '}
-            {Object.keys(option.callExpDateMap).map((entry) => {
-            return Object.keys(option.callExpDateMap[entry]).map(
-            (innerArrayID) =>
-            option.callExpDateMap[entry][innerArrayID][0].volatility.toFixed(2)
-          
-            );
-            })}
-            </i>
-            <br></br>
-            <i key={8}>
-            Days to Expiration:{' '}
-            {Object.keys(option.callExpDateMap).map((entry) => {
-            return Object.keys(option.callExpDateMap[entry]).map(
-            (innerArrayID) =>
-            option.callExpDateMap[entry][innerArrayID][0].daysToExpiration
-          
-            );
-            })}
-            </i>
+         <Symbol option={option} />
+         <br></br>
+         <StockPrice option={option} />
+         <br></br>
+         <HundredShares option={option} />
+         <br></br>
+         <BidPrice option={option} />
+         <br></br>
+         <PremiumCollected option={option} />
+         <br></br>
+         <OpenInterest option={option} />
+         <br></br>
+         <Volatility option={option} />
+         <br></br>
+         <DaysToExpiration option={option} />
       </Card>
             )))
           ) : (
             <p>loading data...</p>
           )} 
-
   </>
-        );
-
+  );
 };
 
 

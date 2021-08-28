@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
-import Navbar from "../Navbar/Navbar";
-import TechStocks from './TechStocks'
+import Navbar from '../Navbar/Navbar';
+import TechStocks from './TechStocks';
+
 
 
 class MainTech extends Component {
