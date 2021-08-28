@@ -13,16 +13,16 @@ import DaysToExpiration from '../DataPoints/DaysToExpiration';
 
 
 //const url = `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=AMC&contractType=CALL&strikeCount=1&optionType=CALL&expMonth=${process.env.REACT_APP_MONTH}&toDate=${process.env.REACT_APP_DATE}&range=OTM` 
-const entArray = ['AMC', 'T', 'DIS', 'MGM', 'WYNN'];
+const entArray = ['AMC', 'ATVI', 'DIS', 'MGM', 'WYNN'];
 
 function EntertainmentStocks() {
     const [amc, setAmcData] = useState([]);
-    const [t, setTData] = useState([]);
+    const [atvi, setAtviData] = useState([]);
     const [dis, setDisData] = useState([]);
     const [mgm, setMgmData] = useState([]);
     const [wynn, setWynnData] = useState([]);
  
-    const dataArray = [amc, t, dis, mgm, wynn];
+    const dataArray = [amc, atvi, dis, mgm, wynn];
     
     
       useEffect(() => {
@@ -32,8 +32,8 @@ function EntertainmentStocks() {
         ).then((response) => {
           if(symbol === 'AMC'){
             setAmcData([response.data]);
-          } else if (symbol === 'T') {
-            setTData([response.data])
+          } else if (symbol === 'ATVI') {
+            setAtviData([response.data])
           }
           else if (symbol === 'DIS') {
             setDisData([response.data])
