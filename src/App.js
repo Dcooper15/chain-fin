@@ -7,7 +7,9 @@ import MainEntertainment from "./components/Entertainment/MainEntertainment";
 import MainTravel from "./components/Travel/MainTravel";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer";
+// import DJI from './components/TopMovers/DJI';
 import './App.css';
+
 
 
 
@@ -70,7 +72,7 @@ class App extends Component {
           </Route>
         </div>
         </Router>
-       
+          {/* <DJI /> */}
       </>
     );
   }

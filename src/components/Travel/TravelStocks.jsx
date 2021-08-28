@@ -41,13 +41,10 @@ function TravelStocks() {
           else if (symbol === 'UAL') {
             setUalData([response.data])
           }
-          
-         
         }))
         
       },[]
-        
-      )
+    );
       
   
   return(

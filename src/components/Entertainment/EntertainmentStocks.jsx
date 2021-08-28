@@ -11,6 +11,7 @@ import Volatility from '../DataPoints/Volatility';
 import DaysToExpiration from '../DataPoints/DaysToExpiration';
 
 
+
 //const url = `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=AMC&contractType=CALL&strikeCount=1&optionType=CALL&expMonth=${process.env.REACT_APP_MONTH}&toDate=${process.env.REACT_APP_DATE}&range=OTM` 
 const entArray = ['AMC', 'T', 'DIS', 'MGM', 'WYNN'];
 
@@ -49,7 +50,11 @@ function EntertainmentStocks() {
         
       },[]
         
-      )
+      );
+
+
+
+     
       
   
   return(
