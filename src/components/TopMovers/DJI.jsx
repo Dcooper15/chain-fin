@@ -119,10 +119,11 @@ function DJI() {
   
   return(
   <>
-            
+        <h2>DJI</h2>    
     {!!djiData.length ? ( djiData.map(stock => stock.map(option => (
       <Card className="stockInfo" variant="outlined"
         style={{backgroundColor: "#6d76f7", color: '#fff', borderRadius: '15px'}}>
+        
          <Symbol option={option} />
          <br></br>
          <StockPrice option={option} />

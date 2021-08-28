@@ -119,10 +119,11 @@ function COMPX() {
   
   return(
   <>
-            
+       <h2>NASDAQ</h2>     
     {!!compxData.length ? ( compxData.map(stock => stock.map(option => (
       <Card className="stockInfo" variant="outlined"
         style={{backgroundColor: "#6d76f7", color: '#fff', borderRadius: '15px'}}>
+        
          <Symbol option={option} />
          <br></br>
          <StockPrice option={option} />
