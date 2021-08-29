@@ -18,7 +18,7 @@ function FinanceStocks() {
     const [c, setCData] = useState([]);
     const [jpm, setJpmData] = useState([]);
     const [wfc, setWfcData] = useState([]);
- 
+
     const dataArray = [axp, bac, c, jpm, wfc];
     
     useEffect(() => {
