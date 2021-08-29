@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Card } from '@material-ui/core';
-import Symbol from '../DataPoints/Symbol';
-import StockPrice from '../DataPoints/StockPrice';
-import HundredShares from '../DataPoints/HundredShares';
-import BidPrice from '../DataPoints/BidPrice';
-import PremiumCollected from '../DataPoints/PremiumCollected';
-import OpenInterest from '../DataPoints/OpenInterest';
-import Volatility from '../DataPoints/Volatility';
-import DaysToExpiration from '../DataPoints/DaysToExpiration';
+// import Symbol from '../DataPoints/Symbol';
+// import StockPrice from '../DataPoints/StockPrice';
+// import HundredShares from '../DataPoints/HundredShares';
+// import BidPrice from '../DataPoints/BidPrice';
+// import PremiumCollected from '../DataPoints/PremiumCollected';
+// import OpenInterest from '../DataPoints/OpenInterest';
+// import Volatility from '../DataPoints/Volatility';
+// import DaysToExpiration from '../DataPoints/DaysToExpiration';
 
 
 //working obj keys method
