@@ -48,7 +48,7 @@ const date = new Date();
 function FullOptionChain() {
     
     const [fullChain, setFullChainData] = useState([]);
-    const { option } = useParams();
+   // const { option } = useParams();
     const dataArray = fullChain;
    console.log("dataarray, ", dataArray);
     //console.log("params are ", {symbol});
@@ -64,13 +64,7 @@ function FullOptionChain() {
             return Object.keys(response.data.callExpDateMap[entry]).map( 
             (innerArrayID) =>
             response.data.callExpDateMap[entry]
-            
             [innerArrayID]
-            
-            //[0].map(innerArrayID =>
-               // response.data.callExpDateMap[innerArrayID])
-            //[0].bid.toFixed(
-            //2) * 100
             );
             }).flat()
             setFullChainData(keys);
