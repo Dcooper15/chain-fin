@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { Link, Route } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import Navbar from "../Navbar/Navbar";
 import EntertainmentStocks from './EntertainmentStocks';
 //import FullOptionChain from '../OptionChain/FullOptionChain';
 
-function MainEntertainment({option}) {
+function MainEntertainment() {
   
         return (
             <div>

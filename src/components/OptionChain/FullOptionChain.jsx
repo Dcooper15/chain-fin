@@ -49,8 +49,6 @@ function FullOptionChain() {
     
     const [fullChain, setFullChainData] = useState([]);
     const { option } = useParams();
-    //const [date, setDate] = useState([])
-    //const url = `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${props.symbol}&contractType=CALL&strikeCount=3&fromDate=2021-09-03&toDate=2021-10-30`
     const dataArray = fullChain;
    console.log("dataarray, ", dataArray);
     //console.log("params are ", {symbol});
@@ -58,7 +56,7 @@ function FullOptionChain() {
         
       
        
-       axios.get(`https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${option}&contractType=CALL&strikeCount=3&fromDate=2021-09-03&toDate=2021-10-30` 
+       axios.get(`https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=$PLTR&contractType=CALL&strikeCount=3&fromDate=2021-09-03&toDate=2021-10-30` 
         ).then((response) => {
        
         console.log("full res, ", response);
