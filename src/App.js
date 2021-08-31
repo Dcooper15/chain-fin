@@ -11,13 +11,14 @@ import Footer from "./components/Footer";
 import DJI from './components/TopMovers/DJI';
 import COMPX from './components/TopMovers/COMPX';
 import SPX from './components/TopMovers/SPX';
+//import FullOptionChain from './components/OptionChain/FullOptionChain';
 import './App.css';
 
 
 
 
-class App extends Component {
-  render() {
+function App() {
+  
 
     return (
       <>
@@ -85,13 +86,14 @@ class App extends Component {
            </Route>
            <Route path="/topmovers/spx">
             <SPX />
-           </Route>    
+           </Route> 
+          
         </div>
         </Router>
        
       </>
     );
-  }
+  
 }
 
 export default App;

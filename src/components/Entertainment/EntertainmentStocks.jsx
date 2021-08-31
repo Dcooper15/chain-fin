@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Card } from '@material-ui/core';
+import { Link, Route } from 'react-router-dom';
 import Symbol from '../DataPoints/Symbol';
 import StockPrice from '../DataPoints/StockPrice';
 import HundredShares from '../DataPoints/HundredShares';
@@ -9,13 +10,14 @@ import PremiumCollected from '../DataPoints/PremiumCollected';
 import OpenInterest from '../DataPoints/OpenInterest';
 import Volatility from '../DataPoints/Volatility';
 import DaysToExpiration from '../DataPoints/DaysToExpiration';
+import FullOptionChain from '../OptionChain/FullOptionChain';
 
 
 
 //const url = `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=AMC&contractType=CALL&strikeCount=1&optionType=CALL&expMonth=${process.env.REACT_APP_MONTH}&toDate=${process.env.REACT_APP_DATE}&range=OTM` 
 const entArray = ['AMC', 'ATVI', 'DIS', 'MGM', 'WYNN'];
 
-function EntertainmentStocks() {
+function EntertainmentStocks(option) {
     const [amc, setAmcData] = useState([]);
     const [atvi, setAtviData] = useState([]);
     const [dis, setDisData] = useState([]);
@@ -59,12 +61,18 @@ function EntertainmentStocks() {
   
   return(
   <>
+  <Route path={`/${option}`}>
+       <FullOptionChain />
+  </Route>
     {!!dataArray.length ? ( dataArray.map(stock => stock.map(option => (
       <Card className="stockInfo" variant="outlined"
         style={{backgroundColor: "#6d76f7", color: '#fff', borderRadius: '15px'}}>
           {/* <i><strong>{name}</strong></i> */}
             {/* <hr></hr> */}
+            <Link to={`/${option.symbol}`}>
             <Symbol option={option}/>
+          </Link>
+          
             {/* <i key={1}>
            <strong>{option.DataSymbol}</strong></i> */}
            <br></br>
@@ -132,11 +140,12 @@ function EntertainmentStocks() {
             })}
             </i> */}
       </Card>
+     
             )))
           ) : (
             <p>loading data...</p>
     )}; 
-
+     
   </>
   );
 
