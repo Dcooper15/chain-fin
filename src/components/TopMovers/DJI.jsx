@@ -10,14 +10,14 @@ import OpenInterest from "../DataPoints/OpenInterest";
 import Volatility from "../DataPoints/Volatility";
 import DaysToExpiration from "../DataPoints/DaysToExpiration";
 
-const moversUrl = `https://api.tdameritrade.com/v1/marketdata/$DJI/movers?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&direction=up&change=percent`;
+const moverUrl = `https://api.tdameritrade.com/v1/marketdata/$DJI/movers?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&direction=up&change=percent`;
 
 function DJI() {
   const [djiData, setDjiData] = useState([]);
 
   useEffect(() => {
     const djiDataArray = [];
-    axios.get(moversUrl).then((response) => {
+    axios.get(moverUrl).then((response) => {
       const djiMoversArray = response.data.map(
         (djiSymbol) => djiSymbol.symbol
       );
