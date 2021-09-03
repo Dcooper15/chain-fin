@@ -17,26 +17,27 @@ function COMPX() {
 
   useEffect(() => {
     const compxDataArray = [];
-    axios.get(`https://api.tdameritrade.com/v1/marketdata/$COMPX/movers?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&direction=up&change=percent`).then((response) => {
-      const compxMoversArray = response.data.map(
-        (compxSymbol) => compxSymbol.symbol
-      );
-      compxMoversArray.map((symbol) =>
-        axios
-          .get(
-            `https:api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&contractType=CALL&strikeCount=1&optionType=CALL&expMonth=SEP&toDate=2022-09-04&range=OTM`
-          )
-          .then((response) => {
-            if (response.data.status === "SUCCESS") {
-              compxDataArray.push(response.data);
-            }
-            setCompxData([compxDataArray]);
-          })
-          
-      );
-     
-    });
-         
+    axios
+      .get(
+        `https://api.tdameritrade.com/v1/marketdata/$COMPX/movers?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&direction=up&change=percent`
+      )
+      .then((response) => {
+        response.data
+          .map((compxSymbol) => compxSymbol.symbol)
+
+          .map((symbol) =>
+            axios
+              .get(
+                `https:api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&contractType=CALL&strikeCount=1&optionType=CALL&expMonth=SEP&toDate=2022-09-04&range=OTM`
+              )
+              .then((response) => {
+                if (response.data.status === "SUCCESS") {
+                  compxDataArray.push(response.data);
+                }
+                setCompxData([compxDataArray]);
+              })
+          );
+      });
   }, []);
 
   return (
