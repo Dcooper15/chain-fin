@@ -10,14 +10,14 @@ import OpenInterest from "../DataPoints/OpenInterest";
 import Volatility from "../DataPoints/Volatility";
 import DaysToExpiration from "../DataPoints/DaysToExpiration";
 
-const moverUrl = `https://api.tdameritrade.com/v1/marketdata/$COMPX/movers?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&direction=up&change=percent`;
+//const moverUrl = `https://api.tdameritrade.com/v1/marketdata/$COMPX/movers?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&direction=up&change=percent`;
 
 function COMPX() {
   const [compxData, setCompxData] = useState([]);
 
   useEffect(() => {
     const compxDataArray = [];
-    axios.get(moverUrl).then((response) => {
+    axios.get(`https://api.tdameritrade.com/v1/marketdata/$COMPX/movers?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&direction=up&change=percent`).then((response) => {
       const compxMoversArray = response.data.map(
         (compxSymbol) => compxSymbol.symbol
       );
@@ -32,8 +32,11 @@ function COMPX() {
             }
             setCompxData([compxDataArray]);
           })
+          
       );
+     
     });
+         
   }, []);
 
   return (
