@@ -78,13 +78,13 @@ function App() {
              <MainTopMovers />
            </Route>
            
-           <Route path="/topmovers/compx">
+           <Route path="/compx">
             <COMPX />
            </Route>
-           <Route path="/topmovers/dji">
+           <Route path="/dji">
              <DJI />
            </Route>
-           <Route path="/topmovers/spx">
+           <Route path="/spx">
             <SPX />
            </Route> 
           

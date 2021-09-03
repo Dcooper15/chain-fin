@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
+import Moment from "react-moment";
 import { Card } from "@material-ui/core";
 import Symbol from "../DataPoints/Symbol";
 import StockPrice from "../DataPoints/StockPrice";
@@ -11,20 +13,19 @@ import Volatility from "../DataPoints/Volatility";
 import DaysToExpiration from "../DataPoints/DaysToExpiration";
 
 const moverUrl = `https://api.tdameritrade.com/v1/marketdata/$DJI/movers?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&direction=up&change=percent`;
+const date = new Date();
 
 function DJI() {
   const [djiData, setDjiData] = useState([]);
-
+  console.log("DJIDATa", djiData);
   useEffect(() => {
     const djiDataArray = [];
     axios.get(moverUrl).then((response) => {
-      const djiMoversArray = response.data.map(
-        (djiSymbol) => djiSymbol.symbol
-      );
+      const djiMoversArray = response.data.map((djiSymbol) => djiSymbol.symbol);
       djiMoversArray.map((symbol) =>
         axios
           .get(
-            `https:api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&contractType=CALL&strikeCount=1&optionType=CALL&expMonth=${process.env.REACT_APP_MONTH}&toDate=${process.env.REACT_APP_DATE}&range=OTM`
+            `https:api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&contractType=CALL&strikeCount=1&optionType=CALL&expMonth=${process.env.REACT_APP_MONTH}&toDate=2022-09-04&range=OTM`
           )
           .then((response) => {
             if (response.data.status === "SUCCESS") {
@@ -38,7 +39,12 @@ function DJI() {
 
   return (
     <>
-      <h2>DJI</h2>
+      <h5 className="sectorHeader">
+        <Link to="/topmovers" style={{ color: "#fff" }}>
+          Return to Top Movers
+        </Link>
+      </h5>
+      <h2>Todays Top Movers - DJI</h2>
       {!!djiData.length ? (
         djiData.map((stock) =>
           stock.map((option) => (
@@ -66,6 +72,24 @@ function DJI() {
               <Volatility option={option} />
               <br></br>
               <DaysToExpiration option={option} />
+              <br></br>
+              <>Expiration Date: </>
+              <>
+                <Moment
+                  add={{
+                    days: Object.keys(option.callExpDateMap).map((entry) => {
+                      return Object.keys(option.callExpDateMap[entry]).map(
+                        (innerArrayID) =>
+                          option.callExpDateMap[entry][innerArrayID][0]
+                            .daysToExpiration
+                      );
+                    })[0],
+                  }}
+                  format="MMM DD"
+                >
+                  {date}
+                </Moment>
+              </>
             </Card>
           ))
         )

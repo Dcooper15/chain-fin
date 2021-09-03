@@ -9,7 +9,7 @@ const OpenInterest = (props) => {
             (innerArrayID) =>
             props.option.callExpDateMap[entry][innerArrayID][0].openInterest
             );
-            })}
+            })[0]}
         </i>
     );
 };

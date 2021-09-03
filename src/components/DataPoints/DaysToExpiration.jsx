@@ -10,7 +10,7 @@ const DaysToExpiration = (props) => {
                 (innerArrayID) =>
                 props.option.callExpDateMap[entry][innerArrayID][0].daysToExpiration
                 );
-            })}
+            })[0]}
         </i>
     );
 };

@@ -10,7 +10,7 @@ const PremiumCollected = (props) => {
                 props.option.callExpDateMap[entry][innerArrayID][0].bid.toFixed(
                 2) * 100
                 );
-            })}
+            })[0]}
         </i>
     );
 };
