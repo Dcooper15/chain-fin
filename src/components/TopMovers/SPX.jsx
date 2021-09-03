@@ -29,6 +29,8 @@ function SPX() {
           .then((response) => {
             if (response.data.status === "SUCCESS") {
               spxDataArray.push(response.data);
+            } else {
+              console.log(response.data);
             }
             setSpxData([spxDataArray]);
           })
