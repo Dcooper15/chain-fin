@@ -14,9 +14,10 @@ import DaysToExpiration from "../DataPoints/DaysToExpiration";
 
 function COMPX() {
   const [compxData, setCompxData] = useState([]);
-
+  const compxDataArray = [];
+  console.log("comxar", compxDataArray);
   useEffect(() => {
-    const compxDataArray = [];
+    
     axios
       .get(
         `https://api.tdameritrade.com/v1/marketdata/$COMPX/movers?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&direction=up&change=percent`
@@ -34,7 +35,7 @@ function COMPX() {
                 if (response.data.status === "SUCCESS") {
                   compxDataArray.push(response.data);
                 }
-                setCompxData([compxDataArray]);
+                setCompxData([compxDataArray])
               })
           );
       });
