@@ -19,13 +19,12 @@ function SPX() {
   const [percentChange, setPercentChange] = useState([]);
   const [spxData, setSpxData] = useState([]);
 
- 
   useEffect(() => {
     const spxDataArray = [];
     axios.get(moverUrl).then((response) => {
       const changePercentArray = response.data
-      .map((percent) => [percent.symbol, percent.change])
-      .flat();
+        .map((percent) => [percent.symbol, percent.change])
+        .flat();
       setPercentChange(changePercentArray);
       const spxMoversArray = response.data.map((spxSymbol) => spxSymbol.symbol);
       spxMoversArray.map((symbol) =>
@@ -52,7 +51,7 @@ function SPX() {
           Return to Top Movers
         </Link>
       </h5>
-      <h2>SPX</h2>
+      <h2>Today's Top Movers - SPX</h2>
       {!!spxData.length ? (
         spxData.map((stock) =>
           stock.map((option) => (
@@ -65,12 +64,19 @@ function SPX() {
                 borderRadius: "15px",
               }}
             >
-              <Symbol option={option} />
-              <>{"   "}Up{" "}
-              {percentChange[percentChange.indexOf(option.symbol) + 1].toFixed(
-                4
-              ) * 100}
-              %</>
+              <Link
+                to={`/chain/${option.symbol}`}
+                style={{ textDecoration: "underline", color: "#38ecf2" }}
+              >
+                <Symbol option={option} />
+              </Link>
+              <>
+                {"   "}Up{" "}
+                {percentChange[
+                  percentChange.indexOf(option.symbol) + 1
+                ].toFixed(4) * 100}
+                %
+              </>
               <br></br>
               <StockPrice option={option} />
               <br></br>

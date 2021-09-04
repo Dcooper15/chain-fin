@@ -72,7 +72,9 @@ function COMPX() {
                 borderRadius: "15px",
               }}
             >
-              <Symbol option={option} />
+            <Link to={`/chain/${option.symbol}`} style={{ textDecoration: 'underline', color: '#38ecf2' }}>
+            <Symbol option={option}/>
+          </Link>
               <>{"   "}Up{" "}
               {percentChange[percentChange.indexOf(option.symbol) + 1].toFixed(
                 4

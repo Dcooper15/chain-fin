@@ -59,12 +59,12 @@ function FullOptionChain() {
           .flat();
         setFullChainData(keys);
       });
-    // )
+  
   }, []);
 
   return (
     <>
-      <h4>Full Option Chain Data in Test at the moment..</h4>
+      
       {!!dataArray.length ? (
         dataArray.map((stock) =>
           stock.map((option) => (
@@ -77,12 +77,8 @@ function FullOptionChain() {
                 borderRadius: "15px",
               }}
             >
-              <strong>
-                <i>{option.symbol}</i>
-              </strong>
+              <i><strong>{option.description}</strong></i>
               <hr></hr>
-              <i>{option.description}</i>
-              <br></br>
               <i>Strike Price: {option.strikePrice}</i>
               <br></br>
               <i>Bid: {option.bid}</i>

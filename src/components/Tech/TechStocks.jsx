@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { Card } from '@material-ui/core';
 import Symbol from '../DataPoints/Symbol';
 import StockPrice from '../DataPoints/StockPrice';
@@ -56,7 +57,9 @@ function TechStocks() {
     {!!dataArray.length ? ( dataArray.map(stock => stock.map(option => (
       <Card className="stockInfo" variant="outlined"
         style={{backgroundColor: "#6d76f7", color: '#fff', borderRadius: '15px'}}>
-         <Symbol option={option} />
+          <Link to={`/chain/${option.symbol}`} style={{ textDecoration: 'underline', color: '#38ecf2' }}>
+            <Symbol option={option}/>
+          </Link>
          <br></br>
          <StockPrice option={option} />
          <br></br>
