@@ -16,11 +16,17 @@ const moverUrl = `https://api.tdameritrade.com/v1/marketdata/$SPX.X/movers?apike
 const date = new Date();
 
 function SPX() {
+  const [percentChange, setPercentChange] = useState([]);
   const [spxData, setSpxData] = useState([]);
-  console.log("SPX DATA", spxData);
+
+ 
   useEffect(() => {
     const spxDataArray = [];
     axios.get(moverUrl).then((response) => {
+      const changePercentArray = response.data
+      .map((percent) => [percent.symbol, percent.change])
+      .flat();
+      setPercentChange(changePercentArray);
       const spxMoversArray = response.data.map((spxSymbol) => spxSymbol.symbol);
       spxMoversArray.map((symbol) =>
         axios
@@ -60,6 +66,11 @@ function SPX() {
               }}
             >
               <Symbol option={option} />
+              <>{"   "}Up{" "}
+              {percentChange[percentChange.indexOf(option.symbol) + 1].toFixed(
+                4
+              ) * 100}
+              %</>
               <br></br>
               <StockPrice option={option} />
               <br></br>

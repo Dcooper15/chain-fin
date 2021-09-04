@@ -16,11 +16,18 @@ const moverUrl = `https://api.tdameritrade.com/v1/marketdata/$DJI/movers?apikey=
 const date = new Date();
 
 function DJI() {
+  const [percentChange, setPercentChange] = useState([]);
   const [djiData, setDjiData] = useState([]);
   console.log("DJIDATa", djiData);
+
   useEffect(() => {
     const djiDataArray = [];
     axios.get(moverUrl).then((response) => {
+      const changePercentArray = response.data
+      .map((percent) => [percent.symbol, percent.change])
+      .flat();
+    
+    setPercentChange(changePercentArray);
       const djiMoversArray = response.data.map((djiSymbol) => djiSymbol.symbol);
       djiMoversArray.map((symbol) =>
         axios
@@ -58,6 +65,11 @@ function DJI() {
               }}
             >
               <Symbol option={option} />
+              <>{"   "}Up{" "}
+              {percentChange[percentChange.indexOf(option.symbol) + 1].toFixed(
+                4
+              ) * 100}
+              %</>
               <br></br>
               <StockPrice option={option} />
               <br></br>

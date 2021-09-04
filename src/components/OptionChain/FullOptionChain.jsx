@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-//import { useParams } from 'react-router';
+import { useParams } from 'react-router';
 import { Card } from "@material-ui/core";
 import Moment from "react-moment";
 
@@ -36,6 +36,7 @@ import Moment from "react-moment";
 const date = new Date();
 
 function FullOptionChain() {
+  const { symbol } = useParams()
   const [fullChain, setFullChainData] = useState([]);
 
   const dataArray = fullChain;
@@ -44,7 +45,7 @@ function FullOptionChain() {
   useEffect(() => {
     axios
       .get(
-        `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=$PLTR&contractType=CALL&strikeCount=3&fromDate=2021-09-03&toDate=2021-10-30`
+        `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&contractType=CALL&strikeCount=3&fromDate=2021-09-03&toDate=2021-10-30`
       )
       .then((response) => {
         console.log("full res, ", response);

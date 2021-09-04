@@ -30,9 +30,9 @@ function COMPX() {
         const changePercentArray = response.data
           .map((percent) => [percent.symbol, percent.change])
           .flat();
-        // console.log("Percent array", changePercentArray);
+        
         setPercentChange(changePercentArray);
-        console.log("movers data", response.data);
+        
         const compxMoversArray = response.data.map(
           (compxSymbol) => compxSymbol.symbol
         );

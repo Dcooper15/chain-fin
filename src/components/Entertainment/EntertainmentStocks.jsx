@@ -61,15 +61,15 @@ function EntertainmentStocks(option) {
   
   return(
   <>
-  <Route path={`/${option}`}>
+  {/* <Route path={`/chain/${option}`}>
        <FullOptionChain />
-  </Route>
+  </Route> */}
     {!!dataArray.length ? ( dataArray.map(stock => stock.map(option => (
       <Card className="stockInfo" variant="outlined"
         style={{backgroundColor: "#6d76f7", color: '#fff', borderRadius: '15px'}}>
           {/* <i><strong>{name}</strong></i> */}
             {/* <hr></hr> */}
-            <Link to={`/${option.symbol}`}>
+            <Link to={`/chain/${option.symbol}`}>
             <Symbol option={option}/>
           </Link>
           

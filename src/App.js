@@ -11,7 +11,7 @@ import Footer from "./components/Footer";
 import DJI from './components/TopMovers/DJI';
 import COMPX from './components/TopMovers/COMPX';
 import SPX from './components/TopMovers/SPX';
-//import FullOptionChain from './components/OptionChain/FullOptionChain';
+import FullOptionChain from './components/OptionChain/FullOptionChain';
 import './App.css';
 
 
@@ -87,6 +87,9 @@ function App() {
            <Route path="/spx">
             <SPX />
            </Route> 
+           <Route path="/chain/:symbol">
+            <FullOptionChain />
+           </Route>
           
         </div>
         </Router>
