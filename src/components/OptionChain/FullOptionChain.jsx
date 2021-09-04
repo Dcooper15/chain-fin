@@ -43,6 +43,7 @@ function FullOptionChain() {
   console.log("dataarray, ", dataArray);
 
   useEffect(() => {
+    
     axios
       .get(
         `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&contractType=CALL&strikeCount=3&fromDate=2021-09-03&toDate=2021-10-30`
@@ -60,7 +61,7 @@ function FullOptionChain() {
         setFullChainData(keys);
       });
   
-  }, []);
+  }, [symbol]);
 
   return (
     <>
