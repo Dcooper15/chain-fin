@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import {createMuiTheme, ThemeProvider} from '@material-ui/core';
-import { deepPurple } from '@material-ui/core/colors';
 import MainSearch from './components/MainSearch';
 import MainTech from "./components/Tech/MainTech";
 import MainFinance from "./components/Finance/MainFinance";
