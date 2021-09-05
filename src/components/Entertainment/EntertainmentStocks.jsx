@@ -65,7 +65,7 @@ function EntertainmentStocks() {
        <FullOptionChain />
   </Route> */}
     {!!dataArray.length ? ( dataArray.map(stock => stock.map(option => (
-      <Card className="stockInfo" variant="outlined"
+      <Card className="stockInfo" variant="outlined" raised="true"
         style={{backgroundColor: "#6d76f7", color: '#fff', borderRadius: '15px'}}>
           {/* <i><strong>{name}</strong></i> */}
             {/* <hr></hr> */}
