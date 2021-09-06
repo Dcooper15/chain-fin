@@ -1,37 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from 'react-router';
+import { Link } from 'react-router-dom';
 import { Card } from "@material-ui/core";
 import Moment from "react-moment";
 
-// import Symbol from '../DataPoints/Symbol';
-// import StockPrice from '../DataPoints/StockPrice';
-// import HundredShares from '../DataPoints/HundredShares';
-// import BidPrice from '../DataPoints/BidPrice';
-// import PremiumCollected from '../DataPoints/PremiumCollected';
-// import OpenInterest from '../DataPoints/OpenInterest';
-// import Volatility from '../DataPoints/Volatility';
-// import DaysToExpiration from '../DataPoints/DaysToExpiration';
-
-//working obj keys method
-// axios.get(url
-//     ).then((response) => {
-
-//     console.log("full res, ", response);
-//     console.log("keys ", Object.keys(response.data.callExpDateMap).map((entry) => {
-//         return Object.keys(response.data.callExpDateMap[entry]).map(
-//         (innerArrayID) =>
-//         response.data.callExpDateMap[entry][innerArrayID][0].bid.toFixed(
-//         2) * 100
-//         );
-//         })
-//     );
-
-//     }
-
-//     )
-
-//const moversurl = `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=AMC&contractType=CALL&strikeCount=1&optionType=CALL&expMonth=${process.env.REACT_APP_MONTH}&toDate=${process.env.REACT_APP_DATE}&range=OTM`
 
 const date = new Date();
 
@@ -65,7 +38,7 @@ function FullOptionChain() {
 
   return (
     <>
-      
+       <h5 className="sectorHeader"><Link to="/" style={{color: '#fff'}}>Return to Homepage</Link></h5>
       {!!dataArray.length ? (
         dataArray.map((stock) =>
           stock.map((option) => (

@@ -66,10 +66,10 @@ function EntertainmentStocks() {
   </Route> */}
     {!!dataArray.length ? ( dataArray.map(stock => stock.map(option => (
       <Card className="stockInfo" variant="outlined" raised="true"
-        style={{backgroundColor: "#6d76f7", color: '#fff', borderRadius: '15px'}}>
+        style={{backgroundColor: "#3D3D3D", borderColor: '#d4af37', color: '#fff', borderRadius: '15px'}}>
           {/* <i><strong>{name}</strong></i> */}
             {/* <hr></hr> */}
-            <Link to={`/chain/${option.symbol}`} style={{ textDecoration: 'underline', color: '#ADD8E6' }}>
+            <Link to={`/chain/${option.symbol}`} style={{ textDecoration: 'underline', color: '#d4af37' }}>
             <Symbol option={option}/>
           </Link>
           
