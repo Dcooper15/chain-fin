@@ -117,7 +117,7 @@ function COMPX() {
           ))
         )
       ) : (
-        <p>loading data...</p>
+        <p>Top Movers unavailable on weekends...</p>
       )}
     </>
   );

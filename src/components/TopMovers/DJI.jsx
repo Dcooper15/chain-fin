@@ -113,7 +113,7 @@ function DJI() {
           ))
         )
       ) : (
-        <p>loading data...</p>
+        <p>Top Movers unavailable on weekends...</p>
       )}
     </>
   );
