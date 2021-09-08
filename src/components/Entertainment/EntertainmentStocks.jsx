@@ -1,155 +1,111 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Card } from '@material-ui/core';
-import { Link } from 'react-router-dom';
-import Symbol from '../DataPoints/Symbol';
-import StockPrice from '../DataPoints/StockPrice';
-import HundredShares from '../DataPoints/HundredShares';
-import BidPrice from '../DataPoints/BidPrice';
-import PremiumCollected from '../DataPoints/PremiumCollected';
-import OpenInterest from '../DataPoints/OpenInterest';
-import Volatility from '../DataPoints/Volatility';
-import DaysToExpiration from '../DataPoints/DaysToExpiration';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Card } from "@material-ui/core";
+import { Link } from "react-router-dom";
+import Symbol from "../DataPoints/Symbol";
+import StockPrice from "../DataPoints/StockPrice";
+import HundredShares from "../DataPoints/HundredShares";
+import BidPrice from "../DataPoints/BidPrice";
+import PremiumCollected from "../DataPoints/PremiumCollected";
+import OpenInterest from "../DataPoints/OpenInterest";
+import Volatility from "../DataPoints/Volatility";
+import DaysToExpiration from "../DataPoints/DaysToExpiration";
 
-
-
-
-//const url = `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=AMC&contractType=CALL&strikeCount=1&optionType=CALL&expMonth=${process.env.REACT_APP_MONTH}&toDate=${process.env.REACT_APP_DATE}&range=OTM` 
-const entArray = ['AMC', 'ATVI', 'DIS', 'MGM', 'WYNN'];
+const entArray = ["AMC", "ATVI", "DIS", "MGM", "WYNN"];
 
 function EntertainmentStocks() {
-    
-    const [amc, setAmcData] = useState([]);
-    const [atvi, setAtviData] = useState([]);
-    const [dis, setDisData] = useState([]);
-    const [mgm, setMgmData] = useState([]);
-    const [wynn, setWynnData] = useState([]);
+  const [namesRender, setNames] = useState([]);
+  const [dataArray, setDataArray] = useState([]);
 
-    const dataArray = [amc, atvi, dis, mgm, wynn];
- 
-      useEffect(() => {
-      
-       entArray.map(symbol => 
-        axios.get(`https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&contractType=CALL&strikeCount=1&optionType=CALL&expMonth=${process.env.REACT_APP_MONTH}&toDate=${process.env.REACT_APP_DATE}&range=OTM` 
-        ).then((response) => {
-          if(symbol === 'AMC'){
-            setAmcData([response.data]);
-          } else if (symbol === 'ATVI') {
-            setAtviData([response.data])
-          }
-          else if (symbol === 'DIS') {
-            setDisData([response.data])
-          }
-          else if (symbol === 'MGM') {
-            setMgmData([response.data])
-          }
-          else if (symbol === 'WYNN') {
-            setWynnData([response.data])
-          }
-          
-         
-        }))
-        
-      },[]
-        
-      );
-
-
-
-     
-      
   
-  return(
-  <>
-  {/* <Route path={`/chain/${option}`}>
-       <FullOptionChain />
-  </Route> */}
-    {!!dataArray.length ? ( dataArray.map(stock => stock.map(option => (
-      <Card className="stockInfo" variant="outlined" raised="true"
-        style={{backgroundColor: "#3D3D3D", borderColor: '#d4af37', color: '#fff', borderRadius: '15px'}}>
-          {/* <i><strong>{name}</strong></i> */}
-            {/* <hr></hr> */}
-            <Link to={`/chain/${option.symbol}`} style={{ textDecoration: 'underline', color: '#d4af37' }}>
-            <Symbol option={option}/>
-          </Link>
-          
-            {/* <i key={1}>
-           <strong>{option.DataSymbol}</strong></i> */}
-           <br></br>
-           <StockPrice option={option}/>
-            {/* <i key={2}>Stock Price:{" "}
-            ${option.underlyingPrice.toFixed(2)}</i> */}
-          <br></br>
-          <HundredShares option={option}/>
-            {/* <i key={3}> Cost for 100 shares: $
-            {option.underlyingPrice.toFixed(2) * 100}</i> */}
-          <br></br>
-          <BidPrice option={option}/>
-            {/* <i key={4}>Bid Price: $
-            {Object.keys(option.callExpDateMap).map((entry) => {
-            return Object.keys(
-            option.callExpDateMap[entry]
-            ).map((innerArrayID) =>
-            option.callExpDateMap[entry][innerArrayID][0].bid.toFixed(2)
-            );
-            })}{" "}</i> */}
-          <br></br>
-          <PremiumCollected option={option}/>
-            {/* <i key={5}>Premium collected: $
-            {Object.keys(option.callExpDateMap).map((entry) => {
-            return Object.keys(option.callExpDateMap[entry]).map(
-            (innerArrayID) =>
-            option.callExpDateMap[entry][innerArrayID][0].bid.toFixed(
-            2) * 100
-            );
-            })}
-            </i> */}
-            <br></br>
-            <OpenInterest option={option}/>
-            {/* <i key={6}>Open Interest:{' '}
-            {Object.keys(option.callExpDateMap).map((entry) => {
-            return Object.keys(option.callExpDateMap[entry]).map(
-            (innerArrayID) =>
-            option.callExpDateMap[entry][innerArrayID][0].openInterest
-          
-            );
-            })}
-            </i> */}
-            <br></br>
-            <Volatility option={option}/>
-            {/* <i key={7}>
-            Volatility:{' '}
-            {Object.keys(option.callExpDateMap).map((entry) => {
-            return Object.keys(option.callExpDateMap[entry]).map(
-            (innerArrayID) =>
-            option.callExpDateMap[entry][innerArrayID][0].volatility.toFixed(2)
-          
-            );
-            })}
-            </i> */}
-            <br></br>
-            <DaysToExpiration option={option}/>
-            {/* <i key={8}>
-            Days to Expiration:{' '}
-            {Object.keys(option.callExpDateMap).map((entry) => {
-            return Object.keys(option.callExpDateMap[entry]).map(
-            (innerArrayID) =>
-            option.callExpDateMap[entry][innerArrayID][0].daysToExpiration
-          
-            );
-            })}
-            </i> */}
-      </Card>
+  useEffect(() => {
+    const names = [];
+    const chainData = [];
+    entArray.map((symbol) =>
+      axios
+        .get(
+          `https://api.tdameritrade.com/v1/instruments?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&projection=symbol-search`
+        )
+        .then((response) => {
+          names.push(response.data);
+          const namesArray = names
+            .map((symbolId) => Object.values(symbolId))
+            .map((entryId) => Object.entries(entryId[0]))
+            .flat();
+          setNames([namesArray.flat()]);
+        })
+        );
+          entArray.map((symbol) =>
+            axios
+              .get(
+                `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&contractType=CALL&strikeCount=1&optionType=CALL&expMonth=${process.env.REACT_APP_MONTH}&toDate=${process.env.REACT_APP_DATE}&range=OTM`
+              )
+              .then((response) => {
+                chainData.push(response.data);
+              
+                setDataArray([chainData]); 
+              })
+              
+          );
      
-            )))
-          ) : (
-            <p>loading data...</p>
-    )}; 
-     
-  </>
+  }, []);
+
+  return (
+    <>
+      {!!dataArray.length ? (
+        dataArray.map((stock) =>
+          stock.map((option) => (
+            <Card
+              className="stockInfo"
+              variant="outlined"
+              raised="true"
+              style={{
+                backgroundColor: "#3D3D3D",
+                borderColor: "#d4af37",
+                color: "#fff",
+                borderRadius: "15px",
+              }}
+            >
+              <strong>
+                {namesRender[0][namesRender[0].indexOf(option.symbol) + 2]}
+              </strong>
+              <br></br>
+              <Link
+                to={`/chain/${option.symbol}`}
+                style={{ textDecoration: "underline", color: "#d4af37" }}
+              >
+                <Symbol option={option} />
+              </Link>
+
+              <br></br>
+              <StockPrice option={option} />
+
+              <br></br>
+              <HundredShares option={option} />
+
+              <br></br>
+              <BidPrice option={option} />
+
+              <br></br>
+              <PremiumCollected option={option} />
+
+              <br></br>
+              <OpenInterest option={option} />
+
+              <br></br>
+              <Volatility option={option} />
+
+              <br></br>
+              <DaysToExpiration option={option} />
+            </Card>
+          ))
+        )
+      ) : (
+        <p>loading data...</p>
+      )}
+      ;
+    </>
   );
-
-};
-
+}
 
 export default EntertainmentStocks;

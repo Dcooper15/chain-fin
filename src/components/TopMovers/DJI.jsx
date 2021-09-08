@@ -13,14 +13,16 @@ import Volatility from "../DataPoints/Volatility";
 import DaysToExpiration from "../DataPoints/DaysToExpiration";
 
 const moverUrl = `https://api.tdameritrade.com/v1/marketdata/$DJI/movers?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&direction=up&change=percent`;
+
 const date = new Date();
 
 function DJI() {
+  const [namesRender, setNames] = useState([]);
   const [percentChange, setPercentChange] = useState([]);
   const [djiData, setDjiData] = useState([]);
-  console.log("DJIDATa", djiData);
 
   useEffect(() => {
+    const names = [];
     const djiDataArray = [];
     axios.get(moverUrl).then((response) => {
       const changePercentArray = response.data
@@ -29,6 +31,21 @@ function DJI() {
 
       setPercentChange(changePercentArray);
       const djiMoversArray = response.data.map((djiSymbol) => djiSymbol.symbol);
+
+      djiMoversArray.map((symbol) =>
+        axios
+          .get(
+            `https://api.tdameritrade.com/v1/instruments?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&projection=symbol-search`
+          )
+          .then((response) => {
+            names.push(response.data);
+            const namesArray = names
+              .map((symbolId) => Object.values(symbolId))
+              .map((entryId) => Object.entries(entryId[0]))
+              .flat();
+            setNames([namesArray.flat()]);
+          })
+      );
       djiMoversArray.map((symbol) =>
         axios
           .get(
@@ -51,7 +68,7 @@ function DJI() {
           Return to Top Movers
         </Link>
       </h5>
-      <h2>Todays Top Movers - DJI</h2>
+      <h2>Today's Top Movers - DJI</h2>
       {!!djiData.length ? (
         djiData.map((stock) =>
           stock.map((option) => (
@@ -59,17 +76,15 @@ function DJI() {
               className="stockInfo"
               variant="outlined"
               style={{
-                backgroundColor: "#6d76f7",
+                backgroundColor: "#3D3D3D",
+                borderColor: "#d4af37",
                 color: "#fff",
                 borderRadius: "15px",
               }}
             >
-              <Link
-                to={`/chain/${option.symbol}`}
-                style={{ textDecoration: "underline", color: "#38ecf2" }}
-              >
-                <Symbol option={option} />
-              </Link>
+              <strong>
+                {namesRender[0][namesRender[0].indexOf(option.symbol) + 2]}
+              </strong>
               <>
                 {"   "}Up{" "}
                 {percentChange[
@@ -77,6 +92,13 @@ function DJI() {
                 ].toFixed(4) * 100}
                 %
               </>
+              <br></br>
+              <Link
+                to={`/chain/${option.symbol}`}
+                style={{ textDecoration: "underline", color: "#d4af37" }}
+              >
+                <Symbol option={option} />
+              </Link>
               <br></br>
               <StockPrice option={option} />
               <br></br>

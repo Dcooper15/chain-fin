@@ -32,13 +32,13 @@ class MainSearch extends Component {
               variant="outlined"
               raised="true"
               style={{
-                backgroundColor: "#7161ef",
+                backgroundColor: "#3D3D3D",
+                borderColor: "#d4af37",
                 color: "#fff",
-                
-                borderRadius: "17px",
+                borderRadius: "15px",
               }}
             >
-             <Link to={`/chain/${option.symbol}`} style={{ textDecoration: 'underline', color: '#38ecf2' }}>  <i key={option.id}>{option.symbol}</i></Link>
+             <Link to={`/chain/${option.symbol}`} style={{ textDecoration: "underline", color: "#d4af37" }}>  <i key={option.id}>{option.symbol}</i></Link>
               <br></br>
               <i>Stock Price: ${option.underlyingPrice.toFixed(2)}</i>
               <br></br>

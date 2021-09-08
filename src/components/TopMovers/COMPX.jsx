@@ -12,29 +12,45 @@ import OpenInterest from "../DataPoints/OpenInterest";
 import Volatility from "../DataPoints/Volatility";
 import DaysToExpiration from "../DataPoints/DaysToExpiration";
 
-//const moverUrl = `https://api.tdameritrade.com/v1/marketdata/$COMPX/movers?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&direction=up&change=percent`;
+const moverUrl = `https://api.tdameritrade.com/v1/marketdata/$COMPX/movers?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&direction=up&change=percent`;
+
 const date = new Date();
 
 function COMPX() {
+  const [namesRender, setNames] = useState([]);
   const [percentChange, setPercentChange] = useState([]);
   const [compxData, setCompxData] = useState([]);
-  console.log("Percent array", percentChange);
-  console.log("COMPXDATA", compxData);
+
   useEffect(() => {
+    const names = [];
     const compxDataArray = [];
     axios
       .get(
-        `https://api.tdameritrade.com/v1/marketdata/$COMPX/movers?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&direction=up&change=percent`
+        moverUrl
       )
       .then((response) => {
         const changePercentArray = response.data
           .map((percent) => [percent.symbol, percent.change])
           .flat();
-        
+
         setPercentChange(changePercentArray);
-        
+
         const compxMoversArray = response.data.map(
           (compxSymbol) => compxSymbol.symbol
+        );
+        compxMoversArray.map((symbol) =>
+          axios
+            .get(
+              `https://api.tdameritrade.com/v1/instruments?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&projection=symbol-search`
+            )
+            .then((response) => {
+              names.push(response.data);
+              const namesArray = names
+                .map((symbolId) => Object.values(symbolId))
+                .map((entryId) => Object.entries(entryId[0]))
+                .flat();
+              setNames([namesArray.flat()]);
+            })
         );
         compxMoversArray.map((symbol) =>
           axios
@@ -67,20 +83,29 @@ function COMPX() {
               className="stockInfo"
               variant="outlined"
               style={{
-                backgroundColor: "#6d76f7",
+                backgroundColor: "#3D3D3D",
+                borderColor: "#d4af37",
                 color: "#fff",
                 borderRadius: "15px",
               }}
             >
-            <Link to={`/chain/${option.symbol}`} style={{ textDecoration: 'underline', color: '#38ecf2' }}>
-            <Symbol option={option}/>
-          </Link>
-              <>{"   "}Up{" "}
-              {percentChange[percentChange.indexOf(option.symbol) + 1].toFixed(
-                4
-              ) * 100}
-              %</>
-           
+              <strong>
+                {namesRender[0][namesRender[0].indexOf(option.symbol) + 2]}
+              </strong>
+              <>
+                {"   "}Up{" "}
+                {percentChange[
+                  percentChange.indexOf(option.symbol) + 1
+                ].toFixed(4) * 100}
+                %
+              </>
+              <br></br>
+              <Link
+                to={`/chain/${option.symbol}`}
+                style={{ textDecoration: "underline", color: "#d4af37" }}
+              >
+                <Symbol option={option} />
+              </Link>
               <br></br>
               <StockPrice option={option} />
               <br></br>

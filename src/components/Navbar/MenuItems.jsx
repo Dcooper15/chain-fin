@@ -21,7 +21,10 @@ export const MenuItems = [
     },
     {
         title: <Link style={{textDecoration: 'none', color: '#fff'}}to='/travel'>Travel</Link>,
-        url: 'travel',
+        cName: 'nav-links'
+    },
+    {
+        title: <Link style={{textDecoration: 'none', color: '#fff'}}to='/topmovers'>Top Movers</Link>,
         cName: 'nav-links'
     },
     {   title: <a style={{textDecoration: 'none', color: '#fff'}} href='https://github.com/Dcooper15/covered-call-scanner'>Repo<i class="fab fa-github" style={{padding: '0.4rem'}}></i>

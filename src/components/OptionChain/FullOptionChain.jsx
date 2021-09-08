@@ -4,6 +4,7 @@ import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Card } from "@material-ui/core";
 import Moment from "react-moment";
+import Navbar from "../Navbar/Navbar";
 
 
 const date = new Date();
@@ -38,19 +39,19 @@ function FullOptionChain() {
 
   return (
     <>
+    <Navbar />
        <h5 className="sectorHeader"><Link to="/" style={{color: '#fff'}}>Return to Homepage</Link></h5>
       {!!dataArray.length ? (
         dataArray.map((stock) =>
           stock.map((option) => (
-            <Card
-              className="stockInfo"
-              variant="outlined"
-              style={{
-                backgroundColor: "#6d76f7",
-                color: "#fff",
-                borderRadius: "15px",
-              }}
-            >
+            <Card className="stockInfo" variant="outlined"
+            style={{
+              backgroundColor: "#3D3D3D",
+              borderColor: "#d4af37",
+              color: "#fff",
+              borderRadius: "15px",
+            }}>
+              
               <i><strong>{option.description}</strong></i>
               <hr></hr>
               <i>Strike Price: {option.strikePrice}</i>
