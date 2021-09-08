@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Moment from "react-moment";
 import { Card } from "@material-ui/core";
+import Navbar from "../Navbar/Navbar";
 import Name from "../DataPoints/Name";
 import Symbol from "../DataPoints/Symbol";
 import StockPrice from "../DataPoints/StockPrice";
@@ -66,6 +67,7 @@ function COMPX() {
 
   return (
     <>
+    <Navbar />
       <h5 className="sectorHeader">
         <Link to="/topmovers" style={{ color: "#fff" }}>
           Return to Top Movers

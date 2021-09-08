@@ -2,10 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import {createMuiTheme, ThemeProvider} from '@material-ui/core';
 import MainSearch from './components/MainSearch';
-import MainTech from "./components/Tech/MainTech";
-import MainFinance from "./components/Finance/MainFinance";
-import MainEntertainment from "./components/Entertainment/MainEntertainment";
-import MainTravel from "./components/Travel/MainTravel";
+import MainSectors from "./components/Sectors/MainSectors";
 import MainTopMovers from './components/TopMovers/MainTopMovers';
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer";
@@ -49,13 +46,13 @@ function App() {
         
         <div className="sectorMenu">
           <div class="row">
-            <div class="column" className="financeSect"><h3 className="linkHeader"><Link to="/finance" style={{ textDecoration: 'none' ,color: '#d4af37'}}>Finance</Link></h3></div>
-            <div class="column" className="entertainmentSect"><h3 className="linkHeader"><Link to="/entertainment"  style={{ textDecoration: 'none', color: '#d4af37'}}>Entertainment</Link></h3></div>
+            <div class="column" className="financeSect"><h3 className="linkHeader"><Link to="/sector/finance" style={{ textDecoration: 'none' ,color: '#d4af37'}}>Finance</Link></h3></div>
+            <div class="column" className="entertainmentSect"><h3 className="linkHeader"><Link to="/sector/entertainment"  style={{ textDecoration: 'none', color: '#d4af37'}}>Entertainment</Link></h3></div>
           </div>
           
           <div class="row">
-            <div class="column"className="techSect"><h3 className="linkHeader"><Link to="/tech" style={{ textDecoration: 'none', color: '#d4af37' }}>Tech</Link></h3></div>
-            <div class="column" className="travelSect"><h3 className="linkHeader"><Link to="/travel" style={{ textDecoration: 'none', color: '#d4af37' }}>Travel</Link></h3></div>
+            <div class="column"className="techSect"><h3 className="linkHeader"><Link to="/sector/tech" style={{ textDecoration: 'none', color: '#d4af37' }}>Tech</Link></h3></div>
+            <div class="column" className="travelSect"><h3 className="linkHeader"><Link to="/sector/travel" style={{ textDecoration: 'none', color: '#d4af37' }}>Travel</Link></h3></div>
           </div>
           <div class="row">
             <div class="column" className="travelSect"><h3 className="linkHeader"><Link to="/topmovers" style={{ textDecoration: 'none', color: '#d4af37' }}>Top Movers</Link></h3></div>
@@ -70,35 +67,22 @@ function App() {
         
         
         <div className="Routes">
-          <Route path="/tech">
-            <MainTech />
-          </Route>
         
-        
-          <Route path="/finance">
-            <MainFinance />
-          </Route>
-        
-       
-          <Route path="/travel">
-            <MainTravel />
-          </Route>
-        
-           <Route path="/entertainment">
-            <MainEntertainment />
+           <Route path="/sector/:sector">
+            <MainSectors />
           </Route>
 
-           <Route path="/topmovers">
+           <Route exact path="/topmovers">
              <MainTopMovers />
            </Route>
            
-           <Route path="/compx">
+           <Route path="/topmovers/compx">
             <COMPX />
            </Route>
-           <Route path="/dji">
+           <Route path="/topmovers/dji">
              <DJI />
            </Route>
-           <Route path="/spx">
+           <Route path="/topmovers/spx">
             <SPX />
            </Route> 
            <Route path="/chain/:symbol">

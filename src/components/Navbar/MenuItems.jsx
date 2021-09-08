@@ -5,22 +5,22 @@ import { Link } from "react-router-dom";
 export const MenuItems = [
     
     {
-        title: <Link style={{textDecoration: 'none', color: '#fff'}} to='/finance'>Finance</Link>,
+        title: <Link style={{textDecoration: 'none', color: '#fff'}} to='/sector/finance'>Finance</Link>,
         
         cName: 'nav-links'
     },
     {
-        title: <Link style={{textDecoration: 'none', color: '#fff'}} to='/entertainment'>Entertainment</Link>,
+        title: <Link style={{textDecoration: 'none', color: '#fff'}} to='/sector/entertainment'>Entertainment</Link>,
         
         cName: 'nav-links'
     },
     {
-        title: <Link style={{textDecoration: 'none', color: '#fff'}} to='/tech'>Tech</Link>,
+        title: <Link style={{textDecoration: 'none', color: '#fff'}} to='/sector/tech'>Tech</Link>,
         
         cName: 'nav-links'
     },
     {
-        title: <Link style={{textDecoration: 'none', color: '#fff'}}to='/travel'>Travel</Link>,
+        title: <Link style={{textDecoration: 'none', color: '#fff'}}to='/sector/travel'>Travel</Link>,
         cName: 'nav-links'
     },
     {
