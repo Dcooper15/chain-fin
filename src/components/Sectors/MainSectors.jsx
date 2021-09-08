@@ -1,21 +1,19 @@
-import React, { Component } from 'react'
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from "../Navbar/Navbar";
-import FinanceStocks from './FinanceStocks';
+import SectorStocks from './SectorStocks';
 
 
-class MainFinance extends Component {
-    render() {
+function MainSectors() {
+  
         return (
             <div>
                 <Navbar />
-                <h2 className="sectorHeader">Finance Stocks</h2>
-                <FinanceStocks />
+                <SectorStocks />
                 <h5 className="sectorHeader"><Link to="/" style={{color: '#fff'}}>Return to Homepage</Link></h5>
             </div>
         )
-    }
+    
 }
 
-
-export default MainFinance;
+export default MainSectors;

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useParams } from "react-router";
 import { Card } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import Name from "../DataPoints/Name";
@@ -12,16 +13,31 @@ import OpenInterest from "../DataPoints/OpenInterest";
 import Volatility from "../DataPoints/Volatility";
 import DaysToExpiration from "../DataPoints/DaysToExpiration";
 
-const finArray = ["AXP", "BAC", "C", "JPM", "WFC"];
+let symbolArray = [];
 
-function FinanceStocks() {
+function SectorStocks() {
   const [namesRender, setNames] = useState([]);
   const [dataArray, setDataArray] = useState([]);
+  const { sector } = useParams();
+
+  if (sector === "tech") {
+    symbolArray = ["AMD", "PINS", "SONY", "TWTR", "ZM"];
+  } else if (sector === "entertainment") {
+    symbolArray = ["AMC", "ATVI", "DIS", "MGM", "WYNN"];
+  } else if (sector === "travel") {
+    symbolArray = ["CCL", "DAL", "LUV", "NCLH", "UAL"];
+  } else if (sector === "finance") {
+    symbolArray = ["AXP", "BAC", "C", "JPM", "WFC"];
+  }
+
+  const capHeader = (header) => {
+    return header.charAt(0).toUpperCase() + header.slice(1);
+  };
 
   useEffect(() => {
     const names = [];
     const chainData = [];
-    finArray.map((symbol) =>
+    symbolArray.map((symbol) =>
       axios
         .get(
           `https://api.tdameritrade.com/v1/instruments?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&projection=symbol-search`
@@ -35,7 +51,7 @@ function FinanceStocks() {
           setNames([namesArray.flat()]);
         })
     );
-    finArray.map((symbol) =>
+    symbolArray.map((symbol) =>
       axios
         .get(
           `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&contractType=CALL&strikeCount=1&optionType=CALL&expMonth=${process.env.REACT_APP_MONTH}&toDate=${process.env.REACT_APP_DATE}&range=OTM`
@@ -46,10 +62,11 @@ function FinanceStocks() {
           setDataArray([chainData]);
         })
     );
-  }, []);
+  }, [sector]);
 
   return (
     <>
+      {<h2 className="sectorHeader">{capHeader(sector)}</h2>}
       {!!dataArray.length ? (
         dataArray.map((stock) =>
           stock.map((option) => (
@@ -104,4 +121,4 @@ function FinanceStocks() {
   );
 }
 
-export default FinanceStocks;
+export default SectorStocks;
