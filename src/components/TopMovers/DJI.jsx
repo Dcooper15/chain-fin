@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Moment from "react-moment";
 import { Card } from "@material-ui/core";
+import Name from "../DataPoints/Name";
 import Symbol from "../DataPoints/Symbol";
 import StockPrice from "../DataPoints/StockPrice";
 import HundredShares from "../DataPoints/HundredShares";
@@ -82,9 +83,7 @@ function DJI() {
                 borderRadius: "15px",
               }}
             >
-              <strong>
-                {namesRender[0][namesRender[0].indexOf(option.symbol) + 2]}
-              </strong>
+              <Name option={option} namesRender={namesRender}/>
               <>
                 {"   "}Up{" "}
                 {percentChange[

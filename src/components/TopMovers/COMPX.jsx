@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Moment from "react-moment";
 import { Card } from "@material-ui/core";
+import Name from "../DataPoints/Name";
 import Symbol from "../DataPoints/Symbol";
 import StockPrice from "../DataPoints/StockPrice";
 import HundredShares from "../DataPoints/HundredShares";
@@ -24,47 +25,43 @@ function COMPX() {
   useEffect(() => {
     const names = [];
     const compxDataArray = [];
-    axios
-      .get(
-        moverUrl
-      )
-      .then((response) => {
-        const changePercentArray = response.data
-          .map((percent) => [percent.symbol, percent.change])
-          .flat();
+    axios.get(moverUrl).then((response) => {
+      const changePercentArray = response.data
+        .map((percent) => [percent.symbol, percent.change])
+        .flat();
 
-        setPercentChange(changePercentArray);
+      setPercentChange(changePercentArray);
 
-        const compxMoversArray = response.data.map(
-          (compxSymbol) => compxSymbol.symbol
-        );
-        compxMoversArray.map((symbol) =>
-          axios
-            .get(
-              `https://api.tdameritrade.com/v1/instruments?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&projection=symbol-search`
-            )
-            .then((response) => {
-              names.push(response.data);
-              const namesArray = names
-                .map((symbolId) => Object.values(symbolId))
-                .map((entryId) => Object.entries(entryId[0]))
-                .flat();
-              setNames([namesArray.flat()]);
-            })
-        );
-        compxMoversArray.map((symbol) =>
-          axios
-            .get(
-              `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&contractType=CALL&strikeCount=1&optionType=CALL&expMonth=${process.env.REACT_APP_MONTH}&toDate=2022-09-04&range=OTM`
-            )
-            .then((response) => {
-              if (response.data.status === "SUCCESS") {
-                compxDataArray.push(response.data);
-              }
-              setCompxData([compxDataArray]);
-            })
-        );
-      });
+      const compxMoversArray = response.data.map(
+        (compxSymbol) => compxSymbol.symbol
+      );
+      compxMoversArray.map((symbol) =>
+        axios
+          .get(
+            `https://api.tdameritrade.com/v1/instruments?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&projection=symbol-search`
+          )
+          .then((response) => {
+            names.push(response.data);
+            const namesArray = names
+              .map((symbolId) => Object.values(symbolId))
+              .map((entryId) => Object.entries(entryId[0]))
+              .flat();
+            setNames([namesArray.flat()]);
+          })
+      );
+      compxMoversArray.map((symbol) =>
+        axios
+          .get(
+            `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&contractType=CALL&strikeCount=1&optionType=CALL&expMonth=${process.env.REACT_APP_MONTH}&toDate=2022-09-04&range=OTM`
+          )
+          .then((response) => {
+            if (response.data.status === "SUCCESS") {
+              compxDataArray.push(response.data);
+            }
+            setCompxData([compxDataArray]);
+          })
+      );
+    });
   }, []);
 
   return (
@@ -89,9 +86,8 @@ function COMPX() {
                 borderRadius: "15px",
               }}
             >
-              <strong>
-                {namesRender[0][namesRender[0].indexOf(option.symbol) + 2]}
-              </strong>
+              <Name option={option} namesRender={namesRender} />
+
               <>
                 {"   "}Up{" "}
                 {percentChange[

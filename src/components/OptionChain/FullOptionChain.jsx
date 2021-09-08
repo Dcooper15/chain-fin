@@ -1,29 +1,29 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from 'react-router';
-import { Link } from 'react-router-dom';
+import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 import { Card } from "@material-ui/core";
 import Moment from "react-moment";
 import Navbar from "../Navbar/Navbar";
 
-
 const date = new Date();
 
 function FullOptionChain() {
-  const { symbol } = useParams()
+  const { symbol } = useParams();
+  const [nameRender, setName] = useState([]);
   const [fullChain, setFullChainData] = useState([]);
 
   const dataArray = fullChain;
-  console.log("dataarray, ", dataArray);
+
 
   useEffect(() => {
-    
     axios
       .get(
         `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&contractType=CALL&strikeCount=3&fromDate=2021-09-03&toDate=2021-10-30`
       )
       .then((response) => {
         console.log("full res, ", response);
+        const resSymbol = response.data.symbol;
         const keys = Object.keys(response.data.callExpDateMap)
           .map((entry) => {
             return Object.keys(response.data.callExpDateMap[entry]).map(
@@ -33,26 +33,51 @@ function FullOptionChain() {
           })
           .flat();
         setFullChainData(keys);
+
+        axios
+          .get(
+            `https://api.tdameritrade.com/v1/instruments?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${resSymbol}&projection=symbol-search`
+          )
+          .then((response) => {
+            const nameArray = [response.data]
+              .map((symbolId) => Object.values(symbolId))
+              .map((entryId) => Object.entries(entryId[0]))
+              .flat();
+            console.log("namear", nameArray);
+            setName([nameArray.flat()]);
+          });
       });
-  
   }, [symbol]);
 
   return (
     <>
-    <Navbar />
-       <h5 className="sectorHeader"><Link to="/" style={{color: '#fff'}}>Return to Homepage</Link></h5>
+      <Navbar />
+      <h5 className="sectorHeader">
+        <Link to="/" style={{ color: "#fff" }}>
+          Return to Homepage
+        </Link>
+      </h5>
+      {!!nameRender.length ? (
+        <strong>{nameRender[0][nameRender[0].indexOf("symbol") + 3]}</strong>
+      ) : (
+        <p>loading data...</p>
+      )}
       {!!dataArray.length ? (
         dataArray.map((stock) =>
           stock.map((option) => (
-            <Card className="stockInfo" variant="outlined"
-            style={{
-              backgroundColor: "#3D3D3D",
-              borderColor: "#d4af37",
-              color: "#fff",
-              borderRadius: "15px",
-            }}>
-              
-              <i><strong>{option.description}</strong></i>
+            <Card
+              className="stockInfo"
+              variant="outlined"
+              style={{
+                backgroundColor: "#3D3D3D",
+                borderColor: "#d4af37",
+                color: "#fff",
+                borderRadius: "15px",
+              }}
+            >
+              <i>
+                <strong>{option.description}</strong>
+              </i>
               <hr></hr>
               <i>Strike Price: {option.strikePrice}</i>
               <br></br>

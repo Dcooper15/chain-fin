@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Card } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import Name from "../DataPoints/Name";
 import Symbol from "../DataPoints/Symbol";
 import StockPrice from "../DataPoints/StockPrice";
 import HundredShares from "../DataPoints/HundredShares";
@@ -66,9 +67,7 @@ function TravelStocks() {
                 borderRadius: "15px",
               }}
             >
-              <strong>
-                {namesRender[0][namesRender[0].indexOf(option.symbol) + 2]}
-              </strong>
+              <Name option={option} namesRender={namesRender}/>
               <br></br>
               <Link
                 to={`/chain/${option.symbol}`}

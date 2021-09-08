@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Card } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import Name from "../DataPoints/Name";
 import Symbol from "../DataPoints/Symbol";
 import StockPrice from "../DataPoints/StockPrice";
 import HundredShares from "../DataPoints/HundredShares";
@@ -17,7 +18,6 @@ function EntertainmentStocks() {
   const [namesRender, setNames] = useState([]);
   const [dataArray, setDataArray] = useState([]);
 
-  
   useEffect(() => {
     const names = [];
     const chainData = [];
@@ -34,20 +34,18 @@ function EntertainmentStocks() {
             .flat();
           setNames([namesArray.flat()]);
         })
-        );
-          entArray.map((symbol) =>
-            axios
-              .get(
-                `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&contractType=CALL&strikeCount=1&optionType=CALL&expMonth=${process.env.REACT_APP_MONTH}&toDate=${process.env.REACT_APP_DATE}&range=OTM`
-              )
-              .then((response) => {
-                chainData.push(response.data);
-              
-                setDataArray([chainData]); 
-              })
-              
-          );
-     
+    );
+    entArray.map((symbol) =>
+      axios
+        .get(
+          `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&contractType=CALL&strikeCount=1&optionType=CALL&expMonth=${process.env.REACT_APP_MONTH}&toDate=${process.env.REACT_APP_DATE}&range=OTM`
+        )
+        .then((response) => {
+          chainData.push(response.data);
+
+          setDataArray([chainData]);
+        })
+    );
   }, []);
 
   return (
@@ -66,9 +64,7 @@ function EntertainmentStocks() {
                 borderRadius: "15px",
               }}
             >
-              <strong>
-                {namesRender[0][namesRender[0].indexOf(option.symbol) + 2]}
-              </strong>
+              <Name option={option} namesRender={namesRender} />
               <br></br>
               <Link
                 to={`/chain/${option.symbol}`}
