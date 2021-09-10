@@ -1,27 +1,25 @@
-import React from 'react';
+import React from "react";
 
-
-const BidPrice = (props) => {
-    // console.log("BID", Object.keys(props.option.callExpDateMap).map((entry) => {
-    //     return Object.keys(
-    //     props.option.callExpDateMap[entry]
-    //     ).map((innerArrayID) =>
-    //     props.option.callExpDateMap[entry][innerArrayID][0].bid.toFixed(2)
-    //     );
-    // }));
-    return(
-        <i key={4}>
+const BidPrice = ({option}) => {
+  try {
+    return (
+      <i key={4}>
         Bid Price: $
-            {Object.keys(props.option.callExpDateMap).map((entry) => {
-                return Object.keys(
-                props.option.callExpDateMap[entry]
-                ).map((innerArrayID) =>
-                props.option.callExpDateMap[entry][innerArrayID][0].bid.toFixed(2)
-                );
-            })[0]}{" "}
-        </i>
-    )
+        {
+          Object.keys(option.callExpDateMap).map((entry) => {
+            return Object.keys(option.callExpDateMap[entry]).map(
+              (innerArrayID) =>
+                option.callExpDateMap[entry][innerArrayID][0].bid.toFixed(
+                  2
+                )
+            );
+          })[0]
+        }{" "}
+      </i>
+    );
+  } catch (error) {
+    return <i key={4}>Bid Price: N/A</i>;
+  }
 };
-
 
 export default BidPrice;

@@ -1,17 +1,21 @@
 import React from 'react';
 
 
-const OpenInterest = (props) => {
+const OpenInterest = ({option}) => {
+    try {
     return(
         <i key={6}>Open Interest:{' '}
-            {Object.keys(props.option.callExpDateMap).map((entry) => {
-            return Object.keys(props.option.callExpDateMap[entry]).map(
+            {Object.keys(option.callExpDateMap).map((entry) => {
+            return Object.keys(option.callExpDateMap[entry]).map(
             (innerArrayID) =>
-            props.option.callExpDateMap[entry][innerArrayID][0].openInterest
+            option.callExpDateMap[entry][innerArrayID][0].openInterest
             );
             })[0]}
         </i>
     );
+    } catch (error) {
+        return <i key={6}>Open Interest: N/A</i>
+    }
 };
 
 

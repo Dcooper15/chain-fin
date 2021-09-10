@@ -1,38 +1,31 @@
 import { Link } from "react-router-dom";
 
-
-
 export const MenuItems = [
-    
-    {
-        title: <Link style={{textDecoration: 'none', color: '#fff'}} to='/sector/finance'>Finance</Link>,
-        
-        cName: 'nav-links'
-    },
-    {
-        title: <Link style={{textDecoration: 'none', color: '#fff'}} to='/sector/entertainment'>Entertainment</Link>,
-        
-        cName: 'nav-links'
-    },
-    {
-        title: <Link style={{textDecoration: 'none', color: '#fff'}} to='/sector/tech'>Tech</Link>,
-        
-        cName: 'nav-links'
-    },
-    {
-        title: <Link style={{textDecoration: 'none', color: '#fff'}}to='/sector/travel'>Travel</Link>,
-        cName: 'nav-links'
-    },
-    {
-        title: <Link style={{textDecoration: 'none', color: '#fff'}}to='/topmovers'>Top Movers</Link>,
-        cName: 'nav-links'
-    },
-    {   title: <a style={{textDecoration: 'none', color: '#fff'}} href='https://github.com/Dcooper15/covered-call-scanner'>Repo<i class="fab fa-github" style={{padding: '0.4rem'}}></i>
-    </a>,
+  {
+    title: (
+      <Link style={{ textDecoration: "none", color: "#fff" }} to="/">
+        Home
+      </Link>
+    ),
 
-        cName: 'nav-links-mobile'
+    cName: "nav-links",
+  },
+  {
+    title: (
+      <Link style={{ textDecoration: "none", color: "#fff" }} to="/sector">
+        Sectors
+      </Link>
+    ),
 
-    }
-    
-    
-]
+    cName: "nav-links",
+  },
+  {
+    title: (
+      <Link style={{ textDecoration: "none", color: "#fff" }} to="/topmovers">
+        Top Movers
+      </Link>
+    ),
+    cName: "nav-links",
+  },
+ 
+];

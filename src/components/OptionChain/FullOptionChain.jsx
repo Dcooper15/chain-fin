@@ -10,6 +10,7 @@ const date = new Date();
 
 function FullOptionChain() {
   const { symbol } = useParams();
+  const [stockPriceRender, setStockPrice] = useState([]);
   const [nameRender, setName] = useState([]);
   const [fullChain, setFullChainData] = useState([]);
 
@@ -23,6 +24,8 @@ function FullOptionChain() {
       )
       .then((response) => {
         console.log("full res, ", response);
+        const stockPrice = response.data.underlyingPrice.toFixed(2);
+        setStockPrice([stockPrice]);
         const resSymbol = response.data.symbol;
         const keys = Object.keys(response.data.callExpDateMap)
           .map((entry) => {
@@ -43,7 +46,6 @@ function FullOptionChain() {
               .map((symbolId) => Object.values(symbolId))
               .map((entryId) => Object.entries(entryId[0]))
               .flat();
-            console.log("namear", nameArray);
             setName([nameArray.flat()]);
           });
       });
@@ -59,6 +61,17 @@ function FullOptionChain() {
       </h5>
       {!!nameRender.length ? (
         <strong>{nameRender[0][nameRender[0].indexOf("symbol") + 3]}</strong>
+      ) : (
+        <p>loading data...</p>
+      )}
+      <br></br>
+      <br></br>
+      {stockPriceRender.length ? (
+        <strong>
+          {" "}
+          Share Price: ${stockPriceRender}
+          <br></br> Cost for 100 Shares: ${stockPriceRender * 100}
+        </strong>
       ) : (
         <p>loading data...</p>
       )}

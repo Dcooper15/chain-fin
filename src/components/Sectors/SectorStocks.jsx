@@ -20,14 +20,34 @@ function SectorStocks() {
   const [dataArray, setDataArray] = useState([]);
   const { sector } = useParams();
 
-  if (sector === "tech") {
-    symbolArray = ["AMD", "PINS", "SONY", "TWTR", "ZM"];
-  } else if (sector === "entertainment") {
-    symbolArray = ["AMC", "ATVI", "DIS", "MGM", "WYNN"];
-  } else if (sector === "travel") {
-    symbolArray = ["CCL", "DAL", "LUV", "NCLH", "UAL"];
-  } else if (sector === "finance") {
-    symbolArray = ["AXP", "BAC", "C", "JPM", "WFC"];
+  let sectorError = [];
+  switch (sector) {
+    case "tech":
+      symbolArray = ["AMD", "PINS", "SONY", "TWTR", "ZM"];
+      break;
+    case "entertainment":
+      symbolArray = ["AMC", "ATVI", "DIS", "MGM", "WYNN"];
+      break;
+    case "travel":
+      symbolArray = ["CCL", "DAL", "LUV", "NCLH", "UAL"];
+      break;
+    case "finance":
+      symbolArray = ["AXP", "BAC", "C", "JPM", "WFC"];
+      break;
+    case "oil":
+      symbolArray = ["PXD", "COP", "MPC", "OXY", "CVX", "XOM", "BP"];
+      break;
+    case "cannabis":
+      symbolArray = ["CRON", "ACB", "TLRY", "HEXO", "SNDL", "IGC", "OGI"];
+      break;
+    case "pharmaceutics":
+      symbolArray = ["JNJ", "PFE", "MRNA", "AZN", "AMGN", "BNTX", "SGEN"];
+      break;
+    case "energy":
+      symbolArray = ["NEE", "FSLR", "SEDG", "PLUG", "BLNK", "ENPH", "SPWR"];
+      break;
+    default:
+      sectorError = `No data to display for ${sector}.`;
   }
 
   const capHeader = (header) => {
@@ -37,20 +57,26 @@ function SectorStocks() {
   useEffect(() => {
     const names = [];
     const chainData = [];
-    symbolArray.map((symbol) =>
-      axios
-        .get(
-          `https://api.tdameritrade.com/v1/instruments?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&projection=symbol-search`
-        )
-        .then((response) => {
-          names.push(response.data);
-          const namesArray = names
-            .map((symbolId) => Object.values(symbolId))
-            .map((entryId) => Object.entries(entryId[0]))
-            .flat();
-          setNames([namesArray.flat()]);
-        })
-    );
+    try {
+      symbolArray.map((symbol) =>
+        axios
+          .get(
+            `https://api.tdameritrade.com/v1/instruments?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&projection=symbol-search`
+          )
+          .then((response) => {
+            if (response.status === 200) {
+              names.push(response.data);
+            }
+            const namesArray = names
+              .map((symbolId) => Object.values(symbolId))
+              .map((entryId) => Object.entries(entryId[0]))
+              .flat();
+            setNames([namesArray.flat()]);
+          })
+      );
+    } catch (error) {
+      console.log(error);
+    }
     symbolArray.map((symbol) =>
       axios
         .get(
@@ -66,7 +92,15 @@ function SectorStocks() {
 
   return (
     <>
-      {<h2 className="sectorHeader">{capHeader(sector)}</h2>}
+      {!!sectorError.length ? (
+        <h2 className="sectorHeader">{capHeader(sectorError)}</h2>
+      ) : (
+        <h2 className="sectorHeader">
+          {sector === "energy"
+            ? "Alternative " + capHeader(sector)
+            : capHeader(sector)}
+        </h2>
+      )}
       {!!dataArray.length ? (
         dataArray.map((stock) =>
           stock.map((option) => (

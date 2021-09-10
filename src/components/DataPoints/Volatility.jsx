@@ -1,18 +1,20 @@
 import React from "react";
 
-const Volatility = (props) => {
+const Volatility = ({option}) => {
   try {
     return (
       <i key={7}>
         Volatility:{" "}
-        {Object.keys(props.option.callExpDateMap).map((entry) => {
-          return Object.keys(props.option.callExpDateMap[entry]).map(
-            (innerArrayID) =>
-              props.option.callExpDateMap[entry][
-                innerArrayID
-              ][0].volatility.toFixed(2)
-          );
-        })[0]}
+        {
+          Object.keys(option.callExpDateMap).map((entry) => {
+            return Object.keys(option.callExpDateMap[entry]).map(
+              (innerArrayID) =>
+                option.callExpDateMap[entry][
+                  innerArrayID
+                ][0].volatility.toFixed(2)
+            );
+          })[0]
+        }
       </i>
     );
   } catch (error) {

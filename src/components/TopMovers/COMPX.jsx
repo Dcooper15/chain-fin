@@ -42,7 +42,9 @@ function COMPX() {
             `https://api.tdameritrade.com/v1/instruments?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&projection=symbol-search`
           )
           .then((response) => {
-            names.push(response.data);
+            if (response.status === 200) {
+              names.push(response.data);
+            }
             const namesArray = names
               .map((symbolId) => Object.values(symbolId))
               .map((entryId) => Object.entries(entryId[0]))
@@ -56,6 +58,7 @@ function COMPX() {
             `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&contractType=CALL&strikeCount=1&optionType=CALL&expMonth=${process.env.REACT_APP_MONTH}&toDate=2022-09-04&range=OTM`
           )
           .then((response) => {
+            console.log("compxres", response);
             if (response.data.status === "SUCCESS") {
               compxDataArray.push(response.data);
             }
@@ -67,13 +70,16 @@ function COMPX() {
 
   return (
     <>
-    <Navbar />
+      <Navbar />
       <h5 className="sectorHeader">
-        <Link to="/topmovers" style={{ color: "#fff" }}>
-          Return to Top Movers
+        <Link
+          to="/topmovers"
+          style={{ color: "#d4af37", textDecoration: "none" }}
+        >
+          {"< Top Movers"}
         </Link>
       </h5>
-      <h2>Today's Top Movers - NASDAQ</h2>
+      <h2 style={{ color: "#d4af37" }}>Today's Top Movers - NASDAQ</h2>
 
       {!!compxData.length ? (
         compxData.map((stock) =>

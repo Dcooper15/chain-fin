@@ -1,15 +1,19 @@
-import React from 'react';
+import React from "react";
 
-
-const Symbol = (props) => {
-   return(
-      
+const Symbol = ({option}) => {
+  try {
+    return (
       <i key={1}>
-         <strong>{props.option.symbol}</strong>
+        <strong>{option.symbol}</strong>
       </i>
-   ) 
+    );
+  } catch (error) {
+    return (
+      <i key={1}>
+        Symbol Not Available
+      </i>
+    )
+  }
 };
-
-
 
 export default Symbol;

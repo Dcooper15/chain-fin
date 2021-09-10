@@ -39,7 +39,9 @@ function SPX() {
             `https://api.tdameritrade.com/v1/instruments?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&projection=symbol-search`
           )
           .then((response) => {
-            names.push(response.data);
+            if (response.status === 200) {
+              names.push(response.data);
+            }
             const namesArray = names
               .map((symbolId) => Object.values(symbolId))
               .map((entryId) => Object.entries(entryId[0]))
@@ -69,11 +71,11 @@ function SPX() {
     <>
       <Navbar />
       <h5 className="sectorHeader">
-        <Link to="/topmovers" style={{ color: "#fff" }}>
-          Return to Top Movers
+        <Link to="/topmovers" style={{ color: "#d4af37", textDecoration: "none" }}>
+          {"< Top Movers"}
         </Link>
       </h5>
-      <h2>Today's Top Movers - SPX</h2>
+      <h2 style={{color: "#d4af37"}}>Today's Top Movers - SPX</h2>
       {!!spxData.length ? (
         spxData.map((stock) =>
           stock.map((option) => (

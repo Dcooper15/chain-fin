@@ -1,19 +1,24 @@
-import React from 'react';
+import React from "react";
 
-
-const DaysToExpiration = (props) => {
+const DaysToExpiration = ({option}) => {
+  try {
     return (
-        <i key={8}>
-            Days to Expiration:{' '}
-            {Object.keys(props.option.callExpDateMap).map((entry) => {
-            return Object.keys(props.option.callExpDateMap[entry]).map(
-                (innerArrayID) =>
-                props.option.callExpDateMap[entry][innerArrayID][0].daysToExpiration
-                );
-            })[0]}
-        </i>
+      <i key={8}>
+        Days to Expiration:{" "}
+        {
+          Object.keys(option.callExpDateMap).map((entry) => {
+            return Object.keys(option.callExpDateMap[entry]).map(
+              (innerArrayID) =>
+                option.callExpDateMap[entry][innerArrayID][0]
+                  .daysToExpiration
+            );
+          })[0]
+        }
+      </i>
     );
+  } catch (error) {
+    return <i key={8}>Days to Expiration: N/A</i>;
+  }
 };
 
-
-export default DaysToExpiration
+export default DaysToExpiration;
