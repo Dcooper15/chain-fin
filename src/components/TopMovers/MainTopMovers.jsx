@@ -9,7 +9,7 @@ const MainTopMovers = () => {
         <Route path="/topmovers">
           <Navbar />
           <h5 className="sectorHeader">
-            <Link to="/" style={{ color: "#d4af37" }}>
+            <Link to="/" style={{ color: "#d4af37", textDecoration: "none" }}>
               {"< Home"}
             </Link>
           </h5>

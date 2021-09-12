@@ -101,6 +101,7 @@ function App() {
               <SPX />
             </Route>
             <Route path="/chain/:symbol">
+            <Navbar />
               <FullOptionChain />
             </Route>
             <Route path="/sector/:sector">
