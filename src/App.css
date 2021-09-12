@@ -3,7 +3,7 @@
 
 body {
   font-family: 'Montserrat', sans-serif;
-  background-color: #3D3D3D;
+  background-color: #343434;
   color: #fff;
 }
 
@@ -14,15 +14,8 @@ body {
   font-style: oblique;
 }
 
-/* #3acbf7 */
-.AppInfo {
-  border-color:  #1F51FF;
-  /* border-style: double; */
-  text-align: center;
-  
-  margin-left: 3%;
-  margin-right: 3%;
-}
+
+
 
 .sectorMenu {
   text-align: center;
@@ -66,9 +59,14 @@ body {
   height: 50px;
   
   padding: 2%;
-  
-  
-  
+}
+
+.financeSect:hover {
+  background-color: rgba(212, 175, 55, 0.1);
+  color: #FFED8A;
+  transition: 0.5s ease;
+ 
+
 }
 
 .entertainmentSect {
@@ -86,6 +84,14 @@ body {
   height: 50px;
   padding: 2%;
   
+}
+
+.entertainmentSect:hover {
+  background-color: rgba(212, 175, 55, 0.1);
+  color: #FFED8A;
+  transition: 0.5s ease;
+ 
+
 }
 
 .travelSect {
@@ -127,9 +133,10 @@ body {
   text-decoration: 'none';
   color: '#1F51FF';
 }
-/* .sectorMain {
- 
-} */
+ .linkHeader:hover {
+   color: #FFED8A;
+   margin-bottom: 10px;
+ }
 
 .alert {
   padding: 0.7rem;

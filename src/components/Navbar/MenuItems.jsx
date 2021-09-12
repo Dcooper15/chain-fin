@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export const MenuItems = [
   {
     title: (
-      <Link style={{ textDecoration: "none", color: "#fff" }} to="/">
+      <Link style={{ textDecoration: "none", color: "#fff", overflowX: "hidden"}} to="/">
         Home
       </Link>
     ),
@@ -12,7 +12,7 @@ export const MenuItems = [
   },
   {
     title: (
-      <Link style={{ textDecoration: "none", color: "#fff" }} to="/sector">
+      <Link style={{ textDecoration: "none", color: "#fff", overflowX: "hidden"}} to="/sector">
         Sectors
       </Link>
     ),
@@ -21,7 +21,7 @@ export const MenuItems = [
   },
   {
     title: (
-      <Link style={{ textDecoration: "none", color: "#fff" }} to="/topmovers">
+      <Link style={{ textDecoration: "none", color: "#fff", overflowX: "hidden" }} to="/topmovers">
         Top Movers
       </Link>
     ),

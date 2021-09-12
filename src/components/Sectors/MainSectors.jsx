@@ -9,7 +9,7 @@ const MainSectors = () => {
         <Route path="/sector">
           <Navbar />
           <h5 className="sectorHeader">
-            <Link to="/" style={{ color: "#d4af37" }}>
+            <Link to="/" style={{ color: "#d4af37", textDecoration: "none" }}>
               {"< Home"}
             </Link>
           </h5>
@@ -97,9 +97,11 @@ const MainSectors = () => {
                 <h3 className="linkHeader">
                   <Link
                     to="/sector/energy"
-                    style={{ textDecoration: "none", color: "#d4af37" }}
+                    style={{textDecoration: "none", color: "#d4af37" }}
                   >
-                    Alternative Energy
+                    Alternative 
+                    <br></br>
+                    Energy
                   </Link>
                 </h3>
               </div>

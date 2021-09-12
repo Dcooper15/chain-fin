@@ -4,7 +4,7 @@ import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { Card } from "@material-ui/core";
 import Moment from "react-moment";
-import Navbar from "../Navbar/Navbar";
+
 
 const date = new Date();
 
@@ -15,7 +15,6 @@ function FullOptionChain() {
   const [fullChain, setFullChainData] = useState([]);
 
   const dataArray = fullChain;
-
 
   useEffect(() => {
     axios
@@ -53,10 +52,21 @@ function FullOptionChain() {
 
   return (
     <>
-      <Navbar />
+      
       <h5 className="sectorHeader">
-        <Link to="/" style={{ color: "#fff" }}>
-          Return to Homepage
+        <Link to="/" style={{ color: "#d4af37", textDecoration: "none" }}>
+          {" Home"}
+        </Link>
+        <br></br>
+        <Link to="/sector" style={{ color: "#d4af37", textDecoration: "none" }}>
+          {" Sectors"}
+        </Link>
+        <br></br>
+        <Link
+          to="/topmovers"
+          style={{ color: "#d4af37", textDecoration: "none" }}
+        >
+          {" Top Movers"}
         </Link>
       </h5>
       {!!nameRender.length ? (

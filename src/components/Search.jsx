@@ -4,6 +4,7 @@ import "./MainSearch.css";
 
 
 
+
 class Search extends Component {
   state = {
     text: "",
@@ -29,14 +30,19 @@ class Search extends Component {
           <br></br>
           <br></br>
           <TextField
+          disabled={false}
             type="text"
             name="text"
-            placeholder="AAPL"
+            label="Symbol"
             value={this.state.text}
             onChange={this.onChange}
+            InputLabelProps={{
+              style: { color: '#d4af37'}, 
+           }}
             variant="outlined"
             size="small"
-            color="secondary"
+            color="#d4af37"
+        
           />
           <p></p>
           <Button

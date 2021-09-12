@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { MenuItems } from "./MenuItems";
-import { Button } from "./Button";
 import "./Navbar.css"
 
 class Navbar extends Component {
@@ -14,9 +13,9 @@ class Navbar extends Component {
 
     render() {
         return (
-           <nav className="NavbarItems">
+           <nav className={this.state.clicked ? 'NavbarItems active' : 'NavbarItems'}>
                <h1 className="navbar-logo">Covered Calls<i className="fab fa-react"></i></h1>
-               <div className="menu-icon" onClick={this.handleClick}>
+               <div className="menu-icon"  onClick={this.handleClick}>
                 <i className={this.state.clicked ? 'fas fa-times' : 'fas fa-bars'}></i>
                </div>
                <ul className={this.state.clicked ? 'nav-menu active' : 'nav-menu'}>
@@ -34,9 +33,9 @@ class Navbar extends Component {
                    })}
                    
                </ul>
-               <form method="get" action="https://github.com/Dcooper15/covered-call-scanner">
+               {/* <form method="get" action="https://github.com/Dcooper15/covered-call-scanner">
                <Button type="submit"><i class="fab fa-github" style={{padding: '0.1rem'}}></i></Button>
-               </form>
+               </form> */}
            </nav>
         )
     }
