@@ -1,8 +1,8 @@
 import React from "react";
 
-const Name = ({ namesRender, option }) => {
+const NameOptionChain = ({ namesRender } ) => {
   const nameIncludes =
-    namesRender[0][namesRender[0].indexOf(option.symbol) + 2];
+    namesRender[0][namesRender[0].indexOf("symbol") + 3];
   try {
     if (nameIncludes.includes(",")) {
       return (
@@ -61,4 +61,4 @@ const Name = ({ namesRender, option }) => {
   }
 };
 
-export default Name;
+export default NameOptionChain;

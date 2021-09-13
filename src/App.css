@@ -10,12 +10,81 @@ body {
 .MuiTextField-root {
   color: #fff;
   border-radius: 15px;
-  
   font-style: oblique;
 }
 
+.sectorHeader {
+  justify-content: center;
+  align-items: center;
+  color: #d4af37;
+  font-size: 18px;
+  margin-left: 1%;
+  
+}
 
-
+.dataContainer {
+ justify-content: right;
+ display: inline-flex;
+ flex-flow: row wrap;
+ box-sizing: border-box;
+ width: 55%;
+ flex-direction: row;
+ align-content: space-between;
+ border-style: ridge; 
+ border-top: 0px #d4af37;
+ border-left: 0px #d4af37;
+ border-right: 0px #d4af37;
+ border-color: #756300;
+ border-width: thin;
+ margin-right: 5%;
+ 
+}
+.dataHeader {
+  flex: 1;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  
+}
+.dataComponentData {
+  flex: 0;
+  justify-content: center;
+  align-items: flex-end;
+  flex-direction: column;
+  
+}
+.dataGreekContainer {
+  justify-content: right;
+  display: inline-flex;
+  flex-flow: row wrap;
+  box-sizing: border-box;
+  width: 38%;
+  flex-direction: row;
+  align-content: space-between;
+  border-style: ridge; 
+  border-top: 0px #d4af37;
+  border-left: 0px #d4af37;
+  border-right: 0px #d4af37;
+  border-color: #756300;
+  border-width: thin;
+  align-items: flex-end;
+  margin-right: 2%;
+  
+ }
+  .dataGreekHeader {
+  flex: 1;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  
+} 
+.dataGreekComponentData {
+  flex: 0;
+  justify-content: center;
+  align-items: flex-end;
+  flex-direction: column;
+  
+} 
 
 .sectorMenu {
   text-align: center;

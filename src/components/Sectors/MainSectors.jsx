@@ -94,13 +94,13 @@ const MainSectors = () => {
                 </h3>
               </div>
               <div class="column" className="entertainmentSect">
-                <h3 className="linkHeader">
+                <h3 className="linkHeader" style={{paddingBottom: "10px"}}>
                   <Link
                     to="/sector/energy"
-                    style={{textDecoration: "none", color: "#d4af37" }}
+                    style={{textDecoration: "none", color: "#d4af37", fontSize: "16px" }}
                   >
                     Alternative 
-                    <br></br>
+                    
                     Energy
                   </Link>
                 </h3>

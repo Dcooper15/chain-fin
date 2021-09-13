@@ -3,27 +3,40 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import Search from "./Search";
 import { Card } from "@material-ui/core";
+import Symbol from "./DataPoints/Symbol";
 import StockPrice from "./DataPoints/StockPrice";
-import HundredShares from "./DataPoints/HundredShares"
+import StrikeOneOtm from "./DataPoints/StrikeOneOtm";
+// import PercentChange from "../DataPoints/PercentChange";
+import HundredShares from "./DataPoints/HundredShares";
 import BidPrice from "./DataPoints/BidPrice";
 import PremiumCollected from "./DataPoints/PremiumCollected";
 import OpenInterest from "./DataPoints/OpenInterest";
+import Volume from "./DataPoints/Volume";
 import Volatility from "./DataPoints/Volatility";
+import Delta from "./DataPoints/Delta";
+import Theta from "./DataPoints/Theta";
+import Rho from "./DataPoints/Rho";
+import Gamma from "./DataPoints/Gamma";
+import Vega from "./DataPoints/Vega";
 import DaysToExpiration from "./DataPoints/DaysToExpiration";
 import "./MainSearch.css";
 
 class MainSearch extends Component {
   state = {
     stockData: [],
+    error: [],
   };
 
   searchStocks = async (text) => {
     const res = await axios.get(
       `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${text}&contractType=CALL&strikeCount=1&optionType=CALL&expMonth=${process.env.REACT_APP_MONTH}&toDate=${process.env.REACT_APP_DATE}&range=OTM`
     );
-
-    this.setState({ stockData: [...this.state.stockData, res.data] });
-    console.log("search res is...", res);
+    console.log("data", res.data);
+    if (res.data.status === "FAILED") {
+      this.setState({ error: [...this.state.error, res.data.symbol] });
+    } else {
+      this.setState({ stockData: [...this.state.stockData, res.data] });
+    }
   };
 
   render() {
@@ -45,35 +58,41 @@ class MainSearch extends Component {
                 borderRadius: "15px",
               }}
             >
-             <Link to={`/chain/${option.symbol}`} style={{ textDecoration: "underline", color: "#d4af37" }}>  <i key={option.id}>{option.symbol}</i></Link>
-             <br></br>
+              <>
+                {" "}
+                <Link
+                  to={`/chain/${option.symbol}`}
+                  style={{ textDecoration: "none", color: "#d4af37" }}
+                >
+                  <Symbol option={option} />
+                </Link>
+              </>{" "}
               <StockPrice option={option} />
-
               <br></br>
-       
-             <HundredShares option={option}/>
-
+              <hr></hr>
+              <StrikeOneOtm option={option} />
               <br></br>
-             <BidPrice option={option}/>
-
-              <br></br>
+              <HundredShares option={option} />
+              <></>
+              <Delta option={option} />
+              <BidPrice option={option} />
+              <></>
+              <Theta option={option} />
               <PremiumCollected option={option} />
-
-              <br></br>
+              <></>
+              <Rho option={option} />
               <OpenInterest option={option} />
-
-              <br></br>
+              <></>
+              <Gamma option={option} />
+              <Volume option={option} />
+              <></>
+              <Vega option={option} />
               <Volatility option={option} />
-
-              <br></br>
-              <DaysToExpiration option={option} /> 
+              <DaysToExpiration option={option} />
             </Card>
           ))
         ) : (
-          <p className="searchInfo">
-            Search for stocks to view their call option data. Add multiple to
-            compare data.
-          </p>
+          <p className="searchInfo"> </p>
         )}
       </div>
     );

@@ -3,8 +3,8 @@ import axios from "axios";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { Card } from "@material-ui/core";
+import NameOptionChain from "../DataPoints/NameOptionChain"
 import Moment from "react-moment";
-
 
 const date = new Date();
 
@@ -52,8 +52,7 @@ function FullOptionChain() {
 
   return (
     <>
-      
-      <h5 className="sectorHeader">
+      <h5 >
         <Link to="/" style={{ color: "#d4af37", textDecoration: "none" }}>
           {" Home"}
         </Link>
@@ -70,17 +69,16 @@ function FullOptionChain() {
         </Link>
       </h5>
       {!!nameRender.length ? (
-        <strong>{nameRender[0][nameRender[0].indexOf("symbol") + 3]}</strong>
+        <strong className="sectorHeader"><NameOptionChain namesRender={nameRender}/></strong>
       ) : (
         <p>loading data...</p>
       )}
       <br></br>
-      <br></br>
       {stockPriceRender.length ? (
         <strong>
           {" "}
-          Share Price: ${stockPriceRender}
-          <br></br> Cost for 100 Shares: ${stockPriceRender * 100}
+          ${stockPriceRender}
+          <br></br>100 Shares ${stockPriceRender * 100}
         </strong>
       ) : (
         <p>loading data...</p>
@@ -98,33 +96,88 @@ function FullOptionChain() {
                 borderRadius: "15px",
               }}
             >
-              <i>
+              <bold>
                 <strong>{option.description}</strong>
-              </i>
+              </bold>
               <hr></hr>
-              <i>Strike Price: {option.strikePrice}</i>
-              <br></br>
-              <i>Bid: {option.bid}</i>
-              <br></br>
-              <i>Ask: {option.ask}</i>
-              <br></br>
-              <i>
-                Premium Collected: $
-                {(((option.ask + option.bid) / 2) * 100).toFixed(2)}
-              </i>
-              <br></br>
-              <i>Open Interest: {option.openInterest}</i>
-              <br></br>
-              <i>Volatility: {option.volatility}</i>
-              <br></br>
-              <i>Days to Expiration: {option.daysToExpiration}</i>
-              <br></br>
-              <>Expiration Date: </>
-              <>
+              <div className="dataContainer">
+                <div className="dataHeader">Strike</div>
+                <bold className="dataComponentData">{option.strikePrice}</bold>
+              </div>
+              <i style={{ color: "#d4af37" }}>Greeks</i>
+
+              <div className="dataContainer">
+                <div className="dataHeader">Bid</div>
+                <bold className="dataComponentData">{option.bid}</bold>
+              </div>
+              <div className="dataGreekContainer">
+                <div className="dataGreekHeader">Delta</div>
+                <bold className="dataGreekComponentData">{option.delta}</bold>
+              </div>
+              <></>
+              <div className="dataContainer">
+                <div className="dataHeader">Ask</div>
+                <bold className="dataComponentData">{option.ask}</bold>
+              </div>
+              <div className="dataGreekContainer">
+                <div className="dataGreekHeader">Theta</div>
+                <bold className="dataGreekComponentData">{option.theta}</bold>
+              </div>
+              <></>
+
+              <div className="dataContainer">
+                <div className="dataHeader">Premium</div>
+                <bold className="dataComponentData">
+                  ${(((option.ask + option.bid) / 2) * 100).toFixed(2)}
+                </bold>
+              </div>
+              <div className="dataGreekContainer">
+                <div className="dataGreekHeader">Rho</div>
+                <bold className="dataGreekComponentData">{option.rho}</bold>
+              </div>
+              <></>
+              <div className="dataContainer">
+                <div className="dataHeader">Open Interest</div>
+                <bold className="dataComponentData">{option.openInterest}</bold>
+              </div>
+              <div className="dataGreekContainer">
+                <div className="dataGreekHeader">Gamma</div>
+                <bold className="dataGreekComponentData">{option.gamma}</bold>
+              </div>
+              <></>
+              <div className="dataContainer">
+                <div className="dataHeader">Volume</div>
+                <bold className="dataComponentData">{option.totalVolume}</bold>
+              </div>
+              <div className="dataGreekContainer">
+                <div className="dataGreekHeader">Vega</div>
+                <bold className="dataGreekComponentData">{option.vega}</bold>
+              </div>
+              <></>
+              <div className="dataContainer">
+                <div className="dataHeader">Volatility</div>
+                <bold className="dataComponentData">{option.volatility}</bold>
+              </div>
+              <div className="dataContainer">
+                <div className="dataHeader">Days/Expiration</div>
+                <bold className="dataComponentData">{option.daysToExpiration}</bold>
+              </div>
+              <div className="dataContainer">
+                <div className="dataHeader">Expr Date</div>
+                <bold className="dataComponentData">
+                  <Moment
+                    add={{ days: option.daysToExpiration }}
+                    format="MMM DD"
+                  >
+                    {date}
+                  </Moment>
+                </bold>
+              </div>
+              {/* <>
                 <Moment add={{ days: option.daysToExpiration }} format="MMM DD">
                   {date}
                 </Moment>
-              </>
+              </> */}
             </Card>
           ))
         )

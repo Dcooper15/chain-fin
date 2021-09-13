@@ -3,9 +3,10 @@ import React from "react";
 const DaysToExpiration = ({option}) => {
   try {
     return (
-      <i key={8}>
-        Days to Expiration:{" "}
-        {
+        <div className="dataContainer" >
+      <div className="dataHeader">
+        Days/Expiration</div>
+       <i key={8}className="dataComponentData"> {
           Object.keys(option.callExpDateMap).map((entry) => {
             return Object.keys(option.callExpDateMap[entry]).map(
               (innerArrayID) =>
@@ -14,10 +15,11 @@ const DaysToExpiration = ({option}) => {
             );
           })[0]
         }
-      </i>
+     </i>
+      </div>
     );
   } catch (error) {
-    return <i key={8}>Days to Expiration: N/A</i>;
+    return <i className="dataContainer" key={8}>Days to Expiration: N/A</i>;
   }
 };
 

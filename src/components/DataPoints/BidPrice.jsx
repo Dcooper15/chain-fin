@@ -3,9 +3,11 @@ import React from "react";
 const BidPrice = ({option}) => {
   try {
     return (
-      <i key={4}>
-        Bid Price: $
-        {
+        <div className="dataContainer" >
+      
+       <div className="dataHeader"> Bid Price</div>
+       
+        <i key={4}className="dataComponentData">${
           Object.keys(option.callExpDateMap).map((entry) => {
             return Object.keys(option.callExpDateMap[entry]).map(
               (innerArrayID) =>
@@ -16,6 +18,7 @@ const BidPrice = ({option}) => {
           })[0]
         }{" "}
       </i>
+      </div>
     );
   } catch (error) {
     return <i key={4}>Bid Price: N/A</i>;
