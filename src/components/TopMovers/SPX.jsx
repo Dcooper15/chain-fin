@@ -7,11 +7,20 @@ import Navbar from "../Navbar/Navbar";
 import Name from "../DataPoints/Name";
 import Symbol from "../DataPoints/Symbol";
 import StockPrice from "../DataPoints/StockPrice";
+import StrikeOneOtm from "../DataPoints/StrikeOneOtm";
+import PercentChange from "../DataPoints/PercentChange";
 import HundredShares from "../DataPoints/HundredShares";
 import BidPrice from "../DataPoints/BidPrice";
+import AskPrice from "../DataPoints/AskPrice";
 import PremiumCollected from "../DataPoints/PremiumCollected";
 import OpenInterest from "../DataPoints/OpenInterest";
+import Volume from "../DataPoints/Volume";
 import Volatility from "../DataPoints/Volatility";
+import Delta from "../DataPoints/Delta";
+import Theta from "../DataPoints/Theta";
+import Rho from "../DataPoints/Rho";
+import Gamma from "../DataPoints/Gamma";
+import Vega from "../DataPoints/Vega";
 import DaysToExpiration from "../DataPoints/DaysToExpiration";
 
 const moverUrl = `https://api.tdameritrade.com/v1/marketdata/$SPX.X/movers?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&direction=up&change=percent`;
@@ -87,39 +96,53 @@ function SPX() {
                 borderColor: "#d4af37",
                 color: "#fff",
                 borderRadius: "15px",
+                paddingLeft: "2%",
+                marginLeft: "3%",
+                marginRight: "3%"
               }}
             >
-             <Name option={option} namesRender={namesRender}/>
+             
               <>
-                {"   "}Up{" "}
-                {percentChange[
+                {" "}
+                <Link
+                  to={`/chain/${option.symbol}`}
+                  style={{ textDecoration: "none", color: "#d4af37" }}
+                >
+                  <Symbol option={option} />
+                </Link>
+              </> {" "}<StockPrice option={option} />
+              <i style={{color: "#a4de02"}}>{"   "}+
+                {(percentChange[
                   percentChange.indexOf(option.symbol) + 1
-                ].toFixed(4) * 100}
+                ] * 100).toFixed(2)}
                 %
-              </>
+                </i>
               <br></br>
-              <Link
-                to={`/chain/${option.symbol}`}
-                style={{ textDecoration: "underline", color: "#d4af37" }}
-              >
-                <Symbol option={option} />
-              </Link>
+              <Name option={option} namesRender={namesRender} /> <></>
+              <hr></hr>
+              <StrikeOneOtm option={option} /><></><PercentChange option={option}/>
               <br></br>
-              <StockPrice option={option} />
-              <br></br>
+             
               <HundredShares option={option} />
-              <br></br>
+              <></>
+              <i style={{ color: "#d4af37" }}>Greeks</i>
               <BidPrice option={option} />
-              <br></br>
+              <Delta option={option} />
+              <AskPrice option={option} />
+              <></>
+              <Theta option={option} />
               <PremiumCollected option={option} />
-              <br></br>
+              <></>
+              <Rho option={option} />
               <OpenInterest option={option} />
-              <br></br>
+              <></>
+              <Gamma option={option} />
+              <Volume option={option}/>
+              <></>
+              <Vega option={option} />
               <Volatility option={option} />
-              <br></br>
               <DaysToExpiration option={option} />
-              <br></br>
-              <>Expiration Date: </>
+              <>Exp Date </>
               <>
                 <Moment
                   add={{

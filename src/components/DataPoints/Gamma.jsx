@@ -4,7 +4,7 @@ const Gamma = ({ option }) => {
   try {
     return (
       <div className="dataGreekContainer">
-        <i className="dataGreekHeader">Gamma</i>
+        <bold className="dataGreekHeader">Gamma</bold>
         <i className="dataGreekComponentData">
           {" "}
           {

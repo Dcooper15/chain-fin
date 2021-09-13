@@ -52,10 +52,10 @@ const MainSectors = () => {
               <div class="column" className="entertainmentSect">
                 <h3 className="linkHeader">
                   <Link
-                    to="/sector/travel"
+                    to="/sector/airline"
                     style={{ textDecoration: "none", color: "#d4af37" }}
                   >
-                    Travel
+                    Airline
                   </Link>
                 </h3>
               </div>
@@ -102,6 +102,50 @@ const MainSectors = () => {
                     Alternative 
                     
                     Energy
+                  </Link>
+                </h3>
+              </div>
+            </div>
+            <div class="row">
+              <div class="column" className="financeSect">
+                <h3 className="linkHeader">
+                  <Link
+                    to="/sector/automotive"
+                    style={{ textDecoration: "none", color: "#d4af37" }}
+                  >
+                    Automotive
+                  </Link>
+                </h3>
+              </div>
+              <div class="column" className="entertainmentSect">
+                <h3 className="linkHeader">
+                  <Link
+                    to="/sector/grocery"
+                    style={{textDecoration: "none", color: "#d4af37" }}
+                  >
+                    Grocery
+                  </Link>
+                </h3>
+              </div>
+            </div>
+            <div class="row">
+              <div class="column" className="financeSect">
+                <h3 className="linkHeader">
+                  <Link
+                    to="/sector/crypto"
+                    style={{ textDecoration: "none", color: "#d4af37" }}
+                  >
+                    Crypto
+                  </Link>
+                </h3>
+              </div>
+              <div class="column" className="entertainmentSect">
+                <h3 className="linkHeader">
+                  <Link
+                    to="/sector/social"
+                    style={{ textDecoration: "none", color: "#d4af37" }}
+                  >
+                    Social Media
                   </Link>
                 </h3>
               </div>

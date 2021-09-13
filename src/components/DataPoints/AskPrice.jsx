@@ -1,17 +1,17 @@
 import React from "react";
 
-const BidPrice = ({option}) => {
+const AskPrice = ({ option }) => {
   try {
     return (
         <div className="dataContainer" >
       
-       <div className="dataHeader"> Bid</div>
+       <div className="dataHeader"> Ask</div>
        
         <bold key={4}className="dataComponentData">{
           Object.keys(option.callExpDateMap).map((entry) => {
             return Object.keys(option.callExpDateMap[entry]).map(
               (innerArrayID) =>
-                option.callExpDateMap[entry][innerArrayID][0].bid.toFixed(
+                option.callExpDateMap[entry][innerArrayID][0].ask.toFixed(
                   2
                 )
             );
@@ -21,8 +21,8 @@ const BidPrice = ({option}) => {
       </div>
     );
   } catch (error) {
-    return <i key={4}>Bid Price: N/A</i>;
+    return <i key={4}>Ask: N/A</i>;
   }
 };
 
-export default BidPrice;
+export default AskPrice;

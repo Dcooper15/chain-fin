@@ -1,16 +1,16 @@
 import React from "react";
 
-const DaysToExpiration = ({option}) => {
+const DaysToExpirationPut = ({option}) => {
   try {
     return (
         <div className="dataContainer" >
       <div className="dataHeader">
         Days/Expiration</div>
        <bold key={8}className="dataComponentData"> {
-          Object.keys(option.callExpDateMap).map((entry) => {
-            return Object.keys(option.callExpDateMap[entry]).map(
+          Object.keys(option.putExpDateMap).map((entry) => {
+            return Object.keys(option.putExpDateMap[entry]).map(
               (innerArrayID) =>
-                option.callExpDateMap[entry][innerArrayID][0]
+                option.putExpDateMap[entry][innerArrayID][0]
                   .daysToExpiration
             );
           })[0]
@@ -23,4 +23,4 @@ const DaysToExpiration = ({option}) => {
   }
 };
 
-export default DaysToExpiration;
+export default DaysToExpirationPut;

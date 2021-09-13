@@ -4,7 +4,7 @@ const Theta = ({ option }) => {
   try {
     return (
       <div className="dataGreekContainer">
-        <i className="dataGreekHeader">Theta</i>
+        <bold className="dataGreekHeader">Theta</bold>
         <i className="dataGreekComponentData">
           {" "}
           {

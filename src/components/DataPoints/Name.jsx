@@ -6,54 +6,54 @@ const Name = ({ namesRender, option }) => {
   try {
     if (nameIncludes.includes(",")) {
       return (
-        <i key={1}>
+        <bold key={1}>
           <strong>{nameIncludes.slice(0, nameIncludes.indexOf(","))}</strong>
-        </i>
+        </bold>
       );
     } else if (nameIncludes.includes("-")) {
       return (
-        <i key={1}>
+        <bold key={1}>
           <strong>{nameIncludes.slice(0, nameIncludes.indexOf("-"))}</strong>
-        </i>
+        </bold>
       );
     } else if (nameIncludes.includes("(")) {
       return (
-        <i key={1}>
+        <bold key={1}>
           <strong>{nameIncludes.slice(0, nameIncludes.indexOf("("))}</strong>
-        </i>
+        </bold>
       );
     } else if (nameIncludes.includes("Common")) {
       return (
-        <i key={1}>
+        <bold key={1}>
           <strong>
             {nameIncludes.slice(0, nameIncludes.indexOf("Common"))}
           </strong>
-        </i>
+        </bold>
       );
     } 
     else if (nameIncludes.includes("Corporation")) {
       return (
-        <i key={1}>
+        <bold key={1}>
           <strong>
             {nameIncludes.slice(0, nameIncludes.indexOf("Corporation"))}
           </strong>
-        </i>
+        </bold>
       );
     } 
     else if (nameIncludes.includes("Depositary")) {
       return (
-        <i key={1}>
+        <bold key={1}>
           <strong>
             {nameIncludes.slice(0, nameIncludes.indexOf("Depositary"))}
           </strong>
-        </i>
+        </bold>
       );
     } 
     else {
       return (
-        <i key={1}>
+        <bold key={1}>
           <strong>{nameIncludes}</strong>
-        </i>
+        </bold>
       );
     }
   } catch (error) {

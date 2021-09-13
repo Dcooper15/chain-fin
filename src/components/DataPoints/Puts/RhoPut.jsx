@@ -1,6 +1,6 @@
 import React from "react";
 
-const Rho = ({ option }) => {
+const RhoPut = ({ option }) => {
   try {
     return (
       <div className="dataGreekContainer">
@@ -8,10 +8,10 @@ const Rho = ({ option }) => {
         <i className="dataGreekComponentData">
           {" "}
           {
-            Object.keys(option.callExpDateMap).map((entry) => {
-              return Object.keys(option.callExpDateMap[entry]).map(
+            Object.keys(option.putExpDateMap).map((entry) => {
+              return Object.keys(option.putExpDateMap[entry]).map(
                 (innerArrayID) =>
-                  option.callExpDateMap[entry][innerArrayID][0].rho.toFixed(4)
+                  option.putExpDateMap[entry][innerArrayID][0].rho.toFixed(4)
               );
             })[0]
           }
@@ -28,4 +28,4 @@ const Rho = ({ option }) => {
   }
 };
 
-export default Rho;
+export default RhoPut;

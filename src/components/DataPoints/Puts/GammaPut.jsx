@@ -1,17 +1,17 @@
 import React from "react";
 
-const Rho = ({ option }) => {
+const GammaPut = ({ option }) => {
   try {
     return (
       <div className="dataGreekContainer">
-        <bold className="dataGreekHeader">Rho</bold>
+        <bold className="dataGreekHeader">Gamma</bold>
         <i className="dataGreekComponentData">
           {" "}
           {
-            Object.keys(option.callExpDateMap).map((entry) => {
-              return Object.keys(option.callExpDateMap[entry]).map(
+            Object.keys(option.putExpDateMap).map((entry) => {
+              return Object.keys(option.putExpDateMap[entry]).map(
                 (innerArrayID) =>
-                  option.callExpDateMap[entry][innerArrayID][0].rho.toFixed(4)
+                  option.putExpDateMap[entry][innerArrayID][0].gamma.toFixed(4)
               );
             })[0]
           }
@@ -21,11 +21,11 @@ const Rho = ({ option }) => {
   } catch (error) {
     return (
       <div className="dataGreekContainer">
-        <i className="dataGreekHeader">Rho</i>
+        <i className="dataGreekHeader">Gamma</i>
         <i className="dataGreekComponentData">N/A</i>
       </div>
     );
   }
 };
 
-export default Rho;
+export default GammaPut;

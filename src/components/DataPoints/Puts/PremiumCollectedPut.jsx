@@ -1,6 +1,6 @@
 import React from "react";
 
-const PremiumCollected = ({ option }) => {
+const PremiumCollectedPut = ({ option }) => {
   try {
     return (
       <div className="dataContainer">
@@ -9,11 +9,11 @@ const PremiumCollected = ({ option }) => {
           {" "}
           $
           {
-            Object.keys(option.callExpDateMap).map((entry) => {
-              return Object.keys(option.callExpDateMap[entry]).map(
+            Object.keys(option.putExpDateMap).map((entry) => {
+              return Object.keys(option.putExpDateMap[entry]).map(
                 (innerArrayID) =>
                   (
-                    option.callExpDateMap[entry][innerArrayID][0].mark * 100
+                    option.putExpDateMap[entry][innerArrayID][0].mark * 100
                   ).toFixed(2)
               );
             })[0]
@@ -26,4 +26,4 @@ const PremiumCollected = ({ option }) => {
   }
 };
 
-export default PremiumCollected;
+export default PremiumCollectedPut;

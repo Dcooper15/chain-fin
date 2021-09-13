@@ -6,9 +6,9 @@ const HundredShares = ({ option }) => {
       <div className="dataContainer">
         <div className="dataHeader">{"100 Shares"}</div>
         <></>
-        <i key={3}className="dataComponentData">
-          ${option.underlyingPrice.toFixed(2) * 100}
-        </i>
+        <bold key={3}className="dataComponentData">
+          ${(option.underlyingPrice * 100).toFixed(0)}
+        </bold>
       </div>
     );
   } catch (error) {

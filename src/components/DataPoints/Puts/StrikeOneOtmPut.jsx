@@ -1,20 +1,20 @@
 import React from "react";
 
-const StrikeOneOtm = ({ option }) => {
+const StrikeOneOtmPut = ({ option }) => {
   try {
     return (
       <strong>
         <bold key={11} className="dataComponentData">
           $
           {
-            Object.keys(option.callExpDateMap).map((entry) => {
-              return Object.keys(option.callExpDateMap[entry]).map(
+            Object.keys(option.putExpDateMap).map((entry) => {
+              return Object.keys(option.putExpDateMap[entry]).map(
                 (innerArrayID) =>
-                  option.callExpDateMap[entry][innerArrayID][0].strikePrice
+                  option.putExpDateMap[entry][innerArrayID][0].strikePrice
               );
             })[0]
           }{" "}
-          Call
+          Put
         </bold>
       </strong>
     );
@@ -23,4 +23,4 @@ const StrikeOneOtm = ({ option }) => {
   }
 };
 
-export default StrikeOneOtm;
+export default StrikeOneOtmPut;

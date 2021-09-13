@@ -1,15 +1,15 @@
 import React from "react";
 
-const Volatility = ({option}) => {
+const VolatilityPut = ({option}) => {
   try {
     return (
       <div className="dataContainer">
        <div className="dataHeader">Implied Volatility</div>
        <i className="dataComponentData"> {
-          Object.keys(option.callExpDateMap).map((entry) => {
-            return Object.keys(option.callExpDateMap[entry]).map(
+          Object.keys(option.putExpDateMap).map((entry) => {
+            return Object.keys(option.putExpDateMap[entry]).map(
               (innerArrayID) =>
-                option.callExpDateMap[entry][
+                option.putExpDateMap[entry][
                   innerArrayID
                 ][0].volatility.toFixed(2)
             );
@@ -23,4 +23,4 @@ const Volatility = ({option}) => {
   }
 };
 
-export default Volatility;
+export default VolatilityPut;

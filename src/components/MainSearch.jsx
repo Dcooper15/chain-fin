@@ -1,14 +1,16 @@
 import React, { Component } from "react";
 import axios from "axios";
+import Moment from "react-moment";
 import { Link } from "react-router-dom";
 import Search from "./Search";
 import { Card } from "@material-ui/core";
 import Symbol from "./DataPoints/Symbol";
 import StockPrice from "./DataPoints/StockPrice";
 import StrikeOneOtm from "./DataPoints/StrikeOneOtm";
-// import PercentChange from "../DataPoints/PercentChange";
+import PercentChange from "./DataPoints/PercentChange";
 import HundredShares from "./DataPoints/HundredShares";
 import BidPrice from "./DataPoints/BidPrice";
+import AskPrice from "./DataPoints/AskPrice";
 import PremiumCollected from "./DataPoints/PremiumCollected";
 import OpenInterest from "./DataPoints/OpenInterest";
 import Volume from "./DataPoints/Volume";
@@ -20,6 +22,8 @@ import Gamma from "./DataPoints/Gamma";
 import Vega from "./DataPoints/Vega";
 import DaysToExpiration from "./DataPoints/DaysToExpiration";
 import "./MainSearch.css";
+
+const date = new Date();
 
 class MainSearch extends Component {
   state = {
@@ -56,6 +60,9 @@ class MainSearch extends Component {
                 borderColor: "#d4af37",
                 color: "#fff",
                 borderRadius: "15px",
+                paddingLeft: "2%",
+                marginLeft: "3%",
+                marginRight: "3%"
               }}
             >
               <>
@@ -70,12 +77,14 @@ class MainSearch extends Component {
               <StockPrice option={option} />
               <br></br>
               <hr></hr>
-              <StrikeOneOtm option={option} />
+              <StrikeOneOtm option={option} /><></><PercentChange option={option}/>
               <br></br>
               <HundredShares option={option} />
               <></>
-              <Delta option={option} />
+              <i style={{ color: "#d4af37" }}>Greeks</i>
               <BidPrice option={option} />
+              <Delta option={option} />
+              <AskPrice option={option} />
               <></>
               <Theta option={option} />
               <PremiumCollected option={option} />
@@ -89,6 +98,23 @@ class MainSearch extends Component {
               <Vega option={option} />
               <Volatility option={option} />
               <DaysToExpiration option={option} />
+              <>
+              <>Exp Date </>
+                <Moment
+                  add={{
+                    days: Object.keys(option.callExpDateMap).map((entry) => {
+                      return Object.keys(option.callExpDateMap[entry]).map(
+                        (innerArrayID) =>
+                          option.callExpDateMap[entry][innerArrayID][0]
+                            .daysToExpiration
+                      );
+                    })[0],
+                  }}
+                  format="MMM DD"
+                >
+                  {date}
+                </Moment>
+              </>
             </Card>
           ))
         ) : (

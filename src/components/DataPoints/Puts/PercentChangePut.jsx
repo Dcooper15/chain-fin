@@ -1,10 +1,10 @@
 import React from "react";
 
-const PercentChange = ({ option }) => {
-  const indexChange = Object.keys(option.callExpDateMap).map((entry) => {
-    return Object.keys(option.callExpDateMap[entry]).map(
+const PercentChangePut = ({ option }) => {
+  const indexChange = Object.keys(option.putExpDateMap).map((entry) => {
+    return Object.keys(option.putExpDateMap[entry]).map(
       (innerArrayID) =>
-        option.callExpDateMap[entry][innerArrayID][0].markPercentChange
+        option.putExpDateMap[entry][innerArrayID][0].markPercentChange
     );
   })[0];
   try {
@@ -28,4 +28,4 @@ const PercentChange = ({ option }) => {
   }
 };
 
-export default PercentChange;
+export default PercentChangePut;
