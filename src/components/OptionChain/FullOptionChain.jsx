@@ -9,7 +9,7 @@ const date = new Date();
 //console.log("reg date form", date);
 function FullOptionChain() {
   const { symbol } = useParams();
-  const [expDates, setExpDates] = useState([]);
+  //const [expDates, setExpDates] = useState([]);
   const [stockPriceRender, setStockPrice] = useState([]);
   const [nameRender, setName] = useState([]);
   const [fullChain, setFullChainData] = useState([]);
