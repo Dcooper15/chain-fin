@@ -9,9 +9,9 @@ const MainSectors = () => {
         <Route path="/sector">
           <h2 className="sectorHeader">Sectors</h2>
           <div className="sectorMenu">
-            <div class="row">
-              <div class="column" className="financeSect">
-                <h3 className="linkHeader">
+            <div className="menuRow">
+              <div className="columnLeft">
+                <h3 className="menuLink">
                   <Link
                     to="/sector/finance"
                     style={{ textDecoration: "none", color: "#d4af37" }}
@@ -20,8 +20,8 @@ const MainSectors = () => {
                   </Link>
                 </h3>
               </div>
-              <div class="column" className="entertainmentSect">
-                <h3 className="linkHeader">
+              <div  className="columnRight">
+                <h3 className="menuLink">
                   <Link
                     to="/sector/entertainment"
                     style={{ textDecoration: "none", color: "#d4af37" }}
@@ -32,9 +32,9 @@ const MainSectors = () => {
               </div>
             </div>
 
-            <div class="row">
-              <div class="column" className="financeSect">
-                <h3 className="linkHeader">
+            <div className="menuRow">
+              <div className="columnLeft">
+                <h3 className="menuLink">
                   <Link
                     to="/sector/tech"
                     style={{ textDecoration: "none", color: "#d4af37" }}
@@ -43,8 +43,8 @@ const MainSectors = () => {
                   </Link>
                 </h3>
               </div>
-              <div class="column" className="entertainmentSect">
-                <h3 className="linkHeader">
+              <div className="columnRight">
+                <h3 className="menuLink">
                   <Link
                     to="/sector/airline"
                     style={{ textDecoration: "none", color: "#d4af37" }}
@@ -54,9 +54,9 @@ const MainSectors = () => {
                 </h3>
               </div>
             </div>
-            <div class="row">
-              <div class="column" className="financeSect">
-                <h3 className="linkHeader">
+            <div class="menuRow">
+              <div className="columnLeft">
+                <h3 className="menuLink">
                   <Link
                     to="/sector/oil"
                     style={{ textDecoration: "none", color: "#d4af37" }}
@@ -65,8 +65,8 @@ const MainSectors = () => {
                   </Link>
                 </h3>
               </div>
-              <div class="column" className="entertainmentSect">
-                <h3 className="linkHeader">
+              <div className="columnRight">
+                <h3 className="menuLink">
                   <Link
                     to="/sector/cannabis"
                     style={{ textDecoration: "none", color: "#d4af37" }}
@@ -76,9 +76,9 @@ const MainSectors = () => {
                 </h3>
               </div>
             </div>
-            <div class="row">
-              <div class="column" className="financeSect">
-                <h3 className="linkHeader">
+            <div className="menuRow">
+              <div className="columnLeft">
+                <h3 className="menuLink">
                   <Link
                     to="/sector/pharmaceutics"
                     style={{ textDecoration: "none", color: "#d4af37" }}
@@ -87,8 +87,8 @@ const MainSectors = () => {
                   </Link>
                 </h3>
               </div>
-              <div class="column" className="entertainmentSect">
-                <h3 className="linkHeader" style={{paddingBottom: "10px"}}>
+              <div className="columnRight">
+                <h3 className="menuLink" >
                   <Link
                     to="/sector/energy"
                     style={{textDecoration: "none", color: "#d4af37", fontSize: "16px" }}
@@ -100,9 +100,9 @@ const MainSectors = () => {
                 </h3>
               </div>
             </div>
-            <div class="row">
-              <div class="column" className="financeSect">
-                <h3 className="linkHeader">
+            <div className="menuRow">
+              <div className="columnLeft">
+                <h3 className="menuLink">
                   <Link
                     to="/sector/automotive"
                     style={{ textDecoration: "none", color: "#d4af37" }}
@@ -111,8 +111,8 @@ const MainSectors = () => {
                   </Link>
                 </h3>
               </div>
-              <div class="column" className="entertainmentSect">
-                <h3 className="linkHeader">
+              <div className="columnRight">
+                <h3 className="menuLink">
                   <Link
                     to="/sector/grocery"
                     style={{textDecoration: "none", color: "#d4af37" }}
@@ -122,9 +122,9 @@ const MainSectors = () => {
                 </h3>
               </div>
             </div>
-            <div class="row">
-              <div class="column" className="financeSect">
-                <h3 className="linkHeader">
+            <div className="menuRow">
+              <div className="columnLeft">
+                <h3 className="menuLink">
                   <Link
                     to="/sector/crypto"
                     style={{ textDecoration: "none", color: "#d4af37" }}
@@ -133,8 +133,8 @@ const MainSectors = () => {
                   </Link>
                 </h3>
               </div>
-              <div class="column" className="entertainmentSect">
-                <h3 className="linkHeader">
+              <div className="columnRight">
+                <h3 className="menuLink">
                   <Link
                     to="/sector/social"
                     style={{ textDecoration: "none", color: "#d4af37" }}

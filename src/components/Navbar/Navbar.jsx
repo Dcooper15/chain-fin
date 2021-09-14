@@ -22,10 +22,10 @@ class Navbar extends Component {
                    {MenuItems.map((item, index) => {
                        return (
                        
-                        <i key={index}
+                        <bold key={index}
                             className={item.cName}> <Link to={item.url}></Link>
                              {item.title}
-                        </i>
+                        </bold>
                             
                         
                        

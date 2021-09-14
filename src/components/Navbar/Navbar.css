@@ -1,11 +1,12 @@
 .NavbarItems{
     background: #343434;
-    
+    font-family: 'Montserrat', sans-serif;
     height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1.2rem;
+    border-width: 1px;
     border-style: ridge;
     border-top: 0px #d4af37;
     border-left: 0px #d4af37;
@@ -42,7 +43,7 @@
 }
 
 .nav-links {
-    color: white;
+    color: #d4af37;
     text-decoration: none;
     padding: 0.5rem 1rem;
 }
@@ -50,11 +51,11 @@
 .nav-links:hover {
     color: #d4af37;
     border-color: #d4af37;
-    border-style: groove;
+    border-style: normal;
     border-width: 1px;
-    border-radius: 15px;
+    border-radius: 10px; 
     transition: all 0.1s ease;
-    background-color: rgba(212, 175, 55, 0.1);
+    background-color: rgba(212, 175, 55, 0.1);  
     color: #FFED8A;
     transition: 0.3s ease;
 }

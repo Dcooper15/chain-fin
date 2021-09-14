@@ -35,25 +35,13 @@ function App() {
               <br></br>
               <br></br>
               <br></br>
-              <br></br>
               <MainSearch />
-              {/* <Alert /> */}
             </div>
 
             <div className="sectorMenu">
-              <div class="row">
-                <div class="column" className="financeSect">
-                  <h3 className="linkHeader">
-                    <Link
-                      to="/topmovers"
-                      style={{ textDecoration: "none", color: "#d4af37" }}
-                    >
-                      Top Movers
-                    </Link>
-                  </h3>
-                </div>
-                <div class="column" className="entertainmentSect">
-                  <h3 className="linkHeader">
+              <div className="menuRow">
+                <div className="columnLeft">
+                  <h3 className="menuLink">
                     <Link
                       to="/sector"
                       style={{ textDecoration: "none", color: "#d4af37" }}
@@ -62,15 +50,17 @@ function App() {
                     </Link>
                   </h3>
                 </div>
+                <div className="columnRight">
+                  <h3 className="menuLink">
+                    <Link
+                      to="/topmovers"
+                      style={{ textDecoration: "none", color: "#d4af37" }}
+                    >
+                      Top Movers
+                    </Link>
+                  </h3>
+                </div>
               </div>
-
-              {/*<div class="row">
-                  <div class="column"className="techSect"><h3 className="linkHeader"><Link to="/sector" style={{ textDecoration: 'none', color: '#d4af37' }}>Sectors</Link></h3></div>
-                  <div class="column" className="travelSect"><h3 className="linkHeader"><Link to="/sector/travel" style={{ textDecoration: 'none', color: '#d4af37' }}>Travel</Link></h3></div>
-                  </div>
-                  <div class="row">
-                 <div class="column" className="travelSect"><h3 className="linkHeader"><Link to="/topmovers" style={{ textDecoration: 'none', color: '#d4af37' }}>Top Movers</Link></h3></div>
-              </div> */}
             </div>
             <br></br>
             <br></br>
