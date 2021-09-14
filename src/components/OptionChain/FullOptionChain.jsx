@@ -25,12 +25,12 @@ function FullOptionChain() {
       .then((response) => {
         //console.log("full res, ", response.data.callExpDateMap);
         //console.log("o keys", Object.keys(response.data.callExpDateMap));
-        const expirationDates = Object.keys(response.data.callExpDateMap).map(
-          (red) => red.slice(5, 10) + " ,"
-        );
+        // const expirationDates = Object.keys(response.data.callExpDateMap).map(
+        //   (red) => red.slice(5, 10) + " ,"
+        // );
         //console.log("exp dates bef", expirationDates);
        
-        setExpDates([expirationDates]);
+        //setExpDates([expirationDates]);
 
         const stockPrice = response.data.underlyingPrice.toFixed(2);
         setStockPrice([stockPrice]);
