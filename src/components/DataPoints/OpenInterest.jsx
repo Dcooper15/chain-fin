@@ -11,7 +11,7 @@ const OpenInterest = ({option}) => {
             (innerArrayID) =>
             option.callExpDateMap[entry][innerArrayID][0].openInterest
             );
-            })[0]}
+            })[0][1]}
         </bold>
         </div>
     );

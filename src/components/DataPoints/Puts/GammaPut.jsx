@@ -13,7 +13,7 @@ const GammaPut = ({ option }) => {
                 (innerArrayID) =>
                   option.putExpDateMap[entry][innerArrayID][0].gamma.toFixed(4)
               );
-            })[0]
+            })[0][0]
           }
         </i>
       </div>

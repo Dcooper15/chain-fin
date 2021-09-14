@@ -13,7 +13,7 @@ const VegaPut = ({ option }) => {
                 (innerArrayID) =>
                   option.putExpDateMap[entry][innerArrayID][0].vega.toFixed(4)
               );
-            })[0]
+            })[0][0]
           }
         </i>
       </div>

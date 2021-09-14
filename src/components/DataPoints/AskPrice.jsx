@@ -15,7 +15,7 @@ const AskPrice = ({ option }) => {
                   2
                 )
             );
-          })[0]
+          })[0][1]
         }{" "}
       </bold>
       </div>

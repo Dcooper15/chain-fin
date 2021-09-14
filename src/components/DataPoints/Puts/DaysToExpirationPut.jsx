@@ -13,7 +13,7 @@ const DaysToExpirationPut = ({option}) => {
                 option.putExpDateMap[entry][innerArrayID][0]
                   .daysToExpiration
             );
-          })[0]
+          })[0][0]
         }
      </bold>
       </div>

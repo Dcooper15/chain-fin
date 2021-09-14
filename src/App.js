@@ -6,9 +6,7 @@ import MainSectors from "./components/Sectors/MainSectors";
 import MainTopMovers from "./components/TopMovers/MainTopMovers";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer";
-import DJI from "./components/TopMovers/DJI";
-import COMPX from "./components/TopMovers/COMPX";
-import SPX from "./components/TopMovers/SPX";
+import MoverStocks from "./components/TopMovers/MoverStocks";
 import FullOptionChain from "./components/OptionChain/FullOptionChain";
 import SectorStocks from "./components/Sectors/SectorStocks";
 import "./App.css";
@@ -84,24 +82,45 @@ function App() {
 
           <div className="Routes">
             <Route exact path="/sector">
+            <Navbar />
+            <Link to="/" style={{ color: "#d4af37", textDecoration: "none" }}>
+                {"< Home"}
+            </Link>
               <MainSectors />
             </Route>
 
             <Route exact path="/topmovers">
+            <Navbar />
+            <Link to="/" style={{ color: "#d4af37", textDecoration: "none" }}>
+                {"< Home"}
+            </Link>
               <MainTopMovers />
             </Route>
 
-            <Route path="/topmovers/compx">
-              <COMPX />
+            <Route path="/topmovers/:market">
+              <ThemeProvider>
+            <Navbar />
+            <Link to="/topmovers" style={{ color: "#d4af37", textDecoration: "none" }}>
+                {"< Top Movers"}
+            </Link>
+              <MoverStocks />
+              </ThemeProvider>
             </Route>
-            <Route path="/topmovers/dji">
-              <DJI />
-            </Route>
-            <Route path="/topmovers/spx">
-              <SPX />
-            </Route>
+           
             <Route path="/chain/:symbol">
             <Navbar />
+            <Link to="/" style={{ color: "#d4af37", textDecoration: "none", fontSize:"90%" }}>
+                {"Home"}
+            </Link>
+            <br></br>
+            <Link to="/sector" style={{ color: "#d4af37", textDecoration: "none", fontSize:"90%"  }}>
+                {"Sectors"}
+              </Link>
+              <br></br>
+            <Link to="/topmovers" style={{ color: "#d4af37", textDecoration: "none", fontSize:"90%"  }}>
+                {"Top Movers"}
+            </Link>
+            <br></br>
               <FullOptionChain />
             </Route>
             <Route path="/sector/:sector">

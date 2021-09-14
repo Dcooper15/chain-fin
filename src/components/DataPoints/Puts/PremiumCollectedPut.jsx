@@ -16,7 +16,7 @@ const PremiumCollectedPut = ({ option }) => {
                     option.putExpDateMap[entry][innerArrayID][0].mark * 100
                   ).toFixed(2)
               );
-            })[0]
+            })[0][0]
           }
         </bold>
       </div>

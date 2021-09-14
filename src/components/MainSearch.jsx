@@ -24,32 +24,36 @@ import DaysToExpiration from "./DataPoints/DaysToExpiration";
 import "./MainSearch.css";
 
 const date = new Date();
-
+let errorSymbol = [];
 class MainSearch extends Component {
   state = {
     stockData: [],
     error: [],
   };
-
+  
   searchStocks = async (text) => {
     const res = await axios.get(
-      `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${text}&contractType=CALL&strikeCount=1&optionType=CALL&expMonth=${process.env.REACT_APP_MONTH}&toDate=${process.env.REACT_APP_DATE}&range=OTM`
+      `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${text}&contractType=ALL&strikeCount=2&expMonth=${process.env.REACT_APP_MONTH}&toDate=${process.env.REACT_APP_DATE}&range=OTM`
     );
     console.log("data", res.data);
     if (res.data.status === "FAILED") {
+      errorSymbol = res.data.symbol + " is not a valid symbol";
       this.setState({ error: [...this.state.error, res.data.symbol] });
     } else {
+      errorSymbol = [];
       this.setState({ stockData: [...this.state.stockData, res.data] });
     }
   };
 
   render() {
     const { stockData } = this.state;
-
+    const { error } = this.state;
     return (
       <div>
         <Search searchStocks={this.searchStocks} />
+        {error.length ? (<i style={{color: '#d4af37'}}>{errorSymbol}</i>) : (" ") }
         {!!stockData.length ? (
+          
           stockData.map((option) => (
             <Card
               className="stockInfo"
@@ -108,7 +112,7 @@ class MainSearch extends Component {
                           option.callExpDateMap[entry][innerArrayID][0]
                             .daysToExpiration
                       );
-                    })[0],
+                    })[0][1],
                   }}
                   format="MMM DD"
                 >
@@ -120,6 +124,7 @@ class MainSearch extends Component {
         ) : (
           <p className="searchInfo"> </p>
         )}
+        
       </div>
     );
   }

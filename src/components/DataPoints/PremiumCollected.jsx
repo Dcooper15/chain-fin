@@ -16,7 +16,7 @@ const PremiumCollected = ({ option }) => {
                     option.callExpDateMap[entry][innerArrayID][0].mark * 100
                   ).toFixed(2)
               );
-            })[0]
+            })[0][1]
           }
         </bold>
       </div>

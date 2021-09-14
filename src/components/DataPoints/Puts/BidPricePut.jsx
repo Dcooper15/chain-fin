@@ -15,7 +15,7 @@ const BidPricePut = ({option}) => {
                   2
                 )
             );
-          })[0]
+          })[0][0]
         }{" "}
       </bold>
       </div>

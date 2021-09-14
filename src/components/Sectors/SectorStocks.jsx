@@ -43,14 +43,16 @@ let symbolArray = [];
 function SectorStocks() {
   const [namesRender, setNames] = useState([]);
   const [dataArray, setDataArray] = useState([]);
-  const [handleTypeChange, setHandleTypeChange] = useState([false]);
+  const [handleTypeChange, setHandleTypeChange] = useState(false);
   const { sector } = useParams();
 
-  const buttonHandler = () => {
-    setHandleTypeChange(current => !current)
-    console.log(handleTypeChange) // is false 
-  }
-console.log("sector", sector);
+  const buttonHandlerPut = () => {
+    setHandleTypeChange(true);
+  };
+  const buttonHandlerCall = () => {
+    setHandleTypeChange(false);
+  };
+
   let sectorError = [];
   switch (sector) {
     case "tech":
@@ -93,9 +95,9 @@ console.log("sector", sector);
     case "automotive":
       symbolArray = ["HYLN", "GM", "NIO", "CVNA", "F", "TSLA", "RIDE", "WKHS"];
       break;
-      case "grocery":
-        symbolArray = ["WMT", "ACI", "COST", "KR", "GO", "BJ", "TGT"];
-        break;
+    case "grocery":
+      symbolArray = ["WMT", "ACI", "COST", "KR", "GO", "BJ", "TGT"];
+      break;
     case "crypto":
       symbolArray = ["MARA", "RIOT", "BTCM", "BITF", "BITQ", "HUT", "COIN"];
       break;
@@ -136,10 +138,10 @@ console.log("sector", sector);
     symbolArray.map((symbol) =>
       axios
         .get(
-          `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&contractType=ALL&strikeCount=1&expMonth=${process.env.REACT_APP_MONTH}&toDate=${process.env.REACT_APP_DATE}&range=OTM`
+          `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&contractType=ALL&strikeCount=2&expMonth=${process.env.REACT_APP_MONTH}&toDate=${process.env.REACT_APP_DATE}&range=OTM`
         )
         .then((response) => {
-          console.log(response.data);
+          //console.log(response.data);
           chainData.push(response.data);
 
           setDataArray([chainData]);
@@ -148,9 +150,7 @@ console.log("sector", sector);
   }, [sector]);
 
   return (
- 
     <>
-    
       {!!sectorError.length ? (
         <h2 className="sectorHeader">{capHeader(sectorError)}</h2>
       ) : (
@@ -161,181 +161,178 @@ console.log("sector", sector);
         </h2>
       )}
       <Button
-            className="searchButton"
-            type="submit"
-            variant="outlined"
-            value="Search"
-            color="secondary"
-            onClick={buttonHandler}
-          >
-          {handleTypeChange === false ? ("View Puts") : ("View Calls") }
-          </Button>
-      
-      {!!dataArray.length ? (
-        dataArray.map((stock) =>
-          stock.map((option) => (
-            <Card
-              className="stockInfo"
-              variant="outlined"
-              hidden={!handleTypeChange}
-              raised="true"
-              style={{
-                backgroundColor: "#3D3D3D",
-                borderColor: "#d4af37",
-                color: "#fff",
-                borderRadius: "15px",
-                paddingLeft: "2%",
-                marginLeft: "3%",
-                marginRight: "3%",
-              }}
-            >
-              <>
-                {" "}
-                <Link
-                  to={`/chain/${option.symbol}`}
-                  style={{ textDecoration: "none", color: "#d4af37" }}
-                >
-                  <Symbol option={option} />
-                </Link>
-              </>{" "}
-              <StockPrice option={option} />
-              <br></br>
-              <Name option={option} namesRender={namesRender} /> <></>
-              <hr></hr>
-              <StrikeOneOtm option={option} />
-              <></>
-              <PercentChange option={option} />
-              <br></br>
-              <HundredShares option={option} />
-              <i style={{ color: "#d4af37" }}>Greeks</i>
-              <BidPrice option={option} />
-              <></>
-              <Delta option={option} />
-              <AskPrice option={option} />
-              
-              <></>
-              <Theta option={option} />
-              <PremiumCollected option={option} />
-              <></>
-              <Rho option={option} />
-              <OpenInterest option={option} />
-              <></>
-              <Gamma option={option} />
-              <Volume option={option} />
-              <></>
-              <Vega option={option} />
-              <Volatility option={option} />
-              <DaysToExpiration option={option} />
-              <>
-                <>Exp Date </>
-                <Moment
-                  add={{
-                    days: Object.keys(option.callExpDateMap).map((entry) => {
-                      return Object.keys(option.callExpDateMap[entry]).map(
-                        (innerArrayID) =>
-                          option.callExpDateMap[entry][innerArrayID][0]
-                            .daysToExpiration
-                      );
-                    })[0],
-                  }}
-                  format="MMM DD"
-                >
-                  {date}
-                </Moment>
-              </>
-            </Card>
-            
-            
-            
-          ))
-        )
-      ) : (
-        <p>loading data...</p>
-      )};
-      {!!dataArray.length ? (
-        dataArray.map((stock) =>
-          stock.map((option) => (
-            <Card
-              className="stockInfo"
-              variant="outlined"
-              raised="true"
-              hidden={handleTypeChange}
-              style={{
-                backgroundColor: "#3D3D3D",
-                borderColor: "#d4af37",
-                color: "#fff",
-                borderRadius: "15px",
-                paddingLeft: "2%",
-                marginLeft: "3%",
-                marginRight: "3%",
-              }}
-            >
-              <>
-                {" "}
-                <Link
-                  to={`/chain/${option.symbol}`}
-                  style={{ textDecoration: "none", color: "#d4af37" }}
-                >
-                  <Symbol option={option} />
-                </Link>
-              </>{" "}
-              <StockPrice option={option} />
-              <br></br>
-              <Name option={option} namesRender={namesRender} /> <></>
-              <hr></hr>
-              <StrikeOneOtmPut option={option} />
-              <></>
-              <PercentChangePut option={option} />
-              <br></br>
-              <HundredShares option={option} />
-              <i style={{ color: "#d4af37" }}>Greeks</i>
-              <BidPricePut option={option} />
-              <></>
-              <DeltaPut option={option} />
-              <AskPricePut option={option} />
-              
-              <></>
-              <ThetaPut option={option} />
-              <PremiumCollectedPut option={option} />
-              <></>
-              <RhoPut option={option} />
-              <OpenInterestPut option={option} />
-              <></>
-              <GammaPut option={option} />
-              <VolumePut option={option} />
-              <></>
-              <VegaPut option={option} />
-              <VolatilityPut option={option} />
-              <DaysToExpirationPut option={option} />
-              <>
-                <>Exp Date </>
-                <Moment
-                  add={{
-                    days: Object.keys(option.callExpDateMap).map((entry) => {
-                      return Object.keys(option.callExpDateMap[entry]).map(
-                        (innerArrayID) =>
-                          option.callExpDateMap[entry][innerArrayID][0]
-                            .daysToExpiration
-                      );
-                    })[0],
-                  }}
-                  format="MMM DD"
-                >
-                  {date}
-                </Moment>
-              </>
-            </Card>
-            
-            
-            
-          ))
-        )
-      ) : (
-        <p>loading data...</p>
-      )};
+        className="searchButton"
+        type="submit"
+        variant={handleTypeChange === !true ? "contained" : "outlined"}
+        color="secondary"
+        size="small"
+        onClick={buttonHandlerCall}
+        style={{ marginLeft: "3%" }}
+      >
+        Call
+      </Button>
+      <Button
+        className="searchButton"
+        type="submit"
+        variant={handleTypeChange === true ? "contained" : "outlined"}
+        size="small"
+        color="secondary"
+        onClick={buttonHandlerPut}
+      >
+        Put
+      </Button>
+      {!!dataArray.length
+        ? dataArray.map((stock) =>
+            stock.map((option) => (
+              <Card
+                className="stockInfo"
+                variant="outlined"
+                hidden={handleTypeChange === true}
+                raised="true"
+                style={{
+                  backgroundColor: "#3D3D3D",
+                  borderColor: "#d4af37",
+                  color: "#fff",
+                  borderRadius: "15px",
+                  paddingLeft: "2%",
+                  marginLeft: "3%",
+                  marginRight: "3%",
+                }}
+              >
+                <>
+                  {" "}
+                  <Link
+                    to={`/chain/${option.symbol}`}
+                    style={{ textDecoration: "none", color: "#d4af37" }}
+                  >
+                    <Symbol option={option} />
+                  </Link>
+                </>{" "}
+                <StockPrice option={option} />
+                <br></br>
+                <Name option={option} namesRender={namesRender} /> <></>
+                <hr></hr>
+                <StrikeOneOtm option={option} />
+                <></>
+                <PercentChange option={option} />
+                <br></br>
+                <HundredShares option={option} />
+                <i style={{ color: "#d4af37" }}>Greeks</i>
+                <BidPrice option={option} />
+                <></>
+                <Delta option={option} />
+                <AskPrice option={option} />
+                <></>
+                <Theta option={option} />
+                <PremiumCollected option={option} />
+                <></>
+                <Rho option={option} />
+                <OpenInterest option={option} />
+                <></>
+                <Gamma option={option} />
+                <Volume option={option} />
+                <></>
+                <Vega option={option} />
+                <Volatility option={option} />
+                <DaysToExpiration option={option} />
+                <>
+                  <>Exp Date </>
+                  <Moment
+                    add={{
+                      days: Object.keys(option.callExpDateMap).map((entry) => {
+                        return Object.keys(option.callExpDateMap[entry]).map(
+                          (innerArrayID) =>
+                            option.callExpDateMap[entry][innerArrayID][0]
+                              .daysToExpiration
+                        );
+                      })[0][1],
+                    }}
+                    format="MMM DD"
+                  >
+                    {date}
+                  </Moment>
+                </>
+              </Card>
+            ))
+          )
+        : " "}
+      {!!dataArray.length
+        ? dataArray.map((stock) =>
+            stock.map((option) => (
+              <Card
+                className="stockInfo"
+                variant="outlined"
+                raised="true"
+                hidden={handleTypeChange === false}
+                style={{
+                  backgroundColor: "#3D3D3D",
+                  borderColor: "#d4af37",
+                  color: "#fff",
+                  borderRadius: "15px",
+                  paddingLeft: "2%",
+                  marginLeft: "3%",
+                  marginRight: "3%",
+                }}
+              >
+                <>
+                  {" "}
+                  <Link
+                    to={`/chain/${option.symbol}`}
+                    style={{ textDecoration: "none", color: "#d4af37" }}
+                  >
+                    <Symbol option={option} />
+                  </Link>
+                </>{" "}
+                <StockPrice option={option} />
+                <br></br>
+                <Name option={option} namesRender={namesRender} /> <></>
+                <hr></hr>
+                <StrikeOneOtmPut option={option} />
+                <></>
+                <PercentChangePut option={option} />
+                <br></br>
+                <HundredShares option={option} />
+                <i style={{ color: "#d4af37" }}>Greeks</i>
+                <BidPricePut option={option} />
+                <></>
+                <DeltaPut option={option} />
+                <AskPricePut option={option} />
+                <></>
+                <ThetaPut option={option} />
+                <PremiumCollectedPut option={option} />
+                <></>
+                <RhoPut option={option} />
+                <OpenInterestPut option={option} />
+                <></>
+                <GammaPut option={option} />
+                <VolumePut option={option} />
+                <></>
+                <VegaPut option={option} />
+                <VolatilityPut option={option} />
+                <DaysToExpirationPut option={option} />
+                <>
+                  <>Exp Date </>
+                  <Moment
+                    add={{
+                      days: Object.keys(option.callExpDateMap).map((entry) => {
+                        return Object.keys(option.callExpDateMap[entry]).map(
+                          (innerArrayID) =>
+                            option.callExpDateMap[entry][innerArrayID][0]
+                              .daysToExpiration
+                        );
+                      })[0][1],
+                    }}
+                    format="MMM DD"
+                  >
+                    {date}
+                  </Moment>
+                </>
+              </Card>
+            ))
+          )
+        : " "}
       
     </>
-    
   );
 }
 

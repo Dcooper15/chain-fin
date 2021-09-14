@@ -11,7 +11,7 @@ const VolumePut = ({option}) => {
             (innerArrayID) =>
             option.putExpDateMap[entry][innerArrayID][0].totalVolume
             );
-            })[0]}
+            })[0][0]}
         </i>
         </div>
     );

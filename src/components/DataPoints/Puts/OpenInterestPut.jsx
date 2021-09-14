@@ -11,7 +11,7 @@ const OpenInterestPut = ({option}) => {
             (innerArrayID) =>
             option.putExpDateMap[entry][innerArrayID][0].openInterest
             );
-            })[0]}
+            })[0][0]}
         </bold>
         </div>
     );

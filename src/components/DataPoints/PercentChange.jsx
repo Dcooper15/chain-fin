@@ -6,7 +6,7 @@ const PercentChange = ({ option }) => {
       (innerArrayID) =>
         option.callExpDateMap[entry][innerArrayID][0].markPercentChange
     );
-  })[0];
+  })[0][1];
   try {
     return (
       <>

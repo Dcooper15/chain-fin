@@ -12,7 +12,7 @@ const StrikeOneOtm = ({ option }) => {
                 (innerArrayID) =>
                   option.callExpDateMap[entry][innerArrayID][0].strikePrice
               );
-            })[0]
+            })[0][1]
           }{" "}
           Call
         </bold>

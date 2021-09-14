@@ -13,7 +13,7 @@ const RhoPut = ({ option }) => {
                 (innerArrayID) =>
                   option.putExpDateMap[entry][innerArrayID][0].rho.toFixed(4)
               );
-            })[0]
+            })[0][0]
           }
         </i>
       </div>

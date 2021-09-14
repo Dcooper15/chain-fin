@@ -1,5 +1,4 @@
 import React from "react";
-import Navbar from "../Navbar/Navbar";
 import { Link, Route } from "react-router-dom";
 
 const MainTopMovers = () => {
@@ -7,12 +6,6 @@ const MainTopMovers = () => {
     <>
       <div>
         <Route path="/topmovers">
-          <Navbar />
-          <h5 className="sectorHeader">
-            <Link to="/" style={{ color: "#d4af37", textDecoration: "none" }}>
-              {"< Home"}
-            </Link>
-          </h5>
           <h2 className="sectorHeader">Today's Top Movers</h2>
           <div className="sectorMenu">
             <div class="row">
@@ -29,7 +22,7 @@ const MainTopMovers = () => {
               <div class="column" className="entertainmentSect">
                 <h3 className="linkHeader">
                   <Link
-                    to="/topmovers/spx"
+                    to="/topmovers/spx.x"
                     style={{ textDecoration: "none", color: "#d4af37" }}
                   >
                     SPX

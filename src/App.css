@@ -8,18 +8,25 @@ body {
 }
 
 .MuiTextField-root {
-  color: #fff;
+  color: #d4af37;
+  text-emphasis-color: #d4af37;
   border-radius: 15px;
   font-style: oblique;
+  
 }
 
 .sectorHeader {
   justify-content: center;
   align-items: center;
   color: #d4af37;
-  font-size: 18px;
-  margin-left: 1%;
+  font-size: 20px;
+  margin-left: 3%;
+  margin-right: 3%;
   
+}
+
+.navLink {
+  padding-bottom: 0.5%
 }
 
 .dataContainer {

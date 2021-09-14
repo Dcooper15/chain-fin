@@ -1,18 +1,12 @@
 import React from "react";
 import { Link, Route } from "react-router-dom";
-import Navbar from "../Navbar/Navbar";
+
 
 const MainSectors = () => {
   return (
     <>
       <div>
         <Route path="/sector">
-          <Navbar />
-          <h5 className="sectorHeader">
-            <Link to="/" style={{ color: "#d4af37", textDecoration: "none" }}>
-              {"< Home"}
-            </Link>
-          </h5>
           <h2 className="sectorHeader">Sectors</h2>
           <div className="sectorMenu">
             <div class="row">

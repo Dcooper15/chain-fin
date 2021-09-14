@@ -11,7 +11,7 @@ const Volume = ({option}) => {
             (innerArrayID) =>
             option.callExpDateMap[entry][innerArrayID][0].totalVolume
             );
-            })[0]}
+            })[0][1]}
         </i>
         </div>
     );

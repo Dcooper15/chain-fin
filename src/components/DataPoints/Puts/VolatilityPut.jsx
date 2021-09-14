@@ -13,7 +13,7 @@ const VolatilityPut = ({option}) => {
                   innerArrayID
                 ][0].volatility.toFixed(2)
             );
-          })[0]
+          })[0][0]
         }
         </i>
       </div>

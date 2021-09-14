@@ -13,7 +13,7 @@ const Delta = ({ option }) => {
                 (innerArrayID) =>
                   option.callExpDateMap[entry][innerArrayID][0].delta.toFixed(4)
               );
-            })[0]
+            })[0][1]
           }
         </i>
       </div>

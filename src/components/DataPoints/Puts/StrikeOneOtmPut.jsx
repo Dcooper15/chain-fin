@@ -12,7 +12,7 @@ const StrikeOneOtmPut = ({ option }) => {
                 (innerArrayID) =>
                   option.putExpDateMap[entry][innerArrayID][0].strikePrice
               );
-            })[0]
+            })[0][0]
           }{" "}
           Put
         </bold>
