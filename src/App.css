@@ -14,8 +14,44 @@ body {
   font-style: oblique;
   
 }
+ul.MuiList-root {
+  padding-top: 0;
+  padding-bottom: 0;
+  
+  border-radius: 40px;
+  
+  
+}
+.MuiListItem-root.Mui-selected, .MuiListItem-root.Mui-selected {
+  background-color: #756300;
+  background: #756300;
+  font-style:oblique;
+  
+  color: #343434;
+}
+.MuiListItem-root.Mui-selected:hover {
+  background-color: #756300;
+  font-style:oblique;
+  
+  color: #343434;
+}
+/* .MuiListItem-root.Mui-selected:hover{
+  padding-top: 0;
+  padding-bottom: 0;
+  
+  background-color: #d4af37;
+  
+  
+  
+  
+} */
+.MenuItem {
+  color: "#d4af37"
+}
 
-
+.MenuItem.selected { 
+  background-color: #343434;
+}
 .sectorHeader {
   justify-content: center;
   align-items: center;
@@ -64,8 +100,11 @@ body {
   justify-content: center;
   flex-direction: column;
   border-color: #d4af37;
-  border-style: groove;
-  border-radius: 15px;
+  border-top-style: groove;
+  border-left-style: ridge;
+  border-right-style: ridge;
+  border-bottom-style: groove;
+  border-radius: 20px;
   border-width: 1px;
   margin-top: 2%;
 
@@ -83,7 +122,7 @@ body {
   flex-direction: column;
   border-color: #d4af37;
   border-style: groove;
-  border-radius: 15px;
+  border-radius: 20px;
   border-width: 1px;
   margin-top: 2%;
  
@@ -177,6 +216,36 @@ body {
   
 } 
 
+.dateContainer {
+  display: inline-flex;
+  flex: 1;
+  width: 95%;
+  margin-left: 2%;
+  margin-right: 2%;
+  overflow-x: auto;
+  padding-bottom: 5px;
+  
+}
+.dateContainer ::-webkit-scrollbar { 
+  width: 0 !important;
+  height: 0 !important;
+  display: none; 
+}
+
+.buttonContainer ::-webkit-scrollbar { 
+  width: 0 !important;
+  height: 0 !important;
+  display: none; 
+}
+
+.buttonContainer {
+  display: flex;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  scroll-behavior:smooth;
+  
+  
+}
 
 .flex-container {
   padding: 0;
@@ -302,12 +371,10 @@ body {
    margin-bottom: 10px;
  }
 
-.alert {
-  padding: 0.7rem;
-  margin: 1rem 0;
-  opacity: 0.9;
-  background: var(--light-color);
-  color: #333;
+.anySymbol {
+  color: #FFED8A;
+  font-style: italic;
+  font-size: 12px;
 }
 
 .Footer {

@@ -30,6 +30,7 @@ function App() {
         <Router>
           <Route exact path="/">
             <Navbar />
+            <p className='anySymbol'>Click on any symbol to expand option chain</p>
             <br></br>
             <div>
               <br></br>

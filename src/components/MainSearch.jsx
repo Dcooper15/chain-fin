@@ -3,7 +3,7 @@ import axios from "axios";
 import Moment from "react-moment";
 import { Link } from "react-router-dom";
 import Search from "./Search";
-import { Card } from "@material-ui/core";
+import { Card, Button } from "@material-ui/core";
 import Symbol from "./DataPoints/Symbol";
 import StockPrice from "./DataPoints/StockPrice";
 import StrikeOneOtm from "./DataPoints/StrikeOneOtm";
@@ -30,7 +30,7 @@ class MainSearch extends Component {
     stockData: [],
     error: [],
   };
-  
+
   searchStocks = async (text) => {
     const res = await axios.get(
       `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${text}&contractType=ALL&strikeCount=2&expMonth=${process.env.REACT_APP_MONTH}&toDate=${process.env.REACT_APP_DATE}&range=OTM`
@@ -51,14 +51,13 @@ class MainSearch extends Component {
     return (
       <div>
         <Search searchStocks={this.searchStocks} />
-        {error.length ? (<i style={{color: '#d4af37'}}>{errorSymbol}</i>) : (" ") }
+        {error.length ? <i style={{ color: "#d4af37" }}>{errorSymbol}</i> : " "}
         {!!stockData.length ? (
-          
           stockData.map((option) => (
             <Card
               className="stockInfo"
               variant="outlined"
-              raised="true"
+              raised={true}
               style={{
                 backgroundColor: "#3D3D3D",
                 borderColor: "#d4af37",
@@ -66,7 +65,7 @@ class MainSearch extends Component {
                 borderRadius: "15px",
                 paddingLeft: "2%",
                 marginLeft: "3%",
-                marginRight: "3%"
+                marginRight: "3%",
               }}
             >
               <>
@@ -79,9 +78,29 @@ class MainSearch extends Component {
                 </Link>
               </>{" "}
               <StockPrice option={option} />
+              <></>{" "}
+              <Button
+                className="searchButton"
+                type="submit"
+                variant="outlined"
+                size="small"
+                style={{ marginLeft: "4%" }}
+                color="secondary"
+              >
+                {
+                  <Link
+                    to={`/chain/${option.symbol}`}
+                    style={{ textDecoration: "none", color: "#d4af37" }}
+                  >
+                    Chain
+                  </Link>
+                }
+              </Button>
               <br></br>
               <hr></hr>
-              <StrikeOneOtm option={option} /><></><PercentChange option={option}/>
+              <StrikeOneOtm option={option} />
+              <></>
+              <PercentChange option={option} />
               <br></br>
               <HundredShares option={option} />
               <></>
@@ -103,7 +122,7 @@ class MainSearch extends Component {
               <Volatility option={option} />
               <DaysToExpiration option={option} />
               <>
-              <>Exp Date </>
+                <>Exp Date </>
                 <Moment
                   add={{
                     days: Object.keys(option.callExpDateMap).map((entry) => {
@@ -124,7 +143,6 @@ class MainSearch extends Component {
         ) : (
           <p className="searchInfo"> </p>
         )}
-        
       </div>
     );
   }

@@ -188,7 +188,6 @@ function SectorStocks() {
                 className="stockInfo"
                 variant="outlined"
                 hidden={handleTypeChange === true}
-                raised="true"
                 style={{
                   backgroundColor: "#3D3D3D",
                   borderColor: "#d4af37",
@@ -209,8 +208,27 @@ function SectorStocks() {
                   </Link>
                 </>{" "}
                 <StockPrice option={option} />
+                <></>
                 <br></br>
                 <Name option={option} namesRender={namesRender} /> <></>
+                <></>{" "}
+                <Button
+                  className="searchButton"
+                  type="submit"
+                  variant="outlined"
+                  size="small"
+                  style={{ height: "20px", width: "7%" }}
+                  color="secondary"
+                >
+                  {
+                    <Link
+                      to={`/chain/${option.symbol}`}
+                      style={{ textDecoration: "none", color: "#d4af37" }}
+                    >
+                      Chain
+                    </Link>
+                  }
+                </Button>
                 <hr></hr>
                 <StrikeOneOtm option={option} />
                 <></>
@@ -262,7 +280,6 @@ function SectorStocks() {
               <Card
                 className="stockInfo"
                 variant="outlined"
-                raised="true"
                 hidden={handleTypeChange === false}
                 style={{
                   backgroundColor: "#3D3D3D",
@@ -331,7 +348,6 @@ function SectorStocks() {
             ))
           )
         : " "}
-      
     </>
   );
 }

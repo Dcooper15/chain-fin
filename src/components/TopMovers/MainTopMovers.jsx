@@ -19,7 +19,7 @@ const MainTopMovers = () => {
                   </Link>
                 </h3>
               </div>
-              <div  className="columnRight">
+              <div className="columnRight">
                 <h3 className="linkMenu">
                   <Link
                     to="/topmovers/spx.x"
@@ -29,10 +29,10 @@ const MainTopMovers = () => {
                   </Link>
                 </h3>
               </div>
-              </div>
+            </div>
 
-          <div className="menuRowExtra">
-              <div  className="columnLeft" >
+            <div className="menuRowExtra">
+              <div className="columnLeft">
                 <h3 className="linkMenu">
                   <Link
                     to="/topmovers/dji"
@@ -43,7 +43,6 @@ const MainTopMovers = () => {
                 </h3>
               </div>
             </div>
-           
           </div>
         </Route>
       </div>

@@ -46,6 +46,7 @@
     color: #d4af37;
     text-decoration: none;
     padding: 0.5rem 1rem;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .nav-links:hover {
@@ -105,7 +106,8 @@
     .nav-menu.active {
         background: #343434;
         border: #d4af37;
-        border-style: ridge;
+        border-style: groove;
+        border-width: 1.5px;
         border-right: 0px #d4af37;
         border-top: 0px #d4af37;
         border-radius: 15px;

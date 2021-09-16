@@ -171,6 +171,25 @@ function MoverStocks() {
                 </Link>
               </>{" "}
               <StockPrice option={option} />
+              <></>
+              <></>{" "}
+              <Button
+                  className="searchButton"
+                  type="submit"
+                  variant="outlined"
+                  size="small"
+                  style={{ height: "20px", width: "7%" }}
+                  color="secondary"
+                >
+                  {
+                    <Link
+                      to={`/chain/${option.symbol}`}
+                      style={{ textDecoration: "none", color: "#d4af37" }}
+                    >
+                      Chain
+                    </Link>
+                  }
+                </Button>
               <i style={{ color: "#a4de02" }}>
                 {"   "}+
                 {(
@@ -247,7 +266,6 @@ function MoverStocks() {
               <Card
                 className="stockInfo"
                 variant="outlined"
-                raised="true"
                 hidden={handleTypeChange === false}
                 style={{
                   backgroundColor: "#3D3D3D",

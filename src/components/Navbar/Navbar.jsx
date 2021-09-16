@@ -22,10 +22,10 @@ class Navbar extends Component {
                    {MenuItems.map((item, index) => {
                        return (
                        
-                        <bold key={index}
-                            className={item.cName}> <Link to={item.url}></Link>
+                        <strong key={index}
+                            className='nav-links'> <Link to={item.url}></Link>
                              {item.title}
-                        </bold>
+                        </strong>
                             
                         
                        
@@ -33,9 +33,7 @@ class Navbar extends Component {
                    })}
                    
                </ul>
-               {/* <form method="get" action="https://github.com/Dcooper15/covered-call-scanner">
-               <Button type="submit"><i class="fab fa-github" style={{padding: '0.1rem'}}></i></Button>
-               </form> */}
+              
            </nav>
         )
     }
