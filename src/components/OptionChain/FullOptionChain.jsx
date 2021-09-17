@@ -342,7 +342,7 @@ function FullOptionChain() {
                     <div className="dataGreekContainer">
                       <div className="dataGreekHeader">Delta</div>
                       <bold className="dataGreekComponentData">
-                        {option.delta == "NaN" ? "N/A" : (option.delta)}
+                        {option.delta === "NaN" ? "N/A" : (option.delta)}
                       </bold>
                     </div>
                     <></>
@@ -353,7 +353,7 @@ function FullOptionChain() {
                     <div className="dataGreekContainer">
                       <div className="dataGreekHeader">Theta</div>
                       <bold className="dataGreekComponentData">
-                        {option.theta == "NaN" ? "N/A" : option.theta}
+                        {option.theta === "NaN" ? "N/A" : option.theta}
                       </bold>
                     </div>
                     <></>
@@ -367,7 +367,7 @@ function FullOptionChain() {
                     <div className="dataGreekContainer">
                       <div className="dataGreekHeader">Rho</div>
                       <bold className="dataGreekComponentData">
-                        {option.rho == "NaN" ? "N/A" : option.rho}
+                        {option.rho === "NaN" ? "N/A" : option.rho}
                       </bold>
                     </div>
                     <></>
@@ -380,7 +380,7 @@ function FullOptionChain() {
                     <div className="dataGreekContainer">
                       <div className="dataGreekHeader">Gamma</div>
                       <bold className="dataGreekComponentData">
-                        {option.gamma == "NaN" ? "N/A" : option.gamma}
+                        {option.gamma === "NaN" ? "N/A" : option.gamma}
                       </bold>
                     </div>
                     <></>
@@ -393,7 +393,7 @@ function FullOptionChain() {
                     <div className="dataGreekContainer">
                       <div className="dataGreekHeader">Vega</div>
                       <bold className="dataGreekComponentData">
-                        {option.vega == "NaN" ? "N/A" : option.vega}{" "}
+                        {option.vega === "NaN" ? "N/A" : option.vega}{" "}
                       </bold>
                     </div>
                     <></>
@@ -500,7 +500,7 @@ function FullOptionChain() {
                     <div className="dataGreekContainer">
                       <div className="dataGreekHeader">Delta</div>
                       <bold className="dataGreekComponentData">
-                      {option.delta == "NaN" ? "N/A" : option.delta}
+                      {option.delta === "NaN" ? "N/A" : option.delta}
                       </bold>
                     </div>
                     <></>
@@ -511,7 +511,7 @@ function FullOptionChain() {
                     <div className="dataGreekContainer">
                       <div className="dataGreekHeader">Theta</div>
                       <bold className="dataGreekComponentData">
-                        {option.theta == "NaN" ? "N/A" : option.theta}
+                        {option.theta === "NaN" ? "N/A" : option.theta}
                       </bold>
                     </div>
                     <></>
@@ -525,7 +525,7 @@ function FullOptionChain() {
                     <div className="dataGreekContainer">
                       <div className="dataGreekHeader">Rho</div>
                       <bold className="dataGreekComponentData">
-                        {option.rho == "NaN" ? "N/A" : option.rho}
+                        {option.rho === "NaN" ? "N/A" : option.rho}
                       </bold>
                     </div>
                     <></>
@@ -538,7 +538,7 @@ function FullOptionChain() {
                     <div className="dataGreekContainer">
                       <div className="dataGreekHeader">Gamma</div>
                       <bold className="dataGreekComponentData">
-                        {option.gamma == "NaN" ? "N/A" : option.gamma}
+                        {option.gamma === "NaN" ? "N/A" : option.gamma}
                       </bold>
                     </div>
                     <></>
@@ -551,7 +551,7 @@ function FullOptionChain() {
                     <div className="dataGreekContainer">
                       <div className="dataGreekHeader">Vega</div>
                       <bold className="dataGreekComponentData">
-                        {option.vega == "NaN" ? "N/A" : option.vega}{" "}
+                        {option.vega === "NaN" ? "N/A" : option.vega}{" "}
                       </bold>
                     </div>
                     <></>
