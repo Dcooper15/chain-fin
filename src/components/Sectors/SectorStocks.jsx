@@ -164,22 +164,22 @@ function SectorStocks() {
         className="searchButton"
         type="submit"
         variant={handleTypeChange === !true ? "contained" : "outlined"}
-        color="secondary"
+        color="#d4af37"
         size="small"
         onClick={buttonHandlerCall}
         style={{ marginLeft: "3%" }}
       >
-        Call
+        <strong style={{color: "#d4af37"}}>Call</strong>
       </Button>
       <Button
         className="searchButton"
         type="submit"
         variant={handleTypeChange === true ? "contained" : "outlined"}
         size="small"
-        color="secondary"
+        color="#d4af37"
         onClick={buttonHandlerPut}
       >
-        Put
+        <strong style={{color: "#d4af37"}}>Put</strong>
       </Button>
       {!!dataArray.length
         ? dataArray.map((stock) =>
@@ -218,7 +218,7 @@ function SectorStocks() {
                   variant="outlined"
                   size="small"
                   style={{ height: "20px", width: "7%" }}
-                  color="secondary"
+                  color="#d4af37"
                 >
                   {
                     <Link

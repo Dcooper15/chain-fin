@@ -35,16 +35,7 @@ ul.MuiList-root {
   
   color: #343434;
 }
-/* .MuiListItem-root.Mui-selected:hover{
-  padding-top: 0;
-  padding-bottom: 0;
-  
-  background-color: #d4af37;
-  
-  
-  
-  
-} */
+
 .MenuItem {
   color: "#d4af37"
 }
@@ -115,25 +106,23 @@ ul.MuiList-root {
   text-decoration: none;
   
 }
+
 .columnRight {
   flex: 1;
   justify-content: center;
   align-items: flex-end;
   flex-direction: column;
-  border-color: #d4af37;
+  /* border-color: #d4af37; */
   border-style: groove;
   border-radius: 20px;
   border-width: 1px;
   margin-top: 2%;
- 
-
   margin-bottom: 1%;
-  
-
   text-decoration: none;
 
-  
 }
+
+
 .menuRowExtra{
   flex: 1;
   justify-content: center;
@@ -372,7 +361,7 @@ ul.MuiList-root {
  }
 
 .anySymbol {
-  color: #FFED8A;
+  color: #fffdf0;
   font-style: italic;
   font-size: 12px;
 }

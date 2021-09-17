@@ -113,7 +113,7 @@ function FullOptionChain() {
     setOpen(true);
   };
 
-  
+  console.log(callData);
   useEffect(() => {
     axios
       .get(
@@ -197,18 +197,19 @@ function FullOptionChain() {
                 <div className="buttonConainer">
                   <Button
                     value={expDay}
+                    size='small'
                     variant={expDate === expDay ? "contained" : "outlined"}
-                    color="secondary"
+                    color='#d4af37'
                     style={{ height: "70%", width: "100%" }}
                     onClick={() => setExpDate(expDay)}
                   >
-                    <Moment
-                      style={{ fontSize: expDay > offsetDays ? "50%" : "60%" }}
+                   <i style={{color: "seagreen"}}><Moment
+                      style={{ fontSize: expDay > offsetDays ? "60%" : "80%" }}
                       add={{ days: expDay }}
                       format={expDay > offsetDays ? "ll" : "MMM DD"}
                     >
                       {date}
-                    </Moment>
+                    </Moment></i> 
                   </Button>
                 </div>
               ))
@@ -218,22 +219,22 @@ function FullOptionChain() {
 
           type="submit"
           variant={handleTypeChange === !true ? "contained" : "outlined"}
-          color="secondary"
+          color="gold"
           size="small"
           onClick={buttonHandlerCall}
           style={{ marginLeft: "2%" }}
         >
-          Call
+          <strong style={{color: 'Green'}}>Call</strong>
         </Button>
         <Button
     
           type="submit"
           variant={handleTypeChange === true ? "contained" : "outlined"}
           size="small"
-          color="secondary"
+          color="gold"
           onClick={buttonHandlerPut}
         >
-          Put
+          <strong style={{color: 'Green'}}>Put</strong>
         </Button>
        <br></br>
 
@@ -245,7 +246,7 @@ function FullOptionChain() {
         <Select
           labelId="strikeLabel"
           id="strikes"
-          color="secondary"
+          color="gold"
           className={classes.select}
           open={open}
           onClose={handleClose}
@@ -341,7 +342,7 @@ function FullOptionChain() {
                     <div className="dataGreekContainer">
                       <div className="dataGreekHeader">Delta</div>
                       <bold className="dataGreekComponentData">
-                        {option.delta == null ? "N/A" : option.delta.toFixed(4)}
+                        {option.delta == "NaN" ? "N/A" : (option.delta)}
                       </bold>
                     </div>
                     <></>
@@ -352,7 +353,7 @@ function FullOptionChain() {
                     <div className="dataGreekContainer">
                       <div className="dataGreekHeader">Theta</div>
                       <bold className="dataGreekComponentData">
-                        {option.theta == null ? "N/A" : option.theta.toFixed(4)}
+                        {option.theta == "NaN" ? "N/A" : option.theta}
                       </bold>
                     </div>
                     <></>
@@ -366,7 +367,7 @@ function FullOptionChain() {
                     <div className="dataGreekContainer">
                       <div className="dataGreekHeader">Rho</div>
                       <bold className="dataGreekComponentData">
-                        {option.rho == null ? "N/A" : option.rho.toFixed(4)}
+                        {option.rho == "NaN" ? "N/A" : option.rho}
                       </bold>
                     </div>
                     <></>
@@ -379,7 +380,7 @@ function FullOptionChain() {
                     <div className="dataGreekContainer">
                       <div className="dataGreekHeader">Gamma</div>
                       <bold className="dataGreekComponentData">
-                        {option.gamma == null ? "N/A" : option.gamma.toFixed(4)}
+                        {option.gamma == "NaN" ? "N/A" : option.gamma}
                       </bold>
                     </div>
                     <></>
@@ -392,7 +393,7 @@ function FullOptionChain() {
                     <div className="dataGreekContainer">
                       <div className="dataGreekHeader">Vega</div>
                       <bold className="dataGreekComponentData">
-                        {option.vega == null ? "N/A" : option.vega.toFixed(4)}{" "}
+                        {option.vega == "NaN" ? "N/A" : option.vega}{" "}
                       </bold>
                     </div>
                     <></>
@@ -499,7 +500,7 @@ function FullOptionChain() {
                     <div className="dataGreekContainer">
                       <div className="dataGreekHeader">Delta</div>
                       <bold className="dataGreekComponentData">
-                        {option.delta == null ? "N/A" : option.delta.toFixed(4)}
+                      {option.delta == "NaN" ? "N/A" : option.delta}
                       </bold>
                     </div>
                     <></>
@@ -510,7 +511,7 @@ function FullOptionChain() {
                     <div className="dataGreekContainer">
                       <div className="dataGreekHeader">Theta</div>
                       <bold className="dataGreekComponentData">
-                        {option.theta == null ? "N/A" : option.theta.toFixed(4)}
+                        {option.theta == "NaN" ? "N/A" : option.theta}
                       </bold>
                     </div>
                     <></>
@@ -524,7 +525,7 @@ function FullOptionChain() {
                     <div className="dataGreekContainer">
                       <div className="dataGreekHeader">Rho</div>
                       <bold className="dataGreekComponentData">
-                        {option.rho == null ? "N/A" : option.rho.toFixed(4)}
+                        {option.rho == "NaN" ? "N/A" : option.rho}
                       </bold>
                     </div>
                     <></>
@@ -537,7 +538,7 @@ function FullOptionChain() {
                     <div className="dataGreekContainer">
                       <div className="dataGreekHeader">Gamma</div>
                       <bold className="dataGreekComponentData">
-                        {option.gamma == null ? "N/A" : option.gamma.toFixed(4)}
+                        {option.gamma == "NaN" ? "N/A" : option.gamma}
                       </bold>
                     </div>
                     <></>
@@ -550,7 +551,7 @@ function FullOptionChain() {
                     <div className="dataGreekContainer">
                       <div className="dataGreekHeader">Vega</div>
                       <bold className="dataGreekComponentData">
-                        {option.vega == null ? "N/A" : option.vega.toFixed(4)}{" "}
+                        {option.vega == "NaN" ? "N/A" : option.vega}{" "}
                       </bold>
                     </div>
                     <></>

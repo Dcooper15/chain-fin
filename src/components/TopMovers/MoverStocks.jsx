@@ -45,6 +45,7 @@ function MoverStocks() {
   const [percentChange, setPercentChange] = useState([]);
   const [marketData, setMarketData] = useState([]);
   const [handleTypeChange, setHandleTypeChange] = useState(false);
+  const [direction, setDirection] = useState('up');
   const { market } = useParams();
 
   const buttonHandlerPut = () => {
@@ -52,6 +53,12 @@ function MoverStocks() {
   };
   const buttonHandlerCall = () => {
     setHandleTypeChange(false);
+  };
+  const buttonHandlerUp = () => {
+    setDirection('up');
+  };
+  const buttonHandlerDown = () => {
+    setDirection('down');
   };
 
   switch (market) {
@@ -75,7 +82,7 @@ function MoverStocks() {
       .get(
         `https://api.tdameritrade.com/v1/marketdata/$${market.toUpperCase()}/movers?apikey=${
           process.env.REACT_APP_GITHUB_CLIENT_ID
-        }&direction=up&change=percent`
+        }&direction=${direction}&change=percent`
       )
       .then((response) => {
         const changePercentArray = response.data
@@ -116,7 +123,7 @@ function MoverStocks() {
             })
         );
       });
-  }, [market]);
+  }, [market, direction]);
 
   return (
     <>
@@ -143,6 +150,27 @@ function MoverStocks() {
         onClick={buttonHandlerPut}
       >
         Put
+      </Button>
+      <Button
+        className="searchButton"
+        type="submit"
+        variant={direction === 'up' ? "contained" : "outlined"}
+        color="secondary"
+        size="small"
+        onClick={buttonHandlerUp}
+        style={{ marginLeft: "3%" }}
+      >
+        Up
+      </Button>
+      <Button
+        className="searchButton"
+        type="submit"
+        variant={direction === 'down' ? "contained" : "outlined"}
+        size="small"
+        color="secondary"
+        onClick={buttonHandlerDown}
+      >
+        Down
       </Button>
       {!!marketData.length ? (
         marketData.map((stock) =>
@@ -173,30 +201,22 @@ function MoverStocks() {
               <StockPrice option={option} />
               <></>
               <></>{" "}
-              <Button
-                  className="searchButton"
-                  type="submit"
-                  variant="outlined"
-                  size="small"
-                  style={{ height: "20px", width: "7%" }}
-                  color="secondary"
-                >
-                  {
-                    <Link
-                      to={`/chain/${option.symbol}`}
-                      style={{ textDecoration: "none", color: "#d4af37" }}
-                    >
-                      Chain
-                    </Link>
-                  }
-                </Button>
-              <i style={{ color: "#a4de02" }}>
+       
+                {direction === 'up' ? (  <i style={{ color: "#a4de02" }}>
                 {"   "}+
                 {(
                   percentChange[percentChange.indexOf(option.symbol) + 1] * 100
                 ).toFixed(2)}
                 %
-              </i>
+              </i>) : (   <i style={{ color: "#ff4c4c" }}>
+                {"   "}
+                {(
+                  percentChange[percentChange.indexOf(option.symbol) + 1] * 100
+                ).toFixed(2)}
+                %
+              </i>)}
+              
+           
               <br></br>
               <Name option={option} namesRender={namesRender} /> <></>
               <hr></hr>
@@ -287,6 +307,22 @@ function MoverStocks() {
                   </Link>
                 </>{" "}
                 <StockPrice option={option} />
+                <></>{" "}
+           
+                {direction === 'up' ? (  <i style={{ color: "#a4de02" }}>
+                {"   "}+
+                {(
+                  percentChange[percentChange.indexOf(option.symbol) + 1] * 100
+                ).toFixed(2)}
+                %
+              </i>) : (   <i style={{ color: "#ff4c4c" }}>
+                {"   "}
+                {(
+                  percentChange[percentChange.indexOf(option.symbol) + 1] * 100
+                ).toFixed(2)}
+                %
+              </i>)}
+           
                 <br></br>
                 <Name option={option} namesRender={namesRender} /> <></>
                 <hr></hr>

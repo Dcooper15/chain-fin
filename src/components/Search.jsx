@@ -50,7 +50,7 @@ class Search extends Component {
             }}
             variant="outlined"
             size="small"
-            color="secondary"
+            color="primary"
             text="secondary"
           />
           <p></p>
@@ -59,7 +59,7 @@ class Search extends Component {
             type="submit"
             variant="outlined"
             value="Search"
-            color="secondary"
+            color="primary"
           >
             Search
           </Button>

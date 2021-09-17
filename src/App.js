@@ -1,6 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
+import { ThemeProvider } from "styled-components";
+import {
+  lightTheme,
+  darkTheme,
+  GlobalBackGround,
+} from "./components/Styles/theme";
+import {
+  SectorMenu,
+  MenuRow,
+  ColumnRight,
+  ColumnLeft,
+  StyledLink,
+} from "./components/Styles/styledElements";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 import MainSearch from "./components/MainSearch";
 import MainSectors from "./components/Sectors/MainSectors";
 import MainTopMovers from "./components/TopMovers/MainTopMovers";
@@ -9,28 +21,42 @@ import Footer from "./components/Footer";
 import MoverStocks from "./components/TopMovers/MoverStocks";
 import FullOptionChain from "./components/OptionChain/FullOptionChain";
 import SectorStocks from "./components/Sectors/SectorStocks";
+import { Button } from "@material-ui/core";
+// import DarkModeIcon from '@mui/icons-material/DarkMode';
+// import Brightness5Icon from '@mui/icons-material/Brightness5';
+
 import "./App.css";
 
-const darkTheme = createMuiTheme({
-  palette: {
-    primary: {
-      main: "#756300",
-    },
-    secondary: {
-      main: "#d4af37",
-      dark: "#d4af37",
-    },
-  },
-});
-
 function App() {
+  const [theme, setTheme] = useState("dark");
+
+  const lightDarkChange = () => {
+    theme === "light" ? setTheme("dark") : setTheme("light");
+  };
+
   return (
-    <ThemeProvider theme={darkTheme}>
+    <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+      <GlobalBackGround />
+
       <>
         <Router>
           <Route exact path="/">
             <Navbar />
-            <p className='anySymbol'>Click on any symbol to expand option chain</p>
+
+            <Button
+              startIcon={theme === "light" ? "Dark" : "Light"}
+              variant={"outlined"}
+              size="small"
+              color="primary"
+              onClick={lightDarkChange}
+              style={{ marginLeft: "3%" }}
+            ></Button>
+
+            <p className="anySymbol">
+              Light Theme is in progress. Stay in Dark Theme for now...
+              Some accent colors (buttons)
+              may seem a bit off in Dark Theme at the moment.
+            </p>
             <br></br>
             <div>
               <br></br>
@@ -39,30 +65,21 @@ function App() {
               <MainSearch />
             </div>
 
-            <div className="sectorMenu">
-              <div className="menuRow">
-                <div className="columnLeft">
-                  <h3 className="menuLink">
-                    <Link
-                      to="/sector"
-                      style={{ textDecoration: "none", color: "#d4af37" }}
-                    >
-                      Sectors
-                    </Link>
+            <SectorMenu>
+              <MenuRow>
+                <ColumnLeft>
+                  <h3>
+                    <StyledLink to="/sector">Sectors</StyledLink>
                   </h3>
-                </div>
-                <div className="columnRight">
-                  <h3 className="menuLink">
-                    <Link
-                      to="/topmovers"
-                      style={{ textDecoration: "none", color: "#d4af37" }}
-                    >
-                      Top Movers
-                    </Link>
+                </ColumnLeft>
+
+                <ColumnRight>
+                  <h3>
+                    <StyledLink to="/topmovers">Top Movers</StyledLink>
                   </h3>
-                </div>
-              </div>
-            </div>
+                </ColumnRight>
+              </MenuRow>
+            </SectorMenu>
             <br></br>
             <br></br>
 
@@ -73,50 +90,77 @@ function App() {
 
           <div className="Routes">
             <Route exact path="/sector">
-            <Navbar />
-            <Link to="/" style={{ color: "#d4af37", textDecoration: "none" }}>
+              <Navbar />
+              <Link to="/" style={{ color: "#d4af37", textDecoration: "none" }}>
                 {"< Home"}
-            </Link>
+              </Link>
               <MainSectors />
             </Route>
 
             <Route exact path="/topmovers">
-            <Navbar />
-            <Link to="/" style={{ color: "#d4af37", textDecoration: "none" }}>
+              <Navbar />
+              <Link to="/" style={{ color: "#d4af37", textDecoration: "none" }}>
                 {"< Home"}
-            </Link>
+              </Link>
               <MainTopMovers />
             </Route>
 
             <Route path="/topmovers/:market">
-              <ThemeProvider>
-            <Navbar />
-            <Link to="/topmovers" style={{ color: "#d4af37", textDecoration: "none" }}>
-                {"< Top Movers"}
-            </Link>
-              <MoverStocks />
-              </ThemeProvider>
+              
+                <Navbar />
+                <Link
+                  to="/topmovers"
+                  style={{ color: "#d4af37", textDecoration: "none" }}
+                >
+                  {"< Top Movers"}
+                </Link>
+                <MoverStocks />
+              
             </Route>
-           
+
             <Route path="/chain/:symbol">
-            <Navbar />
-            <Link to="/" style={{ color: "#d4af37", textDecoration: "none", fontSize:"90%" }}>
+              <Navbar />
+              <Link
+                to="/"
+                style={{
+                  color: "#d4af37",
+                  textDecoration: "none",
+                  fontSize: "90%",
+                }}
+              >
                 {"Home"}
-            </Link>
-            <br></br>
-            <Link to="/sector" style={{ color: "#d4af37", textDecoration: "none", fontSize:"90%"  }}>
+              </Link>
+              <br></br>
+              <Link
+                to="/sector"
+                style={{
+                  color: "#d4af37",
+                  textDecoration: "none",
+                  fontSize: "90%",
+                }}
+              >
                 {"Sectors"}
               </Link>
               <br></br>
-            <Link to="/topmovers" style={{ color: "#d4af37", textDecoration: "none", fontSize:"90%"  }}>
+              <Link
+                to="/topmovers"
+                style={{
+                  color: "#d4af37",
+                  textDecoration: "none",
+                  fontSize: "90%",
+                }}
+              >
                 {"Top Movers"}
-            </Link>
-            <br></br>
+              </Link>
+              <br></br>
               <FullOptionChain />
             </Route>
             <Route path="/sector/:sector">
               <Navbar />
-              <Link to="/sector" style={{ color: "#d4af37", textDecoration: "none" }}>
+              <Link
+                to="/sector"
+                style={{ color: "#d4af37", textDecoration: "none" }}
+              >
                 {"< Sectors"}
               </Link>
               <SectorStocks />

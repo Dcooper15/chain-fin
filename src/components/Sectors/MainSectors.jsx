@@ -1,5 +1,13 @@
 import React from "react";
-import { Link, Route } from "react-router-dom";
+import {
+  SectorMenu,
+  MenuRow,
+  ColumnRight,
+  ColumnLeft,
+  StyledLink,
+  SectorHeader
+} from "../Styles/styledElements";
+import { Route } from "react-router-dom";
 
 
 const MainSectors = () => {
@@ -7,144 +15,144 @@ const MainSectors = () => {
     <>
       <div>
         <Route path="/sector">
-          <h2 className="sectorHeader">Sectors</h2>
-          <div className="sectorMenu">
-            <div className="menuRow">
-              <div className="columnLeft">
-                <h3 className="menuLink">
-                  <Link
+          <SectorHeader>Sectors</SectorHeader>
+          <SectorMenu>
+            <MenuRow>
+              <ColumnLeft>
+                <h3>
+                  <StyledLink
                     to="/sector/finance"
-                    style={{ textDecoration: "none", color: "#d4af37" }}
+                    
                   >
                     Finance
-                  </Link>
+                  </StyledLink>
                 </h3>
-              </div>
-              <div  className="columnRight">
-                <h3 className="menuLink">
-                  <Link
+              </ColumnLeft>
+              <ColumnRight>
+                <h3>
+                  <StyledLink
                     to="/sector/entertainment"
-                    style={{ textDecoration: "none", color: "#d4af37" }}
+                    
                   >
                     Entertainment
-                  </Link>
+                  </StyledLink>
                 </h3>
-              </div>
-            </div>
+              </ColumnRight>
+            </MenuRow>
 
-            <div className="menuRow">
-              <div className="columnLeft">
-                <h3 className="menuLink">
-                  <Link
+            <MenuRow>
+              <ColumnLeft>
+                <h3>
+                  <StyledLink
                     to="/sector/tech"
-                    style={{ textDecoration: "none", color: "#d4af37" }}
+                   
                   >
                     Tech
-                  </Link>
+                  </StyledLink>
                 </h3>
-              </div>
-              <div className="columnRight">
-                <h3 className="menuLink">
-                  <Link
+              </ColumnLeft>
+              <ColumnRight>
+                <h3>
+                  <StyledLink 
                     to="/sector/airline"
-                    style={{ textDecoration: "none", color: "#d4af37" }}
+                
                   >
                     Airline
-                  </Link>
+                  </StyledLink>
                 </h3>
-              </div>
-            </div>
-            <div class="menuRow">
-              <div className="columnLeft">
-                <h3 className="menuLink">
-                  <Link
+              </ColumnRight>
+            </MenuRow>
+            <MenuRow>
+              <ColumnLeft>
+                <h3>
+                  <StyledLink
                     to="/sector/oil"
-                    style={{ textDecoration: "none", color: "#d4af37" }}
+                   
                   >
                     Oil
-                  </Link>
+                  </StyledLink>
                 </h3>
-              </div>
-              <div className="columnRight">
-                <h3 className="menuLink">
-                  <Link
+              </ColumnLeft>
+              <ColumnRight>
+                <h3>
+                  <StyledLink
                     to="/sector/cannabis"
-                    style={{ textDecoration: "none", color: "#d4af37" }}
+                    
                   >
                     Cannabis
-                  </Link>
+                  </StyledLink>
                 </h3>
-              </div>
-            </div>
-            <div className="menuRow">
-              <div className="columnLeft">
-                <h3 className="menuLink">
-                  <Link
+              </ColumnRight>
+            </MenuRow>
+            <MenuRow>
+              <ColumnLeft>
+                <h3>
+                  <StyledLink
                     to="/sector/pharmaceutics"
-                    style={{ textDecoration: "none", color: "#d4af37" }}
+   
                   >
                     Pharmaceutics
-                  </Link>
+                  </StyledLink>
                 </h3>
-              </div>
-              <div className="columnRight">
-                <h3 className="menuLink" >
-                  <Link
+              </ColumnLeft>
+              <ColumnRight>
+                <h3>
+                  <StyledLink
                     to="/sector/energy"
-                    style={{textDecoration: "none", color: "#d4af37", fontSize: "16px" }}
+                    style={{fontSize: '14px'}}
                   >
                     Alternative 
                     
                     Energy
-                  </Link>
+                  </StyledLink>
                 </h3>
-              </div>
-            </div>
-            <div className="menuRow">
-              <div className="columnLeft">
-                <h3 className="menuLink">
-                  <Link
+              </ColumnRight>
+            </MenuRow>
+            <MenuRow>
+              <ColumnLeft>
+                <h3>
+                  <StyledLink
                     to="/sector/automotive"
-                    style={{ textDecoration: "none", color: "#d4af37" }}
+                    
                   >
                     Automotive
-                  </Link>
+                  </StyledLink>
                 </h3>
-              </div>
-              <div className="columnRight">
-                <h3 className="menuLink">
-                  <Link
+              </ColumnLeft>
+              <ColumnRight>
+                <h3>
+                  <StyledLink
                     to="/sector/grocery"
-                    style={{textDecoration: "none", color: "#d4af37" }}
+                    
                   >
                     Grocery
-                  </Link>
+                  </StyledLink>
                 </h3>
-              </div>
-            </div>
-            <div className="menuRow">
-              <div className="columnLeft">
-                <h3 className="menuLink">
-                  <Link
+              </ColumnRight>
+            </MenuRow>
+            <MenuRow>
+              <ColumnLeft>
+                <h3>
+                  <StyledLink
                     to="/sector/crypto"
-                    style={{ textDecoration: "none", color: "#d4af37" }}
+                    
                   >
                     Crypto
-                  </Link>
+                  </StyledLink>
                 </h3>
-              </div>
-              <div className="columnRight">
-                <h3 className="menuLink">
-                  <Link
+              </ColumnLeft>
+              <ColumnRight>
+                <h3>
+                  <StyledLink
                     to="/sector/social"
-                    style={{ textDecoration: "none", color: "#d4af37" }}
+                    
                   >
                     Social Media
-                  </Link>
+                  </StyledLink>
                 </h3>
-              </div>
-            </div>
-          </div>
+              </ColumnRight>
+            </MenuRow>
+          </SectorMenu>
         </Route>
       </div>
     </>
