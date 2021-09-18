@@ -4,7 +4,7 @@ const Vega = ({ option }) => {
   try {
     return (
       <div className="dataGreekContainer">
-        <i className="dataGreekHeader">Vega</i>
+        <bold className="dataGreekHeader">Vega</bold>
         <i className="dataGreekComponentData">
           {" "}
           {

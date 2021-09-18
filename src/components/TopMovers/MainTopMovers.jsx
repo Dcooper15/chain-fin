@@ -1,49 +1,43 @@
 import React from "react";
-import { Link, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
+import {
+  SectorMenu,
+  MenuRow,
+  MenuRowExtra,
+  ColumnRight,
+  ColumnLeft,
+  StyledLink,
+  SectorHeader,
+} from "../Styles/styledElements";
 
 const MainTopMovers = () => {
   return (
     <>
       <div>
         <Route path="/topmovers">
-          <h2 className="sectorHeader">Today's Top Movers</h2>
-          <div className="sectorMenu">
-            <div className="menuRow">
-              <div className="columnLeft">
-                <h3 className="linkMenu">
-                  <Link
-                    to="/topmovers/compx"
-                    style={{ textDecoration: "none", color: "#d4af37" }}
-                  >
-                    NASDAQ
-                  </Link>
+          <SectorHeader>Today's Top Movers</SectorHeader>
+          <SectorMenu>
+            <MenuRow>
+              <ColumnLeft>
+                <h3>
+                  <StyledLink to="/topmovers/compx">NASDAQ</StyledLink>
                 </h3>
-              </div>
-              <div className="columnRight">
-                <h3 className="linkMenu">
-                  <Link
-                    to="/topmovers/spx.x"
-                    style={{ textDecoration: "none", color: "#d4af37" }}
-                  >
-                    SPX
-                  </Link>
+              </ColumnLeft>
+              <ColumnRight>
+                <h3>
+                  <StyledLink to="/topmovers/spx.x">SPX</StyledLink>
                 </h3>
-              </div>
-            </div>
+              </ColumnRight>
+            </MenuRow>
 
-            <div className="menuRowExtra">
-              <div className="columnLeft">
-                <h3 className="linkMenu">
-                  <Link
-                    to="/topmovers/dji"
-                    style={{ textDecoration: "none", color: "#d4af37" }}
-                  >
-                    DJI
-                  </Link>
+            <MenuRowExtra>
+              <ColumnLeft>
+                <h3>
+                  <StyledLink to="/topmovers/dji">DJI</StyledLink>
                 </h3>
-              </div>
-            </div>
-          </div>
+              </ColumnLeft>
+            </MenuRowExtra>
+          </SectorMenu>
         </Route>
       </div>
     </>

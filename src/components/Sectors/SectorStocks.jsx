@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { ThemeContext } from "styled-components";
+import { SectorHeader, StyledSymbolLink } from "../Styles/styledElements";
+import { useStyles } from "../Styles/muiStyles";
 import axios from "axios";
 import Moment from "react-moment";
 import { useParams } from "react-router";
 import { Card, Button } from "@material-ui/core";
-import { Link } from "react-router-dom";
 import Name from "../DataPoints/Name";
 import Symbol from "../DataPoints/Symbol";
 import StockPrice from "../DataPoints/StockPrice";
@@ -41,6 +43,8 @@ const date = new Date();
 let symbolArray = [];
 
 function SectorStocks() {
+  const classes = useStyles();
+  const theme = useContext(ThemeContext);
   const [namesRender, setNames] = useState([]);
   const [dataArray, setDataArray] = useState([]);
   const [handleTypeChange, setHandleTypeChange] = useState(false);
@@ -53,6 +57,7 @@ function SectorStocks() {
     setHandleTypeChange(false);
   };
 
+  console.log("datais, ", dataArray);
   let sectorError = [];
   switch (sector) {
     case "tech":
@@ -141,7 +146,6 @@ function SectorStocks() {
           `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&contractType=ALL&strikeCount=2&expMonth=${process.env.REACT_APP_MONTH}&toDate=${process.env.REACT_APP_DATE}&range=OTM`
         )
         .then((response) => {
-          //console.log(response.data);
           chainData.push(response.data);
 
           setDataArray([chainData]);
@@ -152,60 +156,78 @@ function SectorStocks() {
   return (
     <>
       {!!sectorError.length ? (
-        <h2 className="sectorHeader">{capHeader(sectorError)}</h2>
+        <SectorHeader>{capHeader(sectorError)}</SectorHeader>
       ) : (
-        <h2 className="sectorHeader">
+        <SectorHeader>
           {sector === "energy"
             ? "Alternative " + capHeader(sector)
             : capHeader(sector)}
-        </h2>
+        </SectorHeader>
       )}
       <Button
-        className="searchButton"
+        className={
+          theme.name === "dark"
+            ? handleTypeChange === false
+              ? classes.buttonDark
+              : classes.buttonDarkUns
+            : handleTypeChange === false
+            ? classes.buttonLight
+            : classes.buttonLightUns
+        }
         type="submit"
-        variant={handleTypeChange === !true ? "contained" : "outlined"}
-        color="#d4af37"
         size="small"
         onClick={buttonHandlerCall}
         style={{ marginLeft: "3%" }}
       >
-        <strong style={{color: "#d4af37"}}>Call</strong>
+        <strong style={{ color: theme.name === "dark" ? "#fff" : "#F8E4A5" }}>
+          Call
+        </strong>
       </Button>
       <Button
-        className="searchButton"
+        className={
+          theme.name === "dark"
+            ? handleTypeChange === true
+              ? classes.buttonDark
+              : classes.buttonDarkUns
+            : handleTypeChange === true
+            ? classes.buttonLight
+            : classes.buttonLightUns
+        }
         type="submit"
-        variant={handleTypeChange === true ? "contained" : "outlined"}
         size="small"
-        color="#d4af37"
         onClick={buttonHandlerPut}
       >
-        <strong style={{color: "#d4af37"}}>Put</strong>
+        <strong style={{ color: theme.name === "dark" ? "#fff" : "#F8E4A5" }}>
+          Put
+        </strong>
       </Button>
       {!!dataArray.length
         ? dataArray.map((stock) =>
             stock.map((option) => (
               <Card
-                className="stockInfo"
+                className={classes.card}
+                style={
+                  theme.name === "dark"
+                    ? {
+                        backgroundColor: "#3D3D3D",
+                        borderColor: "#d4af37",
+                        color: "#ffebcd",
+                      }
+                    : {
+                        backgroundColor: "#ebebeb",
+                        borderColor: "#00afc9",
+                        color: "#002933",
+                      }
+                }
                 variant="outlined"
                 hidden={handleTypeChange === true}
-                style={{
-                  backgroundColor: "#3D3D3D",
-                  borderColor: "#d4af37",
-                  color: "#fff",
-                  borderRadius: "15px",
-                  paddingLeft: "2%",
-                  marginLeft: "3%",
-                  marginRight: "3%",
-                }}
+                raised={true}
               >
                 <>
                   {" "}
-                  <Link
-                    to={`/chain/${option.symbol}`}
-                    style={{ textDecoration: "none", color: "#d4af37" }}
-                  >
+                  <StyledSymbolLink to={`/chain/${option.symbol}`}>
                     <Symbol option={option} />
-                  </Link>
+                  </StyledSymbolLink>
                 </>{" "}
                 <StockPrice option={option} />
                 <></>
@@ -213,20 +235,19 @@ function SectorStocks() {
                 <Name option={option} namesRender={namesRender} /> <></>
                 <></>{" "}
                 <Button
-                  className="searchButton"
+                  className={
+                    theme.name === "dark"
+                      ? classes.chainDark
+                      : classes.chainLight
+                  }
                   type="submit"
                   variant="outlined"
                   size="small"
-                  style={{ height: "20px", width: "7%" }}
-                  color="#d4af37"
                 >
                   {
-                    <Link
-                      to={`/chain/${option.symbol}`}
-                      style={{ textDecoration: "none", color: "#d4af37" }}
-                    >
+                    <StyledSymbolLink to={`/chain/${option.symbol}`}>
                       Chain
-                    </Link>
+                    </StyledSymbolLink>
                   }
                 </Button>
                 <hr></hr>
@@ -235,7 +256,7 @@ function SectorStocks() {
                 <PercentChange option={option} />
                 <br></br>
                 <HundredShares option={option} />
-                <i style={{ color: "#d4af37" }}>Greeks</i>
+                <i>Greeks</i>
                 <BidPrice option={option} />
                 <></>
                 <Delta option={option} />
@@ -278,38 +299,56 @@ function SectorStocks() {
         ? dataArray.map((stock) =>
             stock.map((option) => (
               <Card
-                className="stockInfo"
+                className={classes.card}
+                style={
+                  theme.name === "dark"
+                    ? {
+                        backgroundColor: "#3D3D3D",
+                        borderColor: "#d4af37",
+                        color: "#ffebcd",
+                      }
+                    : {
+                        backgroundColor: "#ebebeb",
+                        borderColor: "#00afc9",
+                        color: "#002933",
+                      }
+                }
                 variant="outlined"
                 hidden={handleTypeChange === false}
-                style={{
-                  backgroundColor: "#3D3D3D",
-                  borderColor: "#d4af37",
-                  color: "#fff",
-                  borderRadius: "15px",
-                  paddingLeft: "2%",
-                  marginLeft: "3%",
-                  marginRight: "3%",
-                }}
+                raised={true}
               >
                 <>
                   {" "}
-                  <Link
-                    to={`/chain/${option.symbol}`}
-                    style={{ textDecoration: "none", color: "#d4af37" }}
-                  >
+                  <StyledSymbolLink to={`/chain/${option.symbol}`}>
                     <Symbol option={option} />
-                  </Link>
+                  </StyledSymbolLink>
                 </>{" "}
                 <StockPrice option={option} />
                 <br></br>
                 <Name option={option} namesRender={namesRender} /> <></>
+                <Button
+                  className={
+                    theme.name === "dark"
+                      ? classes.chainDark
+                      : classes.chainLight
+                  }
+                  type="submit"
+                  variant="outlined"
+                  size="small"
+                >
+                  {
+                    <StyledSymbolLink to={`/chain/${option.symbol}`}>
+                      Chain
+                    </StyledSymbolLink>
+                  }
+                </Button>
                 <hr></hr>
                 <StrikeOneOtmPut option={option} />
                 <></>
                 <PercentChangePut option={option} />
                 <br></br>
                 <HundredShares option={option} />
-                <i style={{ color: "#d4af37" }}>Greeks</i>
+                <i>Greeks</i>
                 <BidPricePut option={option} />
                 <></>
                 <DeltaPut option={option} />

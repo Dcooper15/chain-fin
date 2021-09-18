@@ -1,4 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { ThemeContext } from "styled-components";
+import { SectorHeader, StyledSymbolLink } from "../Styles/styledElements";
+import { useStyles } from "../Styles/muiStyles";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useParams } from "react-router";
@@ -41,13 +44,15 @@ let header = [];
 const date = new Date();
 
 function MoverStocks() {
+  const classes = useStyles();
+  const theme = useContext(ThemeContext);
   const [namesRender, setNames] = useState([]);
   const [percentChange, setPercentChange] = useState([]);
   const [marketData, setMarketData] = useState([]);
   const [handleTypeChange, setHandleTypeChange] = useState(false);
-  const [direction, setDirection] = useState('up');
+  const [direction, setDirection] = useState("up");
   const { market } = useParams();
-
+  console.log("theme is", theme);
   const buttonHandlerPut = () => {
     setHandleTypeChange(true);
   };
@@ -55,10 +60,10 @@ function MoverStocks() {
     setHandleTypeChange(false);
   };
   const buttonHandlerUp = () => {
-    setDirection('up');
+    setDirection("up");
   };
   const buttonHandlerDown = () => {
-    setDirection('down');
+    setDirection("down");
   };
 
   switch (market) {
@@ -127,96 +132,134 @@ function MoverStocks() {
 
   return (
     <>
-      <h2 className="sectorHeader">
+      <SectorHeader>
         Today's Top Movers - {header.length ? header : " "}
-      </h2>
+      </SectorHeader>
+
       <Button
-        className="searchButton"
+        className={
+          theme.name === "dark"
+            ? direction === "up"
+              ? classes.buttonDark
+              : classes.buttonDarkUns
+            : direction === "up"
+            ? classes.buttonLight
+            : classes.buttonLightUns
+        }
         type="submit"
-        variant={handleTypeChange === !true ? "contained" : "outlined"}
-        color="secondary"
-        size="small"
-        onClick={buttonHandlerCall}
-        style={{ marginLeft: "3%" }}
-      >
-        Call
-      </Button>
-      <Button
-        className="searchButton"
-        type="submit"
-        variant={handleTypeChange === true ? "contained" : "outlined"}
-        size="small"
-        color="secondary"
-        onClick={buttonHandlerPut}
-      >
-        Put
-      </Button>
-      <Button
-        className="searchButton"
-        type="submit"
-        variant={direction === 'up' ? "contained" : "outlined"}
-        color="secondary"
         size="small"
         onClick={buttonHandlerUp}
         style={{ marginLeft: "3%" }}
       >
-        Up
+        <strong style={{ color: theme.name === "dark" ? "#fff" : "#F8E4A5" }}>
+          Up
+        </strong>
       </Button>
       <Button
-        className="searchButton"
+        className={
+          theme.name === "dark"
+            ? direction === "down"
+              ? classes.buttonDark
+              : classes.buttonDarkUns
+            : direction === "down"
+            ? classes.buttonLight
+            : classes.buttonLightUns
+        }
         type="submit"
-        variant={direction === 'down' ? "contained" : "outlined"}
         size="small"
-        color="secondary"
         onClick={buttonHandlerDown}
       >
-        Down
+        <strong style={{ color: theme.name === "dark" ? "#fff" : "#F8E4A5" }}>
+          Down
+        </strong>
+      </Button>
+      <Button
+        className={
+          theme.name === "dark"
+            ? handleTypeChange === false
+              ? classes.buttonDark
+              : classes.buttonDarkUns
+            : handleTypeChange === false
+            ? classes.buttonLight
+            : classes.buttonLightUns
+        }
+        type="submit"
+        size="small"
+        onClick={buttonHandlerCall}
+        style={{ marginLeft: "3%" }}
+      >
+        <strong style={{ color: theme.name === "dark" ? "#fff" : "#F8E4A5" }}>
+          Call
+        </strong>
+      </Button>
+      <Button
+        className={
+          theme.name === "dark"
+            ? handleTypeChange === true
+              ? classes.buttonDark
+              : classes.buttonDarkUns
+            : handleTypeChange === true
+            ? classes.buttonLight
+            : classes.buttonLightUns
+        }
+        type="submit"
+        size="small"
+        onClick={buttonHandlerPut}
+      >
+        <strong style={{ color: theme.name === "dark" ? "#fff" : "#F8E4A5" }}>
+          Put
+        </strong>
       </Button>
       {!!marketData.length ? (
         marketData.map((stock) =>
           stock.map((option) => (
             <Card
-              className="stockInfo"
+              className={classes.card}
+              style={
+                theme.name === "dark"
+                  ? {
+                      backgroundColor: "#3D3D3D",
+                      borderColor: "#d4af37",
+                      color: "#ffebcd",
+                    }
+                  : {
+                      backgroundColor: "#ebebeb",
+                      borderColor: "#00afc9",
+                      color: "#002933",
+                    }
+              }
               variant="outlined"
               hidden={handleTypeChange === true}
-              style={{
-                backgroundColor: "#3D3D3D",
-                borderColor: "#d4af37",
-                color: "#fff",
-                borderRadius: "15px",
-                paddingLeft: "2%",
-                marginLeft: "3%",
-                marginRight: "3%",
-              }}
+              raised={true}
             >
               <>
                 {" "}
-                <Link
-                  to={`/chain/${option.symbol}`}
-                  style={{ textDecoration: "none", color: "#d4af37" }}
-                >
+                <StyledSymbolLink to={`/chain/${option.symbol}`}>
                   <Symbol option={option} />
-                </Link>
+                </StyledSymbolLink>
               </>{" "}
               <StockPrice option={option} />
               <></>
               <></>{" "}
-       
-                {direction === 'up' ? (  <i style={{ color: "#a4de02" }}>
-                {"   "}+
-                {(
-                  percentChange[percentChange.indexOf(option.symbol) + 1] * 100
-                ).toFixed(2)}
-                %
-              </i>) : (   <i style={{ color: "#ff4c4c" }}>
-                {"   "}
-                {(
-                  percentChange[percentChange.indexOf(option.symbol) + 1] * 100
-                ).toFixed(2)}
-                %
-              </i>)}
-              
-           
+              {direction === "up" ? (
+                <i style={{ color: "#a4de02" }}>
+                  {"   "}+
+                  {(
+                    percentChange[percentChange.indexOf(option.symbol) + 1] *
+                    100
+                  ).toFixed(2)}
+                  %
+                </i>
+              ) : (
+                <i style={{ color: "#ff4c4c" }}>
+                  {"   "}
+                  {(
+                    percentChange[percentChange.indexOf(option.symbol) + 1] *
+                    100
+                  ).toFixed(2)}
+                  %
+                </i>
+              )}
               <br></br>
               <Name option={option} namesRender={namesRender} /> <></>
               <hr></hr>
@@ -226,7 +269,7 @@ function MoverStocks() {
               <br></br>
               <HundredShares option={option} />
               <></>
-              <i style={{ color: "#d4af37" }}>Greeks</i>
+              <i>Greeks</i>
               <BidPrice option={option} />
               <Delta option={option} />
               <AskPrice option={option} />
@@ -284,18 +327,23 @@ function MoverStocks() {
         ? marketData.map((stock) =>
             stock.map((option) => (
               <Card
-                className="stockInfo"
+                className={classes.card}
+                style={
+                  theme.name === "dark"
+                    ? {
+                        backgroundColor: "#3D3D3D",
+                        borderColor: "#d4af37",
+                        color: "#ffebcd",
+                      }
+                    : {
+                        backgroundColor: "#ebebeb",
+                        borderColor: "#00afc9",
+                        color: "#002933",
+                      }
+                }
                 variant="outlined"
                 hidden={handleTypeChange === false}
-                style={{
-                  backgroundColor: "#3D3D3D",
-                  borderColor: "#d4af37",
-                  color: "#fff",
-                  borderRadius: "15px",
-                  paddingLeft: "2%",
-                  marginLeft: "3%",
-                  marginRight: "3%",
-                }}
+                raised={true}
               >
                 <>
                   {" "}
@@ -308,21 +356,29 @@ function MoverStocks() {
                 </>{" "}
                 <StockPrice option={option} />
                 <></>{" "}
-           
-                {direction === 'up' ? (  <i style={{ color: "#a4de02" }}>
-                {"   "}+
-                {(
-                  percentChange[percentChange.indexOf(option.symbol) + 1] * 100
-                ).toFixed(2)}
-                %
-              </i>) : (   <i style={{ color: "#ff4c4c" }}>
-                {"   "}
-                {(
-                  percentChange[percentChange.indexOf(option.symbol) + 1] * 100
-                ).toFixed(2)}
-                %
-              </i>)}
-           
+                {direction === "up" ? (
+                  <i
+                    style={{
+                      color: theme.name === "dark" ? "#a4de02" : "#6b871b",
+                    }}
+                  >
+                    {"   "}+
+                    {(
+                      percentChange[percentChange.indexOf(option.symbol) + 1] *
+                      100
+                    ).toFixed(2)}
+                    %
+                  </i>
+                ) : (
+                  <i style={{ color: "#ff4c4c" }}>
+                    {"   "}
+                    {(
+                      percentChange[percentChange.indexOf(option.symbol) + 1] *
+                      100
+                    ).toFixed(2)}
+                    %
+                  </i>
+                )}
                 <br></br>
                 <Name option={option} namesRender={namesRender} /> <></>
                 <hr></hr>
@@ -331,7 +387,7 @@ function MoverStocks() {
                 <PercentChangePut option={option} />
                 <br></br>
                 <HundredShares option={option} />
-                <i style={{ color: "#d4af37" }}>Greeks</i>
+                <i>Greeks</i>
                 <BidPricePut option={option} />
                 <></>
                 <DeltaPut option={option} />

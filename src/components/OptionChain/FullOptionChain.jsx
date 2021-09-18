@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { ThemeContext } from "styled-components";
+import { SectorHeader } from "../Styles/styledElements";
+import { useStyles } from "../Styles/muiStyles";
 import axios from "axios";
 import { useParams } from "react-router";
-import { makeStyles } from "@material-ui/core/styles";
 import {
   Card,
   Button,
@@ -13,44 +15,6 @@ import {
 
 import NameOptionChain from "../DataPoints/NameOptionChain";
 import Moment from "react-moment";
-
-
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 200,
-  },
-  label: {
-    marginBottom: "0",
-    marginTop: "3%",
-    marginLeft: "2%",
-    minWidth: 75,
-  },
-  menuItem: {
-    backgroundColor: '#756300',
-    '&:hover': {
-      backgroundColor: '#343434',
-      '&$selected': {
-        backgroundColor: '#343434'
-      },
-      
-    },
-    paddingTop: "0px",
-    width: "100%",
-    justifyContent: "center"
-   
-  },
-  select: {
-    width: '25%',
-    marginLeft: "2%",
-    "& .MuiSvgIcon-root": {
-      color: "#d4af37",
-    },
-    
-  },
-  
- 
-}));
 
 const date = new Date();
 const yearEnd = new Date("12/31/2021");
@@ -86,6 +50,7 @@ const offsetDays = (yearEnd.getTime() - date.getTime()) / (1000 * 3600 * 24);
 
 function FullOptionChain() {
   const classes = useStyles();
+  const theme = useContext(ThemeContext);
   const { symbol } = useParams();
   const [expDays, setExpDays] = useState([]);
   const [expDate, setExpDate] = useState([]);
@@ -172,9 +137,9 @@ function FullOptionChain() {
     return (
       <>
         {!!nameRender.length ? (
-          <h2 className="sectorHeader" style={{ marginBottom: "0%" }}>
+          <SectorHeader>
             <NameOptionChain namesRender={nameRender} />
-          </h2>
+          </SectorHeader>
         ) : (
           " "
         )}
@@ -197,72 +162,101 @@ function FullOptionChain() {
                 <div className="buttonConainer">
                   <Button
                     value={expDay}
-                    size='small'
+                    size="small"
                     variant={expDate === expDay ? "contained" : "outlined"}
-                    color='#d4af37'
+                    color="#d4af37"
                     style={{ height: "70%", width: "100%" }}
                     onClick={() => setExpDate(expDay)}
                   >
-                   <i style={{color: "seagreen"}}><Moment
-                      style={{ fontSize: expDay > offsetDays ? "60%" : "80%" }}
-                      add={{ days: expDay }}
-                      format={expDay > offsetDays ? "ll" : "MMM DD"}
-                    >
-                      {date}
-                    </Moment></i> 
+                    <i style={{ color: "seagreen" }}>
+                      <Moment
+                        style={{
+                          fontSize: expDay > offsetDays ? "60%" : "80%",
+                        }}
+                        add={{ days: expDay }}
+                        format={expDay > offsetDays ? "ll" : "MMM DD"}
+                      >
+                        {date}
+                      </Moment>
+                    </i>
                   </Button>
                 </div>
               ))
             : " "}
         </div>
-        <Button
 
+        <Button
+          className={
+            theme.name === "dark"
+              ? handleTypeChange === false
+                ? classes.buttonDark
+                : classes.buttonDarkUns
+              : handleTypeChange === false
+              ? classes.buttonLight
+              : classes.buttonLightUns
+          }
           type="submit"
-          variant={handleTypeChange === !true ? "contained" : "outlined"}
-          color="gold"
           size="small"
           onClick={buttonHandlerCall}
-          style={{ marginLeft: "2%" }}
+          style={{ marginLeft: "3%" }}
         >
-          <strong style={{color: 'Green'}}>Call</strong>
+          <strong style={{ color: theme.name === "dark" ? "#fff" : "#F8E4A5" }}>
+            Call
+          </strong>
         </Button>
         <Button
-    
+          className={
+            theme.name === "dark"
+              ? handleTypeChange === true
+                ? classes.buttonDark
+                : classes.buttonDarkUns
+              : handleTypeChange === true
+              ? classes.buttonLight
+              : classes.buttonLightUns
+          }
           type="submit"
-          variant={handleTypeChange === true ? "contained" : "outlined"}
           size="small"
-          color="gold"
           onClick={buttonHandlerPut}
         >
-          <strong style={{color: 'Green'}}>Put</strong>
+          <strong style={{ color: theme.name === "dark" ? "#fff" : "#F8E4A5" }}>
+            Put
+          </strong>
         </Button>
-       <br></br>
+        <br></br>
 
-        
         <FormControl className={classes.formControl}>
-        <InputLabel 
-        id="strikeLabel"
-        className={classes.label}><strong style={{color: "#d4af37", fontFamily:'Montserrat, sans-serif'}}>Strikes</strong></InputLabel>
-        <Select
-          labelId="strikeLabel"
-          id="strikes"
-          color="gold"
-          className={classes.select}
-          open={open}
-          onClose={handleClose}
-          onOpen={handleOpen}
-          value={strikeCount}
-          onChange={handleStrikeChange}
-        >
-          <MenuItem classes={{root: classes.menuItem, selected: 'selected'}} value={6}
-          ><bold style={{color: "#d4af37"}}>6</bold></MenuItem>
-          <MenuItem className={classes.menuItem} value={10}><bold style={{color: "#d4af37"}}>10</bold></MenuItem>
-          <MenuItem className={classes.menuItem} value={14}><bold style={{color: "#d4af37"}}>14</bold></MenuItem>
-          <MenuItem className={classes.menuItem} value={60}><bold style={{color: "#d4af37"}}>All</bold></MenuItem>
-        </Select>
-      </FormControl>
-     
-          {/* <Slider 
+          <InputLabel id="strikeLabel" className={classes.select}>
+            <strong style={{ color: "#d4af37" }}>Strikes</strong>
+          </InputLabel>
+          <Select
+            labelId="strikeLabel"
+            id="strikes"
+            className={classes.select}
+            open={open}
+            onClose={handleClose}
+            onOpen={handleOpen}
+            value={strikeCount}
+            onChange={handleStrikeChange}
+          >
+            <MenuItem
+              classes={{ root: classes.menuItem, selected: "selected" }}
+              value={6}
+            >
+              <bold style={{ color: "#d4af37" }}>6</bold>
+            </MenuItem>
+            <MenuItem className={classes.menuItem} value={10}>
+              <bold style={{ color: "#d4af37" }}>10</bold>
+            </MenuItem>
+            <MenuItem className={classes.menuItem} value={14}>
+              <bold style={{ color: "#d4af37" }}>14</bold>
+            </MenuItem>
+            <MenuItem className={classes.menuItem} value={60}>
+              <bold style={{ color: "#d4af37" }}>All</bold>
+            </MenuItem>
+          </Select>
+        </FormControl>
+
+        {/* <Slider 
         style={{width: '90%'}}
         defaultValue={6}
         aria-labelledby="discrete-slider-restrict"
@@ -271,30 +265,34 @@ function FullOptionChain() {
         marks={marks}
         valueLabelDisplay="auto"
         /> */}
-        
 
         {!!callData.length
           ? callData
               .map((stock) =>
                 stock.map((option) => (
                   <Card
+                    className={classes.card}
+                    style={
+                      theme.name === "dark"
+                        ? {
+                            backgroundColor: "#3D3D3D",
+                            borderColor: "#d4af37",
+                            color: "#ffebcd",
+                          }
+                        : {
+                            backgroundColor: "#ebebeb",
+                            borderColor: "#00afc9",
+                            color: "#002933",
+                          }
+                    }
+                    variant="outlined"
                     hidden={
                       expDate === option.daysToExpiration &&
                       handleTypeChange === false
                         ? false
                         : true
                     }
-                    className="stockInfo"
-                    variant="outlined"
-                    style={{
-                      backgroundColor: "#3D3D3D",
-                      borderColor: "#d4af37",
-                      color: "#fff",
-                      borderRadius: "15px",
-                      paddingLeft: "2%",
-                      marginLeft: "3%",
-                      marginRight: "3%",
-                    }}
+                    raised={true}
                   >
                     <bold>
                       <strong>
@@ -342,7 +340,7 @@ function FullOptionChain() {
                     <div className="dataGreekContainer">
                       <div className="dataGreekHeader">Delta</div>
                       <bold className="dataGreekComponentData">
-                        {option.delta === "NaN" ? "N/A" : (option.delta)}
+                        {option.delta === "NaN" ? "N/A" : option.delta}
                       </bold>
                     </div>
                     <></>
@@ -422,37 +420,38 @@ function FullOptionChain() {
                         </Moment>
                       </bold>
                     </>
-                    
-                    
                   </Card>
-                  
                 ))
               )
               .reverse()
-              
           : " "}
         {!!putData.length
           ? putData
               .map((stock) =>
                 stock.map((option) => (
                   <Card
+                    className={classes.card}
+                    style={
+                      theme.name === "dark"
+                        ? {
+                            backgroundColor: "#3D3D3D",
+                            borderColor: "#d4af37",
+                            color: "#ffebcd",
+                          }
+                        : {
+                            backgroundColor: "#ebebeb",
+                            borderColor: "#00afc9",
+                            color: "#002933",
+                          }
+                    }
+                    variant="outlined"
                     hidden={
                       expDate === option.daysToExpiration &&
                       handleTypeChange === true
                         ? false
                         : true
                     }
-                    className="stockInfo"
-                    variant="outlined"
-                    style={{
-                      backgroundColor: "#3D3D3D",
-                      borderColor: "#d4af37",
-                      color: "#fff",
-                      borderRadius: "15px",
-                      paddingLeft: "2%",
-                      marginLeft: "3%",
-                      marginRight: "3%",
-                    }}
+                    raised={true}
                   >
                     <bold>
                       <strong>
@@ -500,7 +499,7 @@ function FullOptionChain() {
                     <div className="dataGreekContainer">
                       <div className="dataGreekHeader">Delta</div>
                       <bold className="dataGreekComponentData">
-                      {option.delta === "NaN" ? "N/A" : option.delta}
+                        {option.delta === "NaN" ? "N/A" : option.delta}
                       </bold>
                     </div>
                     <></>
