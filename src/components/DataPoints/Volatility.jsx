@@ -1,25 +1,44 @@
 import React from "react";
+import {
+  DataContainer,
+  DataHeader,
+  DataComponent,
+} from "../Styles/styledElements";
 
-const Volatility = ({option}) => {
+const Volatility = ({ option, type }) => {
   try {
     return (
-      <div className="dataContainer">
-       <div className="dataHeader">Implied Volatility</div>
-       <i className="dataComponentData"> {
-          Object.keys(option.callExpDateMap).map((entry) => {
-            return Object.keys(option.callExpDateMap[entry]).map(
-              (innerArrayID) =>
-                option.callExpDateMap[entry][
-                  innerArrayID
-                ][0].volatility.toFixed(2)
-            );
-          })[0][1]
-        }
-        </i>
-      </div>
+      <DataContainer>
+        <DataHeader>Implied Volatility</DataHeader>
+
+        <DataComponent>
+          {type === "call"
+            ? Object.keys(option.callExpDateMap).map((entry) => {
+                return Object.keys(option.callExpDateMap[entry]).map(
+                  (innerArrayID) =>
+                    option.callExpDateMap[entry][
+                      innerArrayID
+                    ][0].volatility.toFixed(2)
+                );
+              })[0][1]
+            : Object.keys(option.putExpDateMap).map((entry) => {
+                return Object.keys(option.putExpDateMap[entry]).map(
+                  (innerArrayID) =>
+                    option.putExpDateMap[entry][
+                      innerArrayID
+                    ][0].volatility.toFixed(2)
+                );
+              })[0][0]}{" "}
+        </DataComponent>
+      </DataContainer>
     );
   } catch (error) {
-    return <i className="dataContainer" key={7}>Volatility N/A</i>;
+    return (
+      <DataContainer>
+        <DataHeader>Implied Volatility</DataHeader>
+        <DataComponent>N/A</DataComponent>
+      </DataContainer>
+    );
   }
 };
 

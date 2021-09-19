@@ -1,29 +1,31 @@
 import React from "react";
+import { DataGreekContainer, DataGreekHeader, GreekDataComponent} from '../Styles/styledElements';
 
 const Rho = ({ option }) => {
+  const key = Object.keys(option.callExpDateMap).map((entry) => {
+    return Object.keys(option.callExpDateMap[entry]).map(
+      (innerArrayID) =>
+        option.callExpDateMap[entry][innerArrayID][0].rho.toFixed(4)
+    );
+  })[0][1]
   try {
     return (
-      <div className="dataGreekContainer">
-        <bold className="dataGreekHeader">Rho</bold>
-        <i className="dataGreekComponentData">
+      <DataGreekContainer >
+        <DataGreekHeader>Rho</DataGreekHeader>
+        <GreekDataComponent>
           {" "}
           {
-            Object.keys(option.callExpDateMap).map((entry) => {
-              return Object.keys(option.callExpDateMap[entry]).map(
-                (innerArrayID) =>
-                  option.callExpDateMap[entry][innerArrayID][0].rho.toFixed(4)
-              );
-            })[0][1]
+            key
           }
-        </i>
-      </div>
+        </GreekDataComponent>
+      </DataGreekContainer>
     );
   } catch (error) {
     return (
-      <div className="dataGreekContainer">
-        <i className="dataGreekHeader">Rho</i>
-        <i className="dataGreekComponentData">N/A</i>
-      </div>
+      <DataGreekContainer>
+        <DataGreekHeader>Rho</DataGreekHeader>
+        <GreekDataComponent>N/A</GreekDataComponent>
+      </DataGreekContainer>
     );
   }
 };

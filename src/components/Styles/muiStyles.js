@@ -1,5 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 
+
 export const useStyles = makeStyles({
   buttonDark: {
     background: "linear-gradient(45deg, #d4af37 30%, #EEBC1D 90%)",
@@ -37,6 +38,19 @@ export const useStyles = makeStyles({
     margin: 1,
     size: "small",
   },
+  buttonExp: {
+    borderRadius: 3,
+    minWidth: '30px',
+    padding: '0px 15px',
+    fontSize: '12px',
+    color: "#d4af37",
+    margin: '0',
+    marginBottom: '4px',
+    size: "small",
+    display: 'inlineFlex',
+    textAlign: 'center', 
+    whiteSpace: 'nowrap'
+  },
   card: {
     position: "center",
     justifyItems: "center",
@@ -68,44 +82,33 @@ export const useStyles = makeStyles({
 
   formControl: {
     margin: 1,
-    minWidth: 200,
+    
+    display: 'inlineFlex',
+    textAlign: 'center', 
+    whiteSpace: 'nowrap'
   },
 
   label: {
     marginBottom: "0",
-    marginTop: "3%",
+    paddingBottom: '0',
+    marginTop: "2%",
     marginLeft: "2%",
     minWidth: 75,
     fontFamily: "Montserrat, sans-serif",
   },
 
   menuItem: {
-    backgroundColor: "#756300",
-    "&:hover": {
-      backgroundColor: "#343434",
-      "&$selected": {
-        backgroundColor: "#343434",
-      },
-    },
     paddingTop: "0px",
     width: "100%",
     justifyContent: "center",
   },
 
   select: {
-    width: "25%",
-    marginLeft: "2%",
-    color: "#d4af37",
+    minWidth: '40px',
+    paddingTop: '0px',
     "& .MuiSvgIcon-root": {
       color: "#d4af37",
     },
   },
-  selectLight: {
-    width: "25%",
-    marginLeft: "2%",
-    color: "#00afc9",
-    "& .MuiSvgIcon-root": {
-      color: "#00afc9",
-    },
-  },
+ 
 });

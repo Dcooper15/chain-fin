@@ -1,15 +1,20 @@
 import React from "react";
+import {
+  DataContainer,
+  DataHeader,
+  DataComponent,
+} from "../Styles/styledElements";
 
-const PremiumCollected = ({ option }) => {
+const PremiumCollected = ({ option, type }) => {
   try {
     return (
-      <div className="dataContainer">
-        <div className="dataHeader">Premium</div>
-        <bold key={5} className="dataComponentData">
+      <DataContainer>
+        <DataHeader>Premium</DataHeader>
+        <DataComponent>
           {" "}
           $
-          {
-            Object.keys(option.callExpDateMap).map((entry) => {
+          {type === "call"
+            ? Object.keys(option.callExpDateMap).map((entry) => {
               return Object.keys(option.callExpDateMap[entry]).map(
                 (innerArrayID) =>
                   (
@@ -17,12 +22,27 @@ const PremiumCollected = ({ option }) => {
                   ).toFixed(2)
               );
             })[0][1]
+            : Object.keys(option.putExpDateMap).map((entry) => {
+              return Object.keys(option.callExpDateMap[entry]).map(
+                (innerArrayID) =>
+                  (
+                    option.putExpDateMap[entry][innerArrayID][0].mark * 100
+                  ).toFixed(2)
+              );
+            })[0][0]
+          
+            
           }
-        </bold>
-      </div>
+        </DataComponent>
+      </DataContainer>
     );
   } catch (error) {
-    return <i key={5}>Premium Collected: N/A</i>;
+    return (
+      <DataContainer>
+        <DataHeader>Premium Collected</DataHeader>
+        <DataComponent>N/A</DataComponent>
+      </DataContainer>
+    );
   }
 };
 

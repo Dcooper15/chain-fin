@@ -1,24 +1,40 @@
-import React from 'react';
+import React from "react";
+import {
+  DataContainer,
+  DataHeader,
+  DataComponent,
+} from "../Styles/styledElements";
 
-
-const OpenInterest = ({option}) => {
-    try {
-    return(
-        <div className="dataContainer" >
-        <div className="dataHeader">Open Interest</div>
-         <bold key={6}className="dataComponentData">{Object.keys(option.callExpDateMap).map((entry) => {
-            return Object.keys(option.callExpDateMap[entry]).map(
-            (innerArrayID) =>
-            option.callExpDateMap[entry][innerArrayID][0].openInterest
-            );
-            })[0][1]}
-        </bold>
-        </div>
+const OpenInterest = ({ option, type }) => {
+  try {
+    return (
+      <DataContainer>
+        <DataHeader>Open Interest</DataHeader>
+        <DataComponent>
+          {type === "call"
+            ? Object.keys(option.callExpDateMap).map((entry) => {
+                return Object.keys(option.callExpDateMap[entry]).map(
+                  (innerArrayID) =>
+                    option.callExpDateMap[entry][innerArrayID][0].openInterest
+                );
+              })[0][1]
+            : Object.keys(option.putExpDateMap).map((entry) => {
+                return Object.keys(option.putExpDateMap[entry]).map(
+                  (innerArrayID) =>
+                    option.putExpDateMap[entry][innerArrayID][0].openInterest
+                );
+              })[0][0]}{" "}
+        </DataComponent>
+      </DataContainer>
     );
-    } catch (error) {
-        return <i key={6}>Open Interest: N/A</i>
-    }
+  } catch (error) {
+    return (
+      <DataContainer>
+        <DataHeader>Open Interest</DataHeader>
+        <DataComponent>N/A</DataComponent>
+      </DataContainer>
+    );
+  }
 };
-
 
 export default OpenInterest;

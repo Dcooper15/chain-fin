@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { ThemeContext } from "styled-components";
-import { SectorHeader } from "../Styles/styledElements";
+import { SectorHeader, OptionCSub, StyledExpDate, StyledGreeks, StyledMenuItem } from "../Styles/styledElements";
 import { useStyles } from "../Styles/muiStyles";
 import axios from "axios";
 import { useParams } from "react-router";
@@ -13,7 +13,7 @@ import {
   FormControl,
 } from "@material-ui/core";
 
-import NameOptionChain from "../DataPoints/NameOptionChain";
+import Name from "../DataPoints/Name";
 import Moment from "react-moment";
 
 const date = new Date();
@@ -78,11 +78,10 @@ function FullOptionChain() {
     setOpen(true);
   };
 
-  console.log(callData);
   useEffect(() => {
     axios
       .get(
-        `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&strikeCount=${strikeCount}&fromDate=2021-09-03&toDate=2023-01-30`
+        `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&strikeCount=${strikeCount}&includeQuotes=TRUE&fromDate=2021-09-03&toDate=2023-01-30`
       )
       .then((response) => {
         const getDaysToExp = Object.keys(response.data.callExpDateMap)
@@ -100,7 +99,7 @@ function FullOptionChain() {
         setExpDate(uniqueDays[0]);
         const stockPrice = response.data.underlyingPrice.toFixed(2);
         setStockPrice([stockPrice]);
-        const resSymbol = response.data.symbol;
+        setName([response.data.underlying.description])
         const callKeys = Object.keys(response.data.callExpDateMap)
           .map((entry) => {
             return Object.keys(response.data.callExpDateMap[entry]).map(
@@ -120,38 +119,27 @@ function FullOptionChain() {
         setCallData(callKeys);
         setPutData(putKeys);
 
-        axios
-          .get(
-            `https://api.tdameritrade.com/v1/instruments?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${resSymbol}&projection=symbol-search`
-          )
-          .then((response) => {
-            const nameArray = [response.data]
-              .map((symbolId) => Object.values(symbolId))
-              .map((entryId) => Object.entries(entryId[0]))
-              .flat();
-            setName([nameArray.flat()]);
-          });
       });
   }, [symbol, strikeCount]);
   try {
     return (
       <>
         {!!nameRender.length ? (
-          <SectorHeader>
-            <NameOptionChain namesRender={nameRender} />
+          <SectorHeader style={{marginBottom: '0'}}>
+            <Name namesRender={nameRender} />
           </SectorHeader>
         ) : (
           " "
         )}
         {stockPriceRender.length ? (
-          <div className="sectorHeader">
+          <OptionCSub>
             {" "}
             ${stockPriceRender}
             <br></br>
-            <i style={{ fontSize: "90%", color: "#d4af37" }}>
-              100 Shares ${(stockPriceRender * 100).toFixed(0)}
-            </i>
-          </div>
+            
+            <i>  100 Shares ${(stockPriceRender * 100).toFixed(0)}</i>
+          
+          </OptionCSub>
         ) : (
           " "
         )}
@@ -161,24 +149,24 @@ function FullOptionChain() {
             ? expDays.map((expDay) => (
                 <div className="buttonConainer">
                   <Button
+                  className={classes.buttonExp}
                     value={expDay}
                     size="small"
-                    variant={expDate === expDay ? "contained" : "outlined"}
-                    color="#d4af37"
-                    style={{ height: "70%", width: "100%" }}
                     onClick={() => setExpDate(expDay)}
+                    style={{background: expDate === expDay ? theme.name === 'dark' ? 'black' : 'white' : 'none' 
+                  }}
                   >
-                    <i style={{ color: "seagreen" }}>
+                    <StyledExpDate
+                   
+                    >
                       <Moment
-                        style={{
-                          fontSize: expDay > offsetDays ? "60%" : "80%",
-                        }}
+                       
                         add={{ days: expDay }}
                         format={expDay > offsetDays ? "ll" : "MMM DD"}
                       >
                         {date}
                       </Moment>
-                    </i>
+                    </StyledExpDate>
                   </Button>
                 </div>
               ))
@@ -198,7 +186,7 @@ function FullOptionChain() {
           type="submit"
           size="small"
           onClick={buttonHandlerCall}
-          style={{ marginLeft: "3%" }}
+          style={{ marginLeft: "2%" }}
         >
           <strong style={{ color: theme.name === "dark" ? "#fff" : "#F8E4A5" }}>
             Call
@@ -217,17 +205,21 @@ function FullOptionChain() {
           type="submit"
           size="small"
           onClick={buttonHandlerPut}
+          style={{marginLeft: '1%', marginRight: '4%'}}
         >
-          <strong style={{ color: theme.name === "dark" ? "#fff" : "#F8E4A5" }}>
+          <strong style={{ color: theme.name === "dark" ? "#fff" : "#F8E4A5"}}>
             Put
           </strong>
         </Button>
-        <br></br>
+        
 
-        <FormControl className={classes.formControl}>
+        <FormControl className={classes.formControl}
+        >
+     
           <InputLabel id="strikeLabel" className={classes.select}>
-            <strong style={{ color: "#d4af37" }}>Strikes</strong>
+            <strong style={{color: theme.name === 'dark' ?  "#d4af37" : '#146175'}}>Strikes</strong>
           </InputLabel>
+          
           <Select
             labelId="strikeLabel"
             id="strikes"
@@ -238,22 +230,24 @@ function FullOptionChain() {
             value={strikeCount}
             onChange={handleStrikeChange}
           >
+            
             <MenuItem
               classes={{ root: classes.menuItem, selected: "selected" }}
               value={6}
             >
-              <bold style={{ color: "#d4af37" }}>6</bold>
+            <StyledMenuItem>6</StyledMenuItem>
             </MenuItem>
             <MenuItem className={classes.menuItem} value={10}>
-              <bold style={{ color: "#d4af37" }}>10</bold>
-            </MenuItem>
+            <StyledMenuItem>10</StyledMenuItem></MenuItem>
             <MenuItem className={classes.menuItem} value={14}>
-              <bold style={{ color: "#d4af37" }}>14</bold>
+            <StyledMenuItem>14</StyledMenuItem>
             </MenuItem>
             <MenuItem className={classes.menuItem} value={60}>
-              <bold style={{ color: "#d4af37" }}>All</bold>
+            <StyledMenuItem>All</StyledMenuItem>
             </MenuItem>
+            
           </Select>
+          
         </FormControl>
 
         {/* <Slider 
@@ -331,7 +325,7 @@ function FullOptionChain() {
                         {option.strikePrice}
                       </bold>
                     </div>
-                    <i style={{ color: "#d4af37" }}>Greeks</i>
+                    <StyledGreeks>Greeks</StyledGreeks>
 
                     <div className="dataContainer">
                       <div className="dataHeader">Bid</div>
@@ -490,7 +484,7 @@ function FullOptionChain() {
                         {option.strikePrice}
                       </bold>
                     </div>
-                    <i style={{ color: "#d4af37" }}>Greeks</i>
+                    <StyledGreeks>Greeks</StyledGreeks>
 
                     <div className="dataContainer">
                       <div className="dataHeader">Bid</div>
@@ -589,9 +583,9 @@ function FullOptionChain() {
   } catch (error) {
     console.log("catch error", error);
     return (
-      <i className="sectorHeader" style={{ fontSize: "14px" }}>
-        Unable to view {symbol} option chain{" "}
-      </i>
+      <SectorHeader style={{ fontSize: "14px" }}>
+        Unable to view {symbol} option chain
+      </SectorHeader>
     );
   }
 }

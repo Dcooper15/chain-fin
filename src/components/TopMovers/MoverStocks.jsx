@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { ThemeContext } from "styled-components";
-import { SectorHeader, StyledSymbolLink } from "../Styles/styledElements";
+import { SectorHeader, StyledSymbolLink, StyledNavLink, ButtonDiv } from "../Styles/styledElements";
 import { useStyles } from "../Styles/muiStyles";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -26,19 +26,13 @@ import Gamma from "../DataPoints/Gamma";
 import Vega from "../DataPoints/Vega";
 import DaysToExpiration from "../DataPoints/DaysToExpiration";
 import StrikeOneOtmPut from "../DataPoints/Puts/StrikeOneOtmPut";
-import PercentChangePut from "../DataPoints/Puts/PercentChangePut";
-import BidPricePut from "../DataPoints/Puts/BidPricePut";
-import AskPricePut from "../DataPoints/Puts/AskPricePut";
-import PremiumCollectedPut from "../DataPoints/Puts/PremiumCollectedPut";
-import OpenInterestPut from "../DataPoints/Puts/OpenInterestPut";
-import VolumePut from "../DataPoints/Puts/VolumePut";
-import VolatilityPut from "../DataPoints/Puts/VolatilityPut";
 import DeltaPut from "../DataPoints/Puts/DeltaPut";
 import ThetaPut from "../DataPoints/Puts/ThetaPut";
 import RhoPut from "../DataPoints/Puts/RhoPut";
 import GammaPut from "../DataPoints/Puts/GammaPut";
 import VegaPut from "../DataPoints/Puts/VegaPut";
-import DaysToExpirationPut from "../DataPoints/Puts/DaysToExpirationPut";
+import { FaArrowUp, FaArrowDown } from 'react-icons/fa';
+
 
 let header = [];
 const date = new Date();
@@ -46,7 +40,6 @@ const date = new Date();
 function MoverStocks() {
   const classes = useStyles();
   const theme = useContext(ThemeContext);
-  const [namesRender, setNames] = useState([]);
   const [percentChange, setPercentChange] = useState([]);
   const [marketData, setMarketData] = useState([]);
   const [handleTypeChange, setHandleTypeChange] = useState(false);
@@ -81,7 +74,7 @@ function MoverStocks() {
   }
 
   useEffect(() => {
-    const names = [];
+    //const names = [];
     const marketDataArray = [];
     axios
       .get(
@@ -99,26 +92,26 @@ function MoverStocks() {
         const marketMoversArray = response.data.map(
           (marketSymbol) => marketSymbol.symbol
         );
+        // marketMoversArray.map((symbol) =>
+        //   axios
+        //     .get(
+        //       `https://api.tdameritrade.com/v1/instruments?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&projection=symbol-search`
+        //     )
+        //     .then((response) => {
+        //       if (response.status === 200) {
+        //         names.push(response.data);
+        //       }
+        //       const namesArray = names
+        //         .map((symbolId) => Object.values(symbolId))
+        //         .map((entryId) => Object.entries(entryId[0]))
+        //         .flat();
+        //       setNames([namesArray.flat()]);
+        //     })
+        // );
         marketMoversArray.map((symbol) =>
           axios
             .get(
-              `https://api.tdameritrade.com/v1/instruments?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&projection=symbol-search`
-            )
-            .then((response) => {
-              if (response.status === 200) {
-                names.push(response.data);
-              }
-              const namesArray = names
-                .map((symbolId) => Object.values(symbolId))
-                .map((entryId) => Object.entries(entryId[0]))
-                .flat();
-              setNames([namesArray.flat()]);
-            })
-        );
-        marketMoversArray.map((symbol) =>
-          axios
-            .get(
-              `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&contractType=ALL&strikeCount=2&expMonth=${process.env.REACT_APP_MONTH}&toDate=${process.env.REACT_APP_DATE}&range=OTM`
+              `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&contractType=ALL&strikeCount=2&includeQuotes=TRUE&toDate=${process.env.REACT_APP_DATE}&range=OTM`
             )
             .then((response) => {
               if (response.data.status === "SUCCESS") {
@@ -132,11 +125,11 @@ function MoverStocks() {
 
   return (
     <>
-      <SectorHeader>
+    
+      <SectorHeader style={{marginLeft: '0.5%'}}>
         Today's Top Movers - {header.length ? header : " "}
-      </SectorHeader>
-
-      <Button
+        <ButtonDiv >
+        <Button
         className={
           theme.name === "dark"
             ? direction === "up"
@@ -146,14 +139,15 @@ function MoverStocks() {
             ? classes.buttonLight
             : classes.buttonLightUns
         }
+      
         type="submit"
-        size="small"
         onClick={buttonHandlerUp}
-        style={{ marginLeft: "3%" }}
+        style={{ marginLeft: '1px', paddingTop: '3px', padding: '1px', minWidth: '30px'  
+      }}
       >
-        <strong style={{ color: theme.name === "dark" ? "#fff" : "#F8E4A5" }}>
-          Up
-        </strong>
+      <strong>
+          <FaArrowUp style={{color: '#26d134' }}/>
+      </strong>
       </Button>
       <Button
         className={
@@ -166,13 +160,21 @@ function MoverStocks() {
             : classes.buttonLightUns
         }
         type="submit"
-        size="small"
+        
         onClick={buttonHandlerDown}
+        style={{ marginLeft: '3px', paddingTop: '3px', padding: '1px', minWidth: '30px'
+      }}
       >
-        <strong style={{ color: theme.name === "dark" ? "#fff" : "#F8E4A5" }}>
-          Down
-        </strong>
+       <strong>
+        <FaArrowDown style={{color: '#f53333'}}/>
+      </strong>
       </Button>
+      </ButtonDiv>
+      </SectorHeader>
+      
+    
+
+      
       <Button
         className={
           theme.name === "dark"
@@ -261,31 +263,31 @@ function MoverStocks() {
                 </i>
               )}
               <br></br>
-              <Name option={option} namesRender={namesRender} /> <></>
+              <Name namesRender={option.underlying.description} /> <></>
               <hr></hr>
               <StrikeOneOtm option={option} />
               <></>
-              <PercentChange option={option} />
+              <PercentChange option={option} type={'call'} />
               <br></br>
               <HundredShares option={option} />
               <></>
               <i>Greeks</i>
-              <BidPrice option={option} />
+              <BidPrice option={option} type={'call'}/>
               <Delta option={option} />
-              <AskPrice option={option} />
+              <AskPrice option={option} type={'call'}/>
               <></>
               <Theta option={option} />
-              <PremiumCollected option={option} />
+              <PremiumCollected option={option} type={'call'}/>
               <></>
               <Rho option={option} />
-              <OpenInterest option={option} />
+              <OpenInterest option={option} type={'call'}/>
               <></>
               <Gamma option={option} />
-              <Volume option={option} />
+              <Volume option={option} type={'call'}/>
               <></>
               <Vega option={option} />
-              <Volatility option={option} />
-              <DaysToExpiration option={option} />
+              <Volatility option={option} type={'call'}/>
+              <DaysToExpiration option={option} type={'call'}/>
               <>Exp Date </>
               <>
                 <Moment
@@ -307,21 +309,17 @@ function MoverStocks() {
           ))
         )
       ) : (
-        <p className="sectorHeader">
+        <SectorHeader>
           Top Movers unavailable on weekends and late hours
           <br></br>
           <br></br>
-          <Link
+          <StyledNavLink
             to="/"
-            style={{
-              color: "#d4af37",
-              textDecoration: "underlined",
-              fontSize: "90%",
-            }}
+           
           >
-            {"Home"}
-          </Link>
-        </p>
+            Home
+          </StyledNavLink>
+        </SectorHeader>
       )}
       {!!marketData.length
         ? marketData.map((stock) =>
@@ -380,31 +378,31 @@ function MoverStocks() {
                   </i>
                 )}
                 <br></br>
-                <Name option={option} namesRender={namesRender} /> <></>
+                <Name namesRender={option.underlying.description} /> <></>
                 <hr></hr>
                 <StrikeOneOtmPut option={option} />
                 <></>
-                <PercentChangePut option={option} />
+                <PercentChange option={option} type={'put'} />
                 <br></br>
                 <HundredShares option={option} />
                 <i>Greeks</i>
-                <BidPricePut option={option} />
+                <BidPrice option={option} type={'put'}/>
                 <></>
                 <DeltaPut option={option} />
-                <AskPricePut option={option} />
+                <AskPrice option={option} type={'put'}/>
                 <></>
                 <ThetaPut option={option} />
-                <PremiumCollectedPut option={option} />
+                <PremiumCollected option={option} type={'put'}/>
                 <></>
                 <RhoPut option={option} />
-                <OpenInterestPut option={option} />
+                <OpenInterest option={option} type={'put'}/>
                 <></>
                 <GammaPut option={option} />
-                <VolumePut option={option} />
+                <Volume option={option} type={'put'}/>
                 <></>
                 <VegaPut option={option} />
-                <VolatilityPut option={option} />
-                <DaysToExpirationPut option={option} />
+                <Volatility option={option} type={'put'}/>
+                <DaysToExpiration option={option} type={'put'}/>
                 <>
                   <>Exp Date </>
                   <Moment

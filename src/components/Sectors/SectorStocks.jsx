@@ -6,8 +6,10 @@ import axios from "axios";
 import Moment from "react-moment";
 import { useParams } from "react-router";
 import { Card, Button } from "@material-ui/core";
+import MapDataPoints from '../DataPoints/MapDataPoints';
 import Name from "../DataPoints/Name";
 import Symbol from "../DataPoints/Symbol";
+import StockPercentChange from '../DataPoints/StockPercentChange';
 import StockPrice from "../DataPoints/StockPrice";
 import StrikeOneOtm from "../DataPoints/StrikeOneOtm";
 import PercentChange from "../DataPoints/PercentChange";
@@ -25,19 +27,12 @@ import Gamma from "../DataPoints/Gamma";
 import Vega from "../DataPoints/Vega";
 import DaysToExpiration from "../DataPoints/DaysToExpiration";
 import StrikeOneOtmPut from "../DataPoints/Puts/StrikeOneOtmPut";
-import PercentChangePut from "../DataPoints/Puts/PercentChangePut";
-import BidPricePut from "../DataPoints/Puts/BidPricePut";
-import AskPricePut from "../DataPoints/Puts/AskPricePut";
-import PremiumCollectedPut from "../DataPoints/Puts/PremiumCollectedPut";
-import OpenInterestPut from "../DataPoints/Puts/OpenInterestPut";
-import VolumePut from "../DataPoints/Puts/VolumePut";
-import VolatilityPut from "../DataPoints/Puts/VolatilityPut";
 import DeltaPut from "../DataPoints/Puts/DeltaPut";
 import ThetaPut from "../DataPoints/Puts/ThetaPut";
 import RhoPut from "../DataPoints/Puts/RhoPut";
 import GammaPut from "../DataPoints/Puts/GammaPut";
 import VegaPut from "../DataPoints/Puts/VegaPut";
-import DaysToExpirationPut from "../DataPoints/Puts/DaysToExpirationPut";
+
 
 const date = new Date();
 let symbolArray = [];
@@ -45,7 +40,6 @@ let symbolArray = [];
 function SectorStocks() {
   const classes = useStyles();
   const theme = useContext(ThemeContext);
-  const [namesRender, setNames] = useState([]);
   const [dataArray, setDataArray] = useState([]);
   const [handleTypeChange, setHandleTypeChange] = useState(false);
   const { sector } = useParams();
@@ -58,6 +52,7 @@ function SectorStocks() {
   };
 
   console.log("datais, ", dataArray);
+
   let sectorError = [];
   switch (sector) {
     case "tech":
@@ -116,38 +111,18 @@ function SectorStocks() {
   const capHeader = (header) => {
     return header.charAt(0).toUpperCase() + header.slice(1);
   };
+  
 
   useEffect(() => {
-    const names = [];
     const chainData = [];
-    try {
-      symbolArray.map((symbol) =>
-        axios
-          .get(
-            `https://api.tdameritrade.com/v1/instruments?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&projection=symbol-search`
-          )
-          .then((response) => {
-            if (response.status === 200) {
-              names.push(response.data);
-            }
-            const namesArray = names
-              .map((symbolId) => Object.values(symbolId))
-              .map((entryId) => Object.entries(entryId[0]))
-              .flat();
-            setNames([namesArray.flat()]);
-          })
-      );
-    } catch (error) {
-      console.log(error);
-    }
+    console.log(chainData);
     symbolArray.map((symbol) =>
       axios
         .get(
-          `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&contractType=ALL&strikeCount=2&expMonth=${process.env.REACT_APP_MONTH}&toDate=${process.env.REACT_APP_DATE}&range=OTM`
+          `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&contractType=ALL&strikeCount=2&includeQuotes=TRUE&toDate=${process.env.REACT_APP_DATE}range=OTM`
         )
         .then((response) => {
           chainData.push(response.data);
-
           setDataArray([chainData]);
         })
     );
@@ -229,10 +204,11 @@ function SectorStocks() {
                     <Symbol option={option} />
                   </StyledSymbolLink>
                 </>{" "}
-                <StockPrice option={option} />
+                <StockPrice option={option} /><></>
+                <StockPercentChange option={option} />
                 <></>
                 <br></br>
-                <Name option={option} namesRender={namesRender} /> <></>
+                <Name namesRender={option.underlying.description} /> <></>
                 <></>{" "}
                 <Button
                   className={
@@ -251,29 +227,36 @@ function SectorStocks() {
                   }
                 </Button>
                 <hr></hr>
+                
+                {/* <MapDataPoints  option={option} 
+               dataComp={option.volatility} fixedDec={0} />
+               
+               {console.log(<MapDataPoints option={option} 
+               dataComp={option.volatility} fixedDec={0} />)} */}
+               
                 <StrikeOneOtm option={option} />
                 <></>
-                <PercentChange option={option} />
+                <PercentChange option={option} type={'call'} />
                 <br></br>
-                <HundredShares option={option} />
+                <HundredShares option={option} type={'call'}/>
                 <i>Greeks</i>
-                <BidPrice option={option} />
+                <BidPrice option={option} type={'call'} />
                 <></>
                 <Delta option={option} />
-                <AskPrice option={option} />
+                <AskPrice option={option} type={'call'}/>
                 <></>
                 <Theta option={option} />
-                <PremiumCollected option={option} />
+                <PremiumCollected option={option} type={'call'} />
                 <></>
                 <Rho option={option} />
-                <OpenInterest option={option} />
+                <OpenInterest option={option} type={'call'} />
                 <></>
                 <Gamma option={option} />
-                <Volume option={option} />
+                <Volume option={option} type={'call'} />
                 <></>
                 <Vega option={option} />
-                <Volatility option={option} />
-                <DaysToExpiration option={option} />
+                <Volatility option={option} type={'call'}/>
+                <DaysToExpiration option={option} type={'call'}/>
                 <>
                   <>Exp Date </>
                   <Moment
@@ -323,9 +306,9 @@ function SectorStocks() {
                     <Symbol option={option} />
                   </StyledSymbolLink>
                 </>{" "}
-                <StockPrice option={option} />
+                <StockPrice option={option} /><></><StockPercentChange option={option} />
                 <br></br>
-                <Name option={option} namesRender={namesRender} /> <></>
+                <Name namesRender={option.underlying.description} /> <></>
                 <Button
                   className={
                     theme.name === "dark"
@@ -345,27 +328,27 @@ function SectorStocks() {
                 <hr></hr>
                 <StrikeOneOtmPut option={option} />
                 <></>
-                <PercentChangePut option={option} />
+                <PercentChange option={option} type={'put'} />
                 <br></br>
                 <HundredShares option={option} />
                 <i>Greeks</i>
-                <BidPricePut option={option} />
+                <BidPrice option={option} type={'put'} />
                 <></>
                 <DeltaPut option={option} />
-                <AskPricePut option={option} />
+                <AskPrice option={option} type={'put'} />
                 <></>
                 <ThetaPut option={option} />
-                <PremiumCollectedPut option={option} />
+                <PremiumCollected option={option} type={'put'} />
                 <></>
                 <RhoPut option={option} />
-                <OpenInterestPut option={option} />
+                <OpenInterest option={option} type={'put'} />
                 <></>
                 <GammaPut option={option} />
-                <VolumePut option={option} />
+                <Volume option={option} type={'put'}/>
                 <></>
                 <VegaPut option={option} />
-                <VolatilityPut option={option} />
-                <DaysToExpirationPut option={option} />
+                <Volatility option={option} type={'put'} />
+                <DaysToExpiration option={option} type={'put'} />
                 <>
                   <>Exp Date </>
                   <Moment

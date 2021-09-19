@@ -1,8 +1,7 @@
 import React from "react";
 
-const Name = ({ namesRender, option }) => {
-  const nameIncludes =
-    namesRender[0][namesRender[0].indexOf(option.symbol) + 2];
+const Name = ({ namesRender }) => {
+  const nameIncludes = namesRender
   try {
     if (nameIncludes.includes(",")) {
       return (

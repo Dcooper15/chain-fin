@@ -1,26 +1,34 @@
 import React from "react";
+import {
+  DataContainer,
+  DataHeader,
+  DataComponent,
+} from "../Styles/styledElements";
 
-const DaysToExpiration = ({option}) => {
+const DaysToExpiration = ({ option, type }) => {
   try {
     return (
-        <div className="dataContainer" >
-      <div className="dataHeader">
-        Days/Expiration</div>
-       <bold key={8}className="dataComponentData"> {
-          Object.keys(option.callExpDateMap).map((entry) => {
-            return Object.keys(option.callExpDateMap[entry]).map(
-              (innerArrayID) =>
-                option.callExpDateMap[entry][innerArrayID][0]
-                  .daysToExpiration
-            );
-          })[0][1]
-        }
-     </bold>
-      </div>
+      <DataContainer>
+        <DataHeader>Days/Expiration</DataHeader>
+        <DataComponent>
+          {
+            Object.keys(option.callExpDateMap).map((entry) => {
+              return Object.keys(option.callExpDateMap[entry]).map(
+                (innerArrayID) =>
+                  option.callExpDateMap[entry][innerArrayID][0].daysToExpiration
+              );
+            })[0][1]
+          }
+        </DataComponent>
+      </DataContainer>
     );
   } catch (error) {
-    return <i className="dataContainer" key={8}>Days to Expiration: N/A</i>;
+    return (
+      <DataContainer>
+        <DataHeader>Days/Expiration</DataHeader>
+        <DataComponent>N/A</DataComponent>
+      </DataContainer>
+    );
   }
-};
-
+}
 export default DaysToExpiration;

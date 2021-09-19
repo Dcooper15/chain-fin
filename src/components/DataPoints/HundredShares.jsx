@@ -1,18 +1,28 @@
 import React from "react";
+import {
+  DataContainer,
+  DataHeader,
+  DataComponent,
+} from "../Styles/styledElements";
 
 const HundredShares = ({ option }) => {
   try {
     return (
-      <div className="dataContainer">
-        <div className="dataHeader">{"100 Shares"}</div>
-        <></>
-        <bold key={3}className="dataComponentData">
+      <DataContainer>
+        <DataHeader>{"100 Shares"}</DataHeader>
+        
+        <DataComponent>
           ${(option.underlyingPrice * 100).toFixed(0)}
-        </bold>
-      </div>
+        </DataComponent>
+      </DataContainer>
     );
   } catch (error) {
-    return <i key={3}>100 Shares: N/A</i>;
+    return (
+      <DataContainer>
+        <DataHeader>Hundred Shares</DataHeader>
+        <DataComponent>N/A</DataComponent>
+      </DataContainer>
+    );
   }
 };
 
