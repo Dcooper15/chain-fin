@@ -6,7 +6,7 @@ import axios from "axios";
 import Moment from "react-moment";
 import { useParams } from "react-router";
 import { Card, Button } from "@material-ui/core";
-import MapDataPoints from '../DataPoints/MapDataPoints';
+//import MapDataPoints from '../DataPoints/MapDataPoints';
 import Name from "../DataPoints/Name";
 import Symbol from "../DataPoints/Symbol";
 import StockPercentChange from '../DataPoints/StockPercentChange';
