@@ -33,7 +33,7 @@ class MainSearch extends Component {
 
   searchStocks = async (text) => {
     const res = await axios.get(
-      `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${text}&contractType=ALL&strikeCount=2&expMonth=${process.env.REACT_APP_MONTH}&toDate=${process.env.REACT_APP_DATE}&range=OTM`
+      `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${text}&contractType=ALL&strikeCount=2&toDate=${process.env.REACT_APP_DATE}&range=OTM`
     );
     console.log("data", res.data);
     if (res.data.status === "FAILED") {
@@ -107,20 +107,20 @@ class MainSearch extends Component {
               <i style={{ color: "#d4af37" }}>Greeks</i>
               <BidPrice option={option} />
               <Delta option={option} />
-              <AskPrice option={option} />
+              <AskPrice option={option} type={'call'}/>
               <></>
               <Theta option={option} />
-              <PremiumCollected option={option} />
+              <PremiumCollected option={option} type={'call'} />
               <></>
               <Rho option={option} />
-              <OpenInterest option={option} />
+              <OpenInterest option={option} type={'call'} />
               <></>
               <Gamma option={option} />
-              <Volume option={option} />
+              <Volume option={option} type={'call'}/>
               <></>
-              <Vega option={option} />
-              <Volatility option={option} />
-              <DaysToExpiration option={option} />
+              <Vega option={option} type={'call'}/>
+              <Volatility option={option} type={'call'}/>
+              <DaysToExpiration option={option} type={'call'}/>
               <>
                 <>Exp Date </>
                 <Moment

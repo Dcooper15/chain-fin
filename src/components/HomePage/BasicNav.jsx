@@ -3,7 +3,7 @@ import { StyledNavLink,
   StyledNavbar 
 } from "../Styles/styledElements";
 import { Button } from "@material-ui/core";
-import { GiMountedKnight, GiLightningSaber } from "react-icons/gi";
+import { GiBlackKnightHelm, GiLightningSaber } from "react-icons/gi";
 import { IoHome } from "react-icons/io5";
 
 const BasicNav = ({ lightDarkChange, theme }) => {
@@ -21,7 +21,7 @@ const BasicNav = ({ lightDarkChange, theme }) => {
       <Button
         startIcon={
           theme === "light" ? (
-            <GiMountedKnight style={{ color: "#00afc9" }} />
+            <GiBlackKnightHelm style={{ color: "#00afc9" }} />
           ) : (
             <GiLightningSaber style={{ color: "#d4af37" }} />
           )
