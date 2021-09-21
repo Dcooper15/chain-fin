@@ -4,19 +4,21 @@ import {
   StyledPercentChangeDown,
 } from "../Styles/styledElements";
 
-const StockPercentChange = ({ option }) => {
+const StockPercentChange = ({ option, chainPercent, type }) => {
+  const percentChange = type === 'full' ? chainPercent : (option.underlying.markPercentChange).toFixed(2)
+
   try {
-    return option.underlying.markPercentChange >= 0 ? (
+    return percentChange >= 0 ? (
       <StyledPercentChangeUp>
-        +{option.underlying.markPercentChange}%
+        +{percentChange}%
       </StyledPercentChangeUp>
     ) : (
       <StyledPercentChangeDown>
-        {option.underlying.markPercentChange}%
+        {percentChange}%
       </StyledPercentChangeDown>
     );
   } catch (error) {
-    return "no";
+    return "";
   }
 };
 

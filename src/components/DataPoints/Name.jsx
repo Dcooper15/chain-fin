@@ -1,62 +1,29 @@
 import React from "react";
 
 const Name = ({ namesRender }) => {
-  const nameIncludes = namesRender
+  const nameIncludes = namesRender;
   try {
     if (nameIncludes.includes(",")) {
-      return (
-        <bold key={1}>
-          <strong>{nameIncludes.slice(0, nameIncludes.indexOf(","))}</strong>
-        </bold>
-      );
+      return <>{nameIncludes.slice(0, nameIncludes.indexOf(","))}</>;
     } else if (nameIncludes.includes("-")) {
-      return (
-        <bold key={1}>
-          <strong>{nameIncludes.slice(0, nameIncludes.indexOf("-"))}</strong>
-        </bold>
-      );
+      return <>{nameIncludes.slice(0, nameIncludes.indexOf("-"))}</>;
     } else if (nameIncludes.includes("(")) {
-      return (
-        <bold key={1}>
-          <strong>{nameIncludes.slice(0, nameIncludes.indexOf("("))}</strong>
-        </bold>
-      );
+      return <>{nameIncludes.slice(0, nameIncludes.indexOf("("))}</>;
     } else if (nameIncludes.includes("Common")) {
+      return <>{nameIncludes.slice(0, nameIncludes.indexOf("Common"))}</>;
+    } else if (nameIncludes.includes("Corporation")) {
+      return <>{nameIncludes.slice(0, nameIncludes.indexOf("Corporation"))}</>;
+    } else if (nameIncludes.includes("Depositary")) {
+      return <>{nameIncludes.slice(0, nameIncludes.indexOf("Depositary"))}</>;
+    } else {
       return (
-        <bold key={1}>
-          <strong>
-            {nameIncludes.slice(0, nameIncludes.indexOf("Common"))}
-          </strong>
-        </bold>
-      );
-    } 
-    else if (nameIncludes.includes("Corporation")) {
-      return (
-        <bold key={1}>
-          <strong>
-            {nameIncludes.slice(0, nameIncludes.indexOf("Corporation"))}
-          </strong>
-        </bold>
-      );
-    } 
-    else if (nameIncludes.includes("Depositary")) {
-      return (
-        <bold key={1}>
-          <strong>
-            {nameIncludes.slice(0, nameIncludes.indexOf("Depositary"))}
-          </strong>
-        </bold>
-      );
-    } 
-    else {
-      return (
-        <bold key={1}>
-          <strong>{nameIncludes}</strong>
-        </bold>
+        <>
+          {nameIncludes}
+        </>
       );
     }
   } catch (error) {
-    return <strong>Name Not Available</strong>;
+    return <>Name Not Available</>;
   }
 };
 

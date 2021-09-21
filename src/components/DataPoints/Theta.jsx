@@ -1,30 +1,37 @@
 import React from "react";
+import {
+  DataGreekContainer,
+  DataGreekHeader,
+  GreekDataComponent,
+} from "../Styles/styledElements";
 
-const Theta = ({ option }) => {
+const Theta = ({ option, mapType, chainType }) => {
+  const callIndex = Object.keys(option.callExpDateMap).map((entry) => {
+    return Object.keys(option.callExpDateMap[entry]).map(
+      (innerArrayID) => option.callExpDateMap[entry][innerArrayID][0].theta
+    );
+  })[0][1];
+  const putIndex = Object.keys(option.putExpDateMap).map((entry) => {
+    return Object.keys(option.putExpDateMap[entry]).map(
+      (innerArrayID) => option.putExpDateMap[entry][innerArrayID][0].theta
+    );
+  })[0][0];
   try {
     return (
-      <div className="dataGreekContainer">
-        <bold className="dataGreekHeader">Theta</bold>
-        <i className="dataGreekComponentData">
-          {" "}
-          {
-            Object.keys(option.callExpDateMap).map((entry) => {
-              return Object.keys(option.callExpDateMap[entry]).map(
-                (innerArrayID) =>
-                  option.callExpDateMap[entry][innerArrayID][0].theta.toFixed(4)
-              );
-            })[0][1]
-          }
-        </i>
-      </div>
+      <DataGreekContainer>
+        <DataGreekHeader>Theta</DataGreekHeader>
+
+        <GreekDataComponent>
+          {mapType === "call" ? callIndex : putIndex}
+        </GreekDataComponent>
+      </DataGreekContainer>
     );
   } catch (error) {
-    return (
-      <div className="dataGreekContainer">
-        <i className="dataGreekHeader">Theta</i>
-        <i className="dataGreekComponentData">N/A</i>
-      </div>
-    );
+    <DataGreekContainer>
+      <DataGreekHeader>Theta</DataGreekHeader>
+
+      <GreekDataComponent>N/A</GreekDataComponent>
+    </DataGreekContainer>;
   }
 };
 

@@ -7,7 +7,7 @@ export const useStyles = makeStyles({
     borderColor: "#d4af37",
     border: 2,
     borderRadius: 3,
-    boxShadow: "0 3px 5px 2px rgba(212, 175, 55, .8)",
+    boxShadow: "0 3px 5px 2px rgba(212, 175, 55, .5)",
     color: "#d4af37",
     margin: 1,
     size: "small",

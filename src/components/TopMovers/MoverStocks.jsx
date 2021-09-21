@@ -1,38 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 import { ThemeContext } from "styled-components";
-import { SectorHeader, StyledSymbolLink, StyledNavLink, ButtonDiv } from "../Styles/styledElements";
+import { SectorHeader, ButtonDiv } from "../Styles/styledElements";
 import { useStyles } from "../Styles/muiStyles";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import { useParams } from "react-router";
 import Moment from "react-moment";
 import { Card, Button } from "@material-ui/core";
-import Name from "../DataPoints/Name";
-import Symbol from "../DataPoints/Symbol";
-import StockPrice from "../DataPoints/StockPrice";
-import StrikeOneOtm from "../DataPoints/StrikeOneOtm";
-import PercentChange from "../DataPoints/PercentChange";
-import HundredShares from "../DataPoints/HundredShares";
-import BidPrice from "../DataPoints/BidPrice";
-import AskPrice from "../DataPoints/AskPrice";
-import PremiumCollected from "../DataPoints/PremiumCollected";
-import OpenInterest from "../DataPoints/OpenInterest";
-import Volume from "../DataPoints/Volume";
-import Volatility from "../DataPoints/Volatility";
-import Delta from "../DataPoints/Delta";
-import Theta from "../DataPoints/Theta";
-import Rho from "../DataPoints/Rho";
-import Gamma from "../DataPoints/Gamma";
-import Vega from "../DataPoints/Vega";
-import DaysToExpiration from "../DataPoints/DaysToExpiration";
-import StrikeOneOtmPut from "../DataPoints/Puts/StrikeOneOtmPut";
-import DeltaPut from "../DataPoints/Puts/DeltaPut";
-import ThetaPut from "../DataPoints/Puts/ThetaPut";
-import RhoPut from "../DataPoints/Puts/RhoPut";
-import GammaPut from "../DataPoints/Puts/GammaPut";
-import VegaPut from "../DataPoints/Puts/VegaPut";
-import { FaArrowUp, FaArrowDown } from 'react-icons/fa';
-
+import MapDataPoints from "../DataPoints/MapDataPoints";
+import MapCardHeader from "../DataPoints/MapCardHeader";
+import { FaArrowUp, FaArrowDown } from "react-icons/fa";
 
 let header = [];
 const date = new Date();
@@ -40,7 +16,6 @@ const date = new Date();
 function MoverStocks() {
   const classes = useStyles();
   const theme = useContext(ThemeContext);
-  const [percentChange, setPercentChange] = useState([]);
   const [marketData, setMarketData] = useState([]);
   const [handleTypeChange, setHandleTypeChange] = useState(false);
   const [direction, setDirection] = useState("up");
@@ -72,9 +47,8 @@ function MoverStocks() {
     default:
       header = `No data to display for ${market}.`;
   }
-
+  const getButtonColor = theme.name === "dark" ? "#fff" : "#F8E4A5";
   useEffect(() => {
-    //const names = [];
     const marketDataArray = [];
     axios
       .get(
@@ -83,31 +57,10 @@ function MoverStocks() {
         }&direction=${direction}&change=percent`
       )
       .then((response) => {
-        const changePercentArray = response.data
-          .map((percent) => [percent.symbol, percent.change])
-          .flat();
-
-        setPercentChange(changePercentArray);
-
         const marketMoversArray = response.data.map(
           (marketSymbol) => marketSymbol.symbol
         );
-        // marketMoversArray.map((symbol) =>
-        //   axios
-        //     .get(
-        //       `https://api.tdameritrade.com/v1/instruments?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&projection=symbol-search`
-        //     )
-        //     .then((response) => {
-        //       if (response.status === 200) {
-        //         names.push(response.data);
-        //       }
-        //       const namesArray = names
-        //         .map((symbolId) => Object.values(symbolId))
-        //         .map((entryId) => Object.entries(entryId[0]))
-        //         .flat();
-        //       setNames([namesArray.flat()]);
-        //     })
-        // );
+
         marketMoversArray.map((symbol) =>
           axios
             .get(
@@ -125,56 +78,58 @@ function MoverStocks() {
 
   return (
     <>
-    
-      <SectorHeader style={{marginLeft: '0.5%'}}>
+      <SectorHeader style={{ marginLeft: "0.5%" }}>
         Today's Top Movers - {header.length ? header : " "}
-        <ButtonDiv >
-        <Button
-        className={
-          theme.name === "dark"
-            ? direction === "up"
-              ? classes.buttonDark
-              : classes.buttonDarkUns
-            : direction === "up"
-            ? classes.buttonLight
-            : classes.buttonLightUns
-        }
-      
-        type="submit"
-        onClick={buttonHandlerUp}
-        style={{ marginLeft: '1px', paddingTop: '3px', padding: '1px', minWidth: '30px'  
-      }}
-      >
-      <strong>
-          <FaArrowUp style={{color: '#26d134' }}/>
-      </strong>
-      </Button>
-      <Button
-        className={
-          theme.name === "dark"
-            ? direction === "down"
-              ? classes.buttonDark
-              : classes.buttonDarkUns
-            : direction === "down"
-            ? classes.buttonLight
-            : classes.buttonLightUns
-        }
-        type="submit"
-        
-        onClick={buttonHandlerDown}
-        style={{ marginLeft: '3px', paddingTop: '3px', padding: '1px', minWidth: '30px'
-      }}
-      >
-       <strong>
-        <FaArrowDown style={{color: '#f53333'}}/>
-      </strong>
-      </Button>
-      </ButtonDiv>
+        <ButtonDiv>
+          <Button
+            className={
+              theme.name === "dark"
+                ? direction === "up"
+                  ? classes.buttonDark
+                  : classes.buttonDarkUns
+                : direction === "up"
+                ? classes.buttonLight
+                : classes.buttonLightUns
+            }
+            type="submit"
+            onClick={buttonHandlerUp}
+            style={{
+              marginLeft: "1px",
+              paddingTop: "3px",
+              padding: "1px",
+              minWidth: "30px",
+            }}
+          >
+            <strong>
+              <FaArrowUp style={{ color: "#26d134" }} />
+            </strong>
+          </Button>
+          <Button
+            className={
+              theme.name === "dark"
+                ? direction === "down"
+                  ? classes.buttonDark
+                  : classes.buttonDarkUns
+                : direction === "down"
+                ? classes.buttonLight
+                : classes.buttonLightUns
+            }
+            type="submit"
+            onClick={buttonHandlerDown}
+            style={{
+              marginLeft: "3px",
+              paddingTop: "3px",
+              padding: "1px",
+              minWidth: "30px",
+            }}
+          >
+            <strong>
+              <FaArrowDown style={{ color: "#f53333" }} />
+            </strong>
+          </Button>
+        </ButtonDiv>
       </SectorHeader>
-      
-    
 
-      
       <Button
         className={
           theme.name === "dark"
@@ -190,9 +145,7 @@ function MoverStocks() {
         onClick={buttonHandlerCall}
         style={{ marginLeft: "3%" }}
       >
-        <strong style={{ color: theme.name === "dark" ? "#fff" : "#F8E4A5" }}>
-          Call
-        </strong>
+        <strong style={{ color: getButtonColor }}>Call</strong>
       </Button>
       <Button
         className={
@@ -208,9 +161,7 @@ function MoverStocks() {
         size="small"
         onClick={buttonHandlerPut}
       >
-        <strong style={{ color: theme.name === "dark" ? "#fff" : "#F8E4A5" }}>
-          Put
-        </strong>
+        <strong style={{ color: getButtonColor }}>Put</strong>
       </Button>
       {!!marketData.length ? (
         marketData.map((stock) =>
@@ -234,60 +185,9 @@ function MoverStocks() {
               hidden={handleTypeChange === true}
               raised={true}
             >
-              <>
-                {" "}
-                <StyledSymbolLink to={`/chain/${option.symbol}`}>
-                  <Symbol option={option} />
-                </StyledSymbolLink>
-              </>{" "}
-              <StockPrice option={option} />
-              <></>
-              <></>{" "}
-              {direction === "up" ? (
-                <i style={{ color: "#a4de02" }}>
-                  {"   "}+
-                  {(
-                    percentChange[percentChange.indexOf(option.symbol) + 1] *
-                    100
-                  ).toFixed(2)}
-                  %
-                </i>
-              ) : (
-                <i style={{ color: "#ff4c4c" }}>
-                  {"   "}
-                  {(
-                    percentChange[percentChange.indexOf(option.symbol) + 1] *
-                    100
-                  ).toFixed(2)}
-                  %
-                </i>
-              )}
-              <br></br>
-              <Name namesRender={option.underlying.description} /> <></>
-              <hr></hr>
-              <StrikeOneOtm option={option} />
-              <></>
-              <PercentChange option={option} type={'call'} />
-              <br></br>
-              <HundredShares option={option} />
-              <></>
-              <i>Greeks</i>
-              <BidPrice option={option} type={'call'}/>
-              <Delta option={option} />
-              <AskPrice option={option} type={'call'}/>
-              <></>
-              <Theta option={option} />
-              <PremiumCollected option={option} type={'call'}/>
-              <></>
-              <Rho option={option} />
-              <OpenInterest option={option} type={'call'}/>
-              <></>
-              <Gamma option={option} />
-              <Volume option={option} type={'call'}/>
-              <></>
-              <Vega option={option} />
-              <Volatility option={option} type={'call'}/>
-              <DaysToExpiration option={option} type={'call'}/>
+              <MapCardHeader option={option} />
+              <MapDataPoints option={option} mapType={"call"} />
+
               <>Exp Date </>
               <>
                 <Moment
@@ -311,14 +211,6 @@ function MoverStocks() {
       ) : (
         <SectorHeader>
           Top Movers unavailable on weekends and late hours
-          <br></br>
-          <br></br>
-          <StyledNavLink
-            to="/"
-           
-          >
-            Home
-          </StyledNavLink>
         </SectorHeader>
       )}
       {!!marketData.length
@@ -343,66 +235,10 @@ function MoverStocks() {
                 hidden={handleTypeChange === false}
                 raised={true}
               >
-                <>
-                  {" "}
-                  <Link
-                    to={`/chain/${option.symbol}`}
-                    style={{ textDecoration: "none", color: "#d4af37" }}
-                  >
-                    <Symbol option={option} />
-                  </Link>
-                </>{" "}
-                <StockPrice option={option} />
-                <></>{" "}
-                {direction === "up" ? (
-                  <i
-                    style={{
-                      color: theme.name === "dark" ? "#a4de02" : "#6b871b",
-                    }}
-                  >
-                    {"   "}+
-                    {(
-                      percentChange[percentChange.indexOf(option.symbol) + 1] *
-                      100
-                    ).toFixed(2)}
-                    %
-                  </i>
-                ) : (
-                  <i style={{ color: "#ff4c4c" }}>
-                    {"   "}
-                    {(
-                      percentChange[percentChange.indexOf(option.symbol) + 1] *
-                      100
-                    ).toFixed(2)}
-                    %
-                  </i>
-                )}
-                <br></br>
-                <Name namesRender={option.underlying.description} /> <></>
-                <hr></hr>
-                <StrikeOneOtmPut option={option} />
+                <MapCardHeader option={option} />
                 <></>
-                <PercentChange option={option} type={'put'} />
-                <br></br>
-                <HundredShares option={option} />
-                <i>Greeks</i>
-                <BidPrice option={option} type={'put'}/>
-                <></>
-                <DeltaPut option={option} />
-                <AskPrice option={option} type={'put'}/>
-                <></>
-                <ThetaPut option={option} />
-                <PremiumCollected option={option} type={'put'}/>
-                <></>
-                <RhoPut option={option} />
-                <OpenInterest option={option} type={'put'}/>
-                <></>
-                <GammaPut option={option} />
-                <Volume option={option} type={'put'}/>
-                <></>
-                <VegaPut option={option} />
-                <Volatility option={option} type={'put'}/>
-                <DaysToExpiration option={option} type={'put'}/>
+                <MapDataPoints option={option} mapType={"put"} />
+
                 <>
                   <>Exp Date </>
                   <Moment

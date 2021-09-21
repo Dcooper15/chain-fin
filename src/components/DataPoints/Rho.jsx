@@ -1,32 +1,37 @@
 import React from "react";
-import { DataGreekContainer, DataGreekHeader, GreekDataComponent} from '../Styles/styledElements';
+import {
+  DataGreekContainer,
+  DataGreekHeader,
+  GreekDataComponent,
+} from "../Styles/styledElements";
 
-const Rho = ({ option }) => {
-  const key = Object.keys(option.callExpDateMap).map((entry) => {
+const Rho = ({ option, mapType, chainType }) => {
+  const callIndex = Object.keys(option.callExpDateMap).map((entry) => {
     return Object.keys(option.callExpDateMap[entry]).map(
-      (innerArrayID) =>
-        option.callExpDateMap[entry][innerArrayID][0].rho.toFixed(4)
+      (innerArrayID) => option.callExpDateMap[entry][innerArrayID][0].rho
     );
-  })[0][1]
+  })[0][1];
+  const putIndex = Object.keys(option.putExpDateMap).map((entry) => {
+    return Object.keys(option.putExpDateMap[entry]).map(
+      (innerArrayID) => option.putExpDateMap[entry][innerArrayID][0].rho
+    );
+  })[0][0];
   try {
     return (
-      <DataGreekContainer >
+      <DataGreekContainer>
         <DataGreekHeader>Rho</DataGreekHeader>
+
         <GreekDataComponent>
-          {" "}
-          {
-            key
-          }
+          {mapType === "call" ? callIndex : putIndex}
         </GreekDataComponent>
       </DataGreekContainer>
     );
   } catch (error) {
-    return (
-      <DataGreekContainer>
-        <DataGreekHeader>Rho</DataGreekHeader>
-        <GreekDataComponent>N/A</GreekDataComponent>
-      </DataGreekContainer>
-    );
+    <DataGreekContainer>
+      <DataGreekHeader>Rho</DataGreekHeader>
+
+      <GreekDataComponent>N/A</GreekDataComponent>
+    </DataGreekContainer>;
   }
 };
 

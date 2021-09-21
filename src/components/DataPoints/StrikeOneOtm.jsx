@@ -1,25 +1,26 @@
 import React from "react";
+import { StrikeHeader } from "../Styles/styledElements";
 
-const StrikeOneOtm = ({ option }) => {
+const StrikeOneOtm = ({ option, mapType, chainType }) => {
+  const callIndex = Object.keys(option.callExpDateMap).map((entry) => {
+    return Object.keys(option.callExpDateMap[entry]).map(
+      (innerArrayID) =>
+        option.callExpDateMap[entry][innerArrayID][0].strikePrice
+    );
+  })[0][1];
+  const putIndex = Object.keys(option.putExpDateMap).map((entry) => {
+    return Object.keys(option.putExpDateMap[entry]).map(
+      (innerArrayID) => option.putExpDateMap[entry][innerArrayID][0].strikePrice
+    );
+  })[0][0];
   try {
     return (
-      <strong>
-        <bold key={11} className="dataComponentData">
-          $
-          {
-            Object.keys(option.callExpDateMap).map((entry) => {
-              return Object.keys(option.callExpDateMap[entry]).map(
-                (innerArrayID) =>
-                  option.callExpDateMap[entry][innerArrayID][0].strikePrice
-              );
-            })[0][1]
-          }{" "}
-          Call
-        </bold>
-      </strong>
+      <StrikeHeader>
+        {mapType === "call" ? callIndex + " Call" : putIndex + " Put"}
+      </StrikeHeader>
     );
   } catch (error) {
-    return <i key={6}>Strike: N/A</i>;
+    <StrikeHeader>N/A</StrikeHeader>;
   }
 };
 

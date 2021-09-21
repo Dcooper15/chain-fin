@@ -1,30 +1,37 @@
 import React from "react";
+import {
+  DataGreekContainer,
+  DataGreekHeader,
+  GreekDataComponent,
+} from "../Styles/styledElements";
 
-const Vega = ({ option }) => {
+const Vega = ({ option, mapType, chainType }) => {
+  const callIndex = Object.keys(option.callExpDateMap).map((entry) => {
+    return Object.keys(option.callExpDateMap[entry]).map(
+      (innerArrayID) => option.callExpDateMap[entry][innerArrayID][0].vega
+    );
+  })[0][1];
+  const putIndex = Object.keys(option.putExpDateMap).map((entry) => {
+    return Object.keys(option.putExpDateMap[entry]).map(
+      (innerArrayID) => option.putExpDateMap[entry][innerArrayID][0].vega
+    );
+  })[0][0];
   try {
     return (
-      <div className="dataGreekContainer">
-        <bold className="dataGreekHeader">Vega</bold>
-        <i className="dataGreekComponentData">
-          {" "}
-          {
-            Object.keys(option.callExpDateMap).map((entry) => {
-              return Object.keys(option.callExpDateMap[entry]).map(
-                (innerArrayID) =>
-                  option.callExpDateMap[entry][innerArrayID][0].vega.toFixed(4)
-              );
-            })[0][1]
-          }
-        </i>
-      </div>
+      <DataGreekContainer>
+        <DataGreekHeader>Vega</DataGreekHeader>
+
+        <GreekDataComponent>
+          {mapType === "call" ? callIndex : putIndex}
+        </GreekDataComponent>
+      </DataGreekContainer>
     );
   } catch (error) {
-    return (
-      <div className="dataGreekContainer">
-        <i className="dataGreekHeader">Vega</i>
-        <i className="dataGreekComponentData">N/A</i>
-      </div>
-    );
+    <DataGreekContainer>
+      <DataGreekHeader>Vega</DataGreekHeader>
+
+      <GreekDataComponent>N/A</GreekDataComponent>
+    </DataGreekContainer>;
   }
 };
 

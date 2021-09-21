@@ -1,40 +1,43 @@
 import React from "react";
 import { StyledNavLink } from '../Styles/styledElements';
-import { Route } from "react-router-dom";
-//import Navbar from '../Navbar/Navbar';
+import { Route, 
+  //useHistory 
+} from "react-router-dom";
 import MainTopMovers from '../TopMovers/MainTopMovers'
 import MoverStocks from '../TopMovers/MoverStocks'
 import FullOptionChain from  '../OptionChain/FullOptionChain';
 import MainSectors from '../Sectors/MainSectors';
 import SectorStocks from '../Sectors/SectorStocks';
+import { BiArrowBack } from "react-icons/bi";
 
 
 const Routes = () => {
+  // let history = useHistory();
     
   return (
     <>
       <Route exact path="/sector">
-     
-        <StyledNavLink to="/">{"< Home"}</StyledNavLink>
+      <br></br>
+        <StyledNavLink to="/">{<BiArrowBack />}</StyledNavLink>
         <MainSectors />
       </Route>
 
       <Route exact path="/topmovers">
+      <br></br>
+      <StyledNavLink to="/">{<BiArrowBack />}</StyledNavLink>
       
-        <StyledNavLink to="/">{"< Home"}</StyledNavLink>
         <MainTopMovers />
       </Route>
 
       <Route path="/topmovers/:market">
+      <br></br>
+      <StyledNavLink to="/topmovers">{<BiArrowBack />}</StyledNavLink>
       
-        <StyledNavLink to="/topmovers">{"< Top Movers"}</StyledNavLink>
         <MoverStocks />
       </Route>
 
       <Route path="/chain/:symbol">
-    
-        <StyledNavLink to="/">{"Home"}</StyledNavLink>
-        <br></br>
+      <br></br>
         <StyledNavLink to="/sector">{"Sectors"}</StyledNavLink>
         <br></br>
         <StyledNavLink to="/topmovers">{"Top Movers"}</StyledNavLink>
@@ -42,8 +45,9 @@ const Routes = () => {
         <FullOptionChain />
       </Route>
       <Route path="/sector/:sector">
-   
-        <StyledNavLink to="/sector">{"< Sectors"}</StyledNavLink>
+      <br></br>
+      <StyledNavLink to="/sector">{<BiArrowBack />}</StyledNavLink>
+      
         <SectorStocks  />
       </Route>
     </>

@@ -1,26 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Moment from "react-moment";
-import { Link } from "react-router-dom";
+import { withTheme } from "styled-components";
 import Search from "./Search";
-import { Card, Button } from "@material-ui/core";
-import Symbol from "./DataPoints/Symbol";
-import StockPrice from "./DataPoints/StockPrice";
-import StrikeOneOtm from "./DataPoints/StrikeOneOtm";
-import PercentChange from "./DataPoints/PercentChange";
-import HundredShares from "./DataPoints/HundredShares";
-import BidPrice from "./DataPoints/BidPrice";
-import AskPrice from "./DataPoints/AskPrice";
-import PremiumCollected from "./DataPoints/PremiumCollected";
-import OpenInterest from "./DataPoints/OpenInterest";
-import Volume from "./DataPoints/Volume";
-import Volatility from "./DataPoints/Volatility";
-import Delta from "./DataPoints/Delta";
-import Theta from "./DataPoints/Theta";
-import Rho from "./DataPoints/Rho";
-import Gamma from "./DataPoints/Gamma";
-import Vega from "./DataPoints/Vega";
-import DaysToExpiration from "./DataPoints/DaysToExpiration";
+import { Card } from "@material-ui/core";
+import MapDataPoints from "./DataPoints/MapDataPoints";
+import MapCardHeader from "./DataPoints/MapCardHeader";
 import "./MainSearch.css";
 
 const date = new Date();
@@ -33,7 +18,7 @@ class MainSearch extends Component {
 
   searchStocks = async (text) => {
     const res = await axios.get(
-      `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${text}&contractType=ALL&strikeCount=2&toDate=${process.env.REACT_APP_DATE}&range=OTM`
+      `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${text}&contractType=ALL&strikeCount=2&includeQuotes=TRUE&toDate=${process.env.REACT_APP_DATE}&range=OTM`
     );
     console.log("data", res.data);
     if (res.data.status === "FAILED") {
@@ -48,6 +33,7 @@ class MainSearch extends Component {
   render() {
     const { stockData } = this.state;
     const { error } = this.state;
+    console.log(this.props.theme);
     return (
       <div>
         <Search searchStocks={this.searchStocks} />
@@ -56,71 +42,30 @@ class MainSearch extends Component {
           stockData.map((option) => (
             <Card
               className="stockInfo"
+              style={
+                this.props.theme.name === "dark"
+                  ? {
+                      backgroundColor: "#3D3D3D",
+                      borderColor: "#d4af37",
+                      color: "#ffebcd",
+                    }
+                  : {
+                      backgroundColor: "#ebebeb",
+                      borderColor: "#00afc9",
+                      color: "#002933",
+                    }
+              }
               variant="outlined"
+              //hidden={handleTypeChange === true}
               raised={true}
-              style={{
-                backgroundColor: "#3D3D3D",
-                borderColor: "#d4af37",
-                color: "#fff",
-                borderRadius: "15px",
-                paddingLeft: "2%",
-                marginLeft: "3%",
-                marginRight: "3%",
-              }}
             >
-              <>
-                {" "}
-                <Link
-                  to={`/chain/${option.symbol}`}
-                  style={{ textDecoration: "none", color: "#d4af37" }}
-                >
-                  <Symbol option={option} />
-                </Link>
-              </>{" "}
-              <StockPrice option={option} />
-              <></>{" "}
-              <Button
-                className="searchButton"
-                type="submit"
-                variant="outlined"
-                size="small"
-                style={{ marginLeft: "4%" }}
-                color="secondary"
-              >
-                {
-                  <Link
-                    to={`/chain/${option.symbol}`}
-                    style={{ textDecoration: "none", color: "#d4af37" }}
-                  >
-                    Chain
-                  </Link>
-                }
-              </Button>
-              <br></br>
-              <hr></hr>
-              <StrikeOneOtm option={option} />
-              <></>
-              <PercentChange option={option} />
-              <br></br>
-              <HundredShares option={option} />
-              <></>
-              <i style={{ color: "#d4af37" }}>Greeks</i>
-              <BidPrice option={option} />
-              <Delta option={option} />
-              <AskPrice option={option} type={'call'}/>
-              <></>
-              <Theta option={option} />
-              <PremiumCollected option={option} type={'call'} />
-              <></>
-              <Rho option={option} />
-              <OpenInterest option={option} type={'call'} />
-              <></>
-              <Gamma option={option} />
-              <Volume option={option} type={'call'}/>
-              <></>
-              <Vega option={option} type={'call'}/>
-              <Volatility option={option} type={'call'}/>
-              <DaysToExpiration option={option} type={'call'}/>
+              {" "}
+              <MapCardHeader option={option} />
+              <MapDataPoints
+                option={option}
+                chainType={"summary"}
+                mapType={"call"}
+              />
               <>
                 <>Exp Date </>
                 <Moment
@@ -148,4 +93,4 @@ class MainSearch extends Component {
   }
 }
 
-export default MainSearch;
+export default withTheme(MainSearch);

@@ -1,12 +1,16 @@
-import React from "react";
-import { StyledNavLink, 
-  StyledNavbar 
-} from "../Styles/styledElements";
+import React, { useState } from "react";
+import { StyledNavLink, StyledNavbar } from "../Styles/styledElements";
 import { Button } from "@material-ui/core";
 import { GiBlackKnightHelm, GiLightningSaber } from "react-icons/gi";
+import { FaUserAstronaut } from "react-icons/fa";
 import { IoHome } from "react-icons/io5";
 
 const BasicNav = ({ lightDarkChange, theme }) => {
+  const [userMessage, setUserMessage] = useState([]);
+  console.log(userMessage);
+  const handleUserClick = () => {
+  userMessage.length ? setUserMessage([]) : setUserMessage('Profile/Settings coming soon');
+  };
   return (
     <StyledNavbar>
       <Button
@@ -16,7 +20,6 @@ const BasicNav = ({ lightDarkChange, theme }) => {
           </StyledNavLink>
         }
         size="medium"
-        style={{ padding: "1px", marginTop: "3px", marginRight: "0px" }}
       ></Button>
       <Button
         startIcon={
@@ -28,8 +31,19 @@ const BasicNav = ({ lightDarkChange, theme }) => {
         }
         onClick={lightDarkChange}
         size="medium"
-        style={{ padding: "1px", marginLeft: "0px" }}
       ></Button>{" "}
+      <Button
+      onClick={handleUserClick}
+        startIcon={
+          <StyledNavLink>
+            <FaUserAstronaut />
+          </StyledNavLink>
+        }
+        size="medium"
+      ></Button><br></br><i style={{fontSize: '10px'}}
+      
+      
+      >{userMessage}</i>
     </StyledNavbar>
   );
 };

@@ -1,9 +1,10 @@
 import React from "react";
 
-const StockPrice = ({option}) => {
+const StockPrice = ({option, chainPrice, type}) => {
+  const price = type === 'full' ? chainPrice : option.underlyingPrice.toFixed(2)
   try {
     return (
-      <bold key={2} style={{fontSize: "16px"}}><strong>${option.underlyingPrice.toFixed(2)}</strong></bold>
+      <>${price}</>
     );
   } catch (error) {
     return <i key={2}>Share Price: N/A</i>;

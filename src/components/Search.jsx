@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { withTheme } from "styled-components";
+import { StyledSearchHeader } from "./Styles/styledElements";
 import { Button, TextField } from "@material-ui/core";
 import "./MainSearch.css";
 
@@ -27,8 +29,9 @@ class Search extends Component {
             className="sectorHeader"
             style={{ fontSize: "14px", paddingBottom: "0%" }}
           >
-            {" "}
-            Search Stock by Ticker Symbol{" "}
+            <StyledSearchHeader>
+              Search Stock by Ticker Symbol
+            </StyledSearchHeader>
           </label>
           <br></br>
           <br></br>
@@ -41,25 +44,41 @@ class Search extends Component {
             onChange={this.onChange}
             InputLabelProps={{
               style: {
-                color: "#d4af37",
+                color: this.props.theme.name === "dark" ? "#d4af37" : "#146175",
                 fontStyle: this.state.text.length ? "normal" : "oblique",
+                borderColor: "#fff",
               },
             }}
             InputProps={{
-              style: { color: "#d4af37", fontStyle: "normal" },
+              style: {
+                color: "#d4af37",
+                fontStyle: "normal",
+              },
             }}
             variant="outlined"
             size="small"
-            color="primary"
-            text="secondary"
+            color="#fff"
+            text="#fff"
           />
           <p></p>
           <Button
-            className="searchButton"
+            // className="searchButton"
             type="submit"
             variant="outlined"
             value="Search"
-            color="primary"
+            style={
+              this.props.theme.name === "dark"
+                ? {
+                    backgroundColor: "#3D3D3D",
+                    borderColor: "#d4af37",
+                    color: "#ffebcd",
+                  }
+                : {
+                    backgroundColor: "#ebebeb",
+                    borderColor: "#00afc9",
+                    color: "#146175",
+                  }
+            }
           >
             Search
           </Button>
@@ -69,4 +88,4 @@ class Search extends Component {
   }
 }
 
-export default Search;
+export default withTheme(Search);

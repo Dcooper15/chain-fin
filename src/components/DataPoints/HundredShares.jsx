@@ -12,7 +12,9 @@ const HundredShares = ({ option }) => {
         <DataHeader>{"100 Shares"}</DataHeader>
         
         <DataComponent>
-          ${(option.underlyingPrice * 100).toFixed(0)}
+          $
+           
+          {(option.underlyingPrice * 100).toFixed(0)}
         </DataComponent>
       </DataContainer>
     );

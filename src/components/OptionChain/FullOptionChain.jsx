@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { ThemeContext } from "styled-components";
-import { SectorHeader, OptionCSub, StyledExpDate, StyledGreeks, StyledMenuItem } from "../Styles/styledElements";
+import { SectorHeader, StyledExpDate, StyledGreeks, StyledMenuItem } from "../Styles/styledElements";
 import { useStyles } from "../Styles/muiStyles";
 import axios from "axios";
 import { useParams } from "react-router";
@@ -12,8 +12,10 @@ import {
   MenuItem,
   FormControl,
 } from "@material-ui/core";
+import HeaderOptionChain from './HeaderOptionChain';
+//import MapDataPoints from '../DataPoints/MapDataPoints'
 
-import Name from "../DataPoints/Name";
+
 import Moment from "react-moment";
 
 const date = new Date();
@@ -55,7 +57,8 @@ function FullOptionChain() {
   const [expDays, setExpDays] = useState([]);
   const [expDate, setExpDate] = useState([]);
   const [handleTypeChange, setHandleTypeChange] = useState(false);
-  const [stockPriceRender, setStockPrice] = useState([]);
+  const [chainPrice, setChainPrice] = useState([]);
+  const [chainPercent, setChainPercent] = useState([]);
   const [nameRender, setName] = useState([]);
   const [strikeCount, setStrikeCount] = useState([6]);
   const [callData, setCallData] = useState([]);
@@ -98,8 +101,11 @@ function FullOptionChain() {
         setExpDays(uniqueDays);
         setExpDate(uniqueDays[0]);
         const stockPrice = response.data.underlyingPrice.toFixed(2);
-        setStockPrice([stockPrice]);
+        const percentChange = response.data.underlying.markPercentChange.toFixed(2);
+        setChainPrice([stockPrice]);
+        setChainPercent([percentChange]);
         setName([response.data.underlying.description])
+        console.log(response.data)
         const callKeys = Object.keys(response.data.callExpDateMap)
           .map((entry) => {
             return Object.keys(response.data.callExpDateMap[entry]).map(
@@ -125,35 +131,24 @@ function FullOptionChain() {
     return (
       <>
         {!!nameRender.length ? (
-          <SectorHeader style={{marginBottom: '0'}}>
-            <Name namesRender={nameRender} />
-          </SectorHeader>
+         <HeaderOptionChain nameRender={nameRender}
+           chainPrice={chainPrice} chainPercent={chainPercent}
+          />
         ) : (
           " "
         )}
-        {stockPriceRender.length ? (
-          <OptionCSub>
-            {" "}
-            ${stockPriceRender}
-            <br></br>
-            
-            <i>  100 Shares ${(stockPriceRender * 100).toFixed(0)}</i>
-          
-          </OptionCSub>
-        ) : (
-          " "
-        )}
+      
         <br></br>
         <div className="dateContainer">
           {!!expDays.length
             ? expDays.map((expDay) => (
-                <div className="buttonConainer">
+                <div style={{marginBottom: '2%', paddingBottom: '0'}}>
                   <Button
                   className={classes.buttonExp}
                     value={expDay}
                     size="small"
                     onClick={() => setExpDate(expDay)}
-                    style={{background: expDate === expDay ? theme.name === 'dark' ? 'black' : 'white' : 'none' 
+                    style={{background: expDate === expDay ? theme.name === 'dark' ? 'black' : 'white' : 'none', marginBottom: '0' 
                   }}
                   >
                     <StyledExpDate
@@ -290,12 +285,12 @@ function FullOptionChain() {
                   >
                     <bold>
                       <strong>
-                        {option.description.includes("(")
+                       {option.description.includes("(")
                           ? option.description.slice(
                               0,
                               option.description.indexOf("(")
                             )
-                          : option.description}
+                          : option.description} 
                       </strong>
                     </bold>
                     <></>
@@ -319,6 +314,7 @@ function FullOptionChain() {
                       </i>
                     )}
                     <hr></hr>
+                    {/* <MapDataPoints option={option} chainType={'full'}/> */}
                     <div className="dataContainer">
                       <div className="dataHeader">Strike</div>
                       <bold className="dataComponentData">
@@ -326,7 +322,7 @@ function FullOptionChain() {
                       </bold>
                     </div>
                     <StyledGreeks>Greeks</StyledGreeks>
-
+                     
                     <div className="dataContainer">
                       <div className="dataHeader">Bid</div>
                       <bold className="dataComponentData">{option.bid}</bold>

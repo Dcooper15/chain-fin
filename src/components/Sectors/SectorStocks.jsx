@@ -1,38 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import { ThemeContext } from "styled-components";
-import { SectorHeader, StyledSymbolLink } from "../Styles/styledElements";
+import { SectorHeader } from "../Styles/styledElements";
 import { useStyles } from "../Styles/muiStyles";
 import axios from "axios";
 import Moment from "react-moment";
 import { useParams } from "react-router";
 import { Card, Button } from "@material-ui/core";
-//import MapDataPoints from '../DataPoints/MapDataPoints';
-import Name from "../DataPoints/Name";
-import Symbol from "../DataPoints/Symbol";
-import StockPercentChange from '../DataPoints/StockPercentChange';
-import StockPrice from "../DataPoints/StockPrice";
-import StrikeOneOtm from "../DataPoints/StrikeOneOtm";
-import PercentChange from "../DataPoints/PercentChange";
-import HundredShares from "../DataPoints/HundredShares";
-import BidPrice from "../DataPoints/BidPrice";
-import AskPrice from "../DataPoints/AskPrice";
-import PremiumCollected from "../DataPoints/PremiumCollected";
-import OpenInterest from "../DataPoints/OpenInterest";
-import Volume from "../DataPoints/Volume";
-import Volatility from "../DataPoints/Volatility";
-import Delta from "../DataPoints/Delta";
-import Theta from "../DataPoints/Theta";
-import Rho from "../DataPoints/Rho";
-import Gamma from "../DataPoints/Gamma";
-import Vega from "../DataPoints/Vega";
-import DaysToExpiration from "../DataPoints/DaysToExpiration";
-import StrikeOneOtmPut from "../DataPoints/Puts/StrikeOneOtmPut";
-import DeltaPut from "../DataPoints/Puts/DeltaPut";
-import ThetaPut from "../DataPoints/Puts/ThetaPut";
-import RhoPut from "../DataPoints/Puts/RhoPut";
-import GammaPut from "../DataPoints/Puts/GammaPut";
-import VegaPut from "../DataPoints/Puts/VegaPut";
-
+import MapCardHeader from "../DataPoints/MapCardHeader";
+import MapDataPoints from "../DataPoints/MapDataPoints";
 
 const date = new Date();
 let symbolArray = [];
@@ -43,7 +18,7 @@ function SectorStocks() {
   const [dataArray, setDataArray] = useState([]);
   const [handleTypeChange, setHandleTypeChange] = useState(false);
   const { sector } = useParams();
-
+console.log(dataArray)
   const buttonHandlerPut = () => {
     setHandleTypeChange(true);
   };
@@ -111,7 +86,8 @@ function SectorStocks() {
   const capHeader = (header) => {
     return header.charAt(0).toUpperCase() + header.slice(1);
   };
-  
+
+  const getButtonColor = theme.name === "dark" ? "#fff" : "#F8E4A5";
 
   useEffect(() => {
     const chainData = [];
@@ -154,9 +130,7 @@ function SectorStocks() {
         onClick={buttonHandlerCall}
         style={{ marginLeft: "3%" }}
       >
-        <strong style={{ color: theme.name === "dark" ? "#fff" : "#F8E4A5" }}>
-          Call
-        </strong>
+        <strong style={{ color: getButtonColor }}>Call</strong>
       </Button>
       <Button
         className={
@@ -172,9 +146,7 @@ function SectorStocks() {
         size="small"
         onClick={buttonHandlerPut}
       >
-        <strong style={{ color: theme.name === "dark" ? "#fff" : "#F8E4A5" }}>
-          Put
-        </strong>
+        <strong style={{ color: getButtonColor }}>Put</strong>
       </Button>
       {!!dataArray.length
         ? dataArray.map((stock) =>
@@ -198,65 +170,13 @@ function SectorStocks() {
                 hidden={handleTypeChange === true}
                 raised={true}
               >
-                <>
-                  {" "}
-                  <StyledSymbolLink to={`/chain/${option.symbol}`}>
-                    <Symbol option={option} />
-                  </StyledSymbolLink>
-                </>{" "}
-                <StockPrice option={option} /><></>
-                <StockPercentChange option={option} />
-                <></>
-                <br></br>
-                <Name namesRender={option.underlying.description} /> <></>
-                <></>{" "}
-                <Button
-                  className={
-                    theme.name === "dark"
-                      ? classes.chainDark
-                      : classes.chainLight
-                  }
-                  type="submit"
-                  variant="outlined"
-                  size="small"
-                >
-                  {
-                    <StyledSymbolLink to={`/chain/${option.symbol}`}>
-                      Chain
-                    </StyledSymbolLink>
-                  }
-                </Button>
-                <hr></hr>
-                
-                {/* <MapDataPoints  option={option} 
-               dataComp={option.volatility} fixedDec={0} />
-               
-               {console.log(<MapDataPoints option={option} 
-               dataComp={option.volatility} fixedDec={0} />)} */}
-               
-                <StrikeOneOtm option={option} />
-                <></>
-                <PercentChange option={option} type={'call'} />
-                <br></br>
-                <HundredShares option={option} type={'call'}/>
-                <i>Greeks</i>
-                <BidPrice option={option} type={'call'} />
-                <></>
-                <Delta option={option} />
-                <AskPrice option={option} type={'call'}/>
-                <></>
-                <Theta option={option} />
-                <PremiumCollected option={option} type={'call'} />
-                <></>
-                <Rho option={option} />
-                <OpenInterest option={option} type={'call'} />
-                <></>
-                <Gamma option={option} />
-                <Volume option={option} type={'call'} />
-                <></>
-                <Vega option={option} />
-                <Volatility option={option} type={'call'}/>
-                <DaysToExpiration option={option} type={'call'}/>
+                <MapCardHeader option={option} />
+
+                <MapDataPoints
+                  option={option}
+                  chainType={'summary'}
+                  mapType={'call'}
+                />
                 <>
                   <>Exp Date </>
                   <Moment
@@ -300,55 +220,14 @@ function SectorStocks() {
                 hidden={handleTypeChange === false}
                 raised={true}
               >
-                <>
-                  {" "}
-                  <StyledSymbolLink to={`/chain/${option.symbol}`}>
-                    <Symbol option={option} />
-                  </StyledSymbolLink>
-                </>{" "}
-                <StockPrice option={option} /><></><StockPercentChange option={option} />
-                <br></br>
-                <Name namesRender={option.underlying.description} /> <></>
-                <Button
-                  className={
-                    theme.name === "dark"
-                      ? classes.chainDark
-                      : classes.chainLight
-                  }
-                  type="submit"
-                  variant="outlined"
-                  size="small"
-                >
-                  {
-                    <StyledSymbolLink to={`/chain/${option.symbol}`}>
-                      Chain
-                    </StyledSymbolLink>
-                  }
-                </Button>
-                <hr></hr>
-                <StrikeOneOtmPut option={option} />
+                <MapCardHeader option={option} />
                 <></>
-                <PercentChange option={option} type={'put'} />
-                <br></br>
-                <HundredShares option={option} />
-                <i>Greeks</i>
-                <BidPrice option={option} type={'put'} />
-                <></>
-                <DeltaPut option={option} />
-                <AskPrice option={option} type={'put'} />
-                <></>
-                <ThetaPut option={option} />
-                <PremiumCollected option={option} type={'put'} />
-                <></>
-                <RhoPut option={option} />
-                <OpenInterest option={option} type={'put'} />
-                <></>
-                <GammaPut option={option} />
-                <Volume option={option} type={'put'}/>
-                <></>
-                <VegaPut option={option} />
-                <Volatility option={option} type={'put'} />
-                <DaysToExpiration option={option} type={'put'} />
+
+                <MapDataPoints
+                  option={option}
+                  chainType={'summary'}
+                  mapType={'put'}
+                />
                 <>
                   <>Exp Date </>
                   <Moment
