@@ -99,7 +99,7 @@ const MainSectors = () => {
                 <h3>
                   <StyledLink
                     to="/sector/energy"
-                    style={{fontSize: '14px'}}
+                    style={{fontSize: '3.5vw'}}
                   >
                     Alternative 
                     

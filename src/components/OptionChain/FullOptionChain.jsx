@@ -1,6 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import { ThemeContext } from "styled-components";
-import { SectorHeader, StyledExpDate, StyledGreeks, StyledMenuItem } from "../Styles/styledElements";
+import {
+  SectorHeader,
+  StyledExpDate,
+  StyledMenuItem,
+  StyledOcCollateral,
+} from "../Styles/styledElements";
 import { useStyles } from "../Styles/muiStyles";
 import axios from "axios";
 import { useParams } from "react-router";
@@ -12,9 +17,9 @@ import {
   MenuItem,
   FormControl,
 } from "@material-ui/core";
-import HeaderOptionChain from './HeaderOptionChain';
-//import MapDataPoints from '../DataPoints/MapDataPoints'
-
+import HeaderOptionChain from "./HeaderOptionChain";
+import MapFullChainData from "./MapFullChainData";
+import FullChainCardHeader from "./FullChainCardHeader";
 
 import Moment from "react-moment";
 
@@ -101,11 +106,12 @@ function FullOptionChain() {
         setExpDays(uniqueDays);
         setExpDate(uniqueDays[0]);
         const stockPrice = response.data.underlyingPrice.toFixed(2);
-        const percentChange = response.data.underlying.markPercentChange.toFixed(2);
+        const percentChange =
+          response.data.underlying.markPercentChange.toFixed(2);
         setChainPrice([stockPrice]);
         setChainPercent([percentChange]);
-        setName([response.data.underlying.description])
-        console.log(response.data)
+        setName([response.data.underlying.description]);
+        console.log(response.data);
         const callKeys = Object.keys(response.data.callExpDateMap)
           .map((entry) => {
             return Object.keys(response.data.callExpDateMap[entry]).map(
@@ -124,38 +130,43 @@ function FullOptionChain() {
 
         setCallData(callKeys);
         setPutData(putKeys);
-
       });
   }, [symbol, strikeCount]);
   try {
     return (
       <>
         {!!nameRender.length ? (
-         <HeaderOptionChain nameRender={nameRender}
-           chainPrice={chainPrice} chainPercent={chainPercent}
+          <HeaderOptionChain
+            nameRender={nameRender}
+            chainPrice={chainPrice}
+            chainPercent={chainPercent}
           />
         ) : (
           " "
         )}
-      
+
         <br></br>
         <div className="dateContainer">
           {!!expDays.length
             ? expDays.map((expDay) => (
-                <div style={{marginBottom: '2%', paddingBottom: '0'}}>
+                <div style={{ marginBottom: "2%", paddingBottom: "0" }}>
                   <Button
-                  className={classes.buttonExp}
+                    className={classes.buttonExp}
                     value={expDay}
                     size="small"
                     onClick={() => setExpDate(expDay)}
-                    style={{background: expDate === expDay ? theme.name === 'dark' ? 'black' : 'white' : 'none', marginBottom: '0' 
-                  }}
+                    style={{
+                      background:
+                        expDate === expDay
+                          ? theme.name === "dark"
+                            ? "black"
+                            : "white"
+                          : "none",
+                      marginBottom: "0",
+                    }}
                   >
-                    <StyledExpDate
-                   
-                    >
+                    <StyledExpDate>
                       <Moment
-                       
                         add={{ days: expDay }}
                         format={expDay > offsetDays ? "ll" : "MMM DD"}
                       >
@@ -200,21 +211,22 @@ function FullOptionChain() {
           type="submit"
           size="small"
           onClick={buttonHandlerPut}
-          style={{marginLeft: '1%', marginRight: '4%'}}
+          style={{ marginLeft: "1%", marginRight: "4%" }}
         >
-          <strong style={{ color: theme.name === "dark" ? "#fff" : "#F8E4A5"}}>
+          <strong style={{ color: theme.name === "dark" ? "#fff" : "#F8E4A5" }}>
             Put
           </strong>
         </Button>
-        
 
-        <FormControl className={classes.formControl}
-        >
-     
+        <FormControl className={classes.formControl}>
           <InputLabel id="strikeLabel" className={classes.select}>
-            <strong style={{color: theme.name === 'dark' ?  "#d4af37" : '#146175'}}>Strikes</strong>
+            <strong
+              style={{ color: theme.name === "dark" ? "#d4af37" : "#146175" }}
+            >
+              Strikes
+            </strong>
           </InputLabel>
-          
+
           <Select
             labelId="strikeLabel"
             id="strikes"
@@ -225,24 +237,22 @@ function FullOptionChain() {
             value={strikeCount}
             onChange={handleStrikeChange}
           >
-            
             <MenuItem
               classes={{ root: classes.menuItem, selected: "selected" }}
               value={6}
             >
-            <StyledMenuItem>6</StyledMenuItem>
+              <StyledMenuItem>6</StyledMenuItem>
             </MenuItem>
             <MenuItem className={classes.menuItem} value={10}>
-            <StyledMenuItem>10</StyledMenuItem></MenuItem>
+              <StyledMenuItem>10</StyledMenuItem>
+            </MenuItem>
             <MenuItem className={classes.menuItem} value={14}>
-            <StyledMenuItem>14</StyledMenuItem>
+              <StyledMenuItem>14</StyledMenuItem>
             </MenuItem>
             <MenuItem className={classes.menuItem} value={60}>
-            <StyledMenuItem>All</StyledMenuItem>
+              <StyledMenuItem>All</StyledMenuItem>
             </MenuItem>
-            
           </Select>
-          
         </FormControl>
 
         {/* <Slider 
@@ -283,122 +293,8 @@ function FullOptionChain() {
                     }
                     raised={true}
                   >
-                    <bold>
-                      <strong>
-                       {option.description.includes("(")
-                          ? option.description.slice(
-                              0,
-                              option.description.indexOf("(")
-                            )
-                          : option.description} 
-                      </strong>
-                    </bold>
-                    <></>
-                    {option.markPercentChange >= 0 ? (
-                      <i
-                        style={{ color: "#a4de02" }}
-                        key={12}
-                        className="dataComponentData"
-                      >
-                        {" "}
-                        +{option.markPercentChange}%
-                      </i>
-                    ) : (
-                      <i
-                        style={{ color: "#ff4c4c" }}
-                        key={12}
-                        className="dataComponentData"
-                      >
-                        {" "}
-                        {option.markPercentChange}%
-                      </i>
-                    )}
-                    <hr></hr>
-                    {/* <MapDataPoints option={option} chainType={'full'}/> */}
-                    <div className="dataContainer">
-                      <div className="dataHeader">Strike</div>
-                      <bold className="dataComponentData">
-                        {option.strikePrice}
-                      </bold>
-                    </div>
-                    <StyledGreeks>Greeks</StyledGreeks>
-                     
-                    <div className="dataContainer">
-                      <div className="dataHeader">Bid</div>
-                      <bold className="dataComponentData">{option.bid}</bold>
-                    </div>
-                    <div className="dataGreekContainer">
-                      <div className="dataGreekHeader">Delta</div>
-                      <bold className="dataGreekComponentData">
-                        {option.delta === "NaN" ? "N/A" : option.delta}
-                      </bold>
-                    </div>
-                    <></>
-                    <div className="dataContainer">
-                      <div className="dataHeader">Ask</div>
-                      <bold className="dataComponentData">{option.ask}</bold>
-                    </div>
-                    <div className="dataGreekContainer">
-                      <div className="dataGreekHeader">Theta</div>
-                      <bold className="dataGreekComponentData">
-                        {option.theta === "NaN" ? "N/A" : option.theta}
-                      </bold>
-                    </div>
-                    <></>
-
-                    <div className="dataContainer">
-                      <div className="dataHeader">Premium</div>
-                      <bold className="dataComponentData">
-                        ${(option.mark * 100).toFixed(2)}
-                      </bold>
-                    </div>
-                    <div className="dataGreekContainer">
-                      <div className="dataGreekHeader">Rho</div>
-                      <bold className="dataGreekComponentData">
-                        {option.rho === "NaN" ? "N/A" : option.rho}
-                      </bold>
-                    </div>
-                    <></>
-                    <div className="dataContainer">
-                      <div className="dataHeader">Open Interest</div>
-                      <bold className="dataComponentData">
-                        {option.openInterest}
-                      </bold>
-                    </div>
-                    <div className="dataGreekContainer">
-                      <div className="dataGreekHeader">Gamma</div>
-                      <bold className="dataGreekComponentData">
-                        {option.gamma === "NaN" ? "N/A" : option.gamma}
-                      </bold>
-                    </div>
-                    <></>
-                    <div className="dataContainer">
-                      <div className="dataHeader">Volume</div>
-                      <bold className="dataComponentData">
-                        {option.totalVolume}
-                      </bold>
-                    </div>
-                    <div className="dataGreekContainer">
-                      <div className="dataGreekHeader">Vega</div>
-                      <bold className="dataGreekComponentData">
-                        {option.vega === "NaN" ? "N/A" : option.vega}{" "}
-                      </bold>
-                    </div>
-                    <></>
-                    <div className="dataContainer">
-                      <div className="dataHeader">Implied Volatility</div>
-                      <bold className="dataComponentData">
-                        {option.volatility > 0
-                          ? option.volatility.toFixed(2)
-                          : "N/A"}
-                      </bold>
-                    </div>
-                    <div className="dataContainer">
-                      <div className="dataHeader">Days/Expiration</div>
-                      <bold className="dataComponentData">
-                        {option.daysToExpiration}
-                      </bold>
-                    </div>
+                    <FullChainCardHeader option={option} />
+                    <MapFullChainData option={option} />
                     <>
                       <>Exp Date </>
                       <bold>
@@ -443,121 +339,12 @@ function FullOptionChain() {
                     }
                     raised={true}
                   >
-                    <bold>
-                      <strong>
-                        {option.description.includes("(")
-                          ? option.description.slice(
-                              0,
-                              option.description.indexOf("(")
-                            )
-                          : option.description}
-                      </strong>
-                    </bold>
-                    <></>
-                    {option.markPercentChange >= 0 ? (
-                      <i
-                        style={{ color: "#a4de02" }}
-                        key={12}
-                        className="dataComponentData"
-                      >
-                        {" "}
-                        +{option.markPercentChange}%
-                      </i>
-                    ) : (
-                      <i
-                        style={{ color: "#ff4c4c" }}
-                        key={12}
-                        className="dataComponentData"
-                      >
-                        {" "}
-                        {option.markPercentChange}%
-                      </i>
-                    )}
-                    <hr></hr>
-                    <div className="dataContainer">
-                      <div className="dataHeader">Strike</div>
-                      <bold className="dataComponentData">
-                        {option.strikePrice}
-                      </bold>
-                    </div>
-                    <StyledGreeks>Greeks</StyledGreeks>
-
-                    <div className="dataContainer">
-                      <div className="dataHeader">Bid</div>
-                      <bold className="dataComponentData">{option.bid}</bold>
-                    </div>
-                    <div className="dataGreekContainer">
-                      <div className="dataGreekHeader">Delta</div>
-                      <bold className="dataGreekComponentData">
-                        {option.delta === "NaN" ? "N/A" : option.delta}
-                      </bold>
-                    </div>
-                    <></>
-                    <div className="dataContainer">
-                      <div className="dataHeader">Ask</div>
-                      <bold className="dataComponentData">{option.ask}</bold>
-                    </div>
-                    <div className="dataGreekContainer">
-                      <div className="dataGreekHeader">Theta</div>
-                      <bold className="dataGreekComponentData">
-                        {option.theta === "NaN" ? "N/A" : option.theta}
-                      </bold>
-                    </div>
-                    <></>
-
-                    <div className="dataContainer">
-                      <div className="dataHeader">Premium</div>
-                      <bold className="dataComponentData">
-                        ${(option.mark * 100).toFixed(2)}
-                      </bold>
-                    </div>
-                    <div className="dataGreekContainer">
-                      <div className="dataGreekHeader">Rho</div>
-                      <bold className="dataGreekComponentData">
-                        {option.rho === "NaN" ? "N/A" : option.rho}
-                      </bold>
-                    </div>
-                    <></>
-                    <div className="dataContainer">
-                      <div className="dataHeader">Open Interest</div>
-                      <bold className="dataComponentData">
-                        {option.openInterest}
-                      </bold>
-                    </div>
-                    <div className="dataGreekContainer">
-                      <div className="dataGreekHeader">Gamma</div>
-                      <bold className="dataGreekComponentData">
-                        {option.gamma === "NaN" ? "N/A" : option.gamma}
-                      </bold>
-                    </div>
-                    <></>
-                    <div className="dataContainer">
-                      <div className="dataHeader">Volume</div>
-                      <bold className="dataComponentData">
-                        {option.totalVolume}
-                      </bold>
-                    </div>
-                    <div className="dataGreekContainer">
-                      <div className="dataGreekHeader">Vega</div>
-                      <bold className="dataGreekComponentData">
-                        {option.vega === "NaN" ? "N/A" : option.vega}{" "}
-                      </bold>
-                    </div>
-                    <></>
-                    <div className="dataContainer">
-                      <div className="dataHeader">Implied Volatility</div>
-                      <bold className="dataComponentData">
-                        {option.volatility > 0
-                          ? option.volatility.toFixed(2)
-                          : "N/A"}
-                      </bold>
-                    </div>
-                    <div className="dataContainer">
-                      <div className="dataHeader">Days/Expiration</div>
-                      <bold className="dataComponentData">
-                        {option.daysToExpiration}
-                      </bold>
-                    </div>
+                    <FullChainCardHeader option={option} />
+                    <StyledOcCollateral>
+                      CSP Collateral ${option.strikePrice * 100}
+                    </StyledOcCollateral>
+                    <br></br>
+                    <MapFullChainData option={option} />
                     <>
                       <>Exp Date </>
                       <bold>

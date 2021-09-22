@@ -63,7 +63,6 @@ class MainSearch extends Component {
               <MapCardHeader option={option} />
               <MapDataPoints
                 option={option}
-                chainType={"summary"}
                 mapType={"call"}
               />
               <>

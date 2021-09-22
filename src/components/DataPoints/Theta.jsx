@@ -5,7 +5,7 @@ import {
   GreekDataComponent,
 } from "../Styles/styledElements";
 
-const Theta = ({ option, mapType, chainType }) => {
+const Theta = ({ option, mapType }) => {
   const callIndex = Object.keys(option.callExpDateMap).map((entry) => {
     return Object.keys(option.callExpDateMap[entry]).map(
       (innerArrayID) => option.callExpDateMap[entry][innerArrayID][0].theta

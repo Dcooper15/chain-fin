@@ -5,7 +5,7 @@ import {
   DataComponent,
 } from "../Styles/styledElements";
 
-const Volume = ({ option, mapType, chainType }) => {
+const Volume = ({ option, mapType }) => {
   const callIndex = Object.keys(option.callExpDateMap).map((entry) => {
     return Object.keys(option.callExpDateMap[entry]).map(
       (innerArrayID) =>

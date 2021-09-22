@@ -1,7 +1,7 @@
 import React from "react";
 import { StrikeHeader } from "../Styles/styledElements";
 
-const StrikeOneOtm = ({ option, mapType, chainType }) => {
+const StrikeOneOtm = ({ option, mapType }) => {
   const callIndex = Object.keys(option.callExpDateMap).map((entry) => {
     return Object.keys(option.callExpDateMap[entry]).map(
       (innerArrayID) =>

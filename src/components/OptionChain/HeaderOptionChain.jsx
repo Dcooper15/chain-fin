@@ -14,6 +14,7 @@ const HeaderOptionChain = ({ nameRender, chainPrice, chainPercent }) => {
       <OptionCName>
         <Name namesRender={nameRender} type={"full"} />
       </OptionCName>
+      <br></br>
       <OptionCSub>
         <StockPrice chainPrice={chainPrice} type={"full"} />
       </OptionCSub> 

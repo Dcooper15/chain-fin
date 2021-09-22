@@ -59,10 +59,10 @@ class Search extends Component {
             size="small"
             color="#fff"
             text="#fff"
+            
           />
           <p></p>
           <Button
-            // className="searchButton"
             type="submit"
             variant="outlined"
             value="Search"

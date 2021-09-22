@@ -5,7 +5,7 @@ import {
   DataComponent,
 } from "../Styles/styledElements";
 
-const Volatility = ({ option, mapType, chainType }) => {
+const Volatility = ({ option, mapType }) => {
   
   try {
     const callIndex = Object.keys(option.callExpDateMap).map((entry) => {

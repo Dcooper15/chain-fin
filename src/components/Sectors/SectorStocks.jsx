@@ -174,7 +174,6 @@ console.log(dataArray)
 
                 <MapDataPoints
                   option={option}
-                  chainType={'summary'}
                   mapType={'call'}
                 />
                 <>
@@ -225,7 +224,6 @@ console.log(dataArray)
 
                 <MapDataPoints
                   option={option}
-                  chainType={'summary'}
                   mapType={'put'}
                 />
                 <>

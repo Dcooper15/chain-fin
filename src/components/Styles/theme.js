@@ -8,7 +8,8 @@ export const lightTheme = {
     headerColor: '#146175',
     dataLineColor: '#146175',
     percentChangeUp: '#006400',
-    percentChangeDown: '#ff4c4c'
+    percentChangeDown: '#ff4c4c',
+    hoverColor: '#d1e6ed'
    
     
     
@@ -22,7 +23,8 @@ export const darkTheme = {
     headerColor: '#d4af37',
     dataLineColor: '#756300',
     percentChangeUp: '#a4de02',
-    percentChangeDown: '#ff4c4c'
+    percentChangeDown: '#ff4c4c',
+    hoverColor: '#474747'
    
 }
 

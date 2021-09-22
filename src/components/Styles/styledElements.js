@@ -8,11 +8,13 @@ export const SectorHeader = styled.h2`
   font-size: 20px;
   margin-left: 3%;
   margin-right: 3%;
+ 
 `;
 
 //search
 export const StyledSearchHeader = styled.i`
   color: ${(props) => props.theme.headerColor};
+  font-size: 14px;
 `;
 
 //full chain header
@@ -28,13 +30,15 @@ export const OptionHeaderContainer = styled.div`
 export const OptionCName = styled.h4`
   color: ${(props) => props.theme.headerColor};
   margin-left: 2%;
+  flex-basis: 100%;
+  font-size: 2vh;
   margin-bottom: 0;
 `;
 export const OptionCSub = styled.strong`
   justify-content: left;
   align-items: left;
   color: ${(props) => props.theme.headerColor};
-  font-size: 18px;
+  font-size: 1.75vh;
   margin-top: 0;
   margin-left: 2%;
   margin-right: 0%;
@@ -83,7 +87,7 @@ export const MenuRowExtra = styled.div`
   width: 49%;
   height: 50%;
   flex-direction: row;
-  align-content: space-between;
+  align-content: space-around;
 `;
 
 export const ColumnLeft = styled.div`
@@ -91,17 +95,22 @@ export const ColumnLeft = styled.div`
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
-  border-color: ${(props) => props.theme.headerColor};
+  border-color: ${(props) => props.theme.accentColor};
   border-top-style: groove;
   border-left-style: ridge;
   border-right-style: ridge;
   border-bottom-style: groove;
-  border-radius: 20px;
-  border-width: 1px;
+  border-radius: 25px;
+  border-width: 2px;
   margin-top: 2%;
   margin-right: 1%;
   margin-bottom: 1%;
   text-decoration: none;
+  font-size: 3.5vw;
+  &:hover {
+    background-color: ${(props) => props.theme.hoverColor};
+    transition: 0.5s ease;
+  }
 `;
 
 export const ColumnRight = styled.div`
@@ -109,13 +118,21 @@ export const ColumnRight = styled.div`
   justify-content: center;
   align-items: flex-end;
   flex-direction: column;
-  border-color: ${(props) => props.theme.headerColor};
+  border-color: ${(props) => props.theme.accentColor};
   border-style: groove;
-  border-radius: 20px;
-  border-width: 1px;
+  border-radius: 25px;
+  border-width: 2px;
   margin-top: 2%;
+  margin-left: 1%;
   margin-bottom: 1%;
   text-decoration: none;
+  font-size: 3.5vw;
+ 
+  &:hover {
+    background-color: ${(props) => props.theme.hoverColor};
+    transition: 0.5s ease;
+  }
+
 `;
 
 export const StyledExpDate = styled.i`
@@ -135,6 +152,7 @@ export const StyledLink = styled(Link)`
   color: ${(props) => props.theme.headerColor};
   text-decoration: none;
   margin: 1rem;
+  font-size: 4vw;
   position: relative;
 `;
 
@@ -148,6 +166,7 @@ export const StyledNavLink = styled(Link)`
   color: ${(props) => props.theme.accentColor};
   text-decoration: none;
   position: relative;
+  font-size: 12px;
   margin-left: 1%;
 `;
 
@@ -166,10 +185,6 @@ export const ButtonDiv = styled.div`
   margin-left: 2%;
   margin-right: 2%;
   width: 5%;
-`;
-
-export const StyledGreeks = styled.i`
-  color: ${(props) => props.theme.headerColor};
 `;
 
 export const StyledMenuItem = styled.strong`
@@ -191,6 +206,8 @@ export const StyledCardHeader = styled.div`
   border-right: ${(props) => props.theme.accentColor};
   border-color: ${(props) => props.theme.accentColor};
   border-width: 1px;
+  padding-top: 0.5%;
+  padding-bottom: 0.5%;
   margin-bottom: 1%;
 `;
 export const CardRow = styled.div`
@@ -223,6 +240,13 @@ export const StyledPercentHeader = styled.i`
   margin-left: 1%;
   align-items: bottom;
 `;
+export const StyledOcCollateral = styled.i`
+flex: 0;
+flex-flow: no wrap;
+flex-basis: 100%;
+
+
+`
 export const StrikeHeader = styled.strong``;
 
 export const DataContainer = styled.div`

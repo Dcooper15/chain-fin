@@ -5,7 +5,7 @@ import {
   DataComponent,
 } from "../Styles/styledElements";
 
-const DaysToExpiration = ({ option, mapType, chainType }) => {
+const DaysToExpiration = ({ option, mapType }) => {
   const callIndex = Object.keys(option.callExpDateMap).map((entry) => {
     return Object.keys(option.callExpDateMap[entry]).map(
       (innerArrayID) =>

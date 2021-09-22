@@ -1,15 +1,8 @@
 import React from "react";
-// import {
-//   DataContainer,
-//   DataHeader,
-//   DataComponent,
-// } from "../Styles/styledElements";
-// import Name from "./Name";
-// import Symbol from "./Symbol";
-// import StockPrice from "./StockPrice";
 import StrikeOneOtm from "./StrikeOneOtm";
 import PercentChange from "./PercentChange";
 import HundredShares from "./HundredShares";
+import CspCollateral from './CspCollateral';
 import BidPrice from "./BidPrice";
 import AskPrice from "./AskPrice";
 import PremiumCollected from "./PremiumCollected";
@@ -23,39 +16,43 @@ import Gamma from "./Gamma";
 import Vega from "./Vega";
 import DaysToExpiration from "./DaysToExpiration";
 
-const MapDataPoints = ({ option, chainType, mapType }) => {
+const MapDataPoints = ({ option, mapType }) => {
   return (
-    <>
-      <StrikeOneOtm option={option} chainType={chainType} mapType={mapType} />
+    <> 
+    
+      <StrikeOneOtm option={option} mapType={mapType} />
+
       <></>
-      <PercentChange option={option} chainType={chainType} mapType={mapType} />
+      <PercentChange option={option} mapType={mapType} />
       <br></br>
-      <HundredShares option={option} chainType={chainType} mapType={mapType} />
+      {mapType === 'call' ? 
+      <HundredShares option={option} mapType={mapType} />
+      :
+     <CspCollateral option={option} mapType={mapType}/>
+      }
       <i>Greeks</i>
-      <BidPrice option={option} chainType={chainType} mapType={mapType} />
+      <BidPrice option={option} mapType={mapType} />
       <></>
-      <Delta option={option} chainType={chainType} mapType={mapType} />
-      <AskPrice option={option} chainType={chainType} mapType={mapType} />
+      <Delta option={option} mapType={mapType} />
+      <AskPrice option={option} mapType={mapType} />
       <></>
-      <Theta option={option} chainType={chainType} mapType={mapType} />
+      <Theta option={option} mapType={mapType} />
       <PremiumCollected
         option={option}
-        chainType={chainType}
         mapType={mapType}
       />
       <></>
-      <Rho option={option} chainType={chainType} mapType={mapType} />
-      <Volume option={option} chainType={chainType} mapType={mapType} />
+      <Rho option={option} mapType={mapType} />
+      <Volume option={option} mapType={mapType} />
       <></>
-      <Gamma option={option} chainType={chainType} mapType={mapType} />
-      <OpenInterest option={option} chainType={chainType} mapType={mapType} />
+      <Gamma option={option} mapType={mapType} />
+      <OpenInterest option={option} mapType={mapType} />
       <></>
-      <Vega option={option} chainType={chainType} mapType={mapType} />
+      <Vega option={option} mapType={mapType} />
 
-      <Volatility option={option} chainType={chainType} mapType={mapType} />
+      <Volatility option={option} mapType={mapType} />
       <DaysToExpiration
         option={option}
-        chainType={chainType}
         mapType={mapType}
       />
     </>

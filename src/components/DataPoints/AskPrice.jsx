@@ -5,7 +5,7 @@ import {
   DataComponent,
 } from "../Styles/styledElements";
 
-const AskPrice = ({ option, mapType, chainType }) => {
+const AskPrice = ({ option, mapType }) => {
   const callIndex = Object.keys(option.callExpDateMap).map((entry) => {
     return Object.keys(option.callExpDateMap[entry]).map((innerArrayID) =>
       option.callExpDateMap[entry][innerArrayID][0].ask.toFixed(2)
