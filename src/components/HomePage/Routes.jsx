@@ -1,5 +1,5 @@
 import React from "react";
-import { StyledNavLink } from '../Styles/styledElements';
+import { StyledNavLink, StyledBackLink } from '../Styles/styledElements';
 import { Route, 
   //useHistory 
 } from "react-router-dom";
@@ -18,27 +18,27 @@ const Routes = () => {
     <>
       <Route exact path="/sector">
       <br></br>
-        <StyledNavLink to="/">{<BiArrowBack />}</StyledNavLink>
+        <StyledBackLink to="/">{<BiArrowBack />}</StyledBackLink>
         <MainSectors />
       </Route>
 
       <Route exact path="/topmovers">
       <br></br>
-      <StyledNavLink to="/">{<BiArrowBack />}</StyledNavLink>
+      <StyledBackLink to="/">{<BiArrowBack />}</StyledBackLink>
       
         <MainTopMovers />
       </Route>
 
       <Route path="/topmovers/:market">
       <br></br>
-      <StyledNavLink to="/topmovers">{<BiArrowBack />}</StyledNavLink>
+      <StyledBackLink to="/topmovers">{<BiArrowBack />}</StyledBackLink>
       
         <MoverStocks />
       </Route>
 
       <Route path="/chain/:symbol">
       <br></br>
-        <StyledNavLink to="/sector">{"Sectors"}</StyledNavLink>
+        <StyledNavLink style={{}}to="/sector">{"Sectors"}</StyledNavLink>
         <br></br>
         <StyledNavLink to="/topmovers">{"Top Movers"}</StyledNavLink>
         <br></br>
@@ -46,7 +46,7 @@ const Routes = () => {
       </Route>
       <Route path="/sector/:sector">
       <br></br>
-      <StyledNavLink to="/sector">{<BiArrowBack />}</StyledNavLink>
+      <StyledBackLink to="/sector">{<BiArrowBack />}</StyledBackLink>
       
         <SectorStocks  />
       </Route>

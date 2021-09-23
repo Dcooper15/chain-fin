@@ -285,13 +285,21 @@ export const StyledSymbolLink = styled(Link)`
   position: relative;
 `;
 
-export const StyledNavLink = styled(Link)`
+export const StyledBackLink = styled(Link)`
   color: ${(props) => props.theme.accentColor};
   text-decoration: none;
   position: relative;
-  font-size: 12px;
+  font-size: 3.4vw;
   margin-left: 1%;
 `;
+
+export const StyledNavLink  = styled(Link)`
+color: ${(props) => props.theme.accentColor};
+  text-decoration: none;
+  position: relative;
+  font-size: 2.4vw;
+  margin-left: 1%;
+`
 
 const StyledExtLinkButton = styled.button`
   color: ${(props) => props.theme.fontColor};
