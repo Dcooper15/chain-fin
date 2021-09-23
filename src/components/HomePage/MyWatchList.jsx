@@ -1,17 +1,17 @@
 import React from 'react';
-import {StyledWatchListHeader, StyledPlaceHolder} from '../Styles/styledElements';
+import {StyledWatchListHeader, StyledPlaceHolder, WatchListContainer} from '../Styles/styledElements';
 
 const MyWatchList = () => {
 return (
 <>
-{/* //<WatchListContainer> */}
+<WatchListContainer> 
 <StyledWatchListHeader>
     My Watch List
 </StyledWatchListHeader>
-<br></br>
+{/* <br></br> */}
 <StyledPlaceHolder>Watch List Coming Soon..</StyledPlaceHolder>
 
-{/* </WatchListContainer> */}
+ </WatchListContainer> 
 
 
 </>

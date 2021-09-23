@@ -8,12 +8,14 @@ export const SectorHeader = styled.h2`
   font-size: 20px;
   margin-left: 3%;
   margin-right: 3%;
+  
 `;
 
 //search
 export const StyledSearchHeader = styled.i`
   color: ${(props) => props.theme.headerColor};
-  font-size: 14px;
+  font-size: 15px;
+  margin-bottom: 2%;
 `;
 
 //full chain header
@@ -37,7 +39,7 @@ export const OptionCSub = styled.strong`
   justify-content: left;
   align-items: left;
   color: ${(props) => props.theme.headerColor};
-  font-size: 1.75vh;
+  font-size: 18px;
   margin-top: 0;
   margin-left: 2%;
   margin-right: 0%;
@@ -220,25 +222,39 @@ export const ColumnRightHome = styled.div`
   }
 `;
 
+export const WatchListContainer = styled.div`
+display: flex;
+width: 60%;
+flex-direction: column;
+margin-top: 10%;
+`
+
 export const StyledWatchListHeader = styled.h4`
+flex: 0;
   color: ${(props) => props.theme.headerColor};
-  font-size: 3.5vw;
+  font-size: 3.2vw;
   text-decoration: underline;
   justify-content: left;
   display: inline-flex;
-  flex-flow: row wrap;
+  flex-flow: row;
   flex-basis: 100%;
   align-items: flex-start;
   box-sizing: border-box;
-  width: 30%;
-  flex-direction: row;
+  width: 40%;
+  flex-direction: column;
 
   margin-left: 1%;
 `;
 
 export const StyledPlaceHolder = styled.i`
+flex: 0;
   color: ${(props) => props.theme.accentColor};
-  font-size: 2.6vw;
+  justify-content: left;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-start;
+  flex-direction: column;
+  font-size: 12px;
   margin-left: 1%;
 `;
 

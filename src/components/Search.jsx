@@ -25,16 +25,11 @@ class Search extends Component {
     return (
       <div>
         <form className="searchForm" onSubmit={this.onSubmit}>
-          <label
-            className="sectorHeader"
-            style={{ fontSize: "14px", paddingBottom: "0%" }}
-          >
-            <StyledSearchHeader>
+        <StyledSearchHeader>
               Search Stock by Ticker Symbol
-            </StyledSearchHeader>
-          </label>
-          <br></br>
-          <br></br>
+        </StyledSearchHeader>
+        <br></br>
+        <br></br>
           <TextField
             disabled={false}
             type="text"
@@ -59,6 +54,7 @@ class Search extends Component {
             size="small"
             color="#fff"
             text="#fff"
+            style={{paddingBottom: '0%'}}
             
           />
           <p></p>
