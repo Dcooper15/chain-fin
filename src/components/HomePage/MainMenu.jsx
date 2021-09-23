@@ -1,38 +1,28 @@
-import React from 'react';
+import React from "react";
 import {
-    SectorMenu,
-    MenuRow,
-    ColumnRight,
-    ColumnLeft,
-    StyledLink,
-  } from "../Styles/styledElements";
-
-
-
+  SectorMenuHome,
+  MenuRowHome,
+  ColumnRightHome,
+  ColumnLeftHome,
+  StyledMainMenuLink,
+} from "../Styles/styledElements";
 
 const MainMenu = () => {
-    return(
-        <>
-        <SectorMenu>
-              <MenuRow>
-                <ColumnLeft>
-                  <h3>
-                    <StyledLink to="/sector">Sectors</StyledLink>
-                  </h3>
-                </ColumnLeft>
+  return (
+    <>
+      <SectorMenuHome>
+        <MenuRowHome>
+          <ColumnLeftHome>
+            <StyledMainMenuLink to="/sector">Sectors</StyledMainMenuLink>
+          </ColumnLeftHome>
 
-                <ColumnRight>
-                  <h3>
-                    <StyledLink to="/topmovers">Top Movers</StyledLink>
-                  </h3>
-                </ColumnRight>
-              </MenuRow>
-            </SectorMenu>
-  
-        </>
-
-    );
-}
-
+          <ColumnRightHome>
+            <StyledMainMenuLink to="/topmovers">Movers</StyledMainMenuLink>
+          </ColumnRightHome>
+        </MenuRowHome>
+      </SectorMenuHome>
+    </>
+  );
+};
 
 export default MainMenu;

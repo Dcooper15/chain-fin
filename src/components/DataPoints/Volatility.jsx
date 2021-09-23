@@ -23,7 +23,7 @@ const Volatility = ({ option, mapType }) => {
         <DataHeader>Implied Volatility</DataHeader>
 
         <DataComponent>
-          {mapType === "call" ? callIndex.toFixed(2) : putIndex.toFixed(2)}
+          {mapType === "call" ? callIndex : putIndex}
         </DataComponent>
       </DataContainer>
     );

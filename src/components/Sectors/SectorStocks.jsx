@@ -220,7 +220,6 @@ console.log(dataArray)
                 raised={true}
               >
                 <MapCardHeader option={option} />
-                <></>
 
                 <MapDataPoints
                   option={option}

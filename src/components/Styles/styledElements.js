@@ -8,7 +8,6 @@ export const SectorHeader = styled.h2`
   font-size: 20px;
   margin-left: 3%;
   margin-right: 3%;
- 
 `;
 
 //search
@@ -100,8 +99,8 @@ export const ColumnLeft = styled.div`
   border-left-style: ridge;
   border-right-style: ridge;
   border-bottom-style: groove;
-  border-radius: 25px;
-  border-width: 2px;
+  border-radius: 2.5vw;
+  border-width: 0.3vw;
   margin-top: 2%;
   margin-right: 1%;
   margin-bottom: 1%;
@@ -112,6 +111,24 @@ export const ColumnLeft = styled.div`
     transition: 0.5s ease;
   }
 `;
+export const SectorMenuHome = styled.div`
+  justify-content: center;
+  text-align: center;
+  display: flex;
+  flex-flow: row wrap;
+  box-sizing: border-box;
+  width: 600px;
+  position: relative;
+  top: 50%;
+  width: 100%;
+  margin-left: 0.5%;
+  margin-right: 0.5%;
+  margin-top: 14vw;
+  margin-bottom: 8vw;
+  flex-direction: column;
+  align-items: center;
+  align-content: space-between;
+`;
 
 export const ColumnRight = styled.div`
   flex: 1;
@@ -120,19 +137,109 @@ export const ColumnRight = styled.div`
   flex-direction: column;
   border-color: ${(props) => props.theme.accentColor};
   border-style: groove;
-  border-radius: 25px;
-  border-width: 2px;
+  border-radius: 2.5vw;
+  border-width: 0.3vw;
   margin-top: 2%;
   margin-left: 1%;
   margin-bottom: 1%;
   text-decoration: none;
   font-size: 3.5vw;
- 
+
   &:hover {
     background-color: ${(props) => props.theme.hoverColor};
     transition: 0.5s ease;
   }
+`;
 
+export const ColumnLeftHome = styled.div`
+  flex: 1;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  border-color: ${(props) => props.theme.accentColor};
+  border-top-style: groove;
+  border-left-style: ridge;
+  border-right-style: ridge;
+  border-bottom-style: groove;
+  border-radius: 1.8vw;
+  border-width: 0.2vw;
+  margin-right: 1%;
+  text-decoration: none;
+  max-height: 90px;
+  height: 100%;
+  max-width: 250px;
+  &:hover {
+    background-color: ${(props) => props.theme.hoverColor};
+    transition: 0.5s ease;
+  }
+`;
+
+export const MenuRowHome = styled.div`
+  flex: 2;
+  justify-content: center;
+  display: inline-flex;
+  padding-right: 1%;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  height: 70%;
+  flex-direction: row;
+  align-content: space-between;
+`;
+
+export const StyledMainMenuLink = styled(Link)`
+color: ${(props) => props.theme.headerColor};
+ flex: 0;
+  text-decoration: none;
+  margin: 1rem;
+  justify-content: center;
+  font-size: 5vw;
+  max-width: 154px
+  position: relative;
+  max-height: 33px;
+
+`;
+export const ColumnRightHome = styled.div`
+  flex: 1;
+  justify-content: center;
+  align-items: flex-end;
+  flex-direction: column;
+  border-color: ${(props) => props.theme.accentColor};
+  border-style: groove;
+  border-radius: 1.8vw;
+  border-width: 0.2vw;
+  margin-left: 1%;
+  text-decoration: none;
+  width: 40%;
+  height: 100%;
+  max-height: 90px;
+  max-width: 255px;
+  &:hover {
+    background-color: ${(props) => props.theme.hoverColor};
+    transition: 0.5s ease;
+  }
+`;
+
+export const StyledWatchListHeader = styled.h4`
+  color: ${(props) => props.theme.headerColor};
+  font-size: 3.5vw;
+  text-decoration: underline;
+  justify-content: left;
+  display: inline-flex;
+  flex-flow: row wrap;
+  flex-basis: 100%;
+  align-items: flex-start;
+  box-sizing: border-box;
+  width: 30%;
+  flex-direction: row;
+
+  margin-left: 1%;
+`;
+
+export const StyledPlaceHolder = styled.i`
+  color: ${(props) => props.theme.accentColor};
+  font-size: 2.6vw;
+  margin-left: 1%;
 `;
 
 export const StyledExpDate = styled.i`
@@ -241,12 +348,10 @@ export const StyledPercentHeader = styled.i`
   align-items: bottom;
 `;
 export const StyledOcCollateral = styled.i`
-flex: 0;
-flex-flow: no wrap;
-flex-basis: 100%;
-
-
-`
+  flex: 0;
+  flex-flow: no wrap;
+  flex-basis: 100%;
+`;
 export const StrikeHeader = styled.strong``;
 
 export const DataContainer = styled.div`
@@ -312,10 +417,12 @@ export const GreekDataComponent = styled.div`
 
 export const StyledPercentChangeUp = styled.i`
   color: ${(props) => props.theme.percentChangeUp};
+  padding-left: 1%;
   margin-left: 1%;
 `;
 
 export const StyledPercentChangeDown = styled.i`
   color: ${(props) => props.theme.percentChangeDown};
+  padding-left: 1%;
   margin-left: 1%;
 `;

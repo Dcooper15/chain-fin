@@ -5,11 +5,13 @@ import {
   darkTheme,
   GlobalBackGround,
 } from "./components/Styles/theme";
+//import { HomeContainer } from './components/Styles/styledElements';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import BasicNav from "./components/HomePage/BasicNav";
 import Routes from "./components/HomePage/Routes";
 import MainMenu from "./components/HomePage/MainMenu";
 import MainSearch from "./components/MainSearch";
+import MyWatchList from './components/HomePage/MyWatchList';
 //import Navbar from "./components/Navbar/Navbar";
 
 import "./App.css";
@@ -26,16 +28,16 @@ function App() {
       <GlobalBackGround />
 
       <Router>
+
         <BasicNav theme={theme} lightDarkChange={lightDarkChange} />
         <Route exact path="/">
-          <br></br>
-          <br></br>
-          <br></br>
-
-          <MainSearch />
-
+  
           <MainMenu />
-          <br></br>
+       
+          <MainSearch />
+          <MyWatchList />
+        <br></br>
+  
         </Route>
         <Routes theme={theme} />
       </Router>

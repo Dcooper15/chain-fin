@@ -2,7 +2,7 @@ import React from "react";
 import {
   StyledCardHeader,
   StyledName,
-  StyledSymbolLink, StyledStockPrice, CardRow, StyledPercentHeader
+  StyledSymbolLink, StyledStockPrice, CardRow
 } from "../Styles/styledElements";
 import { Button } from "@material-ui/core";
 import Name from "./Name";
@@ -22,9 +22,9 @@ const MapCardHeader = ({ option }) => {
         <StyledStockPrice>
         <StockPrice option={option} />
         </StyledStockPrice>
-        <StyledPercentHeader>
+        {/* <StyledPercentHeader> */}
         <StockPercentChange option={option} />
-        </StyledPercentHeader>
+        {/* </StyledPercentHeader> */}
         <Button
           type="submit"
           size="small"

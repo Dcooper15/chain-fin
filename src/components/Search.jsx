@@ -66,6 +66,7 @@ class Search extends Component {
             type="submit"
             variant="outlined"
             value="Search"
+            size="small"
             style={
               this.props.theme.name === "dark"
                 ? {
