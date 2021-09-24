@@ -294,6 +294,16 @@ function FullOptionChain() {
                     raised={true}
                   >
                     <FullChainCardHeader option={option} />
+                    <br></br>
+                    <StyledOcCollateral>
+                      CC Premium to 100 Shares Ratio{" "}
+                      {(
+                        ((option.mark * 100) / (chainPrice *
+                          100)*100) 
+                      ).toFixed(2)}
+                      %
+                    </StyledOcCollateral>
+                    <br></br>
                     <MapFullChainData option={option} />
                     <>
                       <>Exp Date </>
@@ -341,20 +351,25 @@ function FullOptionChain() {
                   >
                     <FullChainCardHeader option={option} />
                     <StyledOcCollateral>
-                      CSP Collateral ${option.strikePrice * 100}
+                      CSP Premium to Collateral Ratio{" "}
+                      {(
+                        ((option.mark * 100) / (option.strikePrice * 100)) *
+                        100
+                      ).toFixed(2)}
+                      %
                     </StyledOcCollateral>
                     <br></br>
-                    <MapFullChainData option={option} />
+                    <MapFullChainData option={option} mapType={"put"} />
                     <>
                       <>Exp Date </>
-                      <bold>
+                      <>
                         <Moment
                           add={{ days: option.daysToExpiration }}
                           format="MMM DD"
                         >
                           {date}
                         </Moment>
-                      </bold>
+                      </>
                     </>
                   </Card>
                 ))

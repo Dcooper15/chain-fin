@@ -4,6 +4,7 @@ import {
   CardRow,
   StyledPercentChangeUp,
   StyledPercentChangeDown,
+  StyledInTheMoney
 } from "../Styles/styledElements";
 
 const FullChainCardHeader = ({ option }) => {
@@ -26,7 +27,11 @@ const FullChainCardHeader = ({ option }) => {
           <StyledPercentChangeDown>
             {option.markPercentChange}%
           </StyledPercentChangeDown>
+          
         )}
+        <StyledInTheMoney>
+        {option.inTheMoney === true ? 'ITM' : 'OTM'}
+        </StyledInTheMoney>
       </CardRow>
     </StyledCardHeader>
   );

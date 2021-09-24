@@ -19,10 +19,8 @@ import DaysToExpiration from "./DaysToExpiration";
 const MapDataPoints = ({ option, mapType }) => {
   return (
     <> 
-    
+      <br></br>
       <StrikeOneOtm option={option} mapType={mapType} />
-
-      <></>
       <PercentChange option={option} mapType={mapType} />
       <br></br>
       {mapType === 'call' ? 

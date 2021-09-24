@@ -12,7 +12,6 @@ const MapFullChainData = ({ option }) => {
   return (
     <>
       <DataContainer>
-        
         <DataHeader>Strike</DataHeader>
 
         <DataComponent>{option.strikePrice}</DataComponent>

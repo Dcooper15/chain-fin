@@ -289,7 +289,7 @@ export const StyledBackLink = styled(Link)`
   color: ${(props) => props.theme.accentColor};
   text-decoration: none;
   position: relative;
-  font-size: 3.4vw;
+  font-size: 3.vw;
   margin-left: 1%;
 `;
 
@@ -372,10 +372,20 @@ export const StyledPercentHeader = styled.i`
   align-items: bottom;
 `;
 export const StyledOcCollateral = styled.i`
+color: ${(props) => props.theme.headerColor};
   flex: 0;
   flex-flow: no wrap;
   flex-basis: 100%;
+  font-size: 14px;
 `;
+export const StyledInTheMoney = styled.strong`
+color: ${(props) => props.theme.headerColor};
+flex: 0;
+margin-left: 2%;
+justify-content: right;
+flex-flow: no wrap;
+
+`
 export const StrikeHeader = styled.strong``;
 
 export const DataContainer = styled.div`
