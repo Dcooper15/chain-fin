@@ -20,7 +20,7 @@ function MoverStocks() {
   const [handleTypeChange, setHandleTypeChange] = useState(false);
   const [direction, setDirection] = useState("up");
   const { market } = useParams();
-  console.log("theme is", theme);
+
   const buttonHandlerPut = () => {
     setHandleTypeChange(true);
   };

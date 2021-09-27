@@ -378,6 +378,15 @@ color: ${(props) => props.theme.headerColor};
   flex-basis: 100%;
   font-size: 14px;
 `;
+export const StyledSliderActiveButton = styled.i`
+font-size: 16px;
+color: ${(props) => props.theme.accentColor};
+flex: 0;
+margin-left: 3%;
+background: 0 3px 5px 2px rgba(212, 175, 55, .5);
+align-items: bottom;
+box-shadow: 0 3px 5px 2px rgba(212, 175, 55, .5);
+`
 export const StyledInTheMoney = styled.strong`
 color: ${(props) => props.theme.headerColor};
 flex: 0;
@@ -441,13 +450,14 @@ export const DataGreekHeader = styled.div`
   flex-direction: column;
 `;
 export const GreekDataComponent = styled.div`
-.dataGreekComponentData {
+
   flex: 0;
   justify-content: center;
   align-items: flex-end;
   flex-direction: column;
   
 `;
+
 
 export const StyledPercentChangeUp = styled.i`
   color: ${(props) => props.theme.percentChangeUp};
@@ -460,3 +470,36 @@ export const StyledPercentChangeDown = styled.i`
   padding-left: 1%;
   margin-left: 1%;
 `;
+
+export const SliderContainer = styled.div`
+height: 100%;
+z-index: 20;
+width: 100%;
+
+
+`;
+
+export const StyledSliderCardInactive = styled.div`
+bottom: -100%;
+transition: all 3.5 ease-in;
+opacity: 1;
+z-index:10;
+  
+
+`;
+
+export const StyledSliderCardActive = styled.div`
+opacity: 1;
+margin-left: 2.5%;
+background-color:#ccc;
+position:fixed;
+height: 100%;
+width: 100%;
+z-index:20;
+transition-timing-function: ease-out;
+transition: .5s;
+transform: translateY(40);
+bottom: 0;
+margin-left: 0%;
+`
+

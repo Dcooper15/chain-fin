@@ -3,9 +3,9 @@ import React from "react";
 const Symbol = ({option}) => {
   try {
     return (
-      <bold key={1} style={{fontSize: "20px"}}>
+      <strong key={1} style={{fontSize: "20px"}}>
         <strong>{option.symbol}</strong>
-      </bold>
+      </strong>
     );
   } catch (error) {
     return (

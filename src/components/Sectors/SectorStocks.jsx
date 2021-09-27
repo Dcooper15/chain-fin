@@ -18,15 +18,13 @@ function SectorStocks() {
   const [dataArray, setDataArray] = useState([]);
   const [handleTypeChange, setHandleTypeChange] = useState(false);
   const { sector } = useParams();
-console.log(dataArray)
+
   const buttonHandlerPut = () => {
     setHandleTypeChange(true);
   };
   const buttonHandlerCall = () => {
     setHandleTypeChange(false);
   };
-
-  console.log("datais, ", dataArray);
 
   let sectorError = [];
   switch (sector) {
@@ -91,7 +89,6 @@ console.log(dataArray)
 
   useEffect(() => {
     const chainData = [];
-    console.log(chainData);
     symbolArray.map((symbol) =>
       axios
         .get(
@@ -172,10 +169,7 @@ console.log(dataArray)
               >
                 <MapCardHeader option={option} />
 
-                <MapDataPoints
-                  option={option}
-                  mapType={'call'}
-                />
+                <MapDataPoints option={option} mapType={"call"} />
                 <>
                   <>Exp Date </>
                   <Moment
@@ -221,10 +215,7 @@ console.log(dataArray)
               >
                 <MapCardHeader option={option} />
 
-                <MapDataPoints
-                  option={option}
-                  mapType={'put'}
-                />
+                <MapDataPoints option={option} mapType={"put"} />
                 <>
                   <>Exp Date </>
                   <Moment

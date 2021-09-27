@@ -4,10 +4,16 @@ import {
   CardRow,
   StyledPercentChangeUp,
   StyledPercentChangeDown,
-  StyledInTheMoney
+  StyledSliderActiveButton,
 } from "../Styles/styledElements";
+import { BiStats } from "react-icons/bi";
 
-const FullChainCardHeader = ({ option }) => {
+const FullChainCardHeader = ({
+  option,
+  buttonHandlerActive,
+  setStrikeHandler,
+  setPremiumHandler,
+}) => {
   return (
     <StyledCardHeader>
       <CardRow>
@@ -27,11 +33,16 @@ const FullChainCardHeader = ({ option }) => {
           <StyledPercentChangeDown>
             {option.markPercentChange}%
           </StyledPercentChangeDown>
-          
         )}
-        <StyledInTheMoney>
-        {option.inTheMoney === true ? 'ITM' : 'OTM'}
-        </StyledInTheMoney>
+        <StyledSliderActiveButton>
+          <BiStats
+            onClick={() => {
+              buttonHandlerActive();
+              setStrikeHandler(option.strikePrice);
+              setPremiumHandler(option.mark * 100);
+            }}
+          />
+        </StyledSliderActiveButton>
       </CardRow>
     </StyledCardHeader>
   );

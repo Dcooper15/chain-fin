@@ -20,7 +20,6 @@ class MainSearch extends Component {
     const res = await axios.get(
       `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${text}&contractType=ALL&strikeCount=2&includeQuotes=TRUE&toDate=${process.env.REACT_APP_DATE}&range=OTM`
     );
-    console.log("data", res.data);
     if (res.data.status === "FAILED") {
       errorSymbol = res.data.symbol + " is not a valid symbol";
       this.setState({ error: [...this.state.error, res.data.symbol] });
@@ -33,7 +32,6 @@ class MainSearch extends Component {
   render() {
     const { stockData } = this.state;
     const { error } = this.state;
-    console.log(this.props.theme);
     return (
       <div>
         <Search searchStocks={this.searchStocks} />

@@ -54,6 +54,7 @@ export const useStyles = makeStyles({
   card: {
     position: "center",
     justifyItems: "center",
+    zIndex: 0,
     marginLeft: "4%",
     marginRight: "3%",
     marginTop: "3%",
@@ -62,6 +63,21 @@ export const useStyles = makeStyles({
     fontFamily: "Noto Sans,sans-serif",
     borderRadius: "15px",
     paddingLeft: "2%",
+  },
+
+  sliderCard: {
+    position: "fixed",
+    justifyItems: "center",
+    zIndex: 1000,
+    height: '400px',
+    // marginLeft: "4%",
+    // marginRight: "3%",
+    // marginTop: "3%",
+    // // paddingTop: "1%",
+    // paddingBottom: "1%",
+    fontFamily: "Noto Sans,sans-serif",
+    borderRadius: "15px",
+    paddingLeft: "0",
   },
 
   chainDark: {

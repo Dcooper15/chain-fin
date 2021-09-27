@@ -7,7 +7,6 @@ import { IoHome } from "react-icons/io5";
 
 const BasicNav = ({ lightDarkChange, theme }) => {
   const [userMessage, setUserMessage] = useState([]);
-  console.log(userMessage);
   const handleUserClick = () => {
   userMessage.length ? setUserMessage([]) : setUserMessage('Profile/Settings coming soon');
   };
@@ -35,9 +34,9 @@ const BasicNav = ({ lightDarkChange, theme }) => {
       <Button
       onClick={handleUserClick}
         startIcon={
-          <StyledNavLink>
-            <FaUserAstronaut />
-          </StyledNavLink>
+          
+            <FaUserAstronaut style={{color: theme === "light" ? "#00afc9" : "#d4af37" }}/>
+          
         }
         size="medium"
       ></Button><br></br><i style={{fontSize: '10px'}}

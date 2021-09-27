@@ -5,6 +5,7 @@ import {
   StyledExpDate,
   StyledMenuItem,
   StyledOcCollateral,
+  //StyledSliderActiveButton,
 } from "../Styles/styledElements";
 import { useStyles } from "../Styles/muiStyles";
 import axios from "axios";
@@ -20,40 +21,13 @@ import {
 import HeaderOptionChain from "./HeaderOptionChain";
 import MapFullChainData from "./MapFullChainData";
 import FullChainCardHeader from "./FullChainCardHeader";
-
+import ProfitLossSlider from "./ProfitLossSlider";
 import Moment from "react-moment";
 
 const date = new Date();
 const yearEnd = new Date("12/31/2021");
 
 const offsetDays = (yearEnd.getTime() - date.getTime()) / (1000 * 3600 * 24);
-
-// const marks = [
-//   {
-//     value: 2,
-//     label: "2",
-//   },
-//   {
-//     value: 6,
-//     label: "6",
-//   },
-//   {
-//     value: 8,
-//     label: "8",
-//   },
-//   {
-//     value: 12,
-//     label: "12",
-//   },
-//   {
-//     value: 16,
-//     label: "16",
-//   },
-//   {
-//     value: "All",
-//     label: "All",
-//   },
-// ];
 
 function FullOptionChain() {
   const classes = useStyles();
@@ -69,6 +43,9 @@ function FullOptionChain() {
   const [callData, setCallData] = useState([]);
   const [putData, setPutData] = useState([]);
   const [open, setOpen] = useState(false);
+  const [sliderStrike, setSliderStrike] = useState([]);
+  const [sliderPremium, setSliderPremium] = useState([]);
+  const [sliderActive, setSliderActive] = useState(false);
 
   const buttonHandlerPut = () => {
     setHandleTypeChange(true);
@@ -84,6 +61,18 @@ function FullOptionChain() {
   };
   const handleOpen = () => {
     setOpen(true);
+  };
+  const buttonHandlerActive = () => {
+    setSliderActive(sliderActive === false ? true : false);
+  };
+  const buttonHandlerInactive = () => {
+    setSliderActive(false);
+  };
+  const sliderStrikeHandler = (value) => {
+    setSliderStrike(value);
+  };
+  const sliderPremiumHandler = (premValue) => {
+    setSliderPremium(premValue);
   };
 
   useEffect(() => {
@@ -111,7 +100,6 @@ function FullOptionChain() {
         setChainPrice([stockPrice]);
         setChainPercent([percentChange]);
         setName([response.data.underlying.description]);
-        console.log(response.data);
         const callKeys = Object.keys(response.data.callExpDateMap)
           .map((entry) => {
             return Object.keys(response.data.callExpDateMap[entry]).map(
@@ -237,10 +225,7 @@ function FullOptionChain() {
             value={strikeCount}
             onChange={handleStrikeChange}
           >
-            <MenuItem
-              classes={{ root: classes.menuItem, selected: "selected" }}
-              value={6}
-            >
+            <MenuItem className={classes.menuItem} value={6}>
               <StyledMenuItem>6</StyledMenuItem>
             </MenuItem>
             <MenuItem className={classes.menuItem} value={10}>
@@ -254,16 +239,6 @@ function FullOptionChain() {
             </MenuItem>
           </Select>
         </FormControl>
-
-        {/* <Slider 
-        style={{width: '90%'}}
-        defaultValue={6}
-        aria-labelledby="discrete-slider-restrict"
-        step={null}
-        max={"All"}
-        marks={marks}
-        valueLabelDisplay="auto"
-        /> */}
 
         {!!callData.length
           ? callData
@@ -293,34 +268,41 @@ function FullOptionChain() {
                     }
                     raised={true}
                   >
-                    <FullChainCardHeader option={option} />
+                    <FullChainCardHeader
+                      option={option}
+                      buttonHandlerActive={buttonHandlerActive}
+                      setStrikeHandler={sliderStrikeHandler}
+                      setPremiumHandler={sliderPremiumHandler}
+                    />
                     <br></br>
                     <StyledOcCollateral>
                       CC Premium to 100 Shares Ratio{" "}
                       {(
-                        ((option.mark * 100) / (chainPrice *
-                          100)*100) 
+                        ((option.mark * 100) / (chainPrice * 100)) *
+                        100
                       ).toFixed(2)}
                       %
                     </StyledOcCollateral>
                     <br></br>
                     <MapFullChainData option={option} />
+
                     <>
                       <>Exp Date </>
-                      <bold>
+                      <>
                         <Moment
                           add={{ days: option.daysToExpiration }}
                           format="MMM DD"
                         >
                           {date}
                         </Moment>
-                      </bold>
+                      </>
                     </>
                   </Card>
                 ))
               )
               .reverse()
           : " "}
+
         {!!putData.length
           ? putData
               .map((stock) =>
@@ -349,7 +331,12 @@ function FullOptionChain() {
                     }
                     raised={true}
                   >
-                    <FullChainCardHeader option={option} />
+                    <FullChainCardHeader 
+                    option={option}
+                    buttonHandlerActive={buttonHandlerActive}
+                    setStrikeHandler={sliderStrikeHandler}
+                    setPremiumHandler={sliderPremiumHandler}
+                     />
                     <StyledOcCollateral>
                       CSP Premium to Collateral Ratio{" "}
                       {(
@@ -376,6 +363,13 @@ function FullOptionChain() {
               )
               .reverse()
           : " "}
+        <ProfitLossSlider
+          active={sliderActive}
+          setInactive={buttonHandlerInactive}
+          sharePrice={chainPrice}
+          strike={sliderStrike}
+          premium={sliderPremium}
+        />
       </>
     );
   } catch (error) {
