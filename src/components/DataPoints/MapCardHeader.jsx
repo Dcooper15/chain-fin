@@ -31,7 +31,7 @@ const MapCardHeader = ({ option }) => {
           style={{padding: '0'}}
         >
            <StyledSymbolLink to={`/chain/${option.symbol}`}>
-            <HiLink style={{fontSize: '14px'}}/>
+            <HiLink style={{fontSize: '14px', boxShadow: '0 3px 5px 2px rgba(212, 175, 55, .5)'}}/>
             </StyledSymbolLink>
         </Button>
         </CardRow>
