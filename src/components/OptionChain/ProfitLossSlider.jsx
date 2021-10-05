@@ -1,6 +1,11 @@
 import React, { useEffect, useState, useContext } from "react";
 import { ThemeContext } from "styled-components";
-import { StyledMenuItem } from "../Styles/styledElements";
+import {
+  StyledMenuItem,
+  SliderDataDiv,
+  StyledLabel,
+  StyledValue,
+} from "../Styles/styledElements";
 import { useStyles } from "../Styles/muiStyles";
 import "./OptionChain.css";
 import {
@@ -64,7 +69,7 @@ const ProfitLossSlider = ({
     sliderValue <= strike
       ? ((sliderValue - sharePrice) * 100).toFixed(2) - premium
       : ((strike - sharePrice) * 100).toFixed(2) - premium;
-  let ccOpurtunityCost =
+  let ccOpportunityCost =
     sliderValue > strike ? ((sliderValue - strike) * 100).toFixed(2) : 0;
 
   let mainPL = [];
@@ -100,19 +105,18 @@ const ProfitLossSlider = ({
           </Button>
           <br></br>
           <br></br>
-          <strong>
-            <br></br>
-            Share Price ${sharePrice}
-            <br></br>
-            Strike Price ${strike}
-            <br></br>
-            Premium ${premium}
-            <br></br>
-            CC 100 Shares ${hundredShares}
-            <br></br>
-            CSP Collaterall ${cspCollaterall}
-          </strong>
-          <br></br>
+          <SliderDataDiv>
+            <StyledLabel>
+              Share Price<StyledValue>${sharePrice}</StyledValue>
+            </StyledLabel>
+            <StyledLabel>
+              Strike Price<StyledValue>${strike}</StyledValue>
+            </StyledLabel>
+            <StyledLabel>
+              Premium<StyledValue>${premium}</StyledValue>
+            </StyledLabel>
+          </SliderDataDiv>
+
           <br></br>
           <FormControl className={classes.formControl}>
             <InputLabel id="strikeLabel" className={classes.select}>
@@ -149,6 +153,18 @@ const ProfitLossSlider = ({
           </FormControl>
           <br></br>
           <br></br>
+          <i
+            style={{ visibility: optionStrategy === 2 ? "visible" : "hidden" }}
+          >
+            CC 100 Shares ${hundredShares}
+          </i>
+          <i
+            style={{ visibility: optionStrategy === 4 ? "visible" : "hidden" }}
+          >
+            CSP Collaterall ${cspCollaterall}
+          </i>
+          <br></br>
+          <br></br>
           <strong>Share Price at Expiration</strong>
           <br></br>
           <Slider
@@ -166,13 +182,18 @@ const ProfitLossSlider = ({
             valueLabelDisplay="on"
           />
           <br></br>
-          <>
-            Profit: ${mainPL.toFixed(2)}
-            <br></br>
-            {optionStrategy === 2
-              ? `Oppurtunity Cost: $${ccOpurtunityCost}`
-              : ""}
-          </>
+          <SliderDataDiv>
+            <StyledLabel>
+              Profit <StyledValue>${mainPL.toFixed(2)}</StyledValue>
+            </StyledLabel>
+            {optionStrategy === 2 ? (
+              <StyledLabel>
+                Opportunity Cost<StyledValue>${ccOpportunityCost}</StyledValue>
+              </StyledLabel>
+            ) : (
+              ""
+            )}
+          </SliderDataDiv>
         </div>
       </div>
     );

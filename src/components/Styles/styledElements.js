@@ -450,7 +450,6 @@ export const DataGreekHeader = styled.div`
   flex-direction: column;
 `;
 export const GreekDataComponent = styled.div`
-
   flex: 0;
   justify-content: center;
   align-items: flex-end;
@@ -470,6 +469,8 @@ export const StyledPercentChangeDown = styled.i`
   padding-left: 1%;
   margin-left: 1%;
 `;
+
+//PL slider
 
 export const SliderContainer = styled.div`
 height: 100%;
@@ -503,3 +504,26 @@ bottom: 0;
 margin-left: 0%;
 `
 
+export const SliderDataDiv = styled.div`
+display: flex;
+width: 100%;
+align-items: flex-start;
+`;
+
+export const RowOne = styled.div`
+flex: 1;
+flex-wrap: nowrap;
+align-items: flex-start;
+
+`
+export const StyledLabel = styled.label`
+display: block;
+margin: 5%;
+justify-content: center;
+`;
+
+export const StyledValue = styled.strong`
+display: block;
+justify-content: center;
+align-self: center;
+`;
