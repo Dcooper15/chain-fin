@@ -1,25 +1,25 @@
 import React from "react";
 import {
   SectorMenuHome,
-  MenuRowHome,
-  ColumnRightHome,
-  ColumnLeftHome,
-  StyledMainMenuLink,
+  MenuRow,
+  ColumnRight,
+  ColumnLeft,
+  StyledLink,
 } from "../Styles/styledElements";
 
 const MainMenu = () => {
   return (
     <>
       <SectorMenuHome>
-        <MenuRowHome>
-          <ColumnLeftHome>
-            <StyledMainMenuLink to="/sector">Sectors</StyledMainMenuLink>
-          </ColumnLeftHome>
+        <MenuRow>
+          <ColumnLeft>
+            <StyledLink to="/sector">Sectors</StyledLink>
+          </ColumnLeft>
 
-          <ColumnRightHome>
-            <StyledMainMenuLink to="/topmovers">Movers</StyledMainMenuLink>
-          </ColumnRightHome>
-        </MenuRowHome>
+          <ColumnRight>
+            <StyledLink to="/topmovers">Movers</StyledLink>
+          </ColumnRight>
+        </MenuRow>
       </SectorMenuHome>
     </>
   );

@@ -1,23 +1,20 @@
-import React from 'react';
-import {StyledWatchListHeader, StyledPlaceHolder, WatchListContainer} from '../Styles/styledElements';
+import React from "react";
+import {
+  StyledWatchListHeader,
+  StyledPlaceHolder,
+  WatchListContainer,
+} from "../Styles/styledElements";
 
 const MyWatchList = () => {
-return (
-<>
-<WatchListContainer> 
-<StyledWatchListHeader>
-    My Watch List
-</StyledWatchListHeader>
-{/* <br></br> */}
-<StyledPlaceHolder>Watch List Coming Soon..</StyledPlaceHolder>
+  return (
+    <>
+      <WatchListContainer>
+        <StyledWatchListHeader>My Watch List</StyledWatchListHeader>
 
- </WatchListContainer> 
-
-
-</>
-
-);
-}
-
+        <StyledPlaceHolder>Watch List Coming Soon..</StyledPlaceHolder>
+      </WatchListContainer>
+    </>
+  );
+};
 
 export default MyWatchList;

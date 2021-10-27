@@ -5,10 +5,13 @@ export const SectorHeader = styled.h2`
   justify-content: center;
   align-items: center;
   color: ${(props) => props.theme.headerColor};
-  font-size: 20px;
+  font-size: 36px;
   margin-left: 3%;
   margin-right: 3%;
-  
+  @media (max-width: 800px) {
+    font-size: 4.6vw;
+    position: relative;
+  }
 `;
 
 //search
@@ -53,17 +56,25 @@ export const StyledNavbar = styled.div`
   flex-flow: row wrap;
   align-items: baseline;
 `;
+//Sectors Page
+export const SectorContainer = styled.div`
+  justify-content: center;
+  width: 100%;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+`;
 export const SectorMenu = styled.div`
-  justify-content: right;
+  justify-content: center;
   text-align: center;
   display: inline-flex;
-  flex-flow: row wrap;
+  flex-flow: nowrap;
   box-sizing: border-box;
   width: 95%;
   margin-right: 3%;
   margin-left: 3%;
   flex-direction: column;
-  align-content: space-between;
+  align-content: space-around;
 `;
 
 export const MenuRow = styled.div`
@@ -101,18 +112,53 @@ export const ColumnLeft = styled.div`
   border-left-style: ridge;
   border-right-style: ridge;
   border-bottom-style: groove;
-  border-radius: 2.5vw;
-  border-width: 0.3vw;
+  border-radius: 20px;
+  border-width: 2.8px;
   margin-top: 2%;
   margin-right: 1%;
   margin-bottom: 1%;
   text-decoration: none;
   font-size: 3.5vw;
+  max-width: 368px;
+  max-height: 100px;
+  padding: 1.5%;
   &:hover {
     background-color: ${(props) => props.theme.hoverColor};
     transition: 0.5s ease;
   }
+  @media (max-width: 800px) {
+    border-width: 0.3vw;
+    border-radius: 2.5vw;
+  }
 `;
+
+export const ColumnRight = styled.div`
+  flex: 1;
+  justify-content: center;
+  align-items: flex-end;
+  flex-direction: column;
+  border-color: ${(props) => props.theme.accentColor};
+  border-style: groove;
+  border-radius: 20px;
+  border-width: 2.8px;
+  margin-top: 2%;
+  margin-left: 1%;
+  margin-bottom: 1%;
+  text-decoration: none;
+  font-size: 3.5vw;
+  max-width: 368px;
+  max-height: 100px;
+  padding: 1.5%;
+  &:hover {
+    background-color: ${(props) => props.theme.hoverColor};
+    transition: 0.5s ease;
+  }
+  @media (max-width: 800px) {
+    border-width: 0.3vw;
+    border-radius: 2.5vw;
+  }
+`;
+
 export const SectorMenuHome = styled.div`
   justify-content: center;
   text-align: center;
@@ -132,62 +178,11 @@ export const SectorMenuHome = styled.div`
   align-content: space-between;
 `;
 
-export const ColumnRight = styled.div`
-  flex: 1;
-  justify-content: center;
-  align-items: flex-end;
-  flex-direction: column;
-  border-color: ${(props) => props.theme.accentColor};
-  border-style: groove;
-  border-radius: 2.5vw;
-  border-width: 0.3vw;
-  margin-top: 2%;
-  margin-left: 1%;
-  margin-bottom: 1%;
-  text-decoration: none;
-  font-size: 3.5vw;
 
-  &:hover {
-    background-color: ${(props) => props.theme.hoverColor};
-    transition: 0.5s ease;
-  }
-`;
 
-export const ColumnLeftHome = styled.div`
-  flex: 1;
-  align-items: flex-start;
-  justify-content: center;
-  flex-direction: column;
-  border-color: ${(props) => props.theme.accentColor};
-  border-top-style: groove;
-  border-left-style: ridge;
-  border-right-style: ridge;
-  border-bottom-style: groove;
-  border-radius: 1.8vw;
-  border-width: 0.2vw;
-  margin-right: 1%;
-  text-decoration: none;
-  max-height: 90px;
-  height: 100%;
-  max-width: 250px;
-  &:hover {
-    background-color: ${(props) => props.theme.hoverColor};
-    transition: 0.5s ease;
-  }
-`;
 
-export const MenuRowHome = styled.div`
-  flex: 2;
-  justify-content: center;
-  display: inline-flex;
-  padding-right: 1%;
-  align-items: center;
-  box-sizing: border-box;
-  width: 100%;
-  height: 70%;
-  flex-direction: row;
-  align-content: space-between;
-`;
+
+
 
 export const StyledMainMenuLink = styled(Link)`
 color: ${(props) => props.theme.headerColor};
@@ -201,38 +196,19 @@ color: ${(props) => props.theme.headerColor};
   max-height: 33px;
 
 `;
-export const ColumnRightHome = styled.div`
-  flex: 1;
-  justify-content: center;
-  align-items: flex-end;
+
+//WatchList
+export const WatchListContainer = styled.div`
+  display: flex;
+  width: 100%;
   flex-direction: column;
-  border-color: ${(props) => props.theme.accentColor};
-  border-style: groove;
-  border-radius: 1.8vw;
-  border-width: 0.2vw;
-  margin-left: 1%;
-  text-decoration: none;
-  width: 40%;
-  height: 100%;
-  max-height: 90px;
-  max-width: 255px;
-  &:hover {
-    background-color: ${(props) => props.theme.hoverColor};
-    transition: 0.5s ease;
-  }
+  margin-top: 10%;
 `;
 
-export const WatchListContainer = styled.div`
-display: flex;
-width: 60%;
-flex-direction: column;
-margin-top: 10%;
-`
-
 export const StyledWatchListHeader = styled.h4`
-flex: 0;
+  flex: 0;
   color: ${(props) => props.theme.headerColor};
-  font-size: 3.2vw;
+  font-size: 30px;
   text-decoration: underline;
   justify-content: left;
   display: inline-flex;
@@ -242,12 +218,15 @@ flex: 0;
   box-sizing: border-box;
   width: 40%;
   flex-direction: column;
-
   margin-left: 1%;
+  @media (max-width: 800px) {
+    font-size: 3.8vw;
+    position: relative;
+  }
 `;
 
 export const StyledPlaceHolder = styled.i`
-flex: 0;
+  flex: 0;
   color: ${(props) => props.theme.accentColor};
   justify-content: left;
   display: flex;
@@ -274,9 +253,14 @@ export const SupLinks = styled.div`
 export const StyledLink = styled(Link)`
   color: ${(props) => props.theme.headerColor};
   text-decoration: none;
-  margin: 1rem;
-  font-size: 4vw;
+  margin: auto;
+  font-size: 35px;
   position: relative;
+  justify-content: center;
+  @media (max-width: 800px) {
+    font-size: 4.3vw;
+    position: relative;
+  }
 `;
 
 export const StyledSymbolLink = styled(Link)`
@@ -289,17 +273,25 @@ export const StyledBackLink = styled(Link)`
   color: ${(props) => props.theme.accentColor};
   text-decoration: none;
   position: relative;
-  font-size: 3.vw;
+  font-size: 20px;
   margin-left: 1%;
+  @media (max-width: 800px) {
+    font-size: 16px;
+    position: relative;
+  }
 `;
 
-export const StyledNavLink  = styled(Link)`
-color: ${(props) => props.theme.accentColor};
+export const StyledNavLink = styled(Link)`
+  color: ${(props) => props.theme.accentColor};
   text-decoration: none;
   position: relative;
-  font-size: 2.4vw;
+  font-size: 14px;
   margin-left: 1%;
-`
+  @media (max-width: 800px) {
+    font-size: 12px;
+    position: relative;
+  }
+`;
 
 const StyledExtLinkButton = styled.button`
   color: ${(props) => props.theme.fontColor};
@@ -372,29 +364,28 @@ export const StyledPercentHeader = styled.i`
   align-items: bottom;
 `;
 export const StyledOcCollateral = styled.i`
-color: ${(props) => props.theme.headerColor};
+  color: ${(props) => props.theme.headerColor};
   flex: 0;
   flex-flow: no wrap;
   flex-basis: 100%;
   font-size: 14px;
 `;
 export const StyledSliderActiveButton = styled.i`
-font-size: 16px;
-color: ${(props) => props.theme.accentColor};
-flex: 0;
-margin-left: 3%;
-background: 0 3px 5px 2px rgba(212, 175, 55, .5);
-align-items: bottom;
-box-shadow: 0 3px 5px 2px rgba(212, 175, 55, .5);
-`
+  font-size: 16px;
+  color: ${(props) => props.theme.accentColor};
+  flex: 0;
+  margin-left: 3%;
+  background: 0 3px 5px 2px rgba(212, 175, 55, 0.5);
+  align-items: bottom;
+  box-shadow: 0 3px 5px 2px rgba(212, 175, 55, 0.5);
+`;
 export const StyledInTheMoney = styled.strong`
-color: ${(props) => props.theme.headerColor};
-flex: 0;
-margin-left: 2%;
-justify-content: right;
-flex-flow: no wrap;
-
-`
+  color: ${(props) => props.theme.headerColor};
+  flex: 0;
+  margin-left: 2%;
+  justify-content: right;
+  flex-flow: no wrap;
+`;
 export const StrikeHeader = styled.strong``;
 
 export const DataContainer = styled.div`
@@ -454,9 +445,7 @@ export const GreekDataComponent = styled.div`
   justify-content: center;
   align-items: flex-end;
   flex-direction: column;
-  
 `;
-
 
 export const StyledPercentChangeUp = styled.i`
   color: ${(props) => props.theme.percentChangeUp};
@@ -473,57 +462,52 @@ export const StyledPercentChangeDown = styled.i`
 //PL slider
 
 export const SliderContainer = styled.div`
-height: 100%;
-z-index: 20;
-width: 100%;
-
-
+  height: 100%;
+  z-index: 20;
+  width: 100%;
 `;
 
 export const StyledSliderCardInactive = styled.div`
-bottom: -100%;
-transition: all 3.5 ease-in;
-opacity: 1;
-z-index:10;
-  
-
+  bottom: -100%;
+  transition: all 3.5 ease-in;
+  opacity: 1;
+  z-index: 10;
 `;
 
 export const StyledSliderCardActive = styled.div`
-opacity: 1;
-margin-left: 2.5%;
-background-color:#ccc;
-position:fixed;
-height: 100%;
-width: 100%;
-z-index:20;
-transition-timing-function: ease-out;
-transition: .5s;
-transform: translateY(40);
-bottom: 0;
-margin-left: 0%;
-`
+  opacity: 1;
+  margin-left: 2.5%;
+  background-color: #ccc;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  z-index: 20;
+  transition-timing-function: ease-out;
+  transition: 0.5s;
+  transform: translateY(40);
+  bottom: 0;
+  margin-left: 0%;
+`;
 
 export const SliderDataDiv = styled.div`
-display: flex;
-width: 100%;
-align-items: flex-start;
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
 `;
 
 export const RowOne = styled.div`
-flex: 1;
-flex-wrap: nowrap;
-align-items: flex-start;
-
-`
+  flex: 1;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+`;
 export const StyledLabel = styled.label`
-display: block;
-margin: 5%;
-justify-content: center;
+  display: block;
+  margin: 5%;
+  justify-content: center;
 `;
 
 export const StyledValue = styled.strong`
-display: block;
-justify-content: center;
-align-self: center;
+  display: block;
+  justify-content: center;
+  align-self: center;
 `;
