@@ -158,6 +158,20 @@ export const ColumnRight = styled.div`
     border-radius: 2.5vw;
   }
 `;
+export const ColumnRightDummy = styled.div`
+  flex: 1;
+  justify-content: center;
+  align-items: flex-end;
+  flex-direction: column;
+  margin-top: 2%;
+  margin-left: 1%;
+  margin-bottom: 1%;
+  text-decoration: none;
+  font-size: 3.5vw;
+  max-width: 368px;
+  max-height: 100px;
+  padding: 1.5%;
+`;
 
 export const SectorMenuHome = styled.div`
   justify-content: center;

@@ -14,6 +14,7 @@ import MainSearch from "./components/MainSearch";
 import MyWatchList from './components/HomePage/MyWatchList';
 
 
+
 import "./App.css";
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
 
         <BasicNav theme={theme} lightDarkChange={lightDarkChange} />
         <Route exact path="/">
+    
   <SectorContainer>
           <MainMenu />
        

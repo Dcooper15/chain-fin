@@ -3,6 +3,7 @@ import {
   SectorMenuHome,
   MenuRow,
   ColumnRight,
+  ColumnRightDummy,
   ColumnLeft,
   StyledLink,
 } from "../Styles/styledElements";
@@ -19,6 +20,13 @@ const MainMenu = () => {
           <ColumnRight>
             <StyledLink to="/topmovers">Movers</StyledLink>
           </ColumnRight>
+        </MenuRow>
+        <MenuRow>
+          <ColumnLeft>
+            <StyledLink to="/trendingwsb">Trending - WSB</StyledLink>
+          </ColumnLeft>
+
+          <ColumnRightDummy></ColumnRightDummy>
         </MenuRow>
       </SectorMenuHome>
     </>

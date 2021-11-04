@@ -52,8 +52,8 @@ class Search extends Component {
             }}
             variant="outlined"
             size="small"
-            color="#fff"
-            text="#fff"
+            // color="#fff"
+            // text="#fff"
             style={{paddingBottom: '0%'}}
             
           />

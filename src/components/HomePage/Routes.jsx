@@ -9,6 +9,7 @@ import MoverStocks from "../TopMovers/MoverStocks";
 import FullOptionChain from "../OptionChain/FullOptionChain";
 import MainSectors from "../Sectors/MainSectors";
 import SectorStocks from "../Sectors/SectorStocks";
+import TrendingWsb from '../WSB/TrendingWsb';
 import { BiArrowBack } from "react-icons/bi";
 
 const Routes = () => {
@@ -27,6 +28,13 @@ const Routes = () => {
         <StyledBackLink to="/">{<BiArrowBack />}</StyledBackLink>
 
         <MainTopMovers />
+      </Route>
+
+      <Route exact path="/trendingwsb">
+        <br></br>
+        <StyledBackLink to="/">{<BiArrowBack />}</StyledBackLink>
+
+        <TrendingWsb />
       </Route>
 
       <Route path="/topmovers/:market">

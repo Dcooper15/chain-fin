@@ -1,131 +1,266 @@
-// import React, { useState, useEffect } from "react";
-// import { Link } from "react-router-dom";
-// import axios from "axios";
-// import Moment from "react-moment";
-// import { Card } from "@material-ui/core";
-// import Symbol from "../DataPoints/Symbol";
-// import StockPrice from "../DataPoints/StockPrice";
-// import HundredShares from "../DataPoints/HundredShares";
-// import BidPrice from "../DataPoints/BidPrice";
-// import PremiumCollected from "../DataPoints/PremiumCollected";
-// import OpenInterest from "../DataPoints/OpenInterest";
-// import Volatility from "../DataPoints/Volatility";
-// import DaysToExpiration from "../DataPoints/DaysToExpiration";
-// function wsb() {
-//     axios.get(`https://apewisdom.io/api/v1.0/filter/stocks/page/1`).then((response) => {
-//       ;
-//       console.log("wsb", response.data);
-//     })
-//   }
-// //const moverUrl = `https://api.tdameritrade.com/v1/marketdata/$COMPX/movers?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&direction=up&change=percent`;
-// const date = new Date();
+import React, { useState, useEffect, useContext } from "react";
+import { ThemeContext } from "styled-components";
+import { SectorHeader } from "../Styles/styledElements";
+import { useStyles } from "../Styles/muiStyles";
+import axios from "axios";
+import Moment from "react-moment";
+import { Card, Button } from "@material-ui/core";
+import MapDataPoints from "../DataPoints/MapDataPoints";
+import MapCardHeader from "../DataPoints/MapCardHeader";
 
-// function COMPX() {
-//   const [percentChange, setPercentChange] = useState([]);
-//   const [compxData, setCompxData] = useState([]);
-//   console.log("Percent array", percentChange);
-//   console.log("COMPXDATA", compxData);
-//   useEffect(() => {
-//     const compxDataArray = [];
-//     axios
-//       .get(
-//         `https://api.tdameritrade.com/v1/marketdata/$COMPX/movers?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&direction=up&change=percent`
-//       )
-//       .then((response) => {
-//         const changePercentArray = response.data
-//           .map((percent) => [percent.symbol, percent.change])
-//           .flat();
-        
-//         setPercentChange(changePercentArray);
-        
-//         const compxMoversArray = response.data.map(
-//           (compxSymbol) => compxSymbol.symbol
-//         );
-//         compxMoversArray.map((symbol) =>
-//           axios
-//             .get(
-//               `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&contractType=CALL&strikeCount=1&optionType=CALL&expMonth=${process.env.REACT_APP_MONTH}&toDate=2022-09-04&range=OTM`
-//             )
-//             .then((response) => {
-//               if (response.data.status === "SUCCESS") {
-//                 compxDataArray.push(response.data);
-//               }
-//               setCompxData([compxDataArray]);
-//             })
-//         );
-//       });
-//   }, []);
+const monthNames = [
+  "january",
+  "february",
+  "march",
+  "april",
+  "may",
+  "june",
+  "july",
+  "august",
+  "september",
+  "october",
+  "november",
+  "december",
+];
+const date = new Date();
+const month = date.getMonth();
+const day = date.getDate();
 
-//   return (
-//     <>
-//       <h5 className="sectorHeader">
-//         <Link to="/topmovers" style={{ color: "#fff" }}>
-//           Return to Top Movers
-//         </Link>
-//       </h5>
-//       <h2>Today's Top Movers - NASDAQ</h2>
+function TrendingWsb() {
+  const classes = useStyles();
+  const theme = useContext(ThemeContext);
+  const [marketData, setMarketData] = useState([]);
+  const [handleTypeChange, setHandleTypeChange] = useState(false);
+  const [minutes, setMinutes] = useState([]);
+  const [occurences, setOccurences] = useState([]);
 
-//       {!!compxData.length ? (
-//         compxData.map((stock) =>
-//           stock.map((option) => (
-//             <Card
-//               className="stockInfo"
-//               variant="outlined"
-//               style={{
-//                 backgroundColor: "#6d76f7",
-//                 color: "#fff",
-//                 borderRadius: "15px",
-//               }}
-//             >
-//             <Link to={`/chain/${option.symbol}`} style={{ textDecoration: 'underline', color: '#38ecf2' }}>
-//             <Symbol option={option}/>
-//           </Link>
-//               <>{"   "}Up{" "}
-//               {percentChange[percentChange.indexOf(option.symbol) + 1].toFixed(
-//                 4
-//               ) * 100}
-//               %</>
-           
-//               <br></br>
-//               <StockPrice option={option} />
-//               <br></br>
-//               <HundredShares option={option} />
-//               <br></br>
-//               <BidPrice option={option} />
-//               <br></br>
-//               <PremiumCollected option={option} />
-//               <br></br>
-//               <OpenInterest option={option} />
-//               <br></br>
-//               <Volatility option={option} />
-//               <br></br>
-//               <DaysToExpiration option={option} />
-//               <br></br>
-//               <>Expiration Date: </>
-//               <>
-//                 <Moment
-//                   add={{
-//                     days: Object.keys(option.callExpDateMap).map((entry) => {
-//                       return Object.keys(option.callExpDateMap[entry]).map(
-//                         (innerArrayID) =>
-//                           option.callExpDateMap[entry][innerArrayID][0]
-//                             .daysToExpiration
-//                       );
-//                     })[0],
-//                   }}
-//                   format="MMM DD"
-//                 >
-//                   {date}
-//                 </Moment>
-//               </>
-//             </Card>
-//           ))
-//         )
-//       ) : (
-//         <p>loading data...</p>
-//       )}
-//     </>
-//   );
-// }
+  const buttonHandlerPut = () => {
+    setHandleTypeChange(true);
+  };
+  const buttonHandlerCall = () => {
+    setHandleTypeChange(false);
+  };
 
-// export default COMPX;
+  const getButtonColor = theme.name === "dark" ? "#fff" : "#F8E4A5";
+
+  useEffect(() => {
+    const wsbDataArray = [];
+    axios
+      .get(
+        `https://www.reddit.com/r/wallstreetbets/comments/ql0v5g/daily_discussion_thread_for_${monthNames[month]}_${day}_2021.json?limit=1000`
+      )
+      .then((response) => {
+        const getMostRecentUtc =
+          response.data[1].data.children[1].data.created_utc;
+
+        const getLastPost = response.data[1].data.children.slice(-2);
+
+        const lastPostUtc = getLastPost[0].data.created_utc;
+
+        const minuteDifference = Math.floor(
+          (getMostRecentUtc - lastPostUtc) / 60
+        );
+
+        setMinutes([minuteDifference]);
+
+        const posts = response.data[1].data.children.map(
+          (innerArray) => innerArray.data.body
+        );
+
+        const allPosts = posts.join(" -!@- ");
+        const upperCaseWords = allPosts.match(/(\b[A-Z][A-Z]+|\b[A-Z]\b)/g);
+
+        let potentialSymbols = [];
+        let i;
+        for (i = 0; i < upperCaseWords.length; i++) {
+          if (
+            upperCaseWords[i].length === 3 ||
+            upperCaseWords[i].length === 4
+          ) {
+            potentialSymbols.push(upperCaseWords[i]);
+          }
+        }
+        // console.log(potentialSymbols);
+        const symbolCounter = potentialSymbols.reduce((obj, e) => {
+          obj[e] = (obj[e] || 0) + 1;
+          return obj;
+        }, {});
+
+        // console.log(symbolCounter);
+
+        let sortedSymbols = [];
+        for (let occurence in symbolCounter) {
+          sortedSymbols.push([occurence, symbolCounter[occurence]]);
+        }
+
+        sortedSymbols
+          .sort(function (a, b) {
+            return a[1] - b[1];
+          })
+          .reverse();
+
+        const limitSymbols = sortedSymbols.slice(0, 10);
+        // console.log("limit", limitSymbols);
+        setOccurences(limitSymbols.flat());
+
+        limitSymbols.map((symbol) =>
+          axios
+            .get(
+              `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol[0]}&contractType=ALL&strikeCount=2&includeQuotes=TRUE&toDate=${process.env.REACT_APP_DATE}&range=OTM`
+            )
+            .then((response) => {
+              if (response.data.status === "SUCCESS") {
+                wsbDataArray.push(response.data);
+              }
+              setMarketData([wsbDataArray]);
+            })
+        );
+      });
+  }, []);
+
+  return (
+    <>
+      <SectorHeader style={{ marginLeft: "0.5%" }}>
+        Tickers Trending on WSB
+      </SectorHeader>
+
+      <Button
+        className={
+          theme.name === "dark"
+            ? handleTypeChange === false
+              ? classes.buttonDark
+              : classes.buttonDarkUns
+            : handleTypeChange === false
+            ? classes.buttonLight
+            : classes.buttonLightUns
+        }
+        type="submit"
+        size="small"
+        onClick={buttonHandlerCall}
+        style={{ marginLeft: "3%" }}
+      >
+        <strong style={{ color: getButtonColor }}>Call</strong>
+      </Button>
+      <Button
+        className={
+          theme.name === "dark"
+            ? handleTypeChange === true
+              ? classes.buttonDark
+              : classes.buttonDarkUns
+            : handleTypeChange === true
+            ? classes.buttonLight
+            : classes.buttonLightUns
+        }
+        type="submit"
+        size="small"
+        onClick={buttonHandlerPut}
+      >
+        <strong style={{ color: getButtonColor }}>Put</strong>
+      </Button>
+      {!!marketData.length ? (
+        marketData.map((stock) =>
+          stock.map((option) => (
+            <Card
+              className={classes.card}
+              style={
+                theme.name === "dark"
+                  ? {
+                      backgroundColor: "#3D3D3D",
+                      borderColor: "#d4af37",
+                      color: "#ffebcd",
+                    }
+                  : {
+                      backgroundColor: "#ebebeb",
+                      borderColor: "#00afc9",
+                      color: "#002933",
+                    }
+              }
+              variant="outlined"
+              hidden={handleTypeChange === true}
+              raised={true}
+            >
+              <i>
+                {occurences[occurences.indexOf(option.symbol) + 1]} mention(s)
+                in last {minutes} minutes
+              </i>
+              <MapCardHeader option={option} />
+              <MapDataPoints option={option} mapType={"call"} />
+
+              <>Exp Date </>
+              <>
+                <Moment
+                  add={{
+                    days: Object.keys(option.callExpDateMap).map((entry) => {
+                      return Object.keys(option.callExpDateMap[entry]).map(
+                        (innerArrayID) =>
+                          option.callExpDateMap[entry][innerArrayID][0]
+                            .daysToExpiration
+                      );
+                    })[0][1],
+                  }}
+                  format="MMM DD"
+                >
+                  {date}
+                </Moment>
+              </>
+            </Card>
+          ))
+        )
+      ) : (
+        <SectorHeader>scanning...</SectorHeader>
+      )}
+      {!!marketData.length
+        ? marketData.map((stock) =>
+            stock.map((option) => (
+              <Card
+                className={classes.card}
+                style={
+                  theme.name === "dark"
+                    ? {
+                        backgroundColor: "#3D3D3D",
+                        borderColor: "#d4af37",
+                        color: "#ffebcd",
+                      }
+                    : {
+                        backgroundColor: "#ebebeb",
+                        borderColor: "#00afc9",
+                        color: "#002933",
+                      }
+                }
+                variant="outlined"
+                hidden={handleTypeChange === false}
+                raised={true}
+              >
+                <i>
+                  {occurences[occurences.indexOf(option.symbol) + 1]} mention(s)
+                  in last {minutes} minutes
+                </i>
+                <MapCardHeader option={option} />
+                <></>
+                <MapDataPoints option={option} mapType={"put"} />
+
+                <>
+                  <>Exp Date </>
+                  <Moment
+                    add={{
+                      days: Object.keys(option.callExpDateMap).map((entry) => {
+                        return Object.keys(option.callExpDateMap[entry]).map(
+                          (innerArrayID) =>
+                            option.callExpDateMap[entry][innerArrayID][0]
+                              .daysToExpiration
+                        );
+                      })[0][1],
+                    }}
+                    format="MMM DD"
+                  >
+                    {date}
+                  </Moment>
+                </>
+              </Card>
+            ))
+          )
+        : " "}
+    </>
+  );
+}
+export default TrendingWsb;
