@@ -153,7 +153,7 @@ function SectorStocks() {
                 style={
                   theme.name === "dark"
                     ? {
-                        backgroundColor: "#3D3D3D",
+                        backgroundColor: "#342F01",
                         borderColor: "#d4af37",
                         color: "#ffebcd",
                       }
@@ -199,7 +199,7 @@ function SectorStocks() {
                 style={
                   theme.name === "dark"
                     ? {
-                        backgroundColor: "#3D3D3D",
+                        backgroundColor: "#342F01",
                         borderColor: "#d4af37",
                         color: "#ffebcd",
                       }

@@ -192,12 +192,6 @@ export const SectorMenuHome = styled.div`
   align-content: space-between;
 `;
 
-
-
-
-
-
-
 export const StyledMainMenuLink = styled(Link)`
 color: ${(props) => props.theme.headerColor};
  flex: 0;
@@ -475,6 +469,27 @@ export const StyledPercentChangeDown = styled.i`
 
 //PL slider
 
+export const SliderPageContainer = styled.div``;
+
+export const StyledFormControl = styled.div`
+  margin-left: 5%;
+  margin-bottom: 3%;
+`;
+
+export const StyledClose = styled.strong`
+  background: ${(props) => props.theme.accentColor};
+  border-radius: 20px;
+  font-size: 22px;
+  display: flex;
+  flex-direction: row-reverse;
+  width: 23px;
+  padding-right: 1px;
+  align-items: center;
+  margin-left: 92.5%;
+  margin-right: 5%;
+  margin-top: 3%;
+`;
+
 export const SliderContainer = styled.div`
   height: 100%;
   z-index: 20;
@@ -515,13 +530,25 @@ export const RowOne = styled.div`
   align-items: flex-start;
 `;
 export const StyledLabel = styled.label`
+  color: ${(props) => props.theme.headerColor};
   display: block;
   margin: 5%;
   justify-content: center;
 `;
+export const StyledStratLabel = styled.label`
+  color: ${(props) => props.theme.headerColor};
+  justify-content: center;
+  
+`;
 
 export const StyledValue = styled.strong`
+  color: ${(props) => props.theme.headerColor};
   display: block;
   justify-content: center;
   align-self: center;
+`;
+
+export const StyledSPE = styled.strong`
+  color: ${(props) => props.theme.headerColor};
+  margin-left: 5%;
 `;

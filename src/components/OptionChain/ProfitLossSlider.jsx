@@ -1,21 +1,20 @@
 import React, { useEffect, useState, useContext } from "react";
 import { ThemeContext } from "styled-components";
 import {
+  SliderPageContainer,
   StyledMenuItem,
   SliderDataDiv,
+  StyledFormControl,
   StyledLabel,
+  StyledStratLabel,
   StyledValue,
+  StyledSPE,
+  StyledClose,
 } from "../Styles/styledElements";
 import { useStyles } from "../Styles/muiStyles";
 import "./OptionChain.css";
-import {
-  Button,
-  Slider,
-  InputLabel,
-  Select,
-  MenuItem,
-  FormControl,
-} from "@material-ui/core";
+import { Slider, Select, MenuItem, FormControl } from "@material-ui/core";
+import { GrFormClose } from "react-icons/gr";
 
 const ProfitLossSlider = ({
   sharePrice,
@@ -92,19 +91,24 @@ const ProfitLossSlider = ({
 
   if (strike) {
     return (
-      <div>
-        <div className={active === true ? "sliderActive" : "sliderInactive"}>
-          <Button
-            type="submit"
-            size="small"
-            variant="outlined"
-            onClick={setInactive}
-            style={{ marginLeft: "2%", marginTop: "2%" }}
-          >
-            <strong>close</strong>
-          </Button>
-          <br></br>
-          <br></br>
+      <SliderPageContainer>
+        <div
+          className={
+            active === true && theme.name === "dark"
+              ? "sliderActiveDark"
+              : active === true && theme.name !== "dark"
+              ? "sliderActive"
+              : "sliderInactive"
+          }
+        >
+          <StyledClose>
+            <GrFormClose
+              onClick={() => {
+                setInactive();
+              }}
+            />
+          </StyledClose>
+
           <SliderDataDiv>
             <StyledLabel>
               Share Price<StyledValue>${sharePrice}</StyledValue>
@@ -117,62 +121,65 @@ const ProfitLossSlider = ({
             </StyledLabel>
           </SliderDataDiv>
 
-          <br></br>
-          <FormControl className={classes.formControl}>
-            <InputLabel id="strikeLabel" className={classes.select}>
-              <strong
-                style={{ color: theme.name === "dark" ? "#d4af37" : "#146175" }}
-              >
-                Option Strategy
-              </strong>
-            </InputLabel>
+          <StyledFormControl>
+            <FormControl className={classes.formControlSlider}>
+              <StyledStratLabel>Option Strategy</StyledStratLabel>
 
-            <Select
-              labelId="strikeLabel"
-              id="strikes"
-              className={classes.select}
-              open={open}
-              onClose={handleClose}
-              onOpen={handleOpen}
-              value={optionStrategy}
-              onChange={handleStrategyChange}
-            >
-              <MenuItem className={classes.menuItem} value={1}>
-                <StyledMenuItem>Buy Call</StyledMenuItem>
-              </MenuItem>
-              <MenuItem className={classes.menuItem} value={2}>
-                <StyledMenuItem>Sell Covered Call</StyledMenuItem>
-              </MenuItem>
-              <MenuItem className={classes.menuItem} value={3}>
-                <StyledMenuItem>Buy Put</StyledMenuItem>
-              </MenuItem>
-              <MenuItem className={classes.menuItem} value={4}>
-                <StyledMenuItem>Sell Cash Secured Put</StyledMenuItem>
-              </MenuItem>
-            </Select>
-          </FormControl>
-          <br></br>
-          <br></br>
-          <i
-            style={{ visibility: optionStrategy === 2 ? "visible" : "hidden" }}
+              <Select
+                labelId="strikeLabel"
+                id="strikes"
+                className={classes.select}
+                open={open}
+                onClose={handleClose}
+                onOpen={handleOpen}
+                value={optionStrategy}
+                onChange={handleStrategyChange}
+                style={{ marginLeft: "5%", minWidth: "100px" }}
+              >
+                <MenuItem className={classes.menuItemSlider} value={1}>
+                  <StyledMenuItem>Buy Call</StyledMenuItem>
+                </MenuItem>
+                <MenuItem className={classes.menuItemSlider} value={2}>
+                  <StyledMenuItem>Sell Covered Call</StyledMenuItem>
+                </MenuItem>
+                <MenuItem className={classes.menuItemSlider} value={3}>
+                  <StyledMenuItem>Buy Put</StyledMenuItem>
+                </MenuItem>
+                <MenuItem className={classes.menuItemSlider} value={4}>
+                  <StyledMenuItem>Sell Cash Secured Put</StyledMenuItem>
+                </MenuItem>
+              </Select>
+            </FormControl>
+          </StyledFormControl>
+          <StyledValue
+            style={{
+              visibility: optionStrategy === 2 ? "visible" : "hidden",
+              marginLeft: "5%",
+            }}
           >
             CC 100 Shares ${hundredShares}
-          </i>
-          <i
-            style={{ visibility: optionStrategy === 4 ? "visible" : "hidden" }}
+          </StyledValue>
+          <StyledValue
+            style={{
+              visibility: optionStrategy === 4 ? "visible" : "hidden",
+              marginLeft: "5%",
+            }}
           >
             CSP Collaterall ${cspCollaterall}
-          </i>
+          </StyledValue>
           <br></br>
           <br></br>
-          <strong>Share Price at Expiration</strong>
+          <StyledSPE>Share Price at Expiration $</StyledSPE>
           <br></br>
           <Slider
+          classes={{ valueLabel: theme.name === "dark" ?classes.valueLabelDark : classes.valueLabel }}
             style={{
               width: "90%",
               marginLeft: "5%",
               marginRight: "5%",
               marginTop: "8%",
+              color: theme.name === "dark" ? "#d4af37" : "#146175",
+              
             }}
             onChange={handleSliderChange}
             value={sliderValue}
@@ -195,7 +202,7 @@ const ProfitLossSlider = ({
             )}
           </SliderDataDiv>
         </div>
-      </div>
+      </SliderPageContainer>
     );
   } else {
     return "Loading..";

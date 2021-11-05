@@ -1,6 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-
 export const useStyles = makeStyles({
   buttonDark: {
     background: "linear-gradient(45deg, #d4af37 30%, #EEBC1D 90%)",
@@ -40,16 +39,16 @@ export const useStyles = makeStyles({
   },
   buttonExp: {
     borderRadius: 3,
-    minWidth: '30px',
-    padding: '0px 15px',
-    fontSize: '12px',
+    minWidth: "30px",
+    padding: "0px 15px",
+    fontSize: "12px",
     color: "#d4af37",
-    margin: '0',
-    marginBottom: '4px',
+    margin: "0",
+    marginBottom: "4px",
     size: "small",
-    display: 'inlineFlex',
-    textAlign: 'center', 
-    whiteSpace: 'nowrap'
+    display: "inlineFlex",
+    textAlign: "center",
+    whiteSpace: "nowrap",
   },
   card: {
     position: "center",
@@ -69,7 +68,7 @@ export const useStyles = makeStyles({
     position: "fixed",
     justifyItems: "center",
     zIndex: 1000,
-    height: '400px',
+    height: "400px",
     // marginLeft: "4%",
     // marginRight: "3%",
     // marginTop: "3%",
@@ -98,15 +97,26 @@ export const useStyles = makeStyles({
 
   formControl: {
     margin: 1,
-    
-    display: 'inlineFlex',
-    textAlign: 'center', 
-    whiteSpace: 'nowrap'
+
+    display: "inlineFlex",
+    textAlign: "center",
+    whiteSpace: "nowrap",
+  },
+
+  formControlSlider: {
+    display: "inlineFlex",
+    textAlign: "center",
+    whiteSpace: "wrap",
+  },
+  menuItemSlider: {
+    paddingTop: "0px",
+    width: "100%",
+    justifyContent: "left",
   },
 
   label: {
     marginBottom: "0",
-    paddingBottom: '0',
+    paddingBottom: "0",
     marginTop: "2%",
     marginLeft: "2%",
     minWidth: 75,
@@ -120,11 +130,26 @@ export const useStyles = makeStyles({
   },
 
   select: {
-    minWidth: '40px',
-    paddingTop: '0px',
+    minWidth: "40px",
+    paddingTop: "0px",
     "& .MuiSvgIcon-root": {
       color: "#d4af37",
     },
   },
- 
+
+  valueLabelDark: {
+    "& > span": {
+      fontSize: "16px",
+      backgroundColor: "#342F01",
+      paddingTop: "6px",
+    },
+  },
+  valueLabel: {
+    "& > span": {
+      color: "#4169e1",
+      fontSize: "16px",
+      backgroundColor: "#ccc",
+      paddingTop: "6px",
+    },
+  },
 });
