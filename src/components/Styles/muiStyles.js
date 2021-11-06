@@ -148,7 +148,7 @@ export const useStyles = makeStyles({
     "& > span": {
       color: "#4169e1",
       fontSize: "16px",
-      backgroundColor: "#ccc",
+      backgroundColor: "#adadad",
       paddingTop: "6px",
     },
   },

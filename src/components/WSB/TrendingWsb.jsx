@@ -42,12 +42,13 @@ function TrendingWsb() {
   };
 
   const getButtonColor = theme.name === "dark" ? "#fff" : "#F8E4A5";
+  //const testUrl = `https://www.reddit.com/r/wallstreetbets/comments.json?limit=1000`
 
   useEffect(() => {
     const wsbDataArray = [];
     axios
       .get(
-        `https://www.reddit.com/r/wallstreetbets/comments/ql0v5g/daily_discussion_thread_for_${monthNames[month]}_${day}_2021.json?limit=1000`
+        `https://www.reddit.com/r/wallstreetbets/comments/qn7rh0/daily_discussion_thread_for_${monthNames[month]}_${day}_2021.json?limit=1000`
       )
       .then((response) => {
         const getMostRecentUtc =
@@ -165,13 +166,13 @@ function TrendingWsb() {
               style={
                 theme.name === "dark"
                   ? {
-                      backgroundColor: "#342F01",
+                      backgroundColor: "#38372b",
                       // #3D3D3D
                       borderColor: "#d4af37",
                       color: "#ffebcd",
                     }
                   : {
-                      backgroundColor: "#ebebeb",
+                      backgroundColor: "#f5f5f5",
                       borderColor: "#00afc9",
                       color: "#002933",
                     }
@@ -218,12 +219,12 @@ function TrendingWsb() {
                 style={
                   theme.name === "dark"
                     ? {
-                        backgroundColor: "#342F01",
+                        backgroundColor: "#38372b",
                         borderColor: "#d4af37",
                         color: "#ffebcd",
                       }
                     : {
-                        backgroundColor: "#ebebeb",
+                        backgroundColor: "#f5f5f5",
                         borderColor: "#00afc9",
                         color: "#002933",
                       }

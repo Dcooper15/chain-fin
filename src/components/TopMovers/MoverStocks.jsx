@@ -171,12 +171,12 @@ function MoverStocks() {
               style={
                 theme.name === "dark"
                   ? {
-                      backgroundColor: "#342F01",
+                      backgroundColor: "#38372b",
                       borderColor: "#d4af37",
                       color: "#ffebcd",
                     }
                   : {
-                      backgroundColor: "#ebebeb",
+                      backgroundColor: "#f5f5f5",
                       borderColor: "#00afc9",
                       color: "#002933",
                     }
@@ -221,12 +221,12 @@ function MoverStocks() {
                 style={
                   theme.name === "dark"
                     ? {
-                        backgroundColor: "#342F01",
+                        backgroundColor: "#38372b",
                         borderColor: "#d4af37",
                         color: "#ffebcd",
                       }
                     : {
-                        backgroundColor: "#ebebeb",
+                        backgroundColor: "#f5f5f5",
                         borderColor: "#00afc9",
                         color: "#002933",
                       }
