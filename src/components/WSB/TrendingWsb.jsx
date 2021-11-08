@@ -24,6 +24,8 @@ const monthNames = [
 ];
 const date = new Date();
 const month = date.getMonth();
+const nowUtc = date.getTime();
+console.log("now", nowUtc);
 const day = date.getDate();
 
 function TrendingWsb() {
@@ -44,13 +46,88 @@ function TrendingWsb() {
   const getButtonColor = theme.name === "dark" ? "#fff" : "#F8E4A5";
   //const testUrl = `https://www.reddit.com/r/wallstreetbets/comments.json?limit=1000`
 
+  //all
+
+  // useEffect(() => {
+  //   const wsbDataArray = [];
+  //   axios
+  //     .get(`https://www.reddit.com/r/wallstreetbets/comments.json?limit=1000`)
+  //     .then((response) => {
+  //       console.log(response.data.data);
+  //       const firstPostUtc = response.data.data.children[0].data.created_utc;
+  //       const lastPostUtc =
+  //         response.data.data.children.slice(-1)[0].data.created_utc;
+  //       const minuteDifference = Math.floor((firstPostUtc - lastPostUtc) / 60);
+  //       console.log("min diff", minuteDifference);
+  //       setMinutes([minuteDifference]);
+  //       const posts = response.data.data.children.map(
+  //         (innerArray) => innerArray.data.body
+  //       );
+  //       console.log("posts", posts);
+  //       const allPosts = posts.join(" -!@- ");
+  //       const upperCaseWords = allPosts.match(/(\b[A-Z][A-Z]+|\b[A-Z]\b)/g);
+  //       console.log(upperCaseWords);
+
+  //       let potentialSymbols = [];
+  //       let i;
+  //       for (i = 0; i < upperCaseWords.length; i++) {
+  //         if (
+  //           upperCaseWords[i].length === 1 || 2 || 3 || 4
+  //           // upperCaseWords[i].length === 3 ||
+  //           // upperCaseWords[i].length === 4
+  //         ) {
+  //           potentialSymbols.push(upperCaseWords[i]);
+  //         }
+  //       }
+  //       console.log(potentialSymbols);
+
+  //       const symbolCounter = potentialSymbols.reduce((obj, e) => {
+  //         obj[e] = (obj[e] || 0) + 1;
+  //         return obj;
+  //       }, {});
+
+  //       // console.log(symbolCounter);
+
+  //       let sortedSymbols = [];
+  //       for (let occurence in symbolCounter) {
+  //         sortedSymbols.push([occurence, symbolCounter[occurence]]);
+  //       }
+
+  //       sortedSymbols
+  //         .sort(function (a, b) {
+  //           return a[1] - b[1];
+  //         })
+  //         .reverse();
+
+  //       const limitSymbols = sortedSymbols.slice(0, 10);
+  //       // console.log("limit", limitSymbols);
+  //       setOccurences(limitSymbols.flat());
+  //       limitSymbols.map((symbol) =>
+  //         axios
+  //           .get(
+  //             `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol[0]}&contractType=ALL&strikeCount=2&includeQuotes=TRUE&toDate=${process.env.REACT_APP_DATE}&range=OTM`
+  //           )
+  //           .then((response) => {
+  //             if (response.data.status === "SUCCESS") {
+  //               wsbDataArray.push(response.data);
+  //             }
+  //             setMarketData([wsbDataArray]);
+  //           })
+  //       );
+  //     });
+  // }, []);
+
+  //daily dicussion
+  //qnjay6
   useEffect(() => {
     const wsbDataArray = [];
     axios
       .get(
-        `https://www.reddit.com/r/wallstreetbets/comments/qn7rh0/daily_discussion_thread_for_${monthNames[month]}_${day}_2021.json?limit=1000`
+        // `https://www.reddit.com/r/wallstreetbets/comments/qnjay6/weekend_discussion_thread_for_the_weekend_of.json?limit=1000`
+        `https://www.reddit.com/r/wallstreetbets/comments/qpb8yh/daily_discussion_thread_for_${monthNames[month]}_${day}_2021.json?limit=1000`
       )
       .then((response) => {
+        console.log(response.data);
         const getMostRecentUtc =
           response.data[1].data.children[1].data.created_utc;
 
@@ -75,19 +152,28 @@ function TrendingWsb() {
         let i;
         for (i = 0; i < upperCaseWords.length; i++) {
           if (
+            upperCaseWords[i].length === 1 ||
+            upperCaseWords[i].length === 2 ||
             upperCaseWords[i].length === 3 ||
             upperCaseWords[i].length === 4
           ) {
             potentialSymbols.push(upperCaseWords[i]);
           }
         }
-        // console.log(potentialSymbols);
+        console.log("pot sym", potentialSymbols);
+
+        // const filteredSyms = potentialSymbols.filter(function (value) {
+        //   if (value !== "I" && value !== "TO" && value !== "THE") {
+        //     return value;
+        //   }
+        // });
+        // console.log("filt", filteredSyms);
         const symbolCounter = potentialSymbols.reduce((obj, e) => {
           obj[e] = (obj[e] || 0) + 1;
           return obj;
         }, {});
 
-        // console.log(symbolCounter);
+        console.log(symbolCounter);
 
         let sortedSymbols = [];
         for (let occurence in symbolCounter) {
@@ -101,7 +187,7 @@ function TrendingWsb() {
           .reverse();
 
         const limitSymbols = sortedSymbols.slice(0, 10);
-        // console.log("limit", limitSymbols);
+        console.log("limit", limitSymbols);
         setOccurences(limitSymbols.flat());
 
         limitSymbols.map((symbol) =>
