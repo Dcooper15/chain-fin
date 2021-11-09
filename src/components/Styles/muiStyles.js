@@ -152,4 +152,60 @@ export const useStyles = makeStyles({
       paddingTop: "6px",
     },
   },
+
+  //WSB Buttons
+  wsbButtonDark: {
+    background: "linear-gradient(45deg, #EEBC1D 10%, #474747 95%)",
+    borderColor: "#d4af37",
+    border: 2,
+    borderRadius: 3,
+    //boxShadow: "0 3px 5px 2px rgba(212, 175, 55, .5)",
+    color: "#fff",
+    margin: 1,
+    marginBottom: '3%',
+    fontSize: '10px',
+    '@media (min-width: 800px)' : {
+      fontSize: '16px',
+    }
+   
+  },
+  wsbButtonLight: {
+    background: "linear-gradient(45deg, #00afc9 5%, #002f36 99%)",
+    border: 2,
+    borderRadius: 3,
+    boxShadow: "0 3px 5px 2px rgba(0, 47, 54, .8)",
+    color: "#F8E4A5",
+    margin: 1,
+    marginBottom: '3%',
+    fontSize: '10px',
+    '@media (min-width: 800px)' : {
+      fontSize: '16px',
+    }
+  },
+  wsbButtonDarkUns: {
+    //background: "linear-gradient(45deg, #d4af37 10%, #756300 80%)",
+    borderColor: "#d4af37",
+    border: 2,
+    borderRadius: 3,
+    color: "#d4af37",
+    margin: 1,
+    marginBottom: '3%',
+    fontSize: '10px',
+    '@media (min-width: 800px)' : {
+      fontSize: '16px',
+    }
+  },
+  wsbButtonLightUns: {
+   // background: "linear-gradient(45deg, #002f36 60%, #00afc9 99%)",
+    border: 2,
+    borderRadius: 3,
+    color: "#146175",
+    margin: 1,
+    marginBottom: '3%',
+    fontSize: '10px',
+    '@media (min-width: 800px)' : {
+      fontSize: '16px',
+    }
+  },
+
 });

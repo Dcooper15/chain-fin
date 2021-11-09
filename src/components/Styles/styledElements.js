@@ -538,7 +538,6 @@ export const StyledLabel = styled.label`
 export const StyledStratLabel = styled.label`
   color: ${(props) => props.theme.headerColor};
   justify-content: center;
-  
 `;
 
 export const StyledValue = styled.strong`
@@ -551,4 +550,28 @@ export const StyledValue = styled.strong`
 export const StyledSPE = styled.strong`
   color: ${(props) => props.theme.headerColor};
   margin-left: 5%;
+`;
+
+//WSB
+
+export const WsbButtonContainer = styled.div`
+  flex: 1;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: row-nowrap;
+  width: 90%;
+`;
+
+export const WsbSubHeader = styled.h4`
+  justify-content: center;
+  align-items: center;
+  color: ${(props) => props.theme.headerColor};
+  font-size: 22px;
+  margin-left: 3%;
+  margin-right: 3%;
+  margin-bottom: 0.5%;
+  @media (max-width: 800px) {
+    font-size: 12px;
+    position: relative;
+  }
 `;
