@@ -331,12 +331,12 @@ function FullOptionChain() {
                     }
                     raised={true}
                   >
-                    <FullChainCardHeader 
-                    option={option}
-                    buttonHandlerActive={buttonHandlerActive}
-                    setStrikeHandler={sliderStrikeHandler}
-                    setPremiumHandler={sliderPremiumHandler}
-                     />
+                    <FullChainCardHeader
+                      option={option}
+                      buttonHandlerActive={buttonHandlerActive}
+                      setStrikeHandler={sliderStrikeHandler}
+                      setPremiumHandler={sliderPremiumHandler}
+                    />
                     <StyledOcCollateral>
                       CSP Premium to Collateral Ratio{" "}
                       {(
@@ -368,7 +368,7 @@ function FullOptionChain() {
           setInactive={buttonHandlerInactive}
           sharePrice={chainPrice}
           strike={sliderStrike}
-          premium={sliderPremium}
+          premium={sliderPremium.length === 0 ? "" : sliderPremium.toFixed(2)}
         />
       </>
     );

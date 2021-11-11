@@ -185,7 +185,7 @@ export const SectorMenuHome = styled.div`
   width: 100%;
   margin-left: 0.5%;
   margin-right: 0.5%;
-  margin-top: 14vw;
+  margin-top: 10%;
   margin-bottom: 8vw;
   flex-direction: column;
   align-items: center;
@@ -575,3 +575,17 @@ export const WsbSubHeader = styled.h4`
     position: relative;
   }
 `;
+
+//home
+
+export const IntroContainer = styled.div`
+color: ${(props) => props.theme.headerColor};
+font-size: 22px;
+  margin-left: 2%;
+  margin-right: 2%;
+ padding-top: 5%;
+  @media (max-width: 800px) {
+    font-size: 12px;
+    position: relative;
+  }
+`

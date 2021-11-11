@@ -172,14 +172,18 @@ const ProfitLossSlider = ({
           <StyledSPE>Share Price at Expiration $</StyledSPE>
           <br></br>
           <Slider
-          classes={{ valueLabel: theme.name === "dark" ?classes.valueLabelDark : classes.valueLabel }}
+            classes={{
+              valueLabel:
+                theme.name === "dark"
+                  ? classes.valueLabelDark
+                  : classes.valueLabel,
+            }}
             style={{
               width: "90%",
               marginLeft: "5%",
               marginRight: "5%",
               marginTop: "8%",
               color: theme.name === "dark" ? "#d4af37" : "#146175",
-              
             }}
             onChange={handleSliderChange}
             value={sliderValue}

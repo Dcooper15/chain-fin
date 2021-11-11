@@ -5,15 +5,16 @@ import {
   darkTheme,
   GlobalBackGround,
 } from "./components/Styles/theme";
-import { SectorContainer } from './components/Styles/styledElements';
+import {
+  SectorContainer,
+  IntroContainer,
+} from "./components/Styles/styledElements";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import BasicNav from "./components/HomePage/BasicNav";
 import Routes from "./components/HomePage/Routes";
 import MainMenu from "./components/HomePage/MainMenu";
 import MainSearch from "./components/MainSearch";
-import MyWatchList from './components/HomePage/MyWatchList';
-
-
+import MyWatchList from "./components/HomePage/MyWatchList";
 
 import "./App.css";
 
@@ -29,18 +30,20 @@ function App() {
       <GlobalBackGround />
 
       <Router>
-
         <BasicNav theme={theme} lightDarkChange={lightDarkChange} />
         <Route exact path="/">
-    
-  <SectorContainer>
-          <MainMenu />
-       
-          <MainSearch />
-          <MyWatchList />
+          <IntroContainer>
+            All initial option data is set to the underlying's nearest
+            expiration and is one strike out of the money. Select any ticker
+            symbol to open the underlying's full option chain.
+          </IntroContainer>
+          <SectorContainer>
+            <MainMenu />
+
+            <MainSearch />
+            <MyWatchList />
           </SectorContainer>
-        <br></br>
-  
+          <br></br>
         </Route>
         <Routes theme={theme} />
       </Router>
