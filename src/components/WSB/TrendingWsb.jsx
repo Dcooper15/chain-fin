@@ -141,8 +141,8 @@ function TrendingWsb() {
       axios
         .get(
           handleThreadChange === "Weekend"
-            ? `https://www.reddit.com/r/wallstreetbets/comments/qnjay6/weekend_discussion_thread_for_the_weekend_of.json?limit=1000`
-            : `https://www.reddit.com/r/wallstreetbets/comments/qritp2/daily_discussion_thread_for_${monthNames[month]}_${day}_2021.json?limit=1000`
+            ? `https://www.reddit.com/r/wallstreetbets/comments/qskqik/weekend_discussion_thread_for_the_weekend_of.json?limit=1000`
+            : `https://www.reddit.com/r/wallstreetbets/comments/qv5cg4/daily_discussion_thread_for_${monthNames[month]}_${day}_2021.json?limit=1000`
         )
         .then((response) => {
           console.log(response.data);
