@@ -90,14 +90,7 @@ function TrendingWsb() {
           let potentialSymbols = [];
           let i;
           for (i = 0; i < upperCaseWords.length; i++) {
-            if (
-              upperCaseWords[i].length === 1 ||
-              2 ||
-              3 ||
-              4
-              // upperCaseWords[i].length === 3 ||
-              // upperCaseWords[i].length === 4
-            ) {
+            if (upperCaseWords[i].length === 1 || 2 || 3 || 4) {
               potentialSymbols.push(upperCaseWords[i]);
             }
           }
@@ -107,8 +100,6 @@ function TrendingWsb() {
             obj[e] = (obj[e] || 0) + 1;
             return obj;
           }, {});
-
-          // console.log(symbolCounter);
 
           let sortedSymbols = [];
           for (let occurence in symbolCounter) {
@@ -141,8 +132,8 @@ function TrendingWsb() {
       axios
         .get(
           handleThreadChange === "Weekend"
-            ? `https://www.reddit.com/r/wallstreetbets/comments/qskqik/weekend_discussion_thread_for_the_weekend_of.json?limit=1000`
-            : `https://www.reddit.com/r/wallstreetbets/comments/qv5cg4/daily_discussion_thread_for_${monthNames[month]}_${day}_2021.json?limit=1000`
+            ? `https://www.reddit.com/r/wallstreetbets/comments/${process.env.REACT_APP_WKND_KEY}/weekend_discussion_thread_for_the_weekend_of.json?limit=1000`
+            : `https://www.reddit.com/r/wallstreetbets/comments/${process.env.REACT_APP_DD_KEY}/daily_discussion_thread_for_${monthNames[month]}_${day}_2021.json?limit=1000`
         )
         .then((response) => {
           console.log(response.data);

@@ -4,7 +4,6 @@ import {
   SectorContainer,
   SectorMenu,
   MenuRow,
-  MenuRowExtra,
   ColumnRight,
   ColumnLeft,
   StyledLink,
@@ -20,24 +19,22 @@ const MainTopMovers = () => {
           <SectorMenu>
             <MenuRow>
               <ColumnLeft>
-                
-                  <StyledLink to="/topmovers/compx">NASDAQ</StyledLink>
-               
+                <StyledLink to="/topmovers/compx">NASDAQ</StyledLink>
               </ColumnLeft>
               <ColumnRight>
-               
-                  <StyledLink to="/topmovers/spx.x">SPX</StyledLink>
-               
+                <StyledLink to="/topmovers/spx.x">SPX</StyledLink>
               </ColumnRight>
             </MenuRow>
 
-            <MenuRowExtra>
+            <MenuRow>
               <ColumnLeft>
-                
-                  <StyledLink to="/topmovers/dji">DJI</StyledLink>
-                
+                <StyledLink to="/topmovers/dji">DJI</StyledLink>
               </ColumnLeft>
-            </MenuRowExtra>
+
+              <ColumnRight>
+                <StyledLink to="/topmovers/general">General</StyledLink>
+              </ColumnRight>
+            </MenuRow>
           </SectorMenu>
         </Route>
       </SectorContainer>

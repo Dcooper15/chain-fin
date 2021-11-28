@@ -63,6 +63,21 @@ export const useStyles = makeStyles({
     borderRadius: "15px",
     paddingLeft: "2%",
   },
+  quoteCard: {
+    position: "center",
+    justifyItems: "center",
+    zIndex: 0,
+    marginBottom: "3%",
+    marginLeft: "2%",
+    marginRight: "2%",
+    marginTop: "3%",
+    paddingTop: "1%",
+    paddingBottom: "1%",
+    fontFamily: "Noto Sans,sans-serif",
+    borderRadius: "15px",
+    paddingLeft: "2%",
+    paddingRight: "2%",
+  },
 
   sliderCard: {
     position: "fixed",
@@ -206,6 +221,17 @@ export const useStyles = makeStyles({
     '@media (min-width: 800px)' : {
       fontSize: '16px',
     }
+  },
+
+  //More Data
+
+  moreDataButtonDark: {
+    //background: "linear-gradient(45deg, #d4af37 30%, #EEBC1D 90%)",
+    color: "#d4af37",
+    margin: 1,
+    size: "small",
+    border: "1px solid #d4af37",
+    borderRadius: 7
   },
 
 });

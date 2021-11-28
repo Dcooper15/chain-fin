@@ -22,6 +22,7 @@ import HeaderOptionChain from "./HeaderOptionChain";
 import MapFullChainData from "./MapFullChainData";
 import FullChainCardHeader from "./FullChainCardHeader";
 import ProfitLossSlider from "./ProfitLossSlider";
+import MoreData from "./MoreData";
 import Moment from "react-moment";
 
 const date = new Date();
@@ -46,6 +47,7 @@ function FullOptionChain() {
   const [sliderStrike, setSliderStrike] = useState([]);
   const [sliderPremium, setSliderPremium] = useState([]);
   const [sliderActive, setSliderActive] = useState(false);
+  const [moreDataActive, setMoreDataActive] = useState(false);
 
   const buttonHandlerPut = () => {
     setHandleTypeChange(true);
@@ -68,13 +70,19 @@ function FullOptionChain() {
   const buttonHandlerInactive = () => {
     setSliderActive(false);
   };
+  const buttonHandlerMoreDataActive = () => {
+    setMoreDataActive(moreDataActive === false ? true : false);
+  };
+  const buttonHandlerMoreDataInactive = () => {
+    setMoreDataActive(false);
+  };
   const sliderStrikeHandler = (value) => {
     setSliderStrike(value);
   };
   const sliderPremiumHandler = (premValue) => {
     setSliderPremium(premValue);
   };
-
+console.log("moredata", moreDataActive);
   useEffect(() => {
     axios
       .get(
@@ -128,6 +136,7 @@ function FullOptionChain() {
             nameRender={nameRender}
             chainPrice={chainPrice}
             chainPercent={chainPercent}
+            buttonHandlerMoreDataActive={buttonHandlerMoreDataActive}
           />
         ) : (
           " "
@@ -369,6 +378,10 @@ function FullOptionChain() {
           sharePrice={chainPrice}
           strike={sliderStrike}
           premium={sliderPremium.length === 0 ? "" : sliderPremium.toFixed(2)}
+        />
+        <MoreData
+          moreDataActive={moreDataActive}
+          setMoreDataInactive={buttonHandlerMoreDataInactive}
         />
       </>
     );

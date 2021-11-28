@@ -44,36 +44,66 @@ function MoverStocks() {
     case "spx.x":
       header = "SPX";
       break;
+    case "general":
+      header = "General";
+      break;
     default:
       header = `No data to display for ${market}.`;
   }
   const getButtonColor = theme.name === "dark" ? "#fff" : "#F8E4A5";
   useEffect(() => {
     const marketDataArray = [];
-    axios
-      .get(
-        `https://api.tdameritrade.com/v1/marketdata/$${market.toUpperCase()}/movers?apikey=${
-          process.env.REACT_APP_GITHUB_CLIENT_ID
-        }&direction=${direction}&change=percent`
-      )
-      .then((response) => {
-        const marketMoversArray = response.data.map(
-          (marketSymbol) => marketSymbol.symbol
-        );
+    if (market === "general") {
+      axios
+        .get(
+          `https://${process.env.REACT_APP_HUB_URL}/api/v3/${
+            direction === "up" ? "gainers" : "losers"
+          }?apikey=${process.env.REACT_APP_FM_CLIENT_ID}`
+        )
+        .then((response) => {
+          const marketMoversArray = response.data.map(
+            (marketSymbol) => marketSymbol.ticker
+          );
 
-        marketMoversArray.map((symbol) =>
-          axios
-            .get(
-              `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&contractType=ALL&strikeCount=2&includeQuotes=TRUE&toDate=${process.env.REACT_APP_DATE}&range=OTM`
-            )
-            .then((response) => {
-              if (response.data.status === "SUCCESS") {
-                marketDataArray.push(response.data);
-              }
-              setMarketData([marketDataArray]);
-            })
-        );
-      });
+          marketMoversArray.map((symbol) =>
+            axios
+              .get(
+                `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&contractType=ALL&strikeCount=2&includeQuotes=TRUE&toDate=${process.env.REACT_APP_DATE}&range=OTM`
+              )
+              .then((response) => {
+                if (response.data.status === "SUCCESS") {
+                  marketDataArray.push(response.data);
+                }
+                setMarketData([marketDataArray]);
+              })
+          );
+        });
+    } else {
+      axios
+        .get(
+          `https://api.tdameritrade.com/v1/marketdata/$${market.toUpperCase()}/movers?apikey=${
+            process.env.REACT_APP_GITHUB_CLIENT_ID
+          }&direction=${direction}&change=percent`
+        )
+        .then((response) => {
+          const marketMoversArray = response.data.map(
+            (marketSymbol) => marketSymbol.symbol
+          );
+
+          marketMoversArray.map((symbol) =>
+            axios
+              .get(
+                `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&contractType=ALL&strikeCount=2&includeQuotes=TRUE&toDate=${process.env.REACT_APP_DATE}&range=OTM`
+              )
+              .then((response) => {
+                if (response.data.status === "SUCCESS") {
+                  marketDataArray.push(response.data);
+                }
+                setMarketData([marketDataArray]);
+              })
+          );
+        });
+    }
   }, [market, direction]);
 
   return (
@@ -209,7 +239,7 @@ function MoverStocks() {
           ))
         )
       ) : (
-        <SectorHeader>
+        <SectorHeader style={{ marginTop: "10%" }}>
           Top Movers unavailable on weekends and late hours
         </SectorHeader>
       )}

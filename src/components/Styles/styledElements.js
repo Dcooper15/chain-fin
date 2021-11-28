@@ -387,6 +387,14 @@ export const StyledSliderActiveButton = styled.i`
   align-items: bottom;
   box-shadow: 0 3px 5px 2px rgba(212, 175, 55, 0.5);
 `;
+export const StyledMoreDataButton = styled.strong`
+  font-size: 16px;
+  color: ${(props) => props.theme.accentColor};
+  margin-left: 3%;
+  background: 0 3px 5px 2px rgba(212, 175, 55, 0.5);
+  box-shadow: 0 3px 5px 2px rgba(212, 175, 55, 0.5);
+  margin-top: 1%;
+`;
 export const StyledInTheMoney = styled.strong`
   color: ${(props) => props.theme.headerColor};
   flex: 0;
@@ -579,13 +587,121 @@ export const WsbSubHeader = styled.h4`
 //home
 
 export const IntroContainer = styled.div`
-color: ${(props) => props.theme.headerColor};
-font-size: 22px;
+  color: ${(props) => props.theme.headerColor};
+  font-size: 22px;
   margin-left: 2%;
   margin-right: 2%;
- padding-top: 5%;
+  padding-top: 5%;
   @media (max-width: 800px) {
     font-size: 12px;
     position: relative;
   }
-`
+`;
+
+//**More Data**
+
+export const MoreDataHeaderContainer = styled.div`
+  width: 100%;
+`;
+
+//Quote
+
+export const QuoteContainerLeft = styled.div`
+  font-size: 12px;
+  font-weight: bold;
+  justify-content: right;
+  display: inline-flex;
+  flex-flow: row wrap;
+  box-sizing: border-box;
+  width: 47%;
+  flex-direction: row;
+  align-content: space-between;
+  border-style: ridge;
+  border-top: 0px ${(props) => props.theme.dataLineColor};
+  border-left: 0px ${(props) => props.theme.dataLineColor};
+  border-right: ${(props) => props.theme.dataLineColor};
+  border-color: ${(props) => props.theme.dataLineColor};
+  border-width: thin;
+  margin-right: 5%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+`;
+
+export const QuoteContainerRight = styled.div`
+  font-size: 12px;
+  font-weight: bold;
+  justify-content: right;
+  display: inline-flex;
+  flex-flow: row wrap;
+  box-sizing: border-box;
+  width: 47%;
+  flex-direction: row;
+  align-content: space-between;
+  border-style: ridge;
+  border-top: 0px ${(props) => props.theme.dataLineColor};
+  border-left: 0px ${(props) => props.theme.dataLineColor};
+  border-right: ${(props) => props.theme.dataLineColor};
+  border-color: ${(props) => props.theme.dataLineColor};
+  border-width: thin;
+  padding-top: 1%;
+  padding-bottom: 1%;
+`;
+
+export const QuoteHeaderLeft = styled.div`
+  flex: 1;
+  flex-direction: column;
+`;
+export const QuoteValueLeft = styled.div`
+  flex: 0;
+  text-align: center;
+  white-space: nowrap;
+  justify-content: center;
+  align-items: flex-end;
+  flex-direction: row;
+`;
+
+export const MoreDataButtonContainer = styled.div`
+  margin: 2%;
+  margin-bottom: 4%;
+`;
+
+export const IncStateContainer = styled.div`
+  font-size: 12px;
+  font-weight: bold;
+  justify-content: right;
+  display: inline-flex;
+  flex-flow: row wrap;
+  box-sizing: border-box;
+  width: 100%;
+  flex-direction: row;
+  align-content: space-between;
+  border-style: ridge;
+  border-top: 0px ${(props) => props.theme.dataLineColor};
+  border-left: 0px ${(props) => props.theme.dataLineColor};
+  border-right: ${(props) => props.theme.dataLineColor};
+  border-color: ${(props) => props.theme.dataLineColor};
+  border-width: thin;
+  padding-top: 1%;
+  padding-bottom: 1%;
+`;
+
+export const StyledIncStateYears = styled.div`
+  flex: 0;
+  text-align: center;
+  display: inline-flex;
+  white-space: nowrap;
+  justify-content: center;
+`;
+
+export const IncStateHeader = styled.div`
+  flex: 1;
+  flex-direction: column;
+`;
+export const IncStateValue = styled.div`
+  flex: 0;
+  text-align: center;
+  white-space: nowrap;
+  justify-content: center;
+  align-items: flex-end;
+  flex-direction: row;
+`;
