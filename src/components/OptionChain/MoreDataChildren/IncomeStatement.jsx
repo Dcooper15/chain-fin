@@ -9,20 +9,21 @@ import {
 } from "../../Styles/styledElements";
 import { useStyles } from "../../Styles/muiStyles";
 
-const IncomeStatement = ({ incStatementYears, incStatementData }) => {
+const IncomeStatement = ({ incStatementYears, incStatementData, dataSelection }) => {
   const classes = useStyles();
   const theme = useContext(ThemeContext);
   const [incYear, setIncYear] = useState([]);
   try {
     return (
       <>
-        {!!incStatementYears.length
+        {!!incStatementYears.length && dataSelection === "income statement"
           ? incStatementYears.map((year) => (
               <StyledIncStateYears>
                 <Button
                   className={classes.buttonExp}
                   value={year}
                   size="small"
+                  hidden={!dataSelection === "income statement"}
                   onClick={() => setIncYear(year)}
                   style={{
                     background:
@@ -38,7 +39,7 @@ const IncomeStatement = ({ incStatementYears, incStatementData }) => {
                 </Button>
               </StyledIncStateYears>
             ))
-          : "No"}
+          : ""}
         {!!incStatementData.length
           ? incStatementData.map((statement) => (
               <Card
@@ -57,7 +58,7 @@ const IncomeStatement = ({ incStatementYears, incStatementData }) => {
                       }
                 }
                 variant="outlined"
-                hidden={incYear !== statement.calendarYear}
+                hidden={incYear !== statement.calendarYear || dataSelection !== "income statement"}
                 raised={true}
               >
                 <IncStateContainer>
@@ -189,7 +190,7 @@ const IncomeStatement = ({ incStatementYears, incStatementData }) => {
                 </IncStateContainer>
               </Card>
             ))
-          : "N/A"}
+          : ""}
       </>
     );
   } catch (err) {

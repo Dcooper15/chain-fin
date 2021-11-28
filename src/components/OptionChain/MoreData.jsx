@@ -20,6 +20,7 @@ import { useStyles } from "../Styles/muiStyles";
 import { GrFormClose } from "react-icons/gr";
 import Quote from "./MoreDataChildren/Quote";
 import IncomeStatement from "./MoreDataChildren/IncomeStatement";
+import InsiderTrading from "./MoreDataChildren/InsiderTrading";
 
 const MoreData = ({ moreDataActive, setMoreDataInactive }) => {
   const theme = useContext(ThemeContext);
@@ -28,7 +29,13 @@ const MoreData = ({ moreDataActive, setMoreDataInactive }) => {
   const [quoteData, setQuoteData] = useState([]);
   const [incStatementData, setIncStatementData] = useState([]);
   const [incStatementYears, setIncStatementYears] = useState([]);
+  const [insiderData, setInsiderData] = useState([]);
+  const [dataSelection, setDataSelection] = useState([]);
 
+  const [insiderYears, setInsiderYears] = useState([]);
+
+ console.log("inc", incStatementData);
+ console.log("ins", insiderData);
   useEffect(() => {
     axios
       .get(
@@ -45,11 +52,27 @@ const MoreData = ({ moreDataActive, setMoreDataInactive }) => {
         setIncStatementData(response.data);
         setIncStatementYears(response.data.map((years) => years.calendarYear));
       });
+    axios
+      .get(
+        `https://${process.env.REACT_APP_HUB_URL}/api/v4/insider-trading?symbol=${symbol}&limit=250&apikey=${process.env.REACT_APP_FM_CLIENT_ID}`
+      )
+      .then((response) => {
+        const returnYears = response.data.map((years) =>
+          years.transactionDate.slice(0, 4)
+        );
+        const uniqueYears = [...new Set(returnYears)];
+        setInsiderYears(uniqueYears);
+        setInsiderData(response.data);
+      });
   }, [symbol]);
 
   return (
     <>
-      {quoteData.length > 0 && incStatementData.length > 0 ? (
+      {quoteData.length > 0 &&
+      incStatementData.length > 0 
+      // &&
+      // insiderData.length > 0 
+      ? (
         <SliderPageContainer>
           <div
             className={
@@ -57,7 +80,7 @@ const MoreData = ({ moreDataActive, setMoreDataInactive }) => {
                 ? "sliderActiveDark"
                 : moreDataActive === true && theme.name !== "dark"
                 ? "sliderActive"
-                : "sliderInactive"
+                : "sliderInactiveMoreData"
             }
           >
             <StyledClose>
@@ -75,16 +98,36 @@ const MoreData = ({ moreDataActive, setMoreDataInactive }) => {
             <Quote quoteData={quoteData[0]} />
             <MoreDataButtonContainer>
               <Button
-                className={classes.moreDataButtonDark}
-                //value={expDay}
+                className={
+                  dataSelection === "income statement" ? classes.moreDataButtonDarkActive : 
+                  classes.moreDataButtonDark}
                 variant="outlined"
                 size="small"
-                //onClick={() => setExpDate(expDay)}
+                onClick={() => setDataSelection("income statement")}
               >
                 Income Statement
               </Button>
+              <Button
+                className={dataSelection === "insider trades" ? classes.moreDataButtonDarkActive : 
+                classes.moreDataButtonDark}
+                variant="outlined"
+                size="small"
+                onClick={() => setDataSelection("insider trades")}
+              >
+                Insider Trades
+              </Button>
             </MoreDataButtonContainer>
-            <IncomeStatement incStatementYears={incStatementYears} incStatementData={incStatementData}/>
+
+            <IncomeStatement
+              incStatementYears={incStatementYears}
+              incStatementData={incStatementData}
+              dataSelection={dataSelection}
+            />
+            <InsiderTrading
+              insiderTradingData={insiderData}
+              dataSelection={dataSelection}
+              years={insiderYears}
+            />
           </div>
         </SliderPageContainer>
       ) : (

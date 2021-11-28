@@ -228,7 +228,15 @@ export const useStyles = makeStyles({
   moreDataButtonDark: {
     //background: "linear-gradient(45deg, #d4af37 30%, #EEBC1D 90%)",
     color: "#d4af37",
-    margin: 1,
+    margin: "1%",
+    size: "small",
+    border: "1px solid #d4af37",
+    borderRadius: 7
+  },
+  moreDataButtonDarkActive: {
+    background: "linear-gradient(45deg, #d4af37 30%, #EEBC1D 90%)",
+    color: "#fff",
+    margin: "1%",
     size: "small",
     border: "1px solid #d4af37",
     borderRadius: 7

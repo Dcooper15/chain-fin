@@ -17,27 +17,39 @@
   transform: translateY(40);
   bottom: 0;
   margin-left: 0%;
+  overflow-y: scroll;
 }
 
 .sliderActiveDark {
   opacity: 1;
-  margin-left: 2.5%;
   background-color: #342F01;
   position: fixed;
   height: 100%;
   width: 100%;
   z-index: 20;
   transition-timing-function: ease-out;
-  transition: 0.25s;
+  transition: .3s;
   transform: translateY(40);
   bottom: 0;
   margin-left: 0%;
+  overflow-y: scroll;
 }
 
 .sliderInactive {
   bottom: -100%;
-  visibility: hidden;
+  visibility: hidden; 
   transition: all 3.5 ease-in;
   opacity: 1;
   z-index: -1;
+  
+}
+
+.sliderInactiveMoreData {
+  bottom: -100%;
+  visibility: hidden; 
+  transition: all 3.5 ease-in;
+  opacity: 1;
+  z-index: -1;
+  display: none;
+  
 }
