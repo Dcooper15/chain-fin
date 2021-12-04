@@ -10,17 +10,19 @@ import {
 } from "../../Styles/styledElements";
 import { useStyles } from "../../Styles/muiStyles";
 
+//const addCommas = /\B(?=(\d{3})+(?!\d))/g;
+
 const InsiderTrading = ({ insiderTradingData, dataSelection, years }) => {
   const classes = useStyles();
   const theme = useContext(ThemeContext);
   const [insiderYear, setInsiderYear] = useState([]);
   console.log("data sel", dataSelection);
   console.log("yr", years);
- 
+
   try {
     return (
       <>
-         {!!years.length && dataSelection === "insider trades"
+        {!!years.length && dataSelection === "insider trades"
           ? years.map((year) => (
               <StyledIncStateYears>
                 <Button
@@ -62,9 +64,9 @@ const InsiderTrading = ({ insiderTradingData, dataSelection, years }) => {
                       }
                 }
                 variant="outlined"
-                hidden={insiderYear !== transaction.transactionDate.slice(0,4) ||
-                  dataSelection !== "insider trades" 
-                
+                hidden={
+                  insiderYear !== transaction.transactionDate.slice(0, 4) ||
+                  dataSelection !== "insider trades"
                 }
                 raised={true}
               >
@@ -111,7 +113,11 @@ const InsiderTrading = ({ insiderTradingData, dataSelection, years }) => {
                 </IncStateContainer>
                 <IncStateContainer>
                   <IncStateHeader>Price</IncStateHeader>
-                  <IncStateValue>${transaction.price}</IncStateValue>
+                  <IncStateValue>
+                    ${transaction.price
+                    // .toString().replace(addCommas, ",")
+                    }
+                  </IncStateValue>
                 </IncStateContainer>
                 <IncStateContainer>
                   <IncStateHeader>Insider Name</IncStateHeader>
@@ -119,12 +125,20 @@ const InsiderTrading = ({ insiderTradingData, dataSelection, years }) => {
                 </IncStateContainer>
                 <IncStateContainer>
                   <IncStateHeader>Securities Owned</IncStateHeader>
-                  <IncStateValue>{transaction.securitiesOwned}</IncStateValue>
+                  <IncStateValue>
+                    {transaction.securitiesOwned
+                      // .toString()
+                      // .replace(addCommas, ",")
+                      }
+                  </IncStateValue>
                 </IncStateContainer>
                 <IncStateContainer>
                   <IncStateHeader>Securities Transacted</IncStateHeader>
                   <IncStateValue>
-                    {transaction.securitiesTransacted}
+                    {transaction.securitiesTransacted
+                      // .toString()
+                      // .replace(addCommas, ",")
+                      }
                   </IncStateValue>
                 </IncStateContainer>
                 <IncStateContainer>
@@ -145,7 +159,8 @@ const InsiderTrading = ({ insiderTradingData, dataSelection, years }) => {
       </>
     );
   } catch (err) {
-    return <>N/A</>;
+    console.log(err.message);
+    return <></>;
   }
 };
 

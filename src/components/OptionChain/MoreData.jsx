@@ -22,6 +22,8 @@ import Quote from "./MoreDataChildren/Quote";
 import IncomeStatement from "./MoreDataChildren/IncomeStatement";
 import InsiderTrading from "./MoreDataChildren/InsiderTrading";
 
+const addCommas = /\B(?=(\d{3})+(?!\d))/g;
+
 const MoreData = ({ moreDataActive, setMoreDataInactive }) => {
   const theme = useContext(ThemeContext);
   const classes = useStyles();
@@ -92,7 +94,7 @@ const MoreData = ({ moreDataActive, setMoreDataInactive }) => {
             </StyledClose>
             <MoreDataHeaderContainer>
               <SectorHeader>
-                {quoteData[0].name} ${quoteData[0].price}
+                {quoteData[0].name} ${quoteData[0].price.toString().replace(addCommas, ",")}
               </SectorHeader>
             </MoreDataHeaderContainer>
             <Quote quoteData={quoteData[0]} />

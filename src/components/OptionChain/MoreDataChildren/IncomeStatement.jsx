@@ -9,7 +9,13 @@ import {
 } from "../../Styles/styledElements";
 import { useStyles } from "../../Styles/muiStyles";
 
-const IncomeStatement = ({ incStatementYears, incStatementData, dataSelection }) => {
+const addCommas = /\B(?=(\d{3})+(?!\d))/g;
+
+const IncomeStatement = ({
+  incStatementYears,
+  incStatementData,
+  dataSelection,
+}) => {
   const classes = useStyles();
   const theme = useContext(ThemeContext);
   const [incYear, setIncYear] = useState([]);
@@ -58,7 +64,10 @@ const IncomeStatement = ({ incStatementYears, incStatementData, dataSelection })
                       }
                 }
                 variant="outlined"
-                hidden={incYear !== statement.calendarYear || dataSelection !== "income statement"}
+                hidden={
+                  incYear !== statement.calendarYear ||
+                  dataSelection !== "income statement"
+                }
                 raised={true}
               >
                 <IncStateContainer>
@@ -71,20 +80,33 @@ const IncomeStatement = ({ incStatementYears, incStatementData, dataSelection })
                 </IncStateContainer>
                 <IncStateContainer>
                   <IncStateHeader>Revenue</IncStateHeader>
-                  <IncStateValue>${statement.revenue}</IncStateValue>
+                  <IncStateValue>
+                    ${statement.revenue.toString().replace(addCommas, ",")}
+                  </IncStateValue>
                 </IncStateContainer>
                 <IncStateContainer>
                   <IncStateHeader>Cost and Expenses</IncStateHeader>
-                  <IncStateValue>${statement.costAndExpenses}</IncStateValue>
+                  <IncStateValue>
+                    $
+                    {statement.costAndExpenses
+                      .toString()
+                      .replace(addCommas, ",")}
+                  </IncStateValue>
                 </IncStateContainer>
                 <IncStateContainer>
                   <IncStateHeader>Cost of Revenue</IncStateHeader>
-                  <IncStateValue>${statement.costOfRevenue}</IncStateValue>
+                  <IncStateValue>
+                    $
+                    {statement.costOfRevenue.toString().replace(addCommas, ",")}
+                  </IncStateValue>
                 </IncStateContainer>
                 <IncStateContainer>
                   <IncStateHeader>Depreciation and Amortization</IncStateHeader>
                   <IncStateValue>
-                    ${statement.depreciationAndAmortization}
+                    $
+                    {statement.depreciationAndAmortization
+                      .toString()
+                      .replace(addCommas, ",")}
                   </IncStateValue>
                 </IncStateContainer>
                 <IncStateContainer>
@@ -92,7 +114,10 @@ const IncomeStatement = ({ incStatementYears, incStatementData, dataSelection })
                     General and Administrative Expenses
                   </IncStateHeader>
                   <IncStateValue>
-                    ${statement.generalAndAdministrativeExpenses}
+                    $
+                    {statement.generalAndAdministrativeExpenses
+                      .toString()
+                      .replace(addCommas, ",")}
                   </IncStateValue>
                 </IncStateContainer>
                 <IncStateContainer>
@@ -100,7 +125,10 @@ const IncomeStatement = ({ incStatementYears, incStatementData, dataSelection })
                     Research and Development Expenses
                   </IncStateHeader>
                   <IncStateValue>
-                    ${statement.researchAndDevelopmentExpenses}
+                    $
+                    {statement.researchAndDevelopmentExpenses
+                      .toString()
+                      .replace(addCommas, ",")}
                   </IncStateValue>
                 </IncStateContainer>
                 <IncStateContainer>
@@ -108,21 +136,37 @@ const IncomeStatement = ({ incStatementYears, incStatementData, dataSelection })
                     Selling and Marketing Expenses
                   </IncStateHeader>
                   <IncStateValue>
-                    ${statement.sellingAndMarketingExpenses}
+                    $
+                    {statement.sellingAndMarketingExpenses
+                      .toString()
+                      .replace(addCommas, ",")}
                   </IncStateValue>
                 </IncStateContainer>
 
                 <IncStateContainer>
                   <IncStateHeader>Other Expenses</IncStateHeader>
-                  <IncStateValue>${statement.otherExpenses}</IncStateValue>
+                  <IncStateValue>
+                    $
+                    {statement.otherExpenses.toString().replace(addCommas, ",")}
+                  </IncStateValue>
                 </IncStateContainer>
                 <IncStateContainer>
                   <IncStateHeader>Operating Expenses</IncStateHeader>
-                  <IncStateValue>${statement.operatingExpenses}</IncStateValue>
+                  <IncStateValue>
+                    $
+                    {statement.operatingExpenses
+                      .toString()
+                      .replace(addCommas, ",")}
+                  </IncStateValue>
                 </IncStateContainer>
                 <IncStateContainer>
                   <IncStateHeader>Operating Income</IncStateHeader>
-                  <IncStateValue>${statement.operatingIncome}</IncStateValue>
+                  <IncStateValue>
+                    $
+                    {statement.operatingIncome
+                      .toString()
+                      .replace(addCommas, ",")}
+                  </IncStateValue>
                 </IncStateContainer>
                 <IncStateContainer>
                   <IncStateHeader>Operating Income Ratio</IncStateHeader>
@@ -134,7 +178,9 @@ const IncomeStatement = ({ incStatementYears, incStatementData, dataSelection })
                 </IncStateContainer>
                 <IncStateContainer>
                   <IncStateHeader>EBITDA</IncStateHeader>
-                  <IncStateValue>${statement.ebitda}</IncStateValue>
+                  <IncStateValue>
+                    ${statement.ebitda.toString().replace(addCommas, ",")}
+                  </IncStateValue>
                 </IncStateContainer>
                 <IncStateContainer>
                   <IncStateHeader>EBITDA Ratio</IncStateHeader>
@@ -146,7 +192,12 @@ const IncomeStatement = ({ incStatementYears, incStatementData, dataSelection })
                 </IncStateContainer>
                 <IncStateContainer>
                   <IncStateHeader>Income Before Taxes</IncStateHeader>
-                  <IncStateValue>${statement.incomeBeforeTax}</IncStateValue>
+                  <IncStateValue>
+                    $
+                    {statement.incomeBeforeTax
+                      .toString()
+                      .replace(addCommas, ",")}
+                  </IncStateValue>
                 </IncStateContainer>
                 <IncStateContainer>
                   <IncStateHeader>Income Before Taxes Ratio</IncStateHeader>
@@ -158,19 +209,36 @@ const IncomeStatement = ({ incStatementYears, incStatementData, dataSelection })
                 </IncStateContainer>
                 <IncStateContainer>
                   <IncStateHeader>Income Tax Expense</IncStateHeader>
-                  <IncStateValue>${statement.incomeTaxExpense}</IncStateValue>
+                  <IncStateValue>
+                    $
+                    {statement.incomeTaxExpense
+                      .toString()
+                      .replace(addCommas, ",")}
+                  </IncStateValue>
                 </IncStateContainer>
                 <IncStateContainer>
                   <IncStateHeader>Interest Expense</IncStateHeader>
-                  <IncStateValue>${statement.interestExpense}</IncStateValue>
+                  <IncStateValue>
+                    $
+                    {statement.interestExpense
+                      .toString()
+                      .replace(addCommas, ",")}
+                  </IncStateValue>
                 </IncStateContainer>
                 <IncStateContainer>
                   <IncStateHeader>Interest Income</IncStateHeader>
-                  <IncStateValue>${statement.interestIncome}</IncStateValue>
+                  <IncStateValue>
+                    $
+                    {statement.interestIncome
+                      .toString()
+                      .replace(addCommas, ",")}
+                  </IncStateValue>
                 </IncStateContainer>
                 <IncStateContainer>
                   <IncStateHeader>Net Income</IncStateHeader>
-                  <IncStateValue>${statement.netIncome}</IncStateValue>
+                  <IncStateValue>
+                    ${statement.netIncome.toString().replace(addCommas, ",")}
+                  </IncStateValue>
                 </IncStateContainer>
                 <IncStateContainer>
                   <IncStateHeader>Net Income Ratio</IncStateHeader>
@@ -185,7 +253,9 @@ const IncomeStatement = ({ incStatementYears, incStatementData, dataSelection })
                     Weighted Average Shares Outstanding
                   </IncStateHeader>
                   <IncStateValue>
-                    {statement.weightedAverageShsOut}
+                    {statement.weightedAverageShsOut
+                      .toString()
+                      .replace(addCommas, ",")}
                   </IncStateValue>
                 </IncStateContainer>
               </Card>

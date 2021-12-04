@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { StyledNavLink, StyledNavbar } from "../Styles/styledElements";
 import { Button } from "@material-ui/core";
-import { GiBlackKnightHelm, GiLightningSaber } from "react-icons/gi";
-import { FaUserAstronaut } from "react-icons/fa";
+import { FaUserAstronaut, FaCloudSun } from "react-icons/fa";
 import { IoHome } from "react-icons/io5";
+import { IoIosCloudyNight} from "react-icons/io";
 
 const BasicNav = ({ lightDarkChange, theme }) => {
   const [userMessage, setUserMessage] = useState([]);
@@ -23,9 +23,9 @@ const BasicNav = ({ lightDarkChange, theme }) => {
       <Button
         startIcon={
           theme === "light" ? (
-            <GiBlackKnightHelm style={{ color: "#00afc9" }} />
+            <IoIosCloudyNight style={{ color: "#00afc9" }} />
           ) : (
-            <GiLightningSaber style={{ color: "#d4af37" }} />
+            <FaCloudSun style={{ color: "#d4af37" }} />
           )
         }
         onClick={lightDarkChange}

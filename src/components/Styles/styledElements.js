@@ -598,6 +598,129 @@ export const IntroContainer = styled.div`
   }
 `;
 
+export const HomeSectorsContainer = styled.div`
+  flex: 1;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  border-color: ${(props) => props.theme.accentColor};
+  border-top: 0px ${(props) => props.theme.accentColor};
+  border-left: 0px ${(props) => props.theme.accentColor};
+  border-right-style: ridge;
+  border-bottom-style: ridge;
+  // border-radius: 20px;
+  border-width: 2.8px;
+  margin-top: 2%;
+  margin-left: 1%;
+  text-decoration: none;
+  font-size: 3.5vw;
+  max-width: 368px;
+  max-height: 100px;
+  padding: 1.5%;
+  &:hover {
+    background-color: ${(props) => props.theme.hoverColor};
+    transition: 0.5s ease;
+  }
+  @media (max-width: 800px) {
+    border-width: 0.3vw;
+    // border-radius: 2.5vw;
+  }
+`;
+
+export const HomeMoversContainer = styled.div`
+  flex: 1;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  border-color: ${(props) => props.theme.accentColor};
+  border-top: 0px ${(props) => props.theme.accentColor};
+  border-right: 0px ${(props) => props.theme.accentColor};
+  border-left-style: ridge;
+  border-bottom-style: ridge;
+  // border-radius: 20px;
+  border-width: 2.8px;
+  margin-top: 2%;
+  margin-right: 1%;
+  text-decoration: none;
+  font-size: 3.5vw;
+  max-width: 368px;
+  max-height: 100px;
+  padding: 1.5%;
+  &:hover {
+    background-color: ${(props) => props.theme.hoverColor};
+    transition: 0.5s ease;
+  }
+  @media (max-width: 800px) {
+    border-width: 0.3vw;
+    // border-radius: 2.5vw;
+  }
+`;
+
+export const HomeTrendingContainer = styled.div`
+  flex: 1;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  border-color: ${(props) => props.theme.accentColor};
+  border-bottom: 0px ${(props) => props.theme.accentColor};
+  border-left: 0px ${(props) => props.theme.accentColor};
+  border-right-style: ridge;
+  border-top-style: ridge;
+  // border-radius: 20px;
+  border-width: 2.8px;
+  margin-left: 1%;
+  margin-bottom: 1%;
+  text-decoration: none;
+  font-size: 3.5vw;
+  max-width: 368px;
+  max-height: 100px;
+  padding: 1.5%;
+  &:hover {
+    background-color: ${(props) => props.theme.hoverColor};
+    transition: 0.5s ease;
+  }
+  @media (max-width: 800px) {
+    border-width: 0.3vw;
+    // border-radius: 2.5vw;
+  }
+`;
+
+export const HomeEarningsContainer = styled.div`
+flex: 1;
+align-items: flex-start;
+justify-content: center;
+flex-direction: column;
+border-color: ${(props) => props.theme.accentColor};
+border-bottom: 0px ${(props) => props.theme.accentColor};
+border-right: 0px ${(props) => props.theme.accentColor};
+border-left-style: ridge;
+border-top-style: ridge;
+// border-radius: 20px;
+border-width: 2.8px;
+margin-right: 1%;
+margin-bottom: 1%;
+text-decoration: none;
+font-size: 3.5vw;
+max-width: 368px;
+max-height: 100px;
+padding: 1.5%;
+&:hover {
+  background-color: ${(props) => props.theme.hoverColor};
+  transition: 0.5s ease;
+}
+@media (max-width: 800px) {
+  border-width: 0.3vw;
+  // border-radius: 2.5vw;
+}
+`;
+
+export const HomeIconContainer = styled.div`
+ font-size: 16px;
+ color: ${(props) => props.theme.accentColor};
+ 
+`;
+
+
 //**More Data**
 
 export const MoreDataHeaderContainer = styled.div`

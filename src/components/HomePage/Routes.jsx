@@ -2,7 +2,6 @@ import React from "react";
 import { StyledNavLink, StyledBackLink } from "../Styles/styledElements";
 import {
   Route,
-  Switch,
   //useHistory
 } from "react-router-dom";
 import MainTopMovers from "../TopMovers/MainTopMovers";
@@ -11,6 +10,7 @@ import FullOptionChain from "../OptionChain/FullOptionChain";
 import MainSectors from "../Sectors/MainSectors";
 import SectorStocks from "../Sectors/SectorStocks";
 import TrendingWsb from "../WSB/TrendingWsb";
+import Earnings from "../Earnings/Earnings";
 import { BiArrowBack } from "react-icons/bi";
 
 const Routes = () => {
@@ -18,7 +18,7 @@ const Routes = () => {
 
   return (
     <>
-      <Switch>
+     
         <Route exact path="/sector">
           <br></br>
           <StyledBackLink to="/">{<BiArrowBack />}</StyledBackLink>
@@ -59,7 +59,10 @@ const Routes = () => {
 
           <SectorStocks />
         </Route>
-      </Switch>
+        <Route path="/earnings">
+          <Earnings />
+        </Route>
+    
     </>
   );
 };
