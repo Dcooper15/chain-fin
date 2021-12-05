@@ -27,11 +27,13 @@ class MainSearch extends Component {
       errorSymbol = [];
       this.setState({ stockData: [...this.state.stockData, res.data] });
     }
+
   };
 
   render() {
     const { stockData } = this.state;
     const { error } = this.state;
+   
     return (
       <div>
         <Search searchStocks={this.searchStocks} />

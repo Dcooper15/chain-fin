@@ -686,40 +686,38 @@ export const HomeTrendingContainer = styled.div`
 `;
 
 export const HomeEarningsContainer = styled.div`
-flex: 1;
-align-items: flex-start;
-justify-content: center;
-flex-direction: column;
-border-color: ${(props) => props.theme.accentColor};
-border-bottom: 0px ${(props) => props.theme.accentColor};
-border-right: 0px ${(props) => props.theme.accentColor};
-border-left-style: ridge;
-border-top-style: ridge;
-// border-radius: 20px;
-border-width: 2.8px;
-margin-right: 1%;
-margin-bottom: 1%;
-text-decoration: none;
-font-size: 3.5vw;
-max-width: 368px;
-max-height: 100px;
-padding: 1.5%;
-&:hover {
-  background-color: ${(props) => props.theme.hoverColor};
-  transition: 0.5s ease;
-}
-@media (max-width: 800px) {
-  border-width: 0.3vw;
-  // border-radius: 2.5vw;
-}
+  flex: 1;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  border-color: ${(props) => props.theme.accentColor};
+  border-bottom: 0px ${(props) => props.theme.accentColor};
+  border-right: 0px ${(props) => props.theme.accentColor};
+  border-left-style: ridge;
+  border-top-style: ridge;
+  // border-radius: 20px;
+  border-width: 2.8px;
+  margin-right: 1%;
+  margin-bottom: 1%;
+  text-decoration: none;
+  font-size: 3.5vw;
+  max-width: 368px;
+  max-height: 100px;
+  padding: 1.5%;
+  &:hover {
+    background-color: ${(props) => props.theme.hoverColor};
+    transition: 0.5s ease;
+  }
+  @media (max-width: 800px) {
+    border-width: 0.3vw;
+    // border-radius: 2.5vw;
+  }
 `;
 
 export const HomeIconContainer = styled.div`
- font-size: 16px;
- color: ${(props) => props.theme.accentColor};
- 
+  font-size: 16px;
+  color: ${(props) => props.theme.accentColor};
 `;
-
 
 //**More Data**
 
@@ -827,4 +825,63 @@ export const IncStateValue = styled.div`
   justify-content: center;
   align-items: flex-end;
   flex-direction: row;
+`;
+
+//Earnings
+
+export const EarningsPageContainer = styled.div`
+margin-top: 5%;
+max-width: 800px;
+justify-content: center;
+`
+export const StyledEarningsRow = styled.div`
+  box-sizing: border-box;
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  color: ${(props) => props.theme.accentColor};
+  margin: 2%;
+  flex-wrap: nowrap;
+  font-size: 12px;
+  position: relative;
+  justify-content: center;
+  @media (max-width: 800px) {
+    font-size: 22;
+    position: relative;
+  }
+`;
+export const StyledEarningsHeader = styled.div`
+  box-sizing: border-box;
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+  color: ${(props) => props.theme.accentColor};
+  flex-wrap: nowrap;
+  margin-left: 2%;
+  font-size: 12px;
+  font-weight: bold;
+  position: relative;
+  justify-content: center;
+  border-style: ridge;
+  border-top: 0px ${(props) => props.theme.dataLineColor};
+  border-left: 0px ${(props) => props.theme.dataLineColor};
+  border-bottom: 1px ${(props) => props.theme.accentColor};
+  border-color: ${(props) => props.theme.accentColor};
+  border-width: thin;
+  @media (max-width: 800px) {
+    font-size: 22;
+    position: relative;
+  }
+`;
+export const StyledEarningsSymLink = styled(Link)`
+  color: ${(props) => props.theme.accentColor};
+  text-decoration: underline;
+  justify-content: center;
+  width: 25%;
+`;
+
+export const StyledEarningsRowItem = styled.div`
+  justify-content: center;
+  width: 25%;
 `;

@@ -48,6 +48,7 @@ function FullOptionChain() {
   const [sliderPremium, setSliderPremium] = useState([]);
   const [sliderActive, setSliderActive] = useState(false);
   const [moreDataActive, setMoreDataActive] = useState(false);
+  const [error, setError] = useState([]);
 
   const buttonHandlerPut = () => {
     setHandleTypeChange(true);
@@ -82,13 +83,14 @@ function FullOptionChain() {
   const sliderPremiumHandler = (premValue) => {
     setSliderPremium(premValue);
   };
-console.log("moredata", moreDataActive);
+
   useEffect(() => {
     axios
       .get(
         `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&strikeCount=${strikeCount}&includeQuotes=TRUE&fromDate=2021-09-03&toDate=2023-01-30`
       )
       .then((response) => {
+        setError(response.data.status === "FAILED" ? "error" : "");
         const getDaysToExp = Object.keys(response.data.callExpDateMap)
           .map((entry) => {
             return Object.keys(response.data.callExpDateMap[entry]).map(
@@ -104,10 +106,16 @@ console.log("moredata", moreDataActive);
         setExpDate(uniqueDays[0]);
         const stockPrice = response.data.underlyingPrice.toFixed(2);
         const percentChange =
-          response.data.underlying.markPercentChange.toFixed(2);
+          response.data.status === "FAILED"
+            ? ""
+            : response.data.underlying.markPercentChange.toFixed(2);
         setChainPrice([stockPrice]);
         setChainPercent([percentChange]);
-        setName([response.data.underlying.description]);
+        setName([
+          response.data.status === "FAILED"
+            ? ""
+            : response.data.underlying.description,
+        ]);
         const callKeys = Object.keys(response.data.callExpDateMap)
           .map((entry) => {
             return Object.keys(response.data.callExpDateMap[entry]).map(
@@ -128,270 +136,278 @@ console.log("moredata", moreDataActive);
         setPutData(putKeys);
       });
   }, [symbol, strikeCount]);
-  try {
-    return (
-      <>
-        {!!nameRender.length ? (
-          <HeaderOptionChain
-            nameRender={nameRender}
-            chainPrice={chainPrice}
-            chainPercent={chainPercent}
-            buttonHandlerMoreDataActive={buttonHandlerMoreDataActive}
-          />
-        ) : (
-          " "
-        )}
+  if (error === "error") {
+    return <SectorHeader>{symbol} is not an optionable symbol</SectorHeader>;
+  } else {
+    try {
+      return (
+        <>
+          {!!nameRender.length ? (
+            <HeaderOptionChain
+              nameRender={nameRender}
+              chainPrice={chainPrice}
+              chainPercent={chainPercent}
+              buttonHandlerMoreDataActive={buttonHandlerMoreDataActive}
+            />
+          ) : (
+            " "
+          )}
 
-        <br></br>
-        <div className="dateContainer">
-          {!!expDays.length
-            ? expDays.map((expDay) => (
-                <div style={{ marginBottom: "2%", paddingBottom: "0" }}>
-                  <Button
-                    className={classes.buttonExp}
-                    value={expDay}
-                    size="small"
-                    onClick={() => setExpDate(expDay)}
-                    style={{
-                      background:
-                        expDate === expDay
-                          ? theme.name === "dark"
-                            ? "black"
-                            : "white"
-                          : "none",
-                      marginBottom: "0",
-                    }}
-                  >
-                    <StyledExpDate>
-                      <Moment
-                        add={{ days: expDay }}
-                        format={expDay > offsetDays ? "ll" : "MMM DD"}
-                      >
-                        {date}
-                      </Moment>
-                    </StyledExpDate>
-                  </Button>
-                </div>
-              ))
-            : " "}
-        </div>
+          <br></br>
+          <div className="dateContainer">
+            {!!expDays.length
+              ? expDays.map((expDay) => (
+                  <div style={{ marginBottom: "2%", paddingBottom: "0" }}>
+                    <Button
+                      className={classes.buttonExp}
+                      value={expDay}
+                      size="small"
+                      onClick={() => setExpDate(expDay)}
+                      style={{
+                        background:
+                          expDate === expDay
+                            ? theme.name === "dark"
+                              ? "black"
+                              : "white"
+                            : "none",
+                        marginBottom: "0",
+                      }}
+                    >
+                      <StyledExpDate>
+                        <Moment
+                          add={{ days: expDay }}
+                          format={expDay > offsetDays ? "ll" : "MMM DD"}
+                        >
+                          {date}
+                        </Moment>
+                      </StyledExpDate>
+                    </Button>
+                  </div>
+                ))
+              : " "}
+          </div>
 
-        <Button
-          className={
-            theme.name === "dark"
-              ? handleTypeChange === false
-                ? classes.buttonDark
-                : classes.buttonDarkUns
-              : handleTypeChange === false
-              ? classes.buttonLight
-              : classes.buttonLightUns
-          }
-          type="submit"
-          size="small"
-          onClick={buttonHandlerCall}
-          style={{ marginLeft: "2%" }}
-        >
-          <strong style={{ color: theme.name === "dark" ? "#fff" : "#F8E4A5" }}>
-            Call
-          </strong>
-        </Button>
-        <Button
-          className={
-            theme.name === "dark"
-              ? handleTypeChange === true
-                ? classes.buttonDark
-                : classes.buttonDarkUns
-              : handleTypeChange === true
-              ? classes.buttonLight
-              : classes.buttonLightUns
-          }
-          type="submit"
-          size="small"
-          onClick={buttonHandlerPut}
-          style={{ marginLeft: "1%", marginRight: "4%" }}
-        >
-          <strong style={{ color: theme.name === "dark" ? "#fff" : "#F8E4A5" }}>
-            Put
-          </strong>
-        </Button>
-
-        <FormControl className={classes.formControl}>
-          <InputLabel id="strikeLabel" className={classes.select}>
-            <strong
-              style={{ color: theme.name === "dark" ? "#d4af37" : "#146175" }}
-            >
-              Strikes
-            </strong>
-          </InputLabel>
-
-          <Select
-            labelId="strikeLabel"
-            id="strikes"
-            className={classes.select}
-            open={open}
-            onClose={handleClose}
-            onOpen={handleOpen}
-            value={strikeCount}
-            onChange={handleStrikeChange}
+          <Button
+            className={
+              theme.name === "dark"
+                ? handleTypeChange === false
+                  ? classes.buttonDark
+                  : classes.buttonDarkUns
+                : handleTypeChange === false
+                ? classes.buttonLight
+                : classes.buttonLightUns
+            }
+            type="submit"
+            size="small"
+            onClick={buttonHandlerCall}
+            style={{ marginLeft: "2%" }}
           >
-            <MenuItem className={classes.menuItem} value={6}>
-              <StyledMenuItem>6</StyledMenuItem>
-            </MenuItem>
-            <MenuItem className={classes.menuItem} value={10}>
-              <StyledMenuItem>10</StyledMenuItem>
-            </MenuItem>
-            <MenuItem className={classes.menuItem} value={14}>
-              <StyledMenuItem>14</StyledMenuItem>
-            </MenuItem>
-            <MenuItem className={classes.menuItem} value={60}>
-              <StyledMenuItem>All</StyledMenuItem>
-            </MenuItem>
-          </Select>
-        </FormControl>
+            <strong
+              style={{ color: theme.name === "dark" ? "#fff" : "#F8E4A5" }}
+            >
+              Call
+            </strong>
+          </Button>
+          <Button
+            className={
+              theme.name === "dark"
+                ? handleTypeChange === true
+                  ? classes.buttonDark
+                  : classes.buttonDarkUns
+                : handleTypeChange === true
+                ? classes.buttonLight
+                : classes.buttonLightUns
+            }
+            type="submit"
+            size="small"
+            onClick={buttonHandlerPut}
+            style={{ marginLeft: "1%", marginRight: "4%" }}
+          >
+            <strong
+              style={{ color: theme.name === "dark" ? "#fff" : "#F8E4A5" }}
+            >
+              Put
+            </strong>
+          </Button>
 
-        {!!callData.length
-          ? callData
-              .map((stock) =>
-                stock.map((option) => (
-                  <Card
-                    className={classes.card}
-                    style={
-                      theme.name === "dark"
-                        ? {
-                            backgroundColor: "#38372b",
-                            borderColor: "#d4af37",
-                            color: "#ffebcd",
-                          }
-                        : {
-                            backgroundColor: "#f5f5f5",
-                            borderColor: "#00afc9",
-                            color: "#002933",
-                          }
-                    }
-                    variant="outlined"
-                    hidden={
-                      expDate === option.daysToExpiration &&
-                      handleTypeChange === false
-                        ? false
-                        : true
-                    }
-                    raised={true}
-                  >
-                    <FullChainCardHeader
-                      option={option}
-                      buttonHandlerActive={buttonHandlerActive}
-                      setStrikeHandler={sliderStrikeHandler}
-                      setPremiumHandler={sliderPremiumHandler}
-                    />
-                    <br></br>
-                    <StyledOcCollateral>
-                      CC Premium to 100 Shares Ratio{" "}
-                      {(
-                        ((option.mark * 100) / (chainPrice * 100)) *
-                        100
-                      ).toFixed(2)}
-                      %
-                    </StyledOcCollateral>
-                    <br></br>
-                    <MapFullChainData option={option} />
+          <FormControl className={classes.formControl}>
+            <InputLabel id="strikeLabel" className={classes.select}>
+              <strong
+                style={{ color: theme.name === "dark" ? "#d4af37" : "#146175" }}
+              >
+                Strikes
+              </strong>
+            </InputLabel>
 
-                    <>
-                      <>Exp Date </>
+            <Select
+              labelId="strikeLabel"
+              id="strikes"
+              className={classes.select}
+              open={open}
+              onClose={handleClose}
+              onOpen={handleOpen}
+              value={strikeCount}
+              onChange={handleStrikeChange}
+            >
+              <MenuItem className={classes.menuItem} value={6}>
+                <StyledMenuItem>6</StyledMenuItem>
+              </MenuItem>
+              <MenuItem className={classes.menuItem} value={10}>
+                <StyledMenuItem>10</StyledMenuItem>
+              </MenuItem>
+              <MenuItem className={classes.menuItem} value={14}>
+                <StyledMenuItem>14</StyledMenuItem>
+              </MenuItem>
+              <MenuItem className={classes.menuItem} value={60}>
+                <StyledMenuItem>All</StyledMenuItem>
+              </MenuItem>
+            </Select>
+          </FormControl>
+
+          {!!callData.length
+            ? callData
+                .map((stock) =>
+                  stock.map((option) => (
+                    <Card
+                      className={classes.card}
+                      style={
+                        theme.name === "dark"
+                          ? {
+                              backgroundColor: "#38372b",
+                              borderColor: "#d4af37",
+                              color: "#ffebcd",
+                            }
+                          : {
+                              backgroundColor: "#f5f5f5",
+                              borderColor: "#00afc9",
+                              color: "#002933",
+                            }
+                      }
+                      variant="outlined"
+                      hidden={
+                        expDate === option.daysToExpiration &&
+                        handleTypeChange === false
+                          ? false
+                          : true
+                      }
+                      raised={true}
+                    >
+                      <FullChainCardHeader
+                        option={option}
+                        buttonHandlerActive={buttonHandlerActive}
+                        setStrikeHandler={sliderStrikeHandler}
+                        setPremiumHandler={sliderPremiumHandler}
+                      />
+                      <br></br>
+                      <StyledOcCollateral>
+                        CC Premium to 100 Shares Ratio{" "}
+                        {(
+                          ((option.mark * 100) / (chainPrice * 100)) *
+                          100
+                        ).toFixed(2)}
+                        %
+                      </StyledOcCollateral>
+                      <br></br>
+                      <MapFullChainData option={option} />
+
                       <>
-                        <Moment
-                          add={{ days: option.daysToExpiration }}
-                          format="MMM DD"
-                        >
-                          {date}
-                        </Moment>
+                        <>Exp Date </>
+                        <>
+                          <Moment
+                            add={{ days: option.daysToExpiration }}
+                            format="MMM DD"
+                          >
+                            {date}
+                          </Moment>
+                        </>
                       </>
-                    </>
-                  </Card>
-                ))
-              )
-              .reverse()
-          : " "}
+                    </Card>
+                  ))
+                )
+                .reverse()
+            : " "}
 
-        {!!putData.length
-          ? putData
-              .map((stock) =>
-                stock.map((option) => (
-                  <Card
-                    className={classes.card}
-                    style={
-                      theme.name === "dark"
-                        ? {
-                            backgroundColor: "#38372b",
-                            borderColor: "#d4af37",
-                            color: "#ffebcd",
-                          }
-                        : {
-                            backgroundColor: "#f5f5f5",
-                            borderColor: "#00afc9",
-                            color: "#002933",
-                          }
-                    }
-                    variant="outlined"
-                    hidden={
-                      expDate === option.daysToExpiration &&
-                      handleTypeChange === true
-                        ? false
-                        : true
-                    }
-                    raised={true}
-                  >
-                    <FullChainCardHeader
-                      option={option}
-                      buttonHandlerActive={buttonHandlerActive}
-                      setStrikeHandler={sliderStrikeHandler}
-                      setPremiumHandler={sliderPremiumHandler}
-                    />
-                    <StyledOcCollateral>
-                      CSP Premium to Collateral Ratio{" "}
-                      {(
-                        ((option.mark * 100) / (option.strikePrice * 100)) *
-                        100
-                      ).toFixed(2)}
-                      %
-                    </StyledOcCollateral>
-                    <br></br>
-                    <MapFullChainData option={option} mapType={"put"} />
-                    <>
-                      <>Exp Date </>
+          {!!putData.length
+            ? putData
+                .map((stock) =>
+                  stock.map((option) => (
+                    <Card
+                      className={classes.card}
+                      style={
+                        theme.name === "dark"
+                          ? {
+                              backgroundColor: "#38372b",
+                              borderColor: "#d4af37",
+                              color: "#ffebcd",
+                            }
+                          : {
+                              backgroundColor: "#f5f5f5",
+                              borderColor: "#00afc9",
+                              color: "#002933",
+                            }
+                      }
+                      variant="outlined"
+                      hidden={
+                        expDate === option.daysToExpiration &&
+                        handleTypeChange === true
+                          ? false
+                          : true
+                      }
+                      raised={true}
+                    >
+                      <FullChainCardHeader
+                        option={option}
+                        buttonHandlerActive={buttonHandlerActive}
+                        setStrikeHandler={sliderStrikeHandler}
+                        setPremiumHandler={sliderPremiumHandler}
+                      />
+                      <StyledOcCollateral>
+                        CSP Premium to Collateral Ratio{" "}
+                        {(
+                          ((option.mark * 100) / (option.strikePrice * 100)) *
+                          100
+                        ).toFixed(2)}
+                        %
+                      </StyledOcCollateral>
+                      <br></br>
+                      <MapFullChainData option={option} mapType={"put"} />
                       <>
-                        <Moment
-                          add={{ days: option.daysToExpiration }}
-                          format="MMM DD"
-                        >
-                          {date}
-                        </Moment>
+                        <>Exp Date </>
+                        <>
+                          <Moment
+                            add={{ days: option.daysToExpiration }}
+                            format="MMM DD"
+                          >
+                            {date}
+                          </Moment>
+                        </>
                       </>
-                    </>
-                  </Card>
-                ))
-              )
-              .reverse()
-          : " "}
-        <ProfitLossSlider
-          active={sliderActive}
-          setInactive={buttonHandlerInactive}
-          sharePrice={chainPrice}
-          strike={sliderStrike}
-          premium={sliderPremium.length === 0 ? "" : sliderPremium.toFixed(2)}
-        />
-        <MoreData
-          moreDataActive={moreDataActive}
-          setMoreDataInactive={buttonHandlerMoreDataInactive}
-        />
-      </>
-    );
-  } catch (error) {
-    console.log("catch error", error);
-    return (
-      <SectorHeader style={{ fontSize: "14px" }}>
-        Unable to view {symbol} option chain
-      </SectorHeader>
-    );
+                    </Card>
+                  ))
+                )
+                .reverse()
+            : " "}
+          <ProfitLossSlider
+            active={sliderActive}
+            setInactive={buttonHandlerInactive}
+            sharePrice={chainPrice}
+            strike={sliderStrike}
+            premium={sliderPremium.length === 0 ? "" : sliderPremium.toFixed(2)}
+          />
+          <MoreData
+            moreDataActive={moreDataActive}
+            setMoreDataInactive={buttonHandlerMoreDataInactive}
+          />
+        </>
+      );
+    } catch (error) {
+      console.log(error);
+      return (
+        <SectorHeader style={{ fontSize: "14px" }}>
+          Something happened...unable to view {symbol} option chain
+        </SectorHeader>
+      );
+    }
   }
 }
 
