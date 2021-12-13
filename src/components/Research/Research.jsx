@@ -9,6 +9,9 @@ import React from // { useState, useEffect, useContext }
 import SearchForm from "./SearchForm";
 
 const Research = () => {
+
+  
+
   return (
     <>
       <SearchForm />

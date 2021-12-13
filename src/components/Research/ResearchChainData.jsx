@@ -8,7 +8,7 @@ import MapDataPoints from "../DataPoints/MapDataPoints";
 import MapCardHeader from "../DataPoints/MapCardHeader";
 
 const date = new Date();
-const ResearchSearch = ({ submittedText }) => {
+const ResearchChainData = ({ submittedText }) => {
   //const classes = useStyles();
   const theme = useContext(ThemeContext);
   const isMounted = useRef(false);
@@ -88,4 +88,4 @@ const ResearchSearch = ({ submittedText }) => {
   );
 };
 
-export default ResearchSearch;
+export default ResearchChainData;

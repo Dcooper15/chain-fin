@@ -26,8 +26,8 @@ const ProfitLossSlider = ({
   const classes = useStyles();
   const theme = useContext(ThemeContext);
   const [open, setOpen] = useState(false);
-  const [optionStrategy, setOptionStrategy] = useState([1]);
-  const [sliderValue, setSliderValue] = useState([sharePrice]);
+  const [optionStrategy, setOptionStrategy] = useState(1);
+  const [sliderValue, setSliderValue] = useState(sharePrice);
 
   const handleClose = () => {
     setOpen(false);
@@ -61,17 +61,16 @@ const ProfitLossSlider = ({
       ? (strike - sliderValue) * 100 - premium
       : premium * -1;
   let cspPL =
-    sliderValue < strike
-      ? (strike - sliderValue) * 100 * -1 + premium
-      : premium;
+    sliderValue < strike ? -((strike - sliderValue) * 100 - premium).toFixed(2) : premium;
   let ccPL =
     sliderValue <= strike
-      ? ((sliderValue - sharePrice) * 100).toFixed(2) - premium
-      : ((strike - sharePrice) * 100).toFixed(2) - premium;
+      ? (sliderValue - sharePrice).toFixed(2) * 100 + premium
+      : (strike - sharePrice).toFixed(2) * 100 + premium;
   let ccOpportunityCost =
     sliderValue > strike ? ((sliderValue - strike) * 100).toFixed(2) : 0;
 
-  let mainPL = [];
+  let mainPL;
+
   switch (optionStrategy) {
     case 1:
       mainPL = buyCallPL;
@@ -86,7 +85,7 @@ const ProfitLossSlider = ({
       mainPL = cspPL;
       break;
     default:
-      mainPL = 0;
+      mainPL = 0.00;
   }
 
   if (strike) {
@@ -195,7 +194,10 @@ const ProfitLossSlider = ({
           <br></br>
           <SliderDataDiv>
             <StyledLabel>
-              Profit <StyledValue>${mainPL.toFixed(2)}</StyledValue>
+              Profit{" "}
+              <StyledValue>
+                ${mainPL.toFixed(2)}
+              </StyledValue>
             </StyledLabel>
             {optionStrategy === 2 ? (
               <StyledLabel>

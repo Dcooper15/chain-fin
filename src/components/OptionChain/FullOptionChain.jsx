@@ -392,7 +392,7 @@ function FullOptionChain() {
             setInactive={buttonHandlerInactive}
             sharePrice={chainPrice}
             strike={sliderStrike}
-            premium={sliderPremium.length === 0 ? "" : sliderPremium.toFixed(2)}
+            premium={sliderPremium}
           />
           <MoreData
             moreDataActive={moreDataActive}

@@ -11,7 +11,7 @@ import MainSectors from "../Sectors/MainSectors";
 import SectorStocks from "../Sectors/SectorStocks";
 import TrendingWsb from "../WSB/TrendingWsb";
 import Earnings from "../Earnings/Earnings";
-import Research from "../Research/Research";
+import SearchForm from "../Research/SearchForm";
 import { BiArrowBack } from "react-icons/bi";
 
 const Routes = () => {
@@ -19,54 +19,52 @@ const Routes = () => {
 
   return (
     <>
-     
-        <Route exact path="/sector">
-          <br></br>
-          <StyledBackLink to="/">{<BiArrowBack />}</StyledBackLink>
-          <MainSectors />
-        </Route>
+      <Route exact path="/sector">
+        <br></br>
+        <StyledBackLink to="/">{<BiArrowBack />}</StyledBackLink>
+        <MainSectors />
+      </Route>
 
-        <Route exact path="/topmovers">
-          <br></br>
-          <StyledBackLink to="/">{<BiArrowBack />}</StyledBackLink>
-          <MainTopMovers />
-        </Route>
+      <Route exact path="/topmovers">
+        <br></br>
+        <StyledBackLink to="/">{<BiArrowBack />}</StyledBackLink>
+        <MainTopMovers />
+      </Route>
 
-        <Route exact path="/trendingwsb">
-          <br></br>
-          <StyledBackLink to="/">{<BiArrowBack />}</StyledBackLink>
+      <Route exact path="/trendingwsb">
+        <br></br>
+        <StyledBackLink to="/">{<BiArrowBack />}</StyledBackLink>
 
-          <TrendingWsb />
-        </Route>
+        <TrendingWsb />
+      </Route>
 
-        <Route path="/topmovers/:market">
-          <br></br>
-          <StyledBackLink to="/topmovers">{<BiArrowBack />}</StyledBackLink>
+      <Route path="/topmovers/:market">
+        <br></br>
+        <StyledBackLink to="/topmovers">{<BiArrowBack />}</StyledBackLink>
 
-          <MoverStocks />
-        </Route>
+        <MoverStocks />
+      </Route>
 
-        <Route path="/chain/:symbol">
-          <br></br>
-          <StyledNavLink to="/sector">{"Sectors"}</StyledNavLink>
-          <br></br>
-          <StyledNavLink to="/topmovers">{"Top Movers"}</StyledNavLink>
-          <br></br>
-          <FullOptionChain />
-        </Route>
-        <Route path="/sector/:sector">
-          <br></br>
-          <StyledBackLink to="/sector">{<BiArrowBack />}</StyledBackLink>
+      <Route path="/chain/:symbol">
+        <br></br>
+        <StyledNavLink to="/sector">{"Sectors"}</StyledNavLink>
+        <br></br>
+        <StyledNavLink to="/topmovers">{"Top Movers"}</StyledNavLink>
+        <br></br>
+        <FullOptionChain />
+      </Route>
+      <Route path="/sector/:sector">
+        <br></br>
+        <StyledBackLink to="/sector">{<BiArrowBack />}</StyledBackLink>
 
-          <SectorStocks />
-        </Route>
-        <Route exact path="/earnings">
-          <Earnings />
-        </Route>
-        <Route exact path="/research">
-          <Research />
-        </Route>
-    
+        <SectorStocks />
+      </Route>
+      <Route exact path="/earnings">
+        <Earnings />
+      </Route>
+      <Route exact path="/research">
+        <SearchForm />
+      </Route>
     </>
   );
 };
