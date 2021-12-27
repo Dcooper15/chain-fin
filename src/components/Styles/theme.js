@@ -10,6 +10,7 @@ export const lightTheme = {
   percentChangeUp: "#006400",
   percentChangeDown: "#ff4c4c",
   hoverColor: "#d1e6ed",
+  disabledColor: "#92a3a6",
 };
 
 export const darkTheme = {
@@ -22,6 +23,7 @@ export const darkTheme = {
   percentChangeUp: "#a4de02",
   percentChangeDown: "#ff4c4c",
   hoverColor: "#474747",
+  disabledColor: "#786320",
 };
 
 export const GlobalBackGround = createGlobalStyle`

@@ -6,7 +6,7 @@ import React from // { useState, useEffect, useContext }
 // import axios from "axios";
 // import Moment from "react-moment";
 // import { Card, Button } from "@material-ui/core";
-import SearchForm from "./SearchForm";
+import SearchForm from "./MainResearch";
 
 const Research = () => {
 

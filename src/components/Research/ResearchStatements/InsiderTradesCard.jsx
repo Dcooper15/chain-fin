@@ -9,7 +9,7 @@ import { Card } from "@material-ui/core";
 import { useStyles } from "../../Styles/muiStyles";
 import Moment from "react-moment";
 
-export default function InsiderTradesCard({
+const InsiderTradesCard = ({
   transactionDate,
   filingDate,
   acquistionOrDisposition,
@@ -20,32 +20,30 @@ export default function InsiderTradesCard({
   securitiesOwned,
   securitiesTransacted,
   typeOfOwner,
-  formType,
-}) {
+  formType
+  
+}) => {
   const classes = useStyles();
   const theme = useContext(ThemeContext);
+
+  const getTradeCardStyle =
+    theme.name === "dark"
+      ? {
+          backgroundColor: "#38372b",
+
+          color: "#ffebcd",
+        }
+      : {
+          backgroundColor: "#c9c9c9",
+
+          color: "#002933",
+        };
+
   return (
     <Card
       className={classes.quoteCard}
-      style={
-        theme.name === "dark"
-          ? {
-              backgroundColor: "#38372b",
-
-              color: "#ffebcd",
-            }
-          : {
-              backgroundColor: "#c9c9c9",
-
-              color: "#002933",
-            }
-      }
+      style={getTradeCardStyle}
       variant="outlined"
-      //   hidden={
-      //     selectedYear !== transactionDate.slice(0, 4)
-      //     //   ||
-      //     //   dataSelection !== "insider trades"
-      //   }
       raised={true}
     >
       <IncStateContainer>
@@ -72,7 +70,10 @@ export default function InsiderTradesCard({
       </IncStateContainer>
       <IncStateContainer>
         <IncStateHeader>Acquisition or Diposition</IncStateHeader>
-        <IncStateValue>{acquistionOrDisposition}</IncStateValue>
+        <IncStateValue>{acquistionOrDisposition ===
+        null ? "N/A" :
+        acquistionOrDisposition === "D" ?
+        "Disposition" : "Aquisition"}</IncStateValue>
       </IncStateContainer>
 
       <IncStateContainer>
@@ -128,4 +129,5 @@ export default function InsiderTradesCard({
       </IncStateContainer>
     </Card>
   );
-}
+};
+export default InsiderTradesCard;

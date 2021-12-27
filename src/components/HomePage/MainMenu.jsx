@@ -7,9 +7,13 @@ import {
   HomeMoversContainer,
   HomeTrendingContainer,
   HomeEarningsContainer,
-  HomeIconContainer
+  HomeResearchContainer,
+  HomeIconContainer,
+  HomeDummyContainer,
+  HomeIconContainerDisabled,
+  StyledLinkDisabled
 } from "../Styles/styledElements";
-import { AiOutlineBank, AiOutlineReddit } from "react-icons/ai";
+import { AiOutlineBank, AiOutlineReddit, AiOutlineFileSearch, AiOutlineScan } from "react-icons/ai";
 import { GiCommercialAirplane } from "react-icons/gi";
 import { GiElectric } from "react-icons/gi";
 import { FiTrendingUp } from "react-icons/fi";
@@ -55,6 +59,20 @@ const MainMenu = () => {
               <IoCalendarSharp style={{padding: '1%'}}/>
           </HomeIconContainer>
           </HomeEarningsContainer>
+        </MenuRow>
+        <MenuRow>
+        <HomeResearchContainer>
+            <StyledLink to="/research">Research</StyledLink>
+            <HomeIconContainer>
+              <AiOutlineFileSearch style={{padding: '1%'}}/>
+            </HomeIconContainer>
+          </HomeResearchContainer>
+          <HomeDummyContainer>
+          <StyledLinkDisabled to="/">Scanner</StyledLinkDisabled>
+            <HomeIconContainerDisabled>
+              <AiOutlineScan style={{padding: '1%'}}/>
+            </HomeIconContainerDisabled>
+          </HomeDummyContainer>
         </MenuRow>
       </SectorMenuHome>
     </>

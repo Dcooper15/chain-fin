@@ -14,24 +14,33 @@ const ResearchChainData = ({ submittedText }) => {
   const isMounted = useRef(false);
   const [chainData, setChainData] = useState([]);
   const [chainError, setChainError] = useState([]);
-  //console.log("err is", chainError);
-  //console.log("submitted text", submittedText);
-  //console.log("chain data", chainData);
 
+  const getCardStyle =
+    theme.name === "dark"
+      ? {
+          backgroundColor: "#3D3D3D",
+          borderColor: "#d4af37",
+          color: "#ffebcd",
+        }
+      : {
+          backgroundColor: "#ebebeb",
+          borderColor: "#00afc9",
+          color: "#002933",
+        };
   useEffect(() => {
-    if(isMounted.current) {
-    axios
-      .get(
-        `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${submittedText}&contractType=ALL&strikeCount=2&includeQuotes=TRUE&toDate=${process.env.REACT_APP_DATE}&range=OTM`
-      )
-      .then((response) => {
-        response.data.status === "FAILED"
-          ? setChainError(["error"])
-          : setChainData([response.data]);
-      }) }
-      else {
-        isMounted.current = true;
-      }
+    if (isMounted.current) {
+      axios
+        .get(
+          `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${submittedText}&contractType=ALL&strikeCount=2&includeQuotes=TRUE&toDate=${process.env.REACT_APP_DATE}&range=OTM`
+        )
+        .then((response) => {
+          response.data.status === "FAILED"
+            ? setChainError(["error"])
+            : setChainData([response.data]);
+        });
+    } else {
+      isMounted.current = true;
+    }
   }, [submittedText]);
 
   return (
@@ -42,19 +51,7 @@ const ResearchChainData = ({ submittedText }) => {
         chainData.map((option) => (
           <Card
             className="stockInfo"
-            style={
-              theme.name === "dark"
-                ? {
-                    backgroundColor: "#3D3D3D",
-                    borderColor: "#d4af37",
-                    color: "#ffebcd",
-                  }
-                : {
-                    backgroundColor: "#ebebeb",
-                    borderColor: "#00afc9",
-                    color: "#002933",
-                  }
-            }
+            style={getCardStyle}
             variant="outlined"
             //hidden={handleTypeChange === true}
             raised={true}

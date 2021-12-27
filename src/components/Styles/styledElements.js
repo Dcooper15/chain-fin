@@ -271,6 +271,19 @@ export const StyledLink = styled(Link)`
   }
 `;
 
+export const StyledLinkDisabled = styled(Link)`
+  color: ${(props) => props.theme.disabledColor};
+  text-decoration: none;
+  margin: auto;
+  font-size: 35px;
+  position: relative;
+  justify-content: center;
+  @media (max-width: 800px) {
+    font-size: 4.3vw;
+    position: relative;
+  }
+`;
+
 export const StyledSymbolLink = styled(Link)`
   color: ${(props) => props.theme.headerColor};
   text-decoration: none;
@@ -662,6 +675,66 @@ export const HomeTrendingContainer = styled.div`
   justify-content: center;
   flex-direction: column;
   border-color: ${(props) => props.theme.accentColor};
+  //border-bottom: 0px ${(props) => props.theme.accentColor};
+  border-left: 0px ${(props) => props.theme.accentColor};
+  border-right-style: ridge;
+  border-top-style: ridge;
+  border-bottom-style: ridge;
+  // border-radius: 20px;
+  border-width: 2.8px;
+  margin-left: 1%;
+  //margin-bottom: 1%;
+  text-decoration: none;
+  font-size: 3.5vw;
+  max-width: 368px;
+  max-height: 100px;
+  padding: 1.5%;
+  &:hover {
+    background-color: ${(props) => props.theme.hoverColor};
+    transition: 0.5s ease;
+  }
+  @media (max-width: 800px) {
+    border-width: 0.3vw;
+    // border-radius: 2.5vw;
+  }
+`;
+
+export const HomeEarningsContainer = styled.div`
+  flex: 1;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  border-color: ${(props) => props.theme.accentColor};
+  //border-bottom: 0px ${(props) => props.theme.accentColor};
+  border-right: 0px ${(props) => props.theme.accentColor};
+  border-left-style: ridge;
+  border-top-style: ridge;
+  border-bottom-style: ridge;
+  // border-radius: 20px;
+  border-width: 2.8px;
+  margin-right: 1%;
+  //margin-bottom: 1%;
+  text-decoration: none;
+  font-size: 3.5vw;
+  max-width: 368px;
+  max-height: 100px;
+  padding: 1.5%;
+  &:hover {
+    background-color: ${(props) => props.theme.hoverColor};
+    transition: 0.5s ease;
+  }
+  @media (max-width: 800px) {
+    border-width: 0.3vw;
+    // border-radius: 2.5vw;
+  }
+`;
+
+export const HomeResearchContainer = styled.div`
+  flex: 1;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  border-color: ${(props) => props.theme.accentColor};
   border-bottom: 0px ${(props) => props.theme.accentColor};
   border-left: 0px ${(props) => props.theme.accentColor};
   border-right-style: ridge;
@@ -684,8 +757,7 @@ export const HomeTrendingContainer = styled.div`
     // border-radius: 2.5vw;
   }
 `;
-
-export const HomeEarningsContainer = styled.div`
+export const HomeDummyContainer = styled.div`
   flex: 1;
   align-items: flex-start;
   justify-content: center;
@@ -695,7 +767,7 @@ export const HomeEarningsContainer = styled.div`
   border-right: 0px ${(props) => props.theme.accentColor};
   border-left-style: ridge;
   border-top-style: ridge;
-  // border-radius: 20px;
+  //border-radius: 20px;
   border-width: 2.8px;
   margin-right: 1%;
   margin-bottom: 1%;
@@ -714,9 +786,18 @@ export const HomeEarningsContainer = styled.div`
   }
 `;
 
+
+ 
+ 
+
 export const HomeIconContainer = styled.div`
   font-size: 16px;
   color: ${(props) => props.theme.accentColor};
+`;
+
+export const HomeIconContainerDisabled = styled.div`
+  font-size: 16px;
+  color: ${(props) => props.theme.disabledColor};
 `;
 
 //**More Data**
@@ -884,4 +965,16 @@ export const StyledEarningsSymLink = styled(Link)`
 export const StyledEarningsRowItem = styled.div`
   justify-content: center;
   width: 25%;
+`;
+
+//research
+
+export const StyledResearchIncStateYears = styled.div`
+  flex: 0;
+  text-align: center;
+  display: inline-flex;
+  white-space: nowrap;
+  justify-content: center;
+  visibility: ${(props) => props.dataSelection === "insider trades" ? 'visible' : 'hidden'};
+
 `;

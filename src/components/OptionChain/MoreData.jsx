@@ -36,8 +36,6 @@ const MoreData = ({ moreDataActive, setMoreDataInactive }) => {
 
   const [insiderYears, setInsiderYears] = useState([]);
 
- console.log("inc", incStatementData);
- console.log("ins", insiderData);
   useEffect(() => {
     axios
       .get(

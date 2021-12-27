@@ -11,7 +11,7 @@ import MainSectors from "../Sectors/MainSectors";
 import SectorStocks from "../Sectors/SectorStocks";
 import TrendingWsb from "../WSB/TrendingWsb";
 import Earnings from "../Earnings/Earnings";
-import SearchForm from "../Research/SearchForm";
+import MainResearch from "../Research/MainResearch";
 import { BiArrowBack } from "react-icons/bi";
 
 const Routes = () => {
@@ -63,7 +63,7 @@ const Routes = () => {
         <Earnings />
       </Route>
       <Route exact path="/research">
-        <SearchForm />
+        <MainResearch />
       </Route>
     </>
   );
