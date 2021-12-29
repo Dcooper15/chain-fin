@@ -8,6 +8,7 @@ import {
   ColumnLeft,
   StyledLink,
   SectorHeader,
+  ColumnRightDummy
 } from "../Styles/styledElements";
 
 const MainTopMovers = () => {
@@ -35,6 +36,13 @@ const MainTopMovers = () => {
                 <StyledLink to="/topmovers/general">General</StyledLink>
               </ColumnRight>
             </MenuRow>
+            <MenuRow>
+              <ColumnLeft>
+                <StyledLink to="/topmovers/mostactive">Most Active</StyledLink>
+              </ColumnLeft>
+              <ColumnRightDummy></ColumnRightDummy>
+            </MenuRow>
+            
           </SectorMenu>
         </Route>
       </SectorContainer>

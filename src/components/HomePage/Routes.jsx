@@ -9,9 +9,10 @@ import MoverStocks from "../TopMovers/MoverStocks";
 import FullOptionChain from "../OptionChain/FullOptionChain";
 import MainSectors from "../Sectors/MainSectors";
 import SectorStocks from "../Sectors/SectorStocks";
-import TrendingWsb from "../WSB/TrendingWsb";
+import TrendingWsb from "../SocialSentiment/TrendingWsb";
 import Earnings from "../Earnings/Earnings";
 import MainResearch from "../Research/MainResearch";
+import Twit from "../SocialSentiment/Twit";
 import { BiArrowBack } from "react-icons/bi";
 
 const Routes = () => {
@@ -64,6 +65,9 @@ const Routes = () => {
       </Route>
       <Route exact path="/research">
         <MainResearch />
+      </Route>
+      <Route exact path="/twit">
+        <Twit />
       </Route>
     </>
   );

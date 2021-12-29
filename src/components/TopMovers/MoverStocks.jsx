@@ -47,6 +47,9 @@ function MoverStocks() {
     case "general":
       header = "General";
       break;
+    case "mostactive":
+      header = "";
+      break;
     default:
       header = `No data to display for ${market}.`;
   }
@@ -59,6 +62,29 @@ function MoverStocks() {
           `https://${process.env.REACT_APP_HUB_URL}/api/v3/${
             direction === "up" ? "gainers" : "losers"
           }?apikey=${process.env.REACT_APP_FM_CLIENT_ID}`
+        )
+        .then((response) => {
+          const marketMoversArray = response.data.map(
+            (marketSymbol) => marketSymbol.ticker
+          );
+
+          marketMoversArray.map((symbol) =>
+            axios
+              .get(
+                `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&contractType=ALL&strikeCount=2&includeQuotes=TRUE&toDate=${process.env.REACT_APP_DATE}&range=OTM`
+              )
+              .then((response) => {
+                if (response.data.status === "SUCCESS") {
+                  marketDataArray.push(response.data);
+                }
+                setMarketData([marketDataArray]);
+              })
+          );
+        });
+    } else if (market === "mostactive") {
+      axios
+        .get(
+          `https://${process.env.REACT_APP_HUB_URL}/api/v3/actives?apikey=${process.env.REACT_APP_FM_CLIENT_ID}`
         )
         .then((response) => {
           const marketMoversArray = response.data.map(
@@ -108,58 +134,61 @@ function MoverStocks() {
 
   return (
     <>
-      <SectorHeader style={{ marginLeft: "0.5%" }}>
-        Today's Top Movers - {header.length ? header : " "}
-        <ButtonDiv>
-          <Button
-            className={
-              theme.name === "dark"
-                ? direction === "up"
-                  ? classes.buttonDark
-                  : classes.buttonDarkUns
-                : direction === "up"
-                ? classes.buttonLight
-                : classes.buttonLightUns
-            }
-            type="submit"
-            onClick={buttonHandlerUp}
-            style={{
-              marginLeft: "1px",
-              paddingTop: "3px",
-              padding: "1px",
-              minWidth: "30px",
-            }}
-          >
-            <strong>
-              <FaArrowUp style={{ color: "#26d134" }} />
-            </strong>
-          </Button>
-          <Button
-            className={
-              theme.name === "dark"
-                ? direction === "down"
-                  ? classes.buttonDark
-                  : classes.buttonDarkUns
-                : direction === "down"
-                ? classes.buttonLight
-                : classes.buttonLightUns
-            }
-            type="submit"
-            onClick={buttonHandlerDown}
-            style={{
-              marginLeft: "3px",
-              paddingTop: "3px",
-              padding: "1px",
-              minWidth: "30px",
-            }}
-          >
-            <strong>
-              <FaArrowDown style={{ color: "#f53333" }} />
-            </strong>
-          </Button>
-        </ButtonDiv>
-      </SectorHeader>
-
+      {market === "mostactive" ? (
+        <SectorHeader>Today's Most Actively Traded Tickers</SectorHeader>
+      ) : (
+        <SectorHeader style={{ marginLeft: "0.5%" }}>
+          Today's Top Movers - {header.length ? header : " "}
+          <ButtonDiv>
+            <Button
+              className={
+                theme.name === "dark"
+                  ? direction === "up"
+                    ? classes.buttonDark
+                    : classes.buttonDarkUns
+                  : direction === "up"
+                  ? classes.buttonLight
+                  : classes.buttonLightUns
+              }
+              type="submit"
+              onClick={buttonHandlerUp}
+              style={{
+                marginLeft: "1px",
+                paddingTop: "3px",
+                padding: "1px",
+                minWidth: "30px",
+              }}
+            >
+              <strong>
+                <FaArrowUp style={{ color: "#26d134" }} />
+              </strong>
+            </Button>
+            <Button
+              className={
+                theme.name === "dark"
+                  ? direction === "down"
+                    ? classes.buttonDark
+                    : classes.buttonDarkUns
+                  : direction === "down"
+                  ? classes.buttonLight
+                  : classes.buttonLightUns
+              }
+              type="submit"
+              onClick={buttonHandlerDown}
+              style={{
+                marginLeft: "3px",
+                paddingTop: "3px",
+                padding: "1px",
+                minWidth: "30px",
+              }}
+            >
+              <strong>
+                <FaArrowDown style={{ color: "#f53333" }} />
+              </strong>
+            </Button>
+          </ButtonDiv>
+        </SectorHeader>
+      )}
       <Button
         className={
           theme.name === "dark"
