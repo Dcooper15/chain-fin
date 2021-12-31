@@ -9,7 +9,7 @@ const MyWatchList = () => {
   return (
     <>
       <WatchListContainer>
-        <StyledWatchListHeader>My Watch List</StyledWatchListHeader>
+        <StyledWatchListHeader>My Options Watch List</StyledWatchListHeader>
 
         <StyledPlaceHolder>Watch List Coming Soon..</StyledPlaceHolder>
       </WatchListContainer>

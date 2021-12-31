@@ -116,7 +116,7 @@ const InsiderTrading = ({ submittedText, dataSelection }) => {
           <FixedSizeList
             height={500}
             width={"100%"}
-            itemSize={275}
+            itemSize={290}
             itemCount={insiderData.length}
           >
             {Row}

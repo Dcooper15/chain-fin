@@ -9,6 +9,7 @@ import MoverStocks from "../TopMovers/MoverStocks";
 import FullOptionChain from "../OptionChain/FullOptionChain";
 import MainSectors from "../Sectors/MainSectors";
 import SectorStocks from "../Sectors/SectorStocks";
+import MainSocialSentiment from "../SocialSentiment/MainSocialSentiment";
 import TrendingWsb from "../SocialSentiment/TrendingWsb";
 import Earnings from "../Earnings/Earnings";
 import MainResearch from "../Research/MainResearch";
@@ -31,10 +32,15 @@ const Routes = () => {
         <StyledBackLink to="/">{<BiArrowBack />}</StyledBackLink>
         <MainTopMovers />
       </Route>
-
-      <Route exact path="/trendingwsb">
+      <Route exact path="/social">
         <br></br>
         <StyledBackLink to="/">{<BiArrowBack />}</StyledBackLink>
+        <MainSocialSentiment />
+      </Route>
+
+      <Route exact path="/social/trendingwsb">
+        <br></br>
+        <StyledBackLink to="/social">{<BiArrowBack />}</StyledBackLink>
 
         <TrendingWsb />
       </Route>
@@ -66,7 +72,9 @@ const Routes = () => {
       <Route exact path="/research">
         <MainResearch />
       </Route>
-      <Route exact path="/twit">
+      <Route exact path="/social/twitterstocktwits">
+        <br></br>
+      <StyledBackLink to="/social">{<BiArrowBack />}</StyledBackLink>
         <Twit />
       </Route>
     </>

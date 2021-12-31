@@ -168,6 +168,29 @@ export const useStyles = makeStyles({
     },
   },
 
+  twitterStwitsLabel: {
+    width: "100px",
+    paddingTop: "0px",
+    "& .MuiSvgIcon-root": {
+      color: "#d4af37",
+    },
+  },
+
+  twitterStwitsSelect: {
+    width: "100%",
+    paddingTop: "0px",
+    "& .MuiSvgIcon-root": {
+      color: "#d4af37",
+    },
+  },
+  twitterStwitsSelectInactive: {
+    width: "165px",
+    paddingTop: "0px",
+    "& .MuiSvgIcon-root": {
+      color: "#d4af37",
+    },
+  },
+
   //WSB Buttons
   wsbButtonDark: {
     background: "linear-gradient(45deg, #EEBC1D 10%, #474747 95%)",

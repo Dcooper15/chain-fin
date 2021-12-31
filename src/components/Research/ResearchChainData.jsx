@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
 import { ThemeContext } from "styled-components";
-//import { useStyles } from "../Styles/muiStyles";
+import { useStyles } from "../Styles/muiStyles";
 import axios from "axios";
 import Moment from "react-moment";
 import { Card } from "@material-ui/core";
@@ -9,7 +9,7 @@ import MapCardHeader from "../DataPoints/MapCardHeader";
 
 const date = new Date();
 const ResearchChainData = ({ submittedText }) => {
-  //const classes = useStyles();
+  const classes = useStyles();
   const theme = useContext(ThemeContext);
   const isMounted = useRef(false);
   const [chainData, setChainData] = useState([]);
@@ -50,7 +50,7 @@ const ResearchChainData = ({ submittedText }) => {
       ) : !!chainData.length ? (
         chainData.map((option) => (
           <Card
-            className="stockInfo"
+            className={classes.card}
             style={getCardStyle}
             variant="outlined"
             //hidden={handleTypeChange === true}

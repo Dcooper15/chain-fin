@@ -791,13 +791,19 @@ export const HomeDummyContainer = styled.div`
  
 
 export const HomeIconContainer = styled.div`
-  font-size: 16px;
+  font-size: 22px;
   color: ${(props) => props.theme.accentColor};
+  @media (max-width: 650px) {
+    font-size: 16px;
+  }
 `;
 
 export const HomeIconContainerDisabled = styled.div`
-  font-size: 16px;
+  font-size: 22px;
   color: ${(props) => props.theme.disabledColor};
+  @media (max-width: 650px) {
+    font-size: 16px;
+  }
 `;
 
 //**More Data**
@@ -975,6 +981,18 @@ export const StyledResearchIncStateYears = styled.div`
   display: inline-flex;
   white-space: nowrap;
   justify-content: center;
+  margin-bottom: 2%;
   visibility: ${(props) => props.dataSelection === "insider trades" ? 'visible' : 'hidden'};
 
 `;
+
+//Twitter&Stocktwits
+
+export const TwitterStwitsFilterContainer = styled.div`
+margin-left: 2%;
+margin-bottom: 5%;
+@media (max-width: 800px) {
+  font-size: 300;
+  position: relative;
+}
+`

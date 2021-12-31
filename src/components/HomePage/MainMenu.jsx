@@ -18,6 +18,8 @@ import { GiCommercialAirplane } from "react-icons/gi";
 import { GiElectric } from "react-icons/gi";
 import { FiTrendingUp } from "react-icons/fi";
 import { IoCalendarSharp } from "react-icons/io5";
+import { TiSocialTwitter } from "react-icons/ti";
+
 
 
 
@@ -45,9 +47,10 @@ const MainMenu = () => {
         </MenuRow>
         <MenuRow>
           <HomeTrendingContainer>
-            <StyledLink to="/trendingwsb">Trending - WSB</StyledLink>
+            <StyledLink to="/social">Social Media</StyledLink>
             <HomeIconContainer>
               <AiOutlineReddit style={{padding: '1%'}}/>
+              <TiSocialTwitter style={{padding: '1%'}}/>
             </HomeIconContainer>
           </HomeTrendingContainer>
 

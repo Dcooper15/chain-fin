@@ -13,8 +13,8 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import BasicNav from "./components/HomePage/BasicNav";
 import Routes from "./components/HomePage/Routes";
 import MainMenu from "./components/HomePage/MainMenu";
-import MainSearch from "./components/MainSearch";
-import MyWatchList from "./components/HomePage/MyWatchList";
+//import MainSearch from "./components/MainSearch";
+//import MyWatchList from "./components/HomePage/MyWatchList";
 
 import "./App.css";
 
@@ -40,8 +40,8 @@ function App() {
           <SectorContainer>
             <MainMenu />
 
-            <MainSearch />
-            <MyWatchList />
+            {/* <MainSearch />  */}
+            {/* <MyWatchList /> */}
           </SectorContainer>
           <br></br>
         </Route>

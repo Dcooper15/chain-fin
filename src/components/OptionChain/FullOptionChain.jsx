@@ -22,7 +22,7 @@ import HeaderOptionChain from "./HeaderOptionChain";
 import MapFullChainData from "./MapFullChainData";
 import FullChainCardHeader from "./FullChainCardHeader";
 import ProfitLossSlider from "./ProfitLossSlider";
-import MoreData from "./MoreData";
+//import MoreData from "./MoreData";
 import Moment from "react-moment";
 
 const date = new Date();
@@ -47,7 +47,7 @@ function FullOptionChain() {
   const [sliderStrike, setSliderStrike] = useState([]);
   const [sliderPremium, setSliderPremium] = useState([]);
   const [sliderActive, setSliderActive] = useState(false);
-  const [moreDataActive, setMoreDataActive] = useState(false);
+  //const [moreDataActive, setMoreDataActive] = useState(false);
   const [error, setError] = useState([]);
 
   const buttonHandlerPut = () => {
@@ -71,12 +71,12 @@ function FullOptionChain() {
   const buttonHandlerInactive = () => {
     setSliderActive(false);
   };
-  const buttonHandlerMoreDataActive = () => {
-    setMoreDataActive(moreDataActive === false ? true : false);
-  };
-  const buttonHandlerMoreDataInactive = () => {
-    setMoreDataActive(false);
-  };
+  // const buttonHandlerMoreDataActive = () => {
+  //   setMoreDataActive(moreDataActive === false ? true : false);
+  // };
+  // const buttonHandlerMoreDataInactive = () => {
+  //   setMoreDataActive(false);
+  // };
   const sliderStrikeHandler = (value) => {
     setSliderStrike(value);
   };
@@ -147,7 +147,7 @@ function FullOptionChain() {
               nameRender={nameRender}
               chainPrice={chainPrice}
               chainPercent={chainPercent}
-              buttonHandlerMoreDataActive={buttonHandlerMoreDataActive}
+              //buttonHandlerMoreDataActive={buttonHandlerMoreDataActive}
             />
           ) : (
             " "
@@ -394,10 +394,10 @@ function FullOptionChain() {
             strike={sliderStrike}
             premium={sliderPremium}
           />
-          <MoreData
+          {/* <MoreData
             moreDataActive={moreDataActive}
             setMoreDataInactive={buttonHandlerMoreDataInactive}
-          />
+          /> */}
         </>
       );
     } catch (error) {
