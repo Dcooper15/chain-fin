@@ -4,6 +4,7 @@ import {
   SectorHeader,
   TwitterStwitsFilterContainer,
   StyledMenuItem,
+  ImpressionsContainer,
 } from "../Styles/styledElements";
 import { useStyles } from "../Styles/muiStyles";
 import axios from "axios";
@@ -20,6 +21,7 @@ import MapDataPoints from "../DataPoints/MapDataPoints";
 import MapCardHeader from "../DataPoints/MapCardHeader";
 
 const date = new Date();
+const addCommas = /\B(?=(\d{3})+(?!\d))/g;
 
 const Twit = () => {
   const classes = useStyles();
@@ -35,7 +37,7 @@ const Twit = () => {
   const [selectedData, setSelectedData] = useState(false);
   const [open, setOpen] = useState(false);
   const [handleTypeChange, setHandleTypeChange] = useState(false);
-  //const [direction, setDirection] = useState("up");
+  const [occurences, setOccurences] = useState([]);
 
   const handleSelectedDataChange = (event) => {
     setSelectedData(event.target.value);
@@ -79,6 +81,58 @@ const Twit = () => {
     default:
       selectedOptionData = "";
   }
+
+  const getOccurenceValue = (symbol, selectedThread, occurences) => {
+    if (selectedThread === 1) {
+      return (
+        "has made " +
+        occurences[occurences.indexOf(symbol) + 8]
+          .toString()
+          .replace(addCommas, ",") +
+        " Twitter Impressions today"
+      );
+    } else if (selectedThread === 2) {
+      return (
+        "has been in " +
+        occurences[occurences.indexOf(symbol) + 2]
+          .toString()
+          .replace(addCommas, ",") +
+        " Twitter posts today"
+      );
+    } else if (selectedThread === 3) {
+      return (
+        "has been in " +
+        occurences[occurences.indexOf(symbol) + 4]
+          .toString()
+          .replace(addCommas, ",") +
+        " Twitter comments today"
+      );
+    } else if (selectedThread === 4) {
+      return (
+        "has made " +
+        occurences[occurences.indexOf(symbol) + 7]
+          .toString()
+          .replace(addCommas, ",") +
+        " Stocktwits impressions today"
+      );
+    } else if (selectedThread === 5) {
+      return (
+        "has been in " +
+        occurences[occurences.indexOf(symbol) + 1]
+          .toString()
+          .replace(addCommas, ",") +
+        " Stocktwits posts today"
+      );
+    } else if (selectedThread === 6) {
+      return (
+        "has been in " +
+        occurences[occurences.indexOf(symbol) + 3]
+          .toString()
+          .replace(addCommas, ",") +
+        " Stocktwits comments today"
+      );
+    }
+  };
 
   useEffect(() => {
     axios
@@ -143,6 +197,7 @@ const Twit = () => {
             if (response.data.status === "SUCCESS") {
               sentimentDataArray.push(response.data);
             }
+            setOccurences(selectedOptionData.map(Object.values).flat());
             setSentimentData([sentimentDataArray]);
           })
       );
@@ -153,7 +208,7 @@ const Twit = () => {
 
   return (
     <>
-      <SectorHeader>Trending on Twitter & StockTwits</SectorHeader>
+      <SectorHeader>Tickers Trending on Twitter & StockTwits</SectorHeader>
       <TwitterStwitsFilterContainer>
         <FormControl className={classes.formControl}>
           <InputLabel
@@ -163,7 +218,7 @@ const Twit = () => {
             <strong
               style={{ color: theme.name === "dark" ? "#d4af37" : "#146175" }}
             >
-              Sort Data By Most
+              Sort Options By Most
             </strong>
           </InputLabel>
 
@@ -258,6 +313,12 @@ const Twit = () => {
                 hidden={handleTypeChange === true}
                 raised={true}
               >
+                <ImpressionsContainer>
+                  {" "}
+                  {option.symbol +
+                    " " +
+                    getOccurenceValue(option.symbol, selectedData, occurences)}
+                </ImpressionsContainer>
                 <MapCardHeader option={option} />
 
                 <MapDataPoints option={option} mapType={"call"} />
@@ -304,6 +365,12 @@ const Twit = () => {
                 hidden={handleTypeChange === false}
                 raised={true}
               >
+                <ImpressionsContainer>
+                  {" "}
+                  {option.symbol +
+                    " " +
+                    getOccurenceValue(option.symbol, selectedData, occurences)}
+                </ImpressionsContainer>
                 <MapCardHeader option={option} />
 
                 <MapDataPoints option={option} mapType={"put"} />

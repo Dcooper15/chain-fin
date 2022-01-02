@@ -786,10 +786,6 @@ export const HomeDummyContainer = styled.div`
   }
 `;
 
-
- 
- 
-
 export const HomeIconContainer = styled.div`
   font-size: 22px;
   color: ${(props) => props.theme.accentColor};
@@ -917,10 +913,10 @@ export const IncStateValue = styled.div`
 //Earnings
 
 export const EarningsPageContainer = styled.div`
-margin-top: 5%;
-max-width: 800px;
-justify-content: center;
-`
+  margin-top: 5%;
+  max-width: 800px;
+  justify-content: center;
+`;
 export const StyledEarningsRow = styled.div`
   box-sizing: border-box;
   display: flex;
@@ -982,17 +978,24 @@ export const StyledResearchIncStateYears = styled.div`
   white-space: nowrap;
   justify-content: center;
   margin-bottom: 2%;
-  visibility: ${(props) => props.dataSelection === "insider trades" ? 'visible' : 'hidden'};
-
+  visibility: ${(props) =>
+    props.dataSelection === "insider trades" ? "visible" : "hidden"};
 `;
 
 //Twitter&Stocktwits
 
 export const TwitterStwitsFilterContainer = styled.div`
-margin-left: 2%;
-margin-bottom: 5%;
-@media (max-width: 800px) {
-  font-size: 300;
-  position: relative;
-}
-`
+  margin-left: 2%;
+  margin-bottom: 5%;
+  @media (max-width: 800px) {
+    font-size: 300;
+    position: relative;
+  }
+`;
+
+export const ImpressionsContainer = styled.div`
+  font-size: 16px;
+  @media (max-width: 600px) {
+    font-size: 14px;
+  }
+`;

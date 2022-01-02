@@ -19,13 +19,14 @@ const MainSocialSentiment = () => {
           <SectorMenu>
             <MenuRow>
               <ColumnLeft>
-                <StyledLink to="/social/twitterstocktwits">Twitter & Stocktwits</StyledLink>
+                <StyledLink to="/social/trendingwsb">Reddit - WSB</StyledLink>
               </ColumnLeft>
               <ColumnRight>
-                <StyledLink to="/social/trendingwsb">Reddit - WSB</StyledLink>
+                <StyledLink to="/social/twitterstocktwits">
+                  Twitter & Stocktwits
+                </StyledLink>
               </ColumnRight>
             </MenuRow>
-            
           </SectorMenu>
         </Route>
       </SectorContainer>

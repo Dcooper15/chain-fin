@@ -67,10 +67,10 @@ export const useStyles = makeStyles({
     position: "center",
     justifyItems: "center",
     zIndex: 0,
-    marginBottom: "3%",
     marginLeft: "2%",
     marginRight: "2%",
     marginTop: "3%",
+    marginBottom: "5%",
     paddingTop: "1%",
     paddingBottom: "1%",
     fontFamily: "Noto Sans,sans-serif",
@@ -184,7 +184,7 @@ export const useStyles = makeStyles({
     },
   },
   twitterStwitsSelectInactive: {
-    width: "165px",
+    width: "190px",
     paddingTop: "0px",
     "& .MuiSvgIcon-root": {
       color: "#d4af37",

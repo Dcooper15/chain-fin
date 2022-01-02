@@ -51,12 +51,7 @@ const MainSectors = () => {
                 </StyledLink>
               </ColumnLeft>
               <ColumnRight>
-                <StyledLink
-                  to="/sector/energy"
-                  // style={{fontSize: '3.0vw'}}
-                >
-                  Alternative Energy
-                </StyledLink>
+                <StyledLink to="/sector/energy">Alternative Energy</StyledLink>
               </ColumnRight>
             </MenuRow>
             <MenuRow>

@@ -15,6 +15,7 @@ const addCommas = /\B(?=(\d{3})+(?!\d))/g;
 const Quote = ({ quoteData }) => {
   const classes = useStyles();
   const theme = useContext(ThemeContext);
+
   return (
     <Card
       className={classes.quoteCard}
@@ -89,7 +90,9 @@ const Quote = ({ quoteData }) => {
       <QuoteContainerRight>
         <QuoteHeaderLeft>EPS</QuoteHeaderLeft>
         <QuoteValueLeft>
-          {quoteData.eps.toFixed(2).toString().replace(addCommas, ",")}
+          {quoteData.pe == null
+            ? "N/A"
+            : quoteData.eps.toFixed(2).toString().replace(addCommas, ",")}
         </QuoteValueLeft>
       </QuoteContainerRight>
 
@@ -121,13 +124,19 @@ const Quote = ({ quoteData }) => {
       <QuoteContainerLeft>
         <QuoteHeaderLeft>Year High</QuoteHeaderLeft>
         <QuoteValueLeft>
-          ${quoteData.yearHigh.toString().replace(addCommas, ",")}
+          $
+          {quoteData.yearHigh == null
+            ? "N/A"
+            : quoteData.yearHigh.toString().replace(addCommas, ",")}
         </QuoteValueLeft>
       </QuoteContainerLeft>
       <QuoteContainerRight>
         <QuoteHeaderLeft>Year Low</QuoteHeaderLeft>
         <QuoteValueLeft>
-          ${quoteData.yearLow.toString().replace(addCommas, ",")}
+          $
+          {quoteData.yearLow == null
+            ? "N/A"
+            : quoteData.yearLow.toString().replace(addCommas, ",")}
         </QuoteValueLeft>
       </QuoteContainerRight>
       <QuoteContainerLeft>
@@ -149,13 +158,18 @@ const Quote = ({ quoteData }) => {
       <QuoteContainerRight>
         <QuoteHeaderLeft>Market Cap</QuoteHeaderLeft>
         <QuoteValueLeft>
-          ${quoteData.marketCap.toString().replace(addCommas, ",")}
+          $
+          {quoteData.marketCap == null
+            ? "N/A"
+            : quoteData.marketCap.toString().replace(addCommas, ",")}
         </QuoteValueLeft>
       </QuoteContainerRight>
       <QuoteContainerLeft>
         <QuoteHeaderLeft>Shares O/S</QuoteHeaderLeft>
         <QuoteValueLeft>
-          {quoteData.sharesOutstanding.toString().replace(addCommas, ",")}
+          {quoteData.sharesOutstanding == null
+            ? "N/A"
+            : quoteData.sharesOutstanding.toString().replace(addCommas, ",")}
         </QuoteValueLeft>
       </QuoteContainerLeft>
     </Card>

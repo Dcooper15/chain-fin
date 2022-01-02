@@ -22,6 +22,7 @@ import HeaderOptionChain from "./HeaderOptionChain";
 import MapFullChainData from "./MapFullChainData";
 import FullChainCardHeader from "./FullChainCardHeader";
 import ProfitLossSlider from "./ProfitLossSlider";
+import Quote from "./MoreDataChildren/Quote";
 //import MoreData from "./MoreData";
 import Moment from "react-moment";
 
@@ -41,6 +42,7 @@ function FullOptionChain() {
   const [chainPercent, setChainPercent] = useState([]);
   const [nameRender, setName] = useState([]);
   const [strikeCount, setStrikeCount] = useState([6]);
+  const [quoteData, setQuoteData] = useState([]);
   const [callData, setCallData] = useState([]);
   const [putData, setPutData] = useState([]);
   const [open, setOpen] = useState(false);
@@ -87,57 +89,91 @@ function FullOptionChain() {
   useEffect(() => {
     axios
       .get(
-        `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&strikeCount=${strikeCount}&includeQuotes=TRUE&fromDate=2021-09-03&toDate=2023-01-30`
+        `https://${process.env.REACT_APP_HUB_URL}/api/v3/quote/${symbol}?apikey=${process.env.REACT_APP_FM_CLIENT_ID}`
       )
       .then((response) => {
-        setError(response.data.status === "FAILED" ? "error" : "");
-        const getDaysToExp = Object.keys(response.data.callExpDateMap)
-          .map((entry) => {
-            return Object.keys(response.data.callExpDateMap[entry]).map(
-              (innerArrayID) =>
-                response.data.callExpDateMap[entry][innerArrayID]
-            );
-          })
-          .flat()
-          .flat();
-        const returnDays = getDaysToExp.map((days) => days.daysToExpiration);
-        const uniqueDays = [...new Set(returnDays)];
-        setExpDays(uniqueDays);
-        setExpDate(uniqueDays[0]);
-        const stockPrice = response.data.underlyingPrice.toFixed(2);
-        const percentChange =
-          response.data.status === "FAILED"
-            ? ""
-            : response.data.underlying.markPercentChange.toFixed(2);
-        setChainPrice([stockPrice]);
-        setChainPercent([percentChange]);
-        setName([
-          response.data.status === "FAILED"
-            ? ""
-            : response.data.underlying.description,
-        ]);
-        const callKeys = Object.keys(response.data.callExpDateMap)
-          .map((entry) => {
-            return Object.keys(response.data.callExpDateMap[entry]).map(
-              (innerArrayID) =>
-                response.data.callExpDateMap[entry][innerArrayID]
-            );
-          })
-          .flat();
-        const putKeys = Object.keys(response.data.putExpDateMap)
-          .map((entry) => {
-            return Object.keys(response.data.putExpDateMap[entry]).map(
-              (innerArrayID) => response.data.putExpDateMap[entry][innerArrayID]
-            );
-          })
-          .flat();
+        setQuoteData(response.data);
+        setName(response.data[0].name);
+        const stockPrice =
+          response.data[0].price == null
+            ? "N/A"
+            : response.data[0].price.toFixed(2);
 
-        setCallData(callKeys);
-        setPutData(putKeys);
+        setChainPrice(stockPrice);
+        const percentChange =
+          response.data[0].change == null
+            ? "N/A"
+            : response.data[0].change.toFixed(2);
+        setChainPercent(percentChange);
+        axios
+          .get(
+            `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&strikeCount=${strikeCount}&includeQuotes=TRUE&fromDate=2021-09-03&toDate=2023-01-30`
+          )
+          .then((response) => {
+            setError(response.data.status === "FAILED" ? "error" : "");
+            const getDaysToExp = Object.keys(response.data.callExpDateMap)
+              .map((entry) => {
+                return Object.keys(response.data.callExpDateMap[entry]).map(
+                  (innerArrayID) =>
+                    response.data.callExpDateMap[entry][innerArrayID]
+                );
+              })
+              .flat()
+              .flat();
+            const returnDays = getDaysToExp.map(
+              (days) => days.daysToExpiration
+            );
+            const uniqueDays = [...new Set(returnDays)];
+            setExpDays(uniqueDays);
+            setExpDate(uniqueDays[0]);
+            //const stockPrice = response.data.underlyingPrice.toFixed(2);
+            // const percentChange =
+            //   response.data.status === "FAILED"
+            //     ? ""
+            //     : response.data.underlying.markPercentChange.toFixed(2);
+            //setChainPrice([stockPrice]);
+            //setChainPercent([percentChange]);
+
+            const callKeys = Object.keys(response.data.callExpDateMap)
+              .map((entry) => {
+                return Object.keys(response.data.callExpDateMap[entry]).map(
+                  (innerArrayID) =>
+                    response.data.callExpDateMap[entry][innerArrayID]
+                );
+              })
+              .flat();
+            const putKeys = Object.keys(response.data.putExpDateMap)
+              .map((entry) => {
+                return Object.keys(response.data.putExpDateMap[entry]).map(
+                  (innerArrayID) =>
+                    response.data.putExpDateMap[entry][innerArrayID]
+                );
+              })
+              .flat();
+
+            setCallData(callKeys);
+            setPutData(putKeys);
+          });
       });
   }, [symbol, strikeCount]);
   if (error === "error") {
-    return <SectorHeader>{symbol} is not an optionable symbol</SectorHeader>;
+    return (
+      <>
+        {!!nameRender.length ? (
+          <HeaderOptionChain
+            nameRender={nameRender}
+            chainPrice={chainPrice}
+            chainPercent={chainPercent}
+            //buttonHandlerMoreDataActive={buttonHandlerMoreDataActive}
+          />
+        ) : (
+          " "
+        )}
+
+        {!!quoteData.length ? <Quote quoteData={quoteData[0]} /> : " "}
+        <SectorHeader>{symbol} is not an optionable symbol</SectorHeader>
+      </>
+    );
   } else {
     try {
       return (
@@ -154,6 +190,9 @@ function FullOptionChain() {
           )}
 
           <br></br>
+
+          {!!quoteData.length ? <Quote quoteData={quoteData[0]} /> : " "}
+
           <div className="dateContainer">
             {!!expDays.length
               ? expDays.map((expDay) => (

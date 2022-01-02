@@ -63,7 +63,7 @@ function TrendingWsb() {
   //const testUrl = `https://www.reddit.com/r/wallstreetbets/comments.json?limit=1000`
 
   //all
-
+console.log("occur", occurences)
   useEffect(() => {
     const wsbDataArray = [];
     if (handleThreadChange === "All") {
@@ -227,107 +227,6 @@ function TrendingWsb() {
         });
     }
   }, [handleThreadChange]);
-
-  //daily dicussion
-  //qnjay6
-  // useEffect(() => {
-  //   const wsbDataArray = [];
-  //   axios
-  //     .get(
-  //       // `https://www.reddit.com/r/wallstreetbets/comments/qnjay6/weekend_discussion_thread_for_the_weekend_of.json?limit=1000`
-  //       `https://www.reddit.com/r/wallstreetbets/comments/qpb8yh/daily_discussion_thread_for_${monthNames[month]}_${day}_2021.json?limit=1000`
-  //     )
-  //     .then((response) => {
-  //       console.log(response.data);
-  //       const getMostRecentUtc =
-  //         response.data[1].data.children[1].data.created_utc;
-
-  //       const getLastPost = response.data[1].data.children.slice(-2);
-
-  //       const lastPostUtc = getLastPost[0].data.created_utc;
-
-  //       const minuteDifference = Math.floor(
-  //         (getMostRecentUtc - lastPostUtc) / 60
-  //       );
-
-  //       setMinutes([minuteDifference]);
-
-  //       const posts = response.data[1].data.children.map(
-  //         (innerArray) => innerArray.data.body
-  //       );
-
-  //       const allPosts = posts.join(" -!@- ");
-  //       const upperCaseWords = allPosts.match(/(\b[A-Z][A-Z]+|\b[A-Z]\b)/g);
-
-  //       let potentialSymbols = [];
-  //       let i;
-  //       for (i = 0; i < upperCaseWords.length; i++) {
-  //         if (
-  //           upperCaseWords[i].length === 1 ||
-  //           upperCaseWords[i].length === 2 ||
-  //           upperCaseWords[i].length === 3 ||
-  //           upperCaseWords[i].length === 4
-  //         ) {
-  //           potentialSymbols.push(upperCaseWords[i]);
-  //         }
-  //       }
-  //       console.log("pot sym", potentialSymbols);
-
-  //       const filteredSyms = potentialSymbols.filter(function (value) {
-  //         if (
-  //           value !== "I" &&
-  //           value !== "TO" &&
-  //           value !== "THE" &&
-  //           value !== "AND" &&
-  //           value !== "EOD" &&
-  //           value !== "WSB" &&
-  //           value !== "EPS" &&
-  //           value !== "EST" &&
-  //           value !== "OTM" &&
-  //           value !== "AH"
-  //         ) {
-  //           return value;
-  //         } else {
-  //           return false;
-  //         }
-  //       });
-  //       console.log("filt", filteredSyms);
-  //       const symbolCounter = filteredSyms.reduce((obj, e) => {
-  //         obj[e] = (obj[e] || 0) + 1;
-  //         return obj;
-  //       }, {});
-
-  //       console.log(symbolCounter);
-
-  //       let sortedSymbols = [];
-  //       for (let occurence in symbolCounter) {
-  //         sortedSymbols.push([occurence, symbolCounter[occurence]]);
-  //       }
-
-  //       sortedSymbols
-  //         .sort(function (a, b) {
-  //           return a[1] - b[1];
-  //         })
-  //         .reverse();
-
-  //       const limitSymbols = sortedSymbols.slice(0, 10);
-  //       console.log("limit", limitSymbols);
-  //       setOccurences(limitSymbols.flat());
-
-  //       limitSymbols.map((symbol) =>
-  //         axios
-  //           .get(
-  //             `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol[0]}&contractType=ALL&strikeCount=2&includeQuotes=TRUE&toDate=${process.env.REACT_APP_DATE}&range=OTM`
-  //           )
-  //           .then((response) => {
-  //             if (response.data.status === "SUCCESS") {
-  //               wsbDataArray.push(response.data);
-  //             }
-  //             setMarketData([wsbDataArray]);
-  //           })
-  //       );
-  //     });
-  // }, []);
 
   return (
     <>
