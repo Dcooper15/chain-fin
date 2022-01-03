@@ -4,6 +4,7 @@ import { useStyles } from "../Styles/muiStyles";
 import ResearchChainData from "./ResearchChainData";
 import ResearchInsiderTrades from "./ResearchStatements/ResearchInsiderTrades";
 import ResearchIncomeStatement from "./ResearchStatements/ResearchIncomeStatement";
+import BalanceSheet from "./ResearchStatements/BalanceSheet";
 import {
   StyledSearchHeader,
   MoreDataButtonContainer,
@@ -55,7 +56,7 @@ const MainResearch = () => {
           disabled={false}
           type="text"
           name="text"
-          label="Symbol"
+          label={text.length ? "Symbol" : "AAPL"}
           onChange={handleTextChange}
           value={text}
           InputLabelProps={{
@@ -73,7 +74,7 @@ const MainResearch = () => {
           }}
           variant="outlined"
           size="small"
-          style={{ paddingBottom: "0%" }}
+          style={{ paddingBottom: "0%", marginLeft: "2%" }}
         />
 
         <Button
@@ -88,7 +89,7 @@ const MainResearch = () => {
       </form>
       <ResearchChainData submittedText={submittedText} />
       <MoreDataButtonContainer>
-        <Button
+       <Button
           className={
             dataSelection === "income statement"
               ? classes.moreDataButtonDarkActive
@@ -99,6 +100,18 @@ const MainResearch = () => {
           onClick={() => setDataSelection("income statement")}
         >
           Income Statement
+        </Button>
+        <Button
+          className={
+            dataSelection === "balance sheet"
+              ? classes.moreDataButtonDarkActive
+              : classes.moreDataButtonDark
+          }
+          variant="outlined"
+          size="small"
+          onClick={() => setDataSelection("balance sheet")}
+        >
+          Balance Sheet
         </Button>
         <Button
           className={
@@ -120,6 +133,10 @@ const MainResearch = () => {
       <ResearchInsiderTrades
         submittedText={submittedText}
         dataSelection={dataSelection}
+      />
+      <BalanceSheet 
+      submittedText={submittedText}
+      dataSelection={dataSelection}
       />
     </div>
   );

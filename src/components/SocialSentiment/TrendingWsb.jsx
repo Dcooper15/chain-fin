@@ -28,9 +28,8 @@ const monthNames = [
 ];
 const date = new Date();
 const month = date.getMonth();
-const nowUtc = date.getTime();
-console.log("now", nowUtc);
 const day = date.getDate();
+
 
 function TrendingWsb() {
   const classes = useStyles();
@@ -57,35 +56,31 @@ function TrendingWsb() {
     setHandleThreadChange("Weekend");
   };
 
-  console.log("thread", handleThreadChange);
-
   const getButtonColor = theme.name === "dark" ? "#fff" : "#F8E4A5";
   //const testUrl = `https://www.reddit.com/r/wallstreetbets/comments.json?limit=1000`
 
   //all
-console.log("occur", occurences)
+
   useEffect(() => {
     const wsbDataArray = [];
     if (handleThreadChange === "All") {
       axios
         .get(`https://www.reddit.com/r/wallstreetbets/comments.json?limit=100`)
         .then((response) => {
-          console.log(response.data.data);
           const firstPostUtc = response.data.data.children[0].data.created_utc;
           const lastPostUtc =
             response.data.data.children.slice(-1)[0].data.created_utc;
           const minuteDifference = Math.floor(
             (firstPostUtc - lastPostUtc) / 60
           );
-          console.log("min diff", minuteDifference);
+
           setMinutes([minuteDifference]);
           const posts = response.data.data.children.map(
             (innerArray) => innerArray.data.body
           );
-          console.log("posts", posts);
+
           const allPosts = posts.join(" -!@- ");
           const upperCaseWords = allPosts.match(/(\b[A-Z][A-Z]+|\b[A-Z]\b)/g);
-          console.log(upperCaseWords);
 
           let potentialSymbols = [];
           let i;
@@ -94,7 +89,6 @@ console.log("occur", occurences)
               potentialSymbols.push(upperCaseWords[i]);
             }
           }
-          console.log(potentialSymbols);
 
           const symbolCounter = potentialSymbols.reduce((obj, e) => {
             obj[e] = (obj[e] || 0) + 1;
@@ -113,7 +107,7 @@ console.log("occur", occurences)
             .reverse();
 
           const limitSymbols = sortedSymbols.slice(0, 10);
-          // console.log("limit", limitSymbols);
+
           setOccurences(limitSymbols.flat());
           limitSymbols.map((symbol) =>
             axios
@@ -136,7 +130,6 @@ console.log("occur", occurences)
             : `https://www.reddit.com/r/wallstreetbets/comments/${process.env.REACT_APP_DD_KEY}/daily_discussion_thread_for_${monthNames[month]}_${day}_2021.json?limit=1000`
         )
         .then((response) => {
-          console.log(response.data);
           const getMostRecentUtc =
             response.data[1].data.children[1].data.created_utc;
 
@@ -169,7 +162,6 @@ console.log("occur", occurences)
               potentialSymbols.push(upperCaseWords[i]);
             }
           }
-          console.log("pot sym", potentialSymbols);
 
           const filteredSyms = potentialSymbols.filter(function (value) {
             if (
@@ -189,13 +181,11 @@ console.log("occur", occurences)
               return false;
             }
           });
-          console.log("filt", filteredSyms);
+
           const symbolCounter = filteredSyms.reduce((obj, e) => {
             obj[e] = (obj[e] || 0) + 1;
             return obj;
           }, {});
-
-          console.log(symbolCounter);
 
           let sortedSymbols = [];
           for (let occurence in symbolCounter) {
@@ -209,7 +199,7 @@ console.log("occur", occurences)
             .reverse();
 
           const limitSymbols = sortedSymbols.slice(0, 10);
-          console.log("limit", limitSymbols);
+
           setOccurences(limitSymbols.flat());
 
           limitSymbols.map((symbol) =>

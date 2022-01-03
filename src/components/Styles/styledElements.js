@@ -19,6 +19,7 @@ export const StyledSearchHeader = styled.i`
   color: ${(props) => props.theme.headerColor};
   font-size: 15px;
   margin-bottom: 2%;
+  margin-left: 2%;
 `;
 
 //full chain header
@@ -867,6 +868,7 @@ export const QuoteValueLeft = styled.div`
 export const MoreDataButtonContainer = styled.div`
   margin: 2%;
   margin-bottom: 4%;
+  display: inline-flex;
 `;
 
 export const IncStateContainer = styled.div`
@@ -980,6 +982,18 @@ export const StyledResearchIncStateYears = styled.div`
   margin-bottom: 2%;
   visibility: ${(props) =>
     props.dataSelection === "insider trades" ? "visible" : "hidden"};
+`;
+
+export const StyledResearchBalanceYears = styled.div`
+  flex: 0;
+  text-align: center;
+  align-items: flex-start;
+  display: inline-flex;
+  white-space: nowrap;
+  justify-content: center;
+  margin-bottom: 2%;
+  visibility: ${(props) =>
+    props.dataSelection === "balance sheet" ? "visible" : "hidden"};
 `;
 
 //Twitter&Stocktwits
