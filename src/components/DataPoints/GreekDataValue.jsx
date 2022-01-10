@@ -6,13 +6,13 @@ import {
 } from "../Styles/styledElements";
 import { callIndexUnfixed, putIndexUnfixed } from "../Globals/globalFunctions";
 
-const Rho = ({ option, mapType }) => {
-  const prop = "rho";
+const GreekDataValue = ({ option, mapType, objectValue, header }) => {
+  const prop = objectValue;
 
   try {
     return (
       <DataGreekContainer>
-        <DataGreekHeader>Rho</DataGreekHeader>
+        <DataGreekHeader>{header}</DataGreekHeader>
 
         <GreekDataComponent>
           {mapType === "call"
@@ -23,11 +23,11 @@ const Rho = ({ option, mapType }) => {
     );
   } catch (error) {
     <DataGreekContainer>
-      <DataGreekHeader>Rho</DataGreekHeader>
+      <DataGreekHeader>{header}</DataGreekHeader>
 
       <GreekDataComponent>N/A</GreekDataComponent>
     </DataGreekContainer>;
   }
 };
 
-export default Rho;
+export default GreekDataValue;

@@ -6,26 +6,26 @@ import {
 } from "../Styles/styledElements";
 import {callIndex, putIndex} from "../Globals/globalFunctions";
 
-const PremiumCollected = ({ option, mapType }) => {
-  var prop = "mark";
+const DataValueFixed = ({ option, mapType, objectValue, header, multiplyBy, dollarSign }) => {
+  var prop = objectValue;
   try {
     return (
       <DataContainer>
-        <DataHeader>Premium</DataHeader>
+        <DataHeader>{header}</DataHeader>
 
         <DataComponent>
-          ${mapType === "call" ? callIndex(option, prop, 2, 100) : putIndex(option, prop, 2, 100)}
+          {dollarSign}{mapType === "call" ? callIndex(option, prop, 2, multiplyBy) : putIndex(option, prop, 2, multiplyBy)}
         </DataComponent>
       </DataContainer>
     );
   } catch (error) {
     return (
       <DataContainer>
-        <DataHeader>Premium</DataHeader>
+        <DataHeader>{header}</DataHeader>
         <DataComponent>N/A</DataComponent>
       </DataContainer>
     );
   }
 };
 
-export default PremiumCollected;
+export default DataValueFixed;

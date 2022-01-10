@@ -3,18 +3,9 @@ import StrikeOneOtm from "./StrikeOneOtm";
 import PercentChange from "./PercentChange";
 import HundredShares from "./HundredShares";
 import CspCollateral from './CspCollateral';
-import BidPrice from "./BidPrice";
-import AskPrice from "./AskPrice";
-import PremiumCollected from "./PremiumCollected";
-import OpenInterest from "./OpenInterest";
-import Volume from "./Volume";
-import Volatility from "./Volatility";
-import Delta from "./Delta";
-import Theta from "./Theta";
-import Rho from "./Rho";
-import Gamma from "./Gamma";
-import Vega from "./Vega";
-import DaysToExpiration from "./DaysToExpiration";
+import DataValueFixed from "./DataValueFixed";
+import DataValueUnfixed from "./DataValueUnfixed";
+import GreekDataValue from "./GreekDataValue";
 
 const MapDataPoints = ({ option, mapType }) => {
   return (
@@ -24,34 +15,75 @@ const MapDataPoints = ({ option, mapType }) => {
       <PercentChange option={option} mapType={mapType} />
       <br></br>
       {mapType === 'call' ? 
-      <HundredShares option={option} mapType={mapType} />
+      <HundredShares option={option} />
       :
-     <CspCollateral option={option} mapType={mapType}/>
+     <CspCollateral option={option} />
       }
       <i>Greeks</i>
-      <BidPrice option={option} mapType={mapType} />
-      <></>
-      <Delta option={option} mapType={mapType} />
-      <AskPrice option={option} mapType={mapType} />
-      <></>
-      <Theta option={option} mapType={mapType} />
-      <PremiumCollected
+      <DataValueFixed
         option={option}
         mapType={mapType}
+        objectValue={"bid"}
+        header={"Bid"}
+        multiplyBy={1}
       />
       <></>
-      <Rho option={option} mapType={mapType} />
-      <Volume option={option} mapType={mapType} />
-      <></>
-      <Gamma option={option} mapType={mapType} />
-      <OpenInterest option={option} mapType={mapType} />
-      <></>
-      <Vega option={option} mapType={mapType} />
-
-      <Volatility option={option} mapType={mapType} />
-      <DaysToExpiration
+      <GreekDataValue option={option} mapType={mapType} objectValue={"delta"} header={"Delta"}/>
+      <DataValueFixed
         option={option}
         mapType={mapType}
+        objectValue={"ask"}
+        header={"Ask"}
+        multiplyBy={1}
+      />
+      <></>
+      <GreekDataValue option={option} mapType={mapType} objectValue={"theta"} header={"Theta"}/>
+      <DataValueFixed
+        option={option}
+        mapType={mapType}
+        objectValue={"mark"}
+        header={"Premium"}
+        multiplyBy={100}
+        dollarSign={"$"}
+      />
+      <></>
+      <GreekDataValue option={option} mapType={mapType} objectValue={"rho"} header={"Rho"}/>
+      <DataValueUnfixed
+        option={option}
+        mapType={mapType}
+        objectValue={"totalVolume"}
+        header={"Volume"}
+   
+    
+      />
+      <></>
+      <GreekDataValue option={option} mapType={mapType} objectValue={"gamma"} header={"Gamma"}/>
+      <DataValueUnfixed
+        option={option}
+        mapType={mapType}
+        objectValue={"openInterest"}
+        header={"Open Interest"}
+   
+    
+      />
+      <></>
+      <GreekDataValue option={option} mapType={mapType} objectValue={"vega"} header={"Vega"}/>
+
+      <DataValueUnfixed
+        option={option}
+        mapType={mapType}
+        objectValue={"volatility"}
+        header={"Implied Volatility"}
+   
+    
+      />
+      <DataValueUnfixed
+        option={option}
+        mapType={mapType}
+        objectValue={"daysToExpiration"}
+        header={"Days/Exp"}
+   
+    
       />
     </>
   );

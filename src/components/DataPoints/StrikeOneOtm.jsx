@@ -1,22 +1,15 @@
 import React from "react";
 import { StrikeHeader } from "../Styles/styledElements";
+import { callIndexUnfixed, putIndexUnfixed } from "../Globals/globalFunctions";
 
 const StrikeOneOtm = ({ option, mapType }) => {
-  const callIndex = Object.keys(option.callExpDateMap).map((entry) => {
-    return Object.keys(option.callExpDateMap[entry]).map(
-      (innerArrayID) =>
-        option.callExpDateMap[entry][innerArrayID][0].strikePrice
-    );
-  })[0][1];
-  const putIndex = Object.keys(option.putExpDateMap).map((entry) => {
-    return Object.keys(option.putExpDateMap[entry]).map(
-      (innerArrayID) => option.putExpDateMap[entry][innerArrayID][0].strikePrice
-    );
-  })[0][0];
+  const prop = "strikePrice";
   try {
     return (
       <StrikeHeader>
-        {mapType === "call" ? callIndex + " Call" : putIndex + " Put"}
+        {mapType === "call"
+          ? callIndexUnfixed(option, prop) + " Call"
+          : putIndexUnfixed(option, prop) + " Put"}
       </StrikeHeader>
     );
   } catch (error) {
