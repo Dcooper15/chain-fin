@@ -2,7 +2,9 @@ import React from "react";
 import {
   StyledCardHeader,
   StyledName,
-  StyledSymbolLink, StyledStockPrice, CardRow
+  StyledSymbolLink,
+  StyledStockPrice,
+  CardRow,
 } from "../Styles/styledElements";
 import { Button } from "@material-ui/core";
 import Name from "./Name";
@@ -16,24 +18,25 @@ const MapCardHeader = ({ option }) => {
     <>
       <StyledCardHeader>
         <CardRow>
-        <StyledSymbolLink to={`/chain/${option.symbol}`}>
-          <Symbol option={option} />
-        </StyledSymbolLink>
-        <StyledStockPrice>
-        <StockPrice option={option} />
-        </StyledStockPrice>
-        {/* <StyledPercentHeader> */}
-        <StockPercentChange option={option} />
-        {/* </StyledPercentHeader> */}
-        <Button
-          type="submit"
-          size="small"
-          style={{padding: '0'}}
-        >
-           <StyledSymbolLink to={`/chain/${option.symbol}`}>
-            <HiLink style={{fontSize: '14px', boxShadow: '0 3px 5px 2px rgba(212, 175, 55, .5)'}}/>
+          <StyledSymbolLink to={`/chain/${option.symbol}`}>
+            <Symbol option={option} />
+          </StyledSymbolLink>
+          <StyledStockPrice>
+            <StockPrice option={option} />
+          </StyledStockPrice>
+
+          <StockPercentChange option={option} />
+
+          <Button type="submit" size="small" style={{ padding: "0" }}>
+            <StyledSymbolLink to={`/chain/${option.symbol}`}>
+              <HiLink
+                style={{
+                  fontSize: "14px",
+                  boxShadow: "0 3px 5px 2px rgba(212, 175, 55, .5)",
+                }}
+              />
             </StyledSymbolLink>
-        </Button>
+          </Button>
         </CardRow>
         <StyledName>
           <Name namesRender={option.underlying.description} />

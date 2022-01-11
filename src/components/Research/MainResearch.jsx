@@ -88,44 +88,48 @@ const MainResearch = () => {
         </Button>
       </form>
       <ResearchChainData submittedText={submittedText} />
-      <MoreDataButtonContainer>
-       <Button
-          className={
-            dataSelection === "income statement"
-              ? classes.moreDataButtonDarkActive
-              : classes.moreDataButtonDark
-          }
-          variant="outlined"
-          size="small"
-          onClick={() => setDataSelection("income statement")}
-        >
-          Income Statement
-        </Button>
-        <Button
-          className={
-            dataSelection === "balance sheet"
-              ? classes.moreDataButtonDarkActive
-              : classes.moreDataButtonDark
-          }
-          variant="outlined"
-          size="small"
-          onClick={() => setDataSelection("balance sheet")}
-        >
-          Balance Sheet
-        </Button>
-        <Button
-          className={
-            dataSelection === "insider trades"
-              ? classes.moreDataButtonDarkActive
-              : classes.moreDataButtonDark
-          }
-          variant="outlined"
-          size="small"
-          onClick={() => setDataSelection("insider trades")}
-        >
-          Insider Trades
-        </Button>
-      </MoreDataButtonContainer>
+      {submittedText.length ? (
+        <MoreDataButtonContainer>
+          <Button
+            className={
+              dataSelection === "income statement"
+                ? classes.moreDataButtonDarkActive
+                : classes.moreDataButtonDark
+            }
+            variant="outlined"
+            size="small"
+            onClick={() => setDataSelection("income statement")}
+          >
+            Income Statement
+          </Button>
+          <Button
+            className={
+              dataSelection === "balance sheet"
+                ? classes.moreDataButtonDarkActive
+                : classes.moreDataButtonDark
+            }
+            variant="outlined"
+            size="small"
+            onClick={() => setDataSelection("balance sheet")}
+          >
+            Balance Sheet
+          </Button>
+          <Button
+            className={
+              dataSelection === "insider trades"
+                ? classes.moreDataButtonDarkActive
+                : classes.moreDataButtonDark
+            }
+            variant="outlined"
+            size="small"
+            onClick={() => setDataSelection("insider trades")}
+          >
+            Insider Trades
+          </Button>
+        </MoreDataButtonContainer>
+      ) : (
+        ""
+      )}
       <ResearchIncomeStatement
         submittedText={submittedText}
         dataSelection={dataSelection}
@@ -134,9 +138,9 @@ const MainResearch = () => {
         submittedText={submittedText}
         dataSelection={dataSelection}
       />
-      <BalanceSheet 
-      submittedText={submittedText}
-      dataSelection={dataSelection}
+      <BalanceSheet
+        submittedText={submittedText}
+        dataSelection={dataSelection}
       />
     </div>
   );

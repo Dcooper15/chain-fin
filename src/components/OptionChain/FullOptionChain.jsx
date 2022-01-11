@@ -86,6 +86,19 @@ function FullOptionChain() {
     setSliderPremium(premValue);
   };
 
+  const getCardColor =
+    theme.name === "dark"
+      ? {
+          backgroundColor: "#38372b",
+          borderColor: "#d4af37",
+          color: "#ffebcd",
+        }
+      : {
+          backgroundColor: "#f5f5f5",
+          borderColor: "#00afc9",
+          color: "#002933",
+        };
+
   useEffect(() => {
     axios
       .get(
@@ -309,19 +322,7 @@ function FullOptionChain() {
                   stock.map((option) => (
                     <Card
                       className={classes.card}
-                      style={
-                        theme.name === "dark"
-                          ? {
-                              backgroundColor: "#38372b",
-                              borderColor: "#d4af37",
-                              color: "#ffebcd",
-                            }
-                          : {
-                              backgroundColor: "#f5f5f5",
-                              borderColor: "#00afc9",
-                              color: "#002933",
-                            }
-                      }
+                      style={getCardColor}
                       variant="outlined"
                       hidden={
                         expDate === option.daysToExpiration &&
@@ -372,19 +373,7 @@ function FullOptionChain() {
                   stock.map((option) => (
                     <Card
                       className={classes.card}
-                      style={
-                        theme.name === "dark"
-                          ? {
-                              backgroundColor: "#38372b",
-                              borderColor: "#d4af37",
-                              color: "#ffebcd",
-                            }
-                          : {
-                              backgroundColor: "#f5f5f5",
-                              borderColor: "#00afc9",
-                              color: "#002933",
-                            }
-                      }
+                      style={getCardColor}
                       variant="outlined"
                       hidden={
                         expDate === option.daysToExpiration &&
@@ -433,10 +422,6 @@ function FullOptionChain() {
             strike={sliderStrike}
             premium={sliderPremium}
           />
-          {/* <MoreData
-            moreDataActive={moreDataActive}
-            setMoreDataInactive={buttonHandlerMoreDataInactive}
-          /> */}
         </>
       );
     } catch (error) {

@@ -3,19 +3,12 @@ import {
   OptionHeaderContainer,
   OptionCName,
   OptionCSub,
-  //StyledMoreDataButton,
 } from "../Styles/styledElements";
 import Name from "../DataPoints/Name";
 import StockPrice from "../DataPoints/StockPrice";
 import StockPercentChange from "../DataPoints/StockPercentChange";
-//import { GiArmoredBoomerang } from "react-icons/gi";
 
-const HeaderOptionChain = ({
-  nameRender,
-  chainPrice,
-  chainPercent,
-  //buttonHandlerMoreDataActive
-}) => {
+const HeaderOptionChain = ({ nameRender, chainPrice, chainPercent }) => {
   return (
     <OptionHeaderContainer>
       <OptionCName>
@@ -26,13 +19,6 @@ const HeaderOptionChain = ({
         <StockPrice chainPrice={chainPrice} type={"full"} />
       </OptionCSub>
       <StockPercentChange chainPercent={chainPercent} type={"full"} />
-      {/* <StyledMoreDataButton>
-        <GiArmoredBoomerang
-          onClick={() => {
-            buttonHandlerMoreDataActive();
-          }}
-        />
-      </StyledMoreDataButton> */}
     </OptionHeaderContainer>
   );
 };

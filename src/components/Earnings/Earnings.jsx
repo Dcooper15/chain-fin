@@ -1,21 +1,18 @@
-import React, {
-  useState,
-  useEffect,
-  // useContext
-} from "react";
-//import Moment from "react-moment";
-//import { ThemeContext } from "styled-components";
+import React, { useState, useEffect } from "react";
+
 import axios from "axios";
-//import { Card, Button } from "@material-ui/core";
-import { EarningsPageContainer, StyledEarningsHeader, StyledEarningsRowItem } from "../Styles/styledElements";
-//import { useStyles } from "../Styles/muiStyles";
+
+import {
+  EarningsPageContainer,
+  StyledEarningsHeader,
+  StyledEarningsRowItem,
+} from "../Styles/styledElements";
+
 import Card from "./Card";
 import { FixedSizeList } from "react-window";
 import { useCallback } from "react";
 
 const Earnings = () => {
-  // const classes = useStyles();
-  // const theme = useContext(ThemeContext);
   const [earningsData, setEarningsData] = useState([]);
 
   useEffect(() => {
@@ -24,41 +21,40 @@ const Earnings = () => {
         `https://${process.env.REACT_APP_HUB_URL}/api/v3/earning_calendar?apikey=${process.env.REACT_APP_FM_CLIENT_ID}`
       )
       .then((response) => {
-          console.log("earnings", response.data);
+        console.log("earnings", response.data);
         setEarningsData(response.data);
-
       });
   }, []);
 
-  const Row = useCallback(({ index, style }) => {
-    const { symbol, date, epsEstimated, time  } = earningsData[index] || {};
-    return (
-      <div style={style}>
-        <Card symbol={symbol} key={symbol} date={date} epsEstimated={epsEstimated} time={time} />
-      </div>
-    );
-  }, [earningsData]);
-
+  const Row = useCallback(
+    ({ index, style }) => {
+      const { symbol, date, epsEstimated, time } = earningsData[index] || {};
+      return (
+        <div style={style}>
+          <Card
+            symbol={symbol}
+            key={symbol}
+            date={date}
+            epsEstimated={epsEstimated}
+            time={time}
+          />
+        </div>
+      );
+    },
+    [earningsData]
+  );
 
   return (
     <EarningsPageContainer>
-    <StyledEarningsHeader>
-    <StyledEarningsRowItem>
-       Symbol 
-    </StyledEarningsRowItem>
-    <StyledEarningsRowItem>
-       Date
-    </StyledEarningsRowItem>
-    <StyledEarningsRowItem>
-       Time
-    </StyledEarningsRowItem>
-    <StyledEarningsRowItem>
-       Est. Eps 
-    </StyledEarningsRowItem>
-    </StyledEarningsHeader>
+      <StyledEarningsHeader>
+        <StyledEarningsRowItem>Symbol</StyledEarningsRowItem>
+        <StyledEarningsRowItem>Date</StyledEarningsRowItem>
+        <StyledEarningsRowItem>Time</StyledEarningsRowItem>
+        <StyledEarningsRowItem>Est. Eps</StyledEarningsRowItem>
+      </StyledEarningsHeader>
       <FixedSizeList
         height={400}
-        width={'100%'}
+        width={"100%"}
         itemSize={40}
         itemCount={earningsData.length}
       >

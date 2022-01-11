@@ -23,7 +23,7 @@ const MainSocialSentiment = () => {
               </ColumnLeft>
               <ColumnRight>
                 <StyledLink to="/social/twitterstocktwits">
-                  Twitter & Stocktwits
+                  Twitter&Stocktwits
                 </StyledLink>
               </ColumnRight>
             </MenuRow>
