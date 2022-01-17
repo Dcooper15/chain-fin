@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
 import { ThemeContext } from "styled-components";
+import { StyledChainError } from "../Styles/styledElements";
 import { useStyles } from "../Styles/muiStyles";
 import axios from "axios";
 import Moment from "react-moment";
@@ -27,15 +28,17 @@ const ResearchChainData = ({ submittedText }) => {
           borderColor: "#00afc9",
           color: "#002933",
         };
+  
   useEffect(() => {
     if (isMounted.current) {
+      setChainError([]);
       axios
         .get(
           `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${submittedText}&contractType=ALL&strikeCount=2&includeQuotes=TRUE&toDate=${process.env.REACT_APP_DATE}&range=OTM`
         )
         .then((response) => {
           response.data.status === "FAILED"
-            ? setChainError(["error"])
+            ? setChainError("error")
             : setChainData([response.data]);
         });
     } else {
@@ -46,7 +49,9 @@ const ResearchChainData = ({ submittedText }) => {
   return (
     <div>
       {chainError === "error" ? (
-        <i style={{ color: "#d4af37" }}>{chainError}</i>
+        <StyledChainError>
+          No option chain data for {submittedText}
+        </StyledChainError>
       ) : !!chainData.length ? (
         chainData.map((option) => (
           <Card

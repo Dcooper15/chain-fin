@@ -26,7 +26,7 @@ const InsiderTradesCard = ({
   const classes = useStyles();
   const theme = useContext(ThemeContext);
 
-  const getTradeCardStyle =
+  const getCardColors =
     theme.name === "dark"
       ? {
           backgroundColor: "#38372b",
@@ -34,7 +34,7 @@ const InsiderTradesCard = ({
           color: "#ffebcd",
         }
       : {
-          backgroundColor: "#c9c9c9",
+          backgroundColor: "#f5f0f0",
 
           color: "#002933",
         };
@@ -42,7 +42,7 @@ const InsiderTradesCard = ({
   return (
     <Card
       className={classes.quoteCard}
-      style={getTradeCardStyle}
+      style={getCardColors}
       variant="outlined"
       raised={true}
     >

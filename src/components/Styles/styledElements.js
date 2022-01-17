@@ -892,6 +892,7 @@ export const IncStateContainer = styled.div`
 `;
 
 export const StyledIncStateYears = styled.div`
+  color: ${(props) => props.theme.headerColor};
   flex: 0;
   text-align: center;
   display: inline-flex;
@@ -994,6 +995,14 @@ export const StyledResearchBalanceYears = styled.div`
   margin-bottom: 2%;
   visibility: ${(props) =>
     props.dataSelection === "balance sheet" ? "visible" : "hidden"};
+`;
+
+export const StyledChainError = styled.i`
+  color: ${(props) => props.theme.accentColor};
+  margin-top: 3%;
+  margin-left: 2%;
+  margin-bottom: 3%;
+  padding-top: 5%;
 `;
 
 //Twitter&Stocktwits

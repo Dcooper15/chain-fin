@@ -161,10 +161,10 @@ export const useStyles = makeStyles({
   },
   valueLabel: {
     "& > span": {
-      color: "#4169e1",
+      //color: "#342F01",
       fontSize: "16px",
-      backgroundColor: "#adadad",
-      paddingTop: "6px",
+      backgroundColor: "#146175",
+      padding: "6px",
     },
   },
 
@@ -184,7 +184,7 @@ export const useStyles = makeStyles({
     },
   },
   twitterStwitsSelectInactive: {
-    width: "190px",
+    width: "215px",
     paddingTop: "0px",
     "& .MuiSvgIcon-root": {
       color: "#d4af37",
@@ -262,6 +262,24 @@ export const useStyles = makeStyles({
     margin: "1%",
     size: "small",
     border: "1px solid #d4af37",
+    borderRadius: 7
+  },
+
+  moreDataButtonLight: {
+    //background: "linear-gradient(45deg, #d4af37 30%, #EEBC1D 90%)",
+    color: "#146175",
+    margin: "1%",
+    size: "small",
+    border: "1px solid #146175",
+    borderRadius: 7
+  },
+  moreDataButtonLightActive: {
+    background: "linear-gradient(45deg, #00afc9 5%, #002f36 99%)",
+    color: "#F8E4A5",
+    margin: "1%",
+    size: "small",
+    // border: "1px solid #00afc9",
+    boxShadow: "0 3px 5px 2px rgba(0, 47, 54, .8)",
     borderRadius: 7
   },
 

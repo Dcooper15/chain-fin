@@ -57,9 +57,18 @@ function TrendingWsb() {
   };
 
   const getButtonColor = theme.name === "dark" ? "#fff" : "#F8E4A5";
-  //const testUrl = `https://www.reddit.com/r/wallstreetbets/comments.json?limit=1000`
-
-  //all
+  const getCardColors =
+    theme.name === "dark"
+      ? {
+          backgroundColor: "#38372b",
+          borderColor: "#d4af37",
+          color: "#ffebcd",
+        }
+      : {
+          backgroundColor: "#f5f0f0",
+          borderColor: "#00afc9",
+          color: "#002933",
+        };
 
   useEffect(() => {
     const wsbDataArray = [];
@@ -323,18 +332,7 @@ function TrendingWsb() {
             <Card
               className={classes.card}
               style={
-                theme.name === "dark"
-                  ? {
-                      backgroundColor: "#38372b",
-                      // #3D3D3D
-                      borderColor: "#d4af37",
-                      color: "#ffebcd",
-                    }
-                  : {
-                      backgroundColor: "#f5f5f5",
-                      borderColor: "#00afc9",
-                      color: "#002933",
-                    }
+                getCardColors
               }
               variant="outlined"
               hidden={handleTypeChange === true}
@@ -376,17 +374,7 @@ function TrendingWsb() {
               <Card
                 className={classes.card}
                 style={
-                  theme.name === "dark"
-                    ? {
-                        backgroundColor: "#38372b",
-                        borderColor: "#d4af37",
-                        color: "#ffebcd",
-                      }
-                    : {
-                        backgroundColor: "#f5f5f5",
-                        borderColor: "#00afc9",
-                        color: "#002933",
-                      }
+                 getCardColors
                 }
                 variant="outlined"
                 hidden={handleTypeChange === false}

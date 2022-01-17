@@ -17,6 +17,9 @@ const MainResearch = () => {
   const [text, setText] = useState("");
   const [submittedText, setSubmittedText] = useState([]);
   const [dataSelection, setDataSelection] = useState([]);
+  const [emptyBalanceSheet, setEmptyBalanceSheet] = useState([]);
+  const [emptyIncomeStatement, setEmptyIncomeStatement] = useState([]);
+  const [emptyInsiderTrades, setEmptyInsiderTrades] = useState([]);
 
   const handleTextChange = (e) => {
     setText(e.target.value);
@@ -31,7 +34,7 @@ const MainResearch = () => {
     }
   };
 
-  const getButtonStyle =
+  const getSubmitButtonStyle =
     theme.name === "dark"
       ? {
           backgroundColor: "#3D3D3D",
@@ -41,10 +44,22 @@ const MainResearch = () => {
         }
       : {
           backgroundColor: "#ebebeb",
-          borderColor: "#00afc9",
+          borderColor: "#146175",
           color: "#146175",
           marginLeft: "1%",
         };
+
+  const getStatementButtonClass = (theme, selection, dataSelection) => {
+    if (dataSelection === selection && theme === "dark") {
+      return classes.moreDataButtonDarkActive;
+    } else if (dataSelection === selection && theme === "light") {
+      return classes.moreDataButtonLightActive;
+    } else if (dataSelection !== selection && theme === "dark") {
+      return classes.moreDataButtonDark;
+    } else if (dataSelection !== selection && theme === "light") {
+      return classes.moreDataButtonLight;
+    }
+  };
 
   return (
     <div>
@@ -68,7 +83,7 @@ const MainResearch = () => {
           }}
           InputProps={{
             style: {
-              color: "#d4af37",
+              color: theme.name === "dark" ? "#d4af37" : "#146175",
               fontStyle: "normal",
             },
           }}
@@ -82,7 +97,7 @@ const MainResearch = () => {
           variant="outlined"
           value="Search"
           size="small"
-          style={getButtonStyle}
+          style={getSubmitButtonStyle}
         >
           Search
         </Button>
@@ -90,42 +105,65 @@ const MainResearch = () => {
       <ResearchChainData submittedText={submittedText} />
       {submittedText.length ? (
         <MoreDataButtonContainer>
-          <Button
-            className={
-              dataSelection === "income statement"
-                ? classes.moreDataButtonDarkActive
-                : classes.moreDataButtonDark
-            }
-            variant="outlined"
-            size="small"
-            onClick={() => setDataSelection("income statement")}
-          >
-            Income Statement
-          </Button>
-          <Button
-            className={
-              dataSelection === "balance sheet"
-                ? classes.moreDataButtonDarkActive
-                : classes.moreDataButtonDark
-            }
-            variant="outlined"
-            size="small"
-            onClick={() => setDataSelection("balance sheet")}
-          >
-            Balance Sheet
-          </Button>
-          <Button
-            className={
-              dataSelection === "insider trades"
-                ? classes.moreDataButtonDarkActive
-                : classes.moreDataButtonDark
-            }
-            variant="outlined"
-            size="small"
-            onClick={() => setDataSelection("insider trades")}
-          >
-            Insider Trades
-          </Button>
+          {/* if income statement data empty, hide button */}
+          {emptyIncomeStatement === true ? (
+            ""
+          ) : (
+            <Button
+              className={
+                getStatementButtonClass(
+                  theme.name,
+                  "income statement",
+                  dataSelection
+                )
+              }
+              variant="outlined"
+              size="small"
+              onClick={() => setDataSelection("income statement")}
+            >
+              Income Statement
+            </Button>
+          )}
+          {/* if balance sheet data empty, hide button */}
+          {emptyBalanceSheet === true ? (
+            ""
+          ) : (
+            <Button
+              className={
+                getStatementButtonClass(
+                  theme.name,
+                  "balance sheet",
+                  dataSelection
+                )
+                
+              }
+             
+              variant="outlined"
+              size="small"
+              onClick={() => setDataSelection("balance sheet")}
+            >
+              Balance Sheet
+            </Button>
+          )}
+          {/* if insider trades data empty, hide button */}
+          {emptyInsiderTrades === true ? (
+            ""
+          ) : (
+            <Button
+              className={
+                getStatementButtonClass(
+                  theme.name,
+                  "insider trades",
+                  dataSelection
+                )
+              }
+              variant="outlined"
+              size="small"
+              onClick={() => setDataSelection("insider trades")}
+            >
+              Insider Trades
+            </Button>
+          )}
         </MoreDataButtonContainer>
       ) : (
         ""
@@ -133,14 +171,17 @@ const MainResearch = () => {
       <ResearchIncomeStatement
         submittedText={submittedText}
         dataSelection={dataSelection}
+        isEmptyIncomeStatement={setEmptyIncomeStatement}
       />
       <ResearchInsiderTrades
         submittedText={submittedText}
         dataSelection={dataSelection}
+        isEmptyInsiderTrades={setEmptyInsiderTrades}
       />
       <BalanceSheet
         submittedText={submittedText}
         dataSelection={dataSelection}
+        isEmptyBalanceSheet={setEmptyBalanceSheet}
       />
     </div>
   );

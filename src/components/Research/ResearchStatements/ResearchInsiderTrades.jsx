@@ -16,7 +16,8 @@ import { FixedSizeList } from "react-window";
 
 //const addCommas = /\B(?=(\d{3})+(?!\d))/g;
 
-const InsiderTrading = ({ submittedText, dataSelection }) => {
+const InsiderTrading = ({ submittedText, dataSelection,
+isEmptyInsiderTrades }) => {
   const classes = useStyles();
   const theme = useContext(ThemeContext);
   const isMounted = useRef(false);
@@ -31,6 +32,11 @@ const InsiderTrading = ({ submittedText, dataSelection }) => {
           `https://${process.env.REACT_APP_HUB_URL}/api/v4/insider-trading?symbol=${submittedText}&limit=250&apikey=${process.env.REACT_APP_FM_CLIENT_ID}`
         )
         .then((response) => {
+          if (!response.data.length) {
+            isEmptyInsiderTrades(true);
+          } else {
+            isEmptyInsiderTrades(false);
+          }
           const returnYears = response.data.map((years) =>
             years.transactionDate.slice(0, 4)
           );
@@ -42,7 +48,7 @@ const InsiderTrading = ({ submittedText, dataSelection }) => {
     } else {
       isMounted.current = true;
     }
-  }, [submittedText]);
+  }, [submittedText, isEmptyInsiderTrades]);
 
   const Row = useCallback(
     ({ index, style }) => {
@@ -103,6 +109,7 @@ const InsiderTrading = ({ submittedText, dataSelection }) => {
                           : "white"
                         : "none",
                     marginBottom: "0",
+                    color: theme.name === "dark" ? "#d4af37" : "#146175",
                   }}
                 >
                   {year}

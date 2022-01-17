@@ -55,8 +55,6 @@ const Twit = () => {
     setHandleTypeChange(false);
   };
 
-  const getButtonColor = theme.name === "dark" ? "#fff" : "#F8E4A5";
-
   let selectedOptionData = useMemo(() => [], []);
   switch (selectedData) {
     case 1:
@@ -133,6 +131,20 @@ const Twit = () => {
       );
     }
   };
+
+  const getButtonColor = theme.name === "dark" ? "#fff" : "#F8E4A5";
+  const getCardColors =
+    theme.name === "dark"
+      ? {
+          backgroundColor: "#38372b",
+          borderColor: "#d4af37",
+          color: "#ffebcd",
+        }
+      : {
+          backgroundColor: "#f5f0f0",
+          borderColor: "#00afc9",
+          color: "#002933",
+        };
 
   useEffect(() => {
     axios
@@ -218,7 +230,7 @@ const Twit = () => {
             <strong
               style={{ color: theme.name === "dark" ? "#d4af37" : "#146175" }}
             >
-              Sort Options By Most
+              Search Options By Most
             </strong>
           </InputLabel>
 
@@ -257,58 +269,51 @@ const Twit = () => {
           </Select>
         </FormControl>
       </TwitterStwitsFilterContainer>
-
-      <Button
-        className={
-          theme.name === "dark"
-            ? handleTypeChange === false
-              ? classes.buttonDark
-              : classes.buttonDarkUns
-            : handleTypeChange === false
-            ? classes.buttonLight
-            : classes.buttonLightUns
-        }
-        type="submit"
-        size="small"
-        onClick={buttonHandlerCall}
-        style={{ marginLeft: "3%" }}
-      >
-        <strong style={{ color: getButtonColor }}>Call</strong>
-      </Button>
-      <Button
-        className={
-          theme.name === "dark"
-            ? handleTypeChange === true
-              ? classes.buttonDark
-              : classes.buttonDarkUns
-            : handleTypeChange === true
-            ? classes.buttonLight
-            : classes.buttonLightUns
-        }
-        type="submit"
-        size="small"
-        onClick={buttonHandlerPut}
-      >
-        <strong style={{ color: getButtonColor }}>Put</strong>
-      </Button>
+      {sentimentData.length ? (
+        <>
+          <Button
+            className={
+              theme.name === "dark"
+                ? handleTypeChange === false
+                  ? classes.buttonDark
+                  : classes.buttonDarkUns
+                : handleTypeChange === false
+                ? classes.buttonLight
+                : classes.buttonLightUns
+            }
+            type="submit"
+            size="small"
+            onClick={buttonHandlerCall}
+            style={{ marginLeft: "3%" }}
+          >
+            <strong style={{ color: getButtonColor }}>Call</strong>
+          </Button>
+          <Button
+            className={
+              theme.name === "dark"
+                ? handleTypeChange === true
+                  ? classes.buttonDark
+                  : classes.buttonDarkUns
+                : handleTypeChange === true
+                ? classes.buttonLight
+                : classes.buttonLightUns
+            }
+            type="submit"
+            size="small"
+            onClick={buttonHandlerPut}
+          >
+            <strong style={{ color: getButtonColor }}>Put</strong>
+          </Button>
+        </>
+      ) : (
+        ""
+      )}
       {!!sentimentData.length
         ? sentimentData.map((stock) =>
             stock.map((option) => (
               <Card
                 className={classes.card}
-                style={
-                  theme.name === "dark"
-                    ? {
-                        backgroundColor: "#38372b",
-                        borderColor: "#d4af37",
-                        color: "#ffebcd",
-                      }
-                    : {
-                        backgroundColor: "#f5f5f5",
-                        borderColor: "#00afc9",
-                        color: "#002933",
-                      }
-                }
+                style={getCardColors}
                 variant="outlined"
                 hidden={handleTypeChange === true}
                 raised={true}
@@ -348,19 +353,7 @@ const Twit = () => {
             stock.map((option) => (
               <Card
                 className={classes.card}
-                style={
-                  theme.name === "dark"
-                    ? {
-                        backgroundColor: "#38372b",
-                        borderColor: "#d4af37",
-                        color: "#ffebcd",
-                      }
-                    : {
-                        backgroundColor: "#f5f5f5",
-                        borderColor: "#00afc9",
-                        color: "#002933",
-                      }
-                }
+                style={getCardColors}
                 variant="outlined"
                 hidden={handleTypeChange === false}
                 raised={true}

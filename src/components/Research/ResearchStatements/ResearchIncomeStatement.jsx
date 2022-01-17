@@ -14,7 +14,8 @@ const addCommas = /\B(?=(\d{3})+(?!\d))/g;
 
 const ResearchIncomeStatement = ({
   submittedText,
-  dataSelection
+  dataSelection,
+  isEmptyIncomeStatement,
 }) => {
   const classes = useStyles();
   const theme = useContext(ThemeContext);
@@ -23,24 +24,41 @@ const ResearchIncomeStatement = ({
   const [incStatementData, setIncStatementData] = useState([]);
   const [incStatementYears, setIncStatementYears] = useState([]);
 
-
   useEffect(() => {
     if (isMounted.current) {
-        axios
+      axios
         .get(
           `https://${process.env.REACT_APP_HUB_URL}/api/v3/income-statement/${submittedText}?limit=10&apikey=${process.env.REACT_APP_FM_CLIENT_ID}`
         )
         .then((response) => {
+          if (!response.data.length) {
+            isEmptyIncomeStatement(true);
+          } else {
+            isEmptyIncomeStatement(false);
+          }
           setIncStatementData(response.data);
-          setIncStatementYears(response.data.map((years) => years.calendarYear));
+          setIncStatementYears(
+            response.data.map((years) => years.calendarYear)
+          );
           setIncYear([]);
         });
     } else {
       isMounted.current = true;
     }
-  }, [submittedText]);
+  }, [submittedText, isEmptyIncomeStatement]);
 
+  const getCardColors =
+    theme.name === "dark"
+      ? {
+          backgroundColor: "#38372b",
 
+          color: "#ffebcd",
+        }
+      : {
+          backgroundColor: "#f5f0f0",
+
+          color: "#002933",
+        };
 
   try {
     return (
@@ -62,6 +80,7 @@ const ResearchIncomeStatement = ({
                           : "white"
                         : "none",
                     marginBottom: "0",
+                    color: theme.name === "dark" ? "#d4af37" : "#146175",
                   }}
                 >
                   {year}
@@ -73,19 +92,7 @@ const ResearchIncomeStatement = ({
           ? incStatementData.map((statement) => (
               <Card
                 className={classes.quoteCard}
-                style={
-                  theme.name === "dark"
-                    ? {
-                        backgroundColor: "#38372b",
-
-                        color: "#ffebcd",
-                      }
-                    : {
-                        backgroundColor: "#c9c9c9",
-
-                        color: "#002933",
-                      }
-                }
+                style={getCardColors}
                 variant="outlined"
                 hidden={
                   incYear !== statement.calendarYear ||

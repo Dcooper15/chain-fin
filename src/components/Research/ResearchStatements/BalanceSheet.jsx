@@ -13,7 +13,11 @@ import { useStyles } from "../../Styles/muiStyles";
 
 const addCommas = /\B(?=(\d{3})+(?!\d))/g;
 
-const BalanceSheet = ({ submittedText, dataSelection }) => {
+const BalanceSheet = ({
+  submittedText,
+  dataSelection,
+  isEmptyBalanceSheet,
+}) => {
   const classes = useStyles();
   const theme = useContext(ThemeContext);
   const isMounted = useRef(false);
@@ -28,6 +32,7 @@ const BalanceSheet = ({ submittedText, dataSelection }) => {
       return "$" + value.toString().replace(addCommas, ",");
     }
   };
+
   useEffect(() => {
     if (isMounted.current) {
       axios
@@ -35,19 +40,36 @@ const BalanceSheet = ({ submittedText, dataSelection }) => {
           `https://${process.env.REACT_APP_HUB_URL}/api/v3/balance-sheet-statement/${submittedText}?limit=10&apikey=${process.env.REACT_APP_FM_CLIENT_ID}`
         )
         .then((response) => {
+          if (!response.data.length) {
+            isEmptyBalanceSheet(true);
+          } else {
+            isEmptyBalanceSheet(false);
+          }
           setBalanceSheetData(response.data);
-
           setBalanceSheetYears(
             response.data.map((years) => years.calendarYear)
           );
+
           setBalYear([]);
         });
     } else {
       isMounted.current = true;
     }
-  }, [submittedText]);
+  }, [submittedText, isEmptyBalanceSheet]);
 
-  //   try {
+  const getCardColors =
+    theme.name === "dark"
+      ? {
+          backgroundColor: "#38372b",
+
+          color: "#ffebcd",
+        }
+      : {
+          backgroundColor: "#f5f0f0",
+
+          color: "#002933",
+        };
+
   return (
     <>
       {!!balanceSheetYears.length && dataSelection === "balance sheet"
@@ -67,6 +89,7 @@ const BalanceSheet = ({ submittedText, dataSelection }) => {
                         : "white"
                       : "none",
                   marginBottom: "0",
+                  color: theme.name === "dark" ? "#d4af37" : "#146175",
                 }}
               >
                 {year}
@@ -78,19 +101,7 @@ const BalanceSheet = ({ submittedText, dataSelection }) => {
         ? balanceSheetData.map((statement) => (
             <Card
               className={classes.quoteCard}
-              style={
-                theme.name === "dark"
-                  ? {
-                      backgroundColor: "#38372b",
-
-                      color: "#ffebcd",
-                    }
-                  : {
-                      backgroundColor: "#c9c9c9",
-
-                      color: "#002933",
-                    }
-              }
+              style={getCardColors}
               variant="outlined"
               hidden={
                 balYear !== statement.calendarYear ||

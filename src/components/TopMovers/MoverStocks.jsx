@@ -54,6 +54,18 @@ function MoverStocks() {
       header = `No data to display for ${market}.`;
   }
   const getButtonColor = theme.name === "dark" ? "#fff" : "#F8E4A5";
+  const getCardColors =
+    theme.name === "dark"
+      ? {
+          backgroundColor: "#38372b",
+          borderColor: "#d4af37",
+          color: "#ffebcd",
+        }
+      : {
+          backgroundColor: "#f5f0f0",
+          borderColor: "#00afc9",
+          color: "#002933",
+        };
   useEffect(() => {
     const marketDataArray = [];
     if (market === "general") {
@@ -228,17 +240,7 @@ function MoverStocks() {
             <Card
               className={classes.card}
               style={
-                theme.name === "dark"
-                  ? {
-                      backgroundColor: "#38372b",
-                      borderColor: "#d4af37",
-                      color: "#ffebcd",
-                    }
-                  : {
-                      backgroundColor: "#f5f5f5",
-                      borderColor: "#00afc9",
-                      color: "#002933",
-                    }
+                getCardColors
               }
               variant="outlined"
               hidden={handleTypeChange === true}
@@ -278,17 +280,7 @@ function MoverStocks() {
               <Card
                 className={classes.card}
                 style={
-                  theme.name === "dark"
-                    ? {
-                        backgroundColor: "#38372b",
-                        borderColor: "#d4af37",
-                        color: "#ffebcd",
-                      }
-                    : {
-                        backgroundColor: "#f5f5f5",
-                        borderColor: "#00afc9",
-                        color: "#002933",
-                      }
+                 getCardColors
                 }
                 variant="outlined"
                 hidden={handleTypeChange === false}

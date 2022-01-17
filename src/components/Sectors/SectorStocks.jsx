@@ -86,7 +86,18 @@ function SectorStocks() {
   };
 
   const getButtonColor = theme.name === "dark" ? "#fff" : "#F8E4A5";
-
+  const getCardColors =
+    theme.name === "dark"
+      ? {
+          backgroundColor: "#38372b",
+          borderColor: "#d4af37",
+          color: "#ffebcd",
+        }
+      : {
+          backgroundColor: "#f5f0f0",
+          borderColor: "#00afc9",
+          color: "#002933",
+        };
   useEffect(() => {
     const chainData = [];
     symbolArray.map((symbol) =>
@@ -150,19 +161,7 @@ function SectorStocks() {
             stock.map((option) => (
               <Card
                 className={classes.card}
-                style={
-                  theme.name === "dark"
-                    ? {
-                        backgroundColor: "#38372b",
-                        borderColor: "#d4af37",
-                        color: "#ffebcd",
-                      }
-                    : {
-                        backgroundColor: "#f5f5f5",
-                        borderColor: "#00afc9",
-                        color: "#002933",
-                      }
-                }
+                style={getCardColors}
                 variant="outlined"
                 hidden={handleTypeChange === true}
                 raised={true}
@@ -196,19 +195,7 @@ function SectorStocks() {
             stock.map((option) => (
               <Card
                 className={classes.card}
-                style={
-                  theme.name === "dark"
-                    ? {
-                        backgroundColor: "#38372b",
-                        borderColor: "#d4af37",
-                        color: "#ffebcd",
-                      }
-                    : {
-                        backgroundColor: "#f5f5f5",
-                        borderColor: "#00afc9",
-                        color: "#002933",
-                      }
-                }
+                style={getCardColors}
                 variant="outlined"
                 hidden={handleTypeChange === false}
                 raised={true}

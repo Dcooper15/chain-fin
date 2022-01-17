@@ -73,12 +73,7 @@ function FullOptionChain() {
   const buttonHandlerInactive = () => {
     setSliderActive(false);
   };
-  // const buttonHandlerMoreDataActive = () => {
-  //   setMoreDataActive(moreDataActive === false ? true : false);
-  // };
-  // const buttonHandlerMoreDataInactive = () => {
-  //   setMoreDataActive(false);
-  // };
+ 
   const sliderStrikeHandler = (value) => {
     setSliderStrike(value);
   };
@@ -86,7 +81,7 @@ function FullOptionChain() {
     setSliderPremium(premValue);
   };
 
-  const getCardColor =
+  const getCardColors =
     theme.name === "dark"
       ? {
           backgroundColor: "#38372b",
@@ -94,7 +89,7 @@ function FullOptionChain() {
           color: "#ffebcd",
         }
       : {
-          backgroundColor: "#f5f5f5",
+          backgroundColor: "#f5f0f0",
           borderColor: "#00afc9",
           color: "#002933",
         };
@@ -322,7 +317,7 @@ function FullOptionChain() {
                   stock.map((option) => (
                     <Card
                       className={classes.card}
-                      style={getCardColor}
+                      style={getCardColors}
                       variant="outlined"
                       hidden={
                         expDate === option.daysToExpiration &&
@@ -373,7 +368,7 @@ function FullOptionChain() {
                   stock.map((option) => (
                     <Card
                       className={classes.card}
-                      style={getCardColor}
+                      style={getCardColors}
                       variant="outlined"
                       hidden={
                         expDate === option.daysToExpiration &&
