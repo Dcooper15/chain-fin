@@ -53,10 +53,22 @@ export const OptionCSub = styled.strong`
 export const StyledNavbar = styled.div`
   color: ${(props) => props.theme.accentColor};
   justify-content: left;
-  display: inline-flex;
+  display: flex;
   flex-flow: row wrap;
   align-items: baseline;
+  width: 100%;
 `;
+export const LogoPlaceholder = styled.div`
+color: ${(props) => props.theme.accentColor};
+font-family: Brush Script MT;
+font-size: 24px;
+//display: flex;
+justify-content: right;
+align-content: flex-end;
+
+margin-right: 2%;
+margin-left: auto;
+`
 //Sectors Page
 export const SectorContainer = styled.div`
   justify-content: center;
@@ -198,7 +210,7 @@ export const HomeMenuItemContainer = styled.div`
   flex-direction: column;
   color: #ffdbd6;
   border-radius: 15px;
-  margin: 4% 2%;
+  margin: 4% 2%;  
   font-size: 30px;
   padding: 20px;
   flex-grow: 1;
@@ -207,8 +219,8 @@ export const HomeMenuItemContainer = styled.div`
   height: 100px;
   background: ${(props) => props.theme.menuItemBackground};
   box-shadow: ${(props) => props.theme.boxShadowColor};
-  @media (max-width: 500px) {
-    width: 120px;
+  @media (max-width: 600px) {
+    width: 130px;
     height: 65px;
     font-size: 22px;
   }
@@ -229,8 +241,8 @@ export const HomeMenuItemContainerDisabled = styled.div`
   height: 100px;
   background: ${(props) => props.theme.menuItemBackground};
   box-shadow: ${(props) => props.theme.boxShadowColor};
-  @media (max-width: 500px) {
-    width: 120px;
+  @media (max-width: 600px) {
+    width: 130px;
     height: 65px;
     font-size: 22px;
   }
@@ -1081,3 +1093,4 @@ export const ImpressionsContainer = styled.div`
     font-size: 14px;
   }
 `;
+
