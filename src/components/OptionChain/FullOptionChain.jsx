@@ -73,7 +73,7 @@ function FullOptionChain() {
   const buttonHandlerInactive = () => {
     setSliderActive(false);
   };
- 
+
   const sliderStrikeHandler = (value) => {
     setSliderStrike(value);
   };
@@ -95,74 +95,76 @@ function FullOptionChain() {
         };
 
   useEffect(() => {
-    axios
-      .get(
-        `https://${process.env.REACT_APP_HUB_URL}/api/v3/quote/${symbol}?apikey=${process.env.REACT_APP_FM_CLIENT_ID}`
-      )
-      .then((response) => {
-        setQuoteData(response.data);
-        setName(response.data[0].name);
-        const stockPrice =
-          response.data[0].price == null
-            ? "N/A"
-            : response.data[0].price.toFixed(2);
+    try {
+      axios
+        .get(
+          `https://${process.env.REACT_APP_HUB_URL}/api/v3/quote/${symbol}?apikey=${process.env.REACT_APP_FM_CLIENT_ID}`
+        )
+        .then((response) => {
+          setQuoteData(response.data);
+          setName(response.data[0].name);
+          const stockPrice =
+            response.data[0].price == null
+              ? "N/A"
+              : response.data[0].price.toFixed(2);
 
-        setChainPrice(stockPrice);
-        const percentChange =
-          response.data[0].change == null
-            ? "N/A"
-            : response.data[0].change.toFixed(2);
-        setChainPercent(percentChange);
-        axios
-          .get(
-            `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&strikeCount=${strikeCount}&includeQuotes=TRUE&fromDate=2021-09-03&toDate=2023-01-30`
-          )
-          .then((response) => {
-            setError(response.data.status === "FAILED" ? "error" : "");
-            const getDaysToExp = Object.keys(response.data.callExpDateMap)
-              .map((entry) => {
-                return Object.keys(response.data.callExpDateMap[entry]).map(
-                  (innerArrayID) =>
-                    response.data.callExpDateMap[entry][innerArrayID]
-                );
-              })
-              .flat()
-              .flat();
-            const returnDays = getDaysToExp.map(
-              (days) => days.daysToExpiration
-            );
-            const uniqueDays = [...new Set(returnDays)];
-            setExpDays(uniqueDays);
-            setExpDate(uniqueDays[0]);
-            //const stockPrice = response.data.underlyingPrice.toFixed(2);
-            // const percentChange =
-            //   response.data.status === "FAILED"
-            //     ? ""
-            //     : response.data.underlying.markPercentChange.toFixed(2);
-            //setChainPrice([stockPrice]);
-            //setChainPercent([percentChange]);
+          setChainPrice(stockPrice);
+          const percentChange =
+            response.data[0].change == null
+              ? "N/A"
+              : response.data[0].change.toFixed(2);
+          setChainPercent(percentChange);
+          axios
+            .get(
+              `https://api.tdameritrade.com/v1/marketdata/chains?apikey=${process.env.REACT_APP_GITHUB_CLIENT_ID}&symbol=${symbol}&strikeCount=${strikeCount}&includeQuotes=TRUE&fromDate=2021-09-03&toDate=2023-01-30`
+            )
+            .then((response) => {
+              setError(response.data.status === "FAILED" ? "error" : "");
+              const getDaysToExp = Object.keys(response.data.callExpDateMap)
+                .map((entry) => {
+                  return Object.keys(response.data.callExpDateMap[entry]).map(
+                    (innerArrayID) =>
+                      response.data.callExpDateMap[entry][innerArrayID]
+                  );
+                })
+                .flat()
+                .flat();
+              const returnDays = getDaysToExp.map(
+                (days) => days.daysToExpiration
+              );
+              const uniqueDays = [...new Set(returnDays)];
+              setExpDays(uniqueDays);
+              setExpDate(uniqueDays[0]);
+              //const stockPrice = response.data.underlyingPrice.toFixed(2);
+              // const percentChange =
+              //   response.data.status === "FAILED"
+              //     ? ""
+              //     : response.data.underlying.markPercentChange.toFixed(2);
+              //setChainPrice([stockPrice]);
+              //setChainPercent([percentChange]);
 
-            const callKeys = Object.keys(response.data.callExpDateMap)
-              .map((entry) => {
-                return Object.keys(response.data.callExpDateMap[entry]).map(
-                  (innerArrayID) =>
-                    response.data.callExpDateMap[entry][innerArrayID]
-                );
-              })
-              .flat();
-            const putKeys = Object.keys(response.data.putExpDateMap)
-              .map((entry) => {
-                return Object.keys(response.data.putExpDateMap[entry]).map(
-                  (innerArrayID) =>
-                    response.data.putExpDateMap[entry][innerArrayID]
-                );
-              })
-              .flat();
+              const callKeys = Object.keys(response.data.callExpDateMap)
+                .map((entry) => {
+                  return Object.keys(response.data.callExpDateMap[entry]).map(
+                    (innerArrayID) =>
+                      response.data.callExpDateMap[entry][innerArrayID]
+                  );
+                })
+                .flat();
+              const putKeys = Object.keys(response.data.putExpDateMap)
+                .map((entry) => {
+                  return Object.keys(response.data.putExpDateMap[entry]).map(
+                    (innerArrayID) =>
+                      response.data.putExpDateMap[entry][innerArrayID]
+                  );
+                })
+                .flat();
 
-            setCallData(callKeys);
-            setPutData(putKeys);
-          });
-      });
+              setCallData(callKeys);
+              setPutData(putKeys);
+            });
+        });
+    } catch (err) {}
   }, [symbol, strikeCount]);
   if (error === "error") {
     return (
@@ -172,7 +174,6 @@ function FullOptionChain() {
             nameRender={nameRender}
             chainPrice={chainPrice}
             chainPercent={chainPercent}
-            //buttonHandlerMoreDataActive={buttonHandlerMoreDataActive}
           />
         ) : (
           " "

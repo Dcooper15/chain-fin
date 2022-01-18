@@ -80,7 +80,7 @@ export const SectorMenu = styled.div`
 
 export const MenuRow = styled.div`
   flex: 2;
-  justify-content: center;
+  justify-content: space-around;
   display: inline-flex;
   padding-right: 1%;
   align-items: center;
@@ -108,11 +108,8 @@ export const ColumnLeft = styled.div`
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
-  border-color: ${(props) => props.theme.accentColor};
-  border-top-style: groove;
-  border-left-style: ridge;
-  border-right-style: ridge;
-  border-bottom-style: groove;
+  background: ${(props) => props.theme.menuItemBackground};
+
   border-radius: 20px;
   border-width: 2.8px;
   margin-top: 2%;
@@ -138,10 +135,11 @@ export const ColumnRight = styled.div`
   justify-content: center;
   align-items: flex-end;
   flex-direction: column;
-  border-color: ${(props) => props.theme.accentColor};
-  border-style: groove;
+
+  background: ${(props) => props.theme.menuItemBackground};
+
   border-radius: 20px;
-  border-width: 2.8px;
+
   margin-top: 2%;
   margin-left: 1%;
   margin-bottom: 1%;
@@ -191,6 +189,66 @@ export const SectorMenuHome = styled.div`
   flex-direction: column;
   align-items: center;
   align-content: space-between;
+`;
+
+export const HomeMenuItemContainer = styled.div`
+  flex: 1;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  color: #ffdbd6;
+  border-radius: 15px;
+  margin: 4% 2%;
+  font-size: 30px;
+  padding: 20px;
+  flex-grow: 1;
+  flex-basis: 120px;
+  width: 200px;
+  height: 100px;
+  background: ${(props) => props.theme.menuItemBackground};
+  box-shadow: ${(props) => props.theme.boxShadowColor};
+  @media (max-width: 500px) {
+    width: 120px;
+    height: 65px;
+    font-size: 22px;
+  }
+`;
+export const HomeMenuItemContainerDisabled = styled.div`
+  flex: 1;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  color: ${(props) => props.theme.disabledColor};
+  border-radius: 15px;
+  margin: 4% 2%;
+  font-size: 30px;
+  padding: 20px;
+  flex-grow: 1;
+  flex-basis: 120px;
+  width: 200px;
+  height: 100px;
+  background: ${(props) => props.theme.menuItemBackground};
+  box-shadow: ${(props) => props.theme.boxShadowColor};
+  @media (max-width: 500px) {
+    width: 120px;
+    height: 65px;
+    font-size: 22px;
+  }
+`;
+
+export const HomeMenuItemIconContainer = styled.div`
+  font-size: 30px;
+  color: #ffdbd6;
+  @media (max-width: 650px) {
+    font-size: 22px;
+  }
+`;
+export const HomeMenuItemIconContainerDisabled = styled.div`
+  font-size: 30px;
+  color: ${(props) => props.theme.disabledColor};
+  @media (max-width: 650px) {
+    font-size: 22px;
+  }
 `;
 
 export const StyledMainMenuLink = styled(Link)`
@@ -260,9 +318,10 @@ export const SupLinks = styled.div`
 `;
 
 export const StyledLink = styled(Link)`
-  color: ${(props) => props.theme.headerColor};
+  color: #ffdbd6;
   text-decoration: none;
   margin: auto;
+  font-weight: bold;
   font-size: 35px;
   position: relative;
   justify-content: center;

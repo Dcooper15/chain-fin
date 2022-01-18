@@ -11,6 +11,9 @@ export const lightTheme = {
   percentChangeDown: "#ff4c4c",
   hoverColor: "#d1e6ed",
   disabledColor: "#92a3a6",
+  boxShadowColor: "-4px 2px 7px 1px rgba(0, 47, 54, .8)",
+  menuItemBackground: "linear-gradient(45deg, #002f36 5%, #00afc9 90%)",
+  elevatedBackgroundColor: "#f5f0f0"
 };
 
 export const darkTheme = {
@@ -24,6 +27,9 @@ export const darkTheme = {
   percentChangeDown: "#ff4c4c",
   hoverColor: "#474747",
   disabledColor: "#786320",
+  boxShadowColor: "0 -2px 10px rgba(0, 0, 0, .1)",
+  menuItemBackground: "linear-gradient(45deg, #826a1f 5%, #d4af37 90%)",
+  elevatedBackgroundColor: "#38372b"
 };
 
 export const GlobalBackGround = createGlobalStyle`

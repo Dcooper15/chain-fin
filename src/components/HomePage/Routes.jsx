@@ -1,5 +1,5 @@
 import React from "react";
-import { StyledNavLink, StyledBackLink } from "../Styles/styledElements";
+import { StyledBackLink } from "../Styles/styledElements";
 import {
   Route,
   //useHistory
@@ -53,11 +53,6 @@ const Routes = () => {
       </Route>
 
       <Route path="/chain/:symbol">
-        <br></br>
-        <StyledNavLink to="/sector">{"Sectors"}</StyledNavLink>
-        <br></br>
-        <StyledNavLink to="/topmovers">{"Top Movers"}</StyledNavLink>
-        <br></br>
         <FullOptionChain />
       </Route>
       <Route path="/sector/:sector">
@@ -74,7 +69,7 @@ const Routes = () => {
       </Route>
       <Route exact path="/social/twitterstocktwits">
         <br></br>
-      <StyledBackLink to="/social">{<BiArrowBack />}</StyledBackLink>
+        <StyledBackLink to="/social">{<BiArrowBack />}</StyledBackLink>
         <Twit />
       </Route>
     </>
