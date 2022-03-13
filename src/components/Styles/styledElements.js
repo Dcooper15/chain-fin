@@ -673,12 +673,12 @@ export const WsbSubHeader = styled.h4`
 
 export const IntroContainer = styled.div`
   color: ${(props) => props.theme.headerColor};
-  font-size: 22px;
+  font-size: 30px;
   margin-left: 2%;
   margin-right: 2%;
   padding-top: 5%;
   @media (max-width: 800px) {
-    font-size: 12px;
+    font-size: 20px;
     position: relative;
   }
 `;

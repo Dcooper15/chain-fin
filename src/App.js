@@ -6,46 +6,50 @@ import {
   GlobalBackGround,
 } from "./components/Styles/theme";
 import {
-  SectorContainer,
+  // SectorContainer,
   IntroContainer,
 } from "./components/Styles/styledElements";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import BasicNav from "./components/HomePage/BasicNav";
-import Routes from "./components/HomePage/Routes";
-import MainMenu from "./components/HomePage/MainMenu";
+//import BasicNav from "./components/HomePage/BasicNav";
+//import Routes from "./components/HomePage/Routes";
+//import MainMenu from "./components/HomePage/MainMenu";
+//import TestConnection from "./components/TestServer/TestConnection";
 //import MainSearch from "./components/MainSearch";
 //import MyWatchList from "./components/HomePage/MyWatchList";
 
 import "./App.css";
 
 function App() {
-  const [theme, setTheme] = useState("dark");
+  const [theme, 
+    // setTheme
+  ] = useState("dark");
 
-  const lightDarkChange = () => {
-    theme === "light" ? setTheme("dark") : setTheme("light");
-  };
+  // const lightDarkChange = () => {
+  //   theme === "light" ? setTheme("dark") : setTheme("light");
+  // };
 
   return (
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
       <GlobalBackGround />
-
+      {/* <TestConnection /> */}
       <Router>
-        <BasicNav theme={theme} lightDarkChange={lightDarkChange} />
+        {/* <BasicNav theme={theme} lightDarkChange={lightDarkChange} /> */}
         <Route exact path="/">
           <IntroContainer>
-            All initial option data is set to the underlying's nearest
-            expiration and is one strike out of the money. Select any ticker
-            symbol to open the underlying's full option chain.
+            This site has moved to{" "} 
+            <strong><a 
+            style={{color: "#d4af37"}}
+            href="https://www.chainpaddle.com/">https://www.chainpaddle.com/</a></strong>
           </IntroContainer>
-          <SectorContainer>
-            <MainMenu />
+          {/* <SectorContainer>
+            <MainMenu /> */}
 
             {/* <MainSearch />  */}
             {/* <MyWatchList /> */}
-          </SectorContainer>
+          {/* </SectorContainer> */}
           <br></br>
         </Route>
-        <Routes theme={theme} />
+        {/* <Routes theme={theme} /> */}
       </Router>
     </ThemeProvider>
   );
