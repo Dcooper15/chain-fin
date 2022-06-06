@@ -1,4 +1,4 @@
-DEPRECIATED - Check Chain-Paddle-Client for updated repo
+DEPRECIATED - check Chain-Paddle-Client for updated repo
 
 
 
